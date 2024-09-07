@@ -1,5 +1,6 @@
-API Endpoints
-Authentication
+***API Endpoints***
+***Authentication***
+
 POST /api/signup
 Description: Registers a new user.
 Request:
