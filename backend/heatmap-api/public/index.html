@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Heatmap</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>User Activity Heatmap</h1>
+    <div id="heatmap"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://unpkg.com/cal-heatmap@3.6.2/dist/cal-heatmap.min.js"></script>
+    <script>
+        const heatmap = new CalHeatMap();
+
+        heatmap.init({
+            itemSelector: "#heatmap",
+            domain: "month",
+            subDomain: "day",
+            range: 3,
+            data: {},
+            start: new Date(),
+        });
+
+        const socket = io();
+
+        socket.on("updateHeatmap", (data) => {
+            console.log("Real-time update received:", data);
+            heatmap.update({
+                [new Date(data.date).getTime() / 1000]: data.leetcodeProblemsSolved || data.loggedIn ? 1 : 0
+            });
+        });
+    </script>
+</body>
+</html>
