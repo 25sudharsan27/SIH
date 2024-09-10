@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema(
     jobseeker: Boolean,
     about: String,
     skills: [String],
+    location:String,
+    country :String,
+    state :String,
+    city :String,
     projects: [
       {
         title: String,
@@ -23,22 +27,7 @@ const userSchema = new mongoose.Schema(
       },
     ],
     jobs: [
-      {
-        title: String,
-        description: String,
-        link: String,
-        media: [String], // Array of image URLs
-        experienceLevel: String, // e.g., Junior, Mid, Senior
-        workMode: {
-          type: String,
-          enum: ["remote", "on-site", "hybrid"], // Possible work modes
-        },
-        country: String,
-        city: String,
-        location: String,
-        company: String,
-         // Location of the job
-      },
+      String // store the job id
     ],
     experiences: [
       {
@@ -70,6 +59,25 @@ const userSchema = new mongoose.Schema(
         media: [String], // Array of image URLs
       },
     ],
+    social: {
+      linkedin: String,
+      twitter: String,
+      github: String,
+      portfolio: String,
+    },
+    followers :[String],
+    following: [String],
+    connections : [String],
+    pendingconnections_to_you :[String],
+    waitingconnections_for_you :[String],
+    pendingJobs: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Jobs",
+    }],
+    acceptedJobs: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Jobs",
+    }],
   },
   { timestamps: true }
 );

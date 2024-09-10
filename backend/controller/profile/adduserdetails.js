@@ -2,18 +2,23 @@ const userModel = require("../../models/userModel");
 
 const updateUserDetails = async (req, res) => {
   try {
-    const { skills, about, jobseeker, projects, jobs, experiences, volunteering, education } = req.body;
+    const { following,skills, about, jobseeker, projects, jobs, experiences, volunteering, education } = req.body;
 
-    if (!email) {
-      throw new Error("Email is required");
-    }
-
+    
     // Find the user by email
     const user_id = req.user_id;
     const user = await userModel.findOne({ user_id });
 
     if (!user) {
       throw new Error("User not found");
+    }
+
+    // Handle following
+    if (following) {
+        user.following = [...new Set([...user.following || [], following])]; // Add single string as an array element
+        const anotheruser = await userModel.findOne({ _id: following });
+        anotheruser.followers = [...new Set([...anotheruser.followers || [], user_id])]; // Merge arrays and remove duplicates
+        await anotheruser.save();
     }
 
     // Handle skills

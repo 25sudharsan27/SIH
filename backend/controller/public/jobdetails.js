@@ -9,7 +9,6 @@ const cookieparser = require('cookie-parser');
 const jobModel = require("../../models/public/jobsModel");
 
 
-
 const jobdetails = async (req,res) => {
     try{
         const user = await jobModel.find().lean(); // Use lean() to return a plain object

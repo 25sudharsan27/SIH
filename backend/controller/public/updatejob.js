@@ -61,10 +61,8 @@ const addOrUpdateJob = async (req, res) => {
         success: true,
         data: savedJob,
       });
-
       
-    
-    
+
   } catch (error) {
     res.status(400).json({
       message: error.message || "Error adding or updating job",

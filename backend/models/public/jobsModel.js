@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const jobSchema = new mongoose.Schema(
   {
     user_id: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
     title: {
@@ -17,8 +17,7 @@ const jobSchema = new mongoose.Schema(
       required: true,
     },
     workMode: {
-      type: String,
-      enum: ["remote", "on-site", "hybrid"], // Possible work modes
+      type: String, // Possible work modes
       required: true,
     },
     country: String,
@@ -30,7 +29,9 @@ const jobSchema = new mongoose.Schema(
       default: 1, // Number of job openings
     },
     skills: [String], // Required skills for the job
+    accepted : Boolean,
   },
+  
   { timestamps: true }
 );
 

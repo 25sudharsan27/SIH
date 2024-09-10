@@ -13,6 +13,7 @@
     "cal-heatmap": "^4.2.4",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "heatmap-api": "file:",
     "mongoose": "^8.6.1",
     "node-fetch": "^3.3.2",
     "socket.io": "^4.7.5"
