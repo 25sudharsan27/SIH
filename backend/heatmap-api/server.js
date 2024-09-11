@@ -1,42 +1,19 @@
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const activityRoutes = require("./routes/activityRoutes");
-const userRoutes = require("./routes/userRoutes");
-const http = require("http");
-const { Server } = require("socket.io");
+const express = require('express');
+const connectDB = require('./config/db');
+const heatmapRoute = require('./routes/heatmap');
+const path = require('path');
+require('dotenv').config();  // Load environment variables
 
 const app = express();
-const server = http.createServer(app);
-const io = new Server(server);
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+// Connect to MongoDB using the environment variable
+connectDB(process.env.MONGO_URI);
 
-app.use(bodyParser.json());
-app.use(express.static("public"));
+// Middleware to serve static files
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use("/api", activityRoutes);
-app.use("/api", userRoutes);
-
-io.on("connection", (socket) => {
-  console.log("Client connected");
-  
-  socket.on("disconnect", () => {
-    console.log("Client disconnected");
-  });
-});
-
-const updateHeatmap = (data) => {
-  io.emit("updateHeatmap", data);
-};
+// Middleware to handle routes
+app.use('/api', heatmapRoute);
 
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-
-module.exports = { updateHeatmap };
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
