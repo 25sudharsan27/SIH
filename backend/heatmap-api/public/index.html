@@ -3,35 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-Time Heatmap</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Heatmap API</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>User Activity Heatmap</h1>
-    <div id="heatmap"></div>
-
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://unpkg.com/cal-heatmap@3.6.2/dist/cal-heatmap.min.js"></script>
-    <script>
-        const heatmap = new CalHeatMap();
-
-        heatmap.init({
-            itemSelector: "#heatmap",
-            domain: "month",
-            subDomain: "day",
-            range: 3,
-            data: {},
-            start: new Date(),
-        });
-
-        const socket = io();
-
-        socket.on("updateHeatmap", (data) => {
-            console.log("Real-time update received:", data);
-            heatmap.update({
-                [new Date(data.date).getTime() / 1000]: data.leetcodeProblemsSolved || data.loggedIn ? 1 : 0
-            });
-        });
-    </script>
+    <div class="container">
+        <h1>Get Coding Stats</h1>
+        <form id="heatmapForm">
+            <label for="leetcodeUsername">LeetCode Username:</label>
+            <input type="text" id="leetcodeUsername" name="leetcodeUsername" required>
+            <br>
+            <label for="codeforcesUsername">Codeforces Username:</label>
+            <input type="text" id="codeforcesUsername" name="codeforcesUsername" required>
+            <br>
+            <label for="codechefUsername">CodeChef Username:</label>
+            <input type="text" id="codechefUsername" name="codechefUsername" required>
+            <br>
+            <label for="hackerrankUsername">HackerRank Username:</label>
+            <input type="text" id="hackerrankUsername" name="hackerrankUsername" required>
+            <br>
+            <button type="submit">Get Stats</button>
+        </form>
+        <div id="result">
+            <!-- Result will be displayed here -->
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
