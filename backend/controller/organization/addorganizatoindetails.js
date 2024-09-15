@@ -1,4 +1,5 @@
 const organizationModel = require("../../models/organizationModel");
+const jobModel = require("../../models/public/jobsModel");
 
 const updateOrganizationDetails = async (req, res) => {
   try {
@@ -10,7 +11,7 @@ const updateOrganizationDetails = async (req, res) => {
 
     // Find the organization by email
     const organization = await organizationModel.findOne({ email });
-
+    
     if (!organization) {
       throw new Error("Organization not found");
     }
@@ -22,22 +23,28 @@ const updateOrganizationDetails = async (req, res) => {
 
     // Handle jobs
     if (jobs) {
+      console.log("started");
       if (Array.isArray(jobs)) {
-        jobs.forEach(job => {
-          const existingJobIndex = (organization.jobs || []).findIndex(j => j === job);
-          if (existingJobIndex === -1) {
+        for (const job of jobs) {
+          const existingJob = await jobModel.findOne({ city: job.city, title: job.title, user_id: organization._id });
+          if (!existingJob) {
             // Add new job
-            organization.jobs.push(job);
+            const newJob = new jobModel({ ...job, user_id: organization._id });
+            const savedJob = await newJob.save();
+            organization.posted_jobs.push(savedJob._id);
+            console.log("Job added and saved");
           }
-        });
-      } else if (typeof jobs === 'string') {
-        if (!organization.jobs.includes(jobs)) {
-          organization.jobs.push(jobs); // Add single job as a string
+        }
+      } else {
+        const existingJob = await jobModel.findOne({ city: jobs.city, title: jobs.title, user_id: organization._id });
+        if (!existingJob) {
+          const newJob = new jobModel({ ...jobs, user_id: organization._id });
+          const savedJob = await newJob.save();
+          organization.posted_jobs.push(savedJob._id); // Add single job
         }
       }
     }
 
-    
     // Handle followers
     if (followers) {
       if (Array.isArray(followers)) {
@@ -48,8 +55,6 @@ const updateOrganizationDetails = async (req, res) => {
         }
       }
     }
-
-    
 
     // Save the updated organization document
     const updatedOrganization = await organization.save();

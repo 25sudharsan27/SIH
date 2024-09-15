@@ -11,6 +11,8 @@ const userDetailsController = require("../controller/userDetails");
 const adduserdetails = require("../controller/profile/adduserdetails");
 const authToken = require("../middleware/authToken");
 const deleteUserDetails = require("../controller/profile/deleteuserdetails");
+const applytojob = require("../controller/profile/applytojob");
+
 
 router.use(cookieparser());
 router.use(bodyParser.json());
@@ -19,5 +21,7 @@ router.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 router.post("/adddetails",adduserdetails);
 router.post("/delete",deleteUserDetails);
+router.post("/applytojob",applytojob)
+
 
 module.exports = router;

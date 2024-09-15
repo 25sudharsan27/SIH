@@ -2,12 +2,11 @@ const userModel = require("../../models/userModel");
 
 const updateUserDetails = async (req, res) => {
   try {
-    const { following,skills, about, jobseeker, projects, jobs, experiences, volunteering, education } = req.body;
+    const { user_id,following,skills, about, projects, jobs, experiences, volunteering, education } = req.body;
 
     
     // Find the user by email
-    const user_id = req.user_id;
-    const user = await userModel.findOne({ user_id });
+    const user = await userModel.findOne({"_id" :user_id });
 
     if (!user) {
       throw new Error("User not found");
@@ -35,10 +34,7 @@ const updateUserDetails = async (req, res) => {
       user.about = about;
     }
 
-    // Update jobseeker status
-    if (typeof jobseeker === 'boolean') {
-      user.jobseeker = jobseeker;
-    }
+    
 
     // Handle projects
     if (projects) {
