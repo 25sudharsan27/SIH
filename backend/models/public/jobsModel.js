@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const jobSchema = new mongoose.Schema(
   {
     user_id: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
       required: true,
     },
     title: {
@@ -17,20 +18,53 @@ const jobSchema = new mongoose.Schema(
       required: true,
     },
     workMode: {
-      type: String,
-      enum: ["remote", "on-site", "hybrid"], // Possible work modes
+      type: String, // Possible work modes
       required: true,
     },
-    country: String,
-    city: String,
-    location: String, // Additional details about the job's location
+    country: {
+      type :String,
+      required:true,
+    },
+    city: {
+      type :String,
+      required:true,
+    },
+    state :{
+      type :String,
+      required:true,
+    }, // Additional details about the job's location
     company: String,
     opening: {
       type: Number,
       default: 1, // Number of job openings
     },
     skills: [String], // Required skills for the job
+    extra_questions :[String],
+    applicants: [
+      {
+        id :{
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User"
+        }
+        ,
+        extra_questions:[{
+          question : String,
+          answer : String
+        },],
+        resume : String,
+        skills :[{
+          skill : String,
+          match : Boolean
+        }]
+      },
+    ],
+    status : {
+      type : String,
+      default : "open"
+    },
+
   },
+  
   { timestamps: true }
 );
 

@@ -7,6 +7,8 @@ const router = require("./routes/index");
 const user = require("./routes/user") 
 const bodyparser = require("body-parser");
 const public = require("./routes/public");
+const organization = require("./routes/organization");
+const hr = require('./routes/hr');
 const app = express();
 app.use(cors({
     origin : process.env.FRONTEND_URL,
@@ -21,6 +23,9 @@ app.use("/api",router);
 app.use(bodyparser.json());
 app.use("/user",user);
 app.use("/public",public);
+app.use("/organization",organization);
+// app.use("/hr",hr);
+
 
 connectDB().then(()=>{
     app.listen(  process.env.PORT  || 8000,()=>{

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heatmap API</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Get Coding Stats</h1>
+        <form id="heatmapForm">
+            <label for="leetcodeUsername">LeetCode Username:</label>
+            <input type="text" id="leetcodeUsername" name="leetcodeUsername" required>
+            <br>
+            <label for="codeforcesUsername">Codeforces Username:</label>
+            <input type="text" id="codeforcesUsername" name="codeforcesUsername" required>
+            <br>
+            <label for="codechefUsername">CodeChef Username:</label>
+            <input type="text" id="codechefUsername" name="codechefUsername" required>
+            <br>
+            <label for="hackerrankUsername">HackerRank Username:</label>
+            <input type="text" id="hackerrankUsername" name="hackerrankUsername" required>
+            <br>
+            <button type="submit">Get Stats</button>
+        </form>
+        <div id="result">
+            <!-- Result will be displayed here -->
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

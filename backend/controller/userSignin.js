@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 async function userSignInController(req,res){
     try{
         console.log("checking");
+        console.log(req.body);
         const email = req.body.email;
         const password = req.body.password;
         if(!email){
