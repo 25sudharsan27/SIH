@@ -24,7 +24,7 @@ app.use(bodyparser.json());
 app.use("/user",user);
 app.use("/public",public);
 app.use("/organization",organization);
-app.use("/hr",hr);
+// app.use("/hr",hr);
 
 
 connectDB().then(()=>{

@@ -13,7 +13,6 @@ const organizationSchema = new mongoose.Schema(
         required: true,
     },
     logo: String,
-    location: String,
     country: {
        type : String,
        required : true,
@@ -28,17 +27,17 @@ const organizationSchema = new mongoose.Schema(
       required : true,
     },
     about: String,
-    jobs: [String],
     followers :[String],
     connections : [String],
-    pendingJobs: [{
+    posted_jobs:[{
       type: mongoose.Schema.Types.ObjectId,
       ref: "Jobs",
     }],
-    acceptedJobs: [{
+    closed_jobs:[{
       type: mongoose.Schema.Types.ObjectId,
       ref: "Jobs",
     }],
+    
   },
   { timestamps: true }
 );

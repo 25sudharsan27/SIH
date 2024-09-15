@@ -5,7 +5,7 @@ const jobModel = require("../../models/public/jobsModel");
 
 const filterjobdetails = async (req, res) => {
   try {
-    const { location, country, city, experienceLevel, workMode } = req.body;
+    const { state, country, city, experienceLevel, workMode } = req.body;
 
     // Build the filter object with only provided fields
     const filter = {};

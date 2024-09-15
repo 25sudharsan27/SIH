@@ -11,10 +11,8 @@ const userSchema = new mongoose.Schema(
     password: String,
     profilepic: String,
     age: Number,
-    jobseeker: Boolean,
     about: String,
     skills: [String],
-    location:String,
     country :String,
     state :String,
     city :String,
@@ -70,14 +68,12 @@ const userSchema = new mongoose.Schema(
     connections : [String],
     pendingconnections_to_you :[String],
     waitingconnections_for_you :[String],
-    pendingJobs: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Jobs",
-    }],
-    acceptedJobs: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Jobs",
-    }],
+    applied_jobs : [
+      {
+        type :mongoose.Schema.Types.ObjectId,
+        ref: "Jobs",
+      }
+    ]
   },
   { timestamps: true }
 );
