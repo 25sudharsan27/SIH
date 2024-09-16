@@ -8,14 +8,14 @@ body {
 
 /* Navbar Styles */
 .navbar {
-    z-index:10000;
+    z-index:1000000;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color:#FFFFFF;
+    background-color:#ffffff;
     padding: 25px 20px;
-    box-shadow: 2px 2px 10px 2px#e4e3e3;
-    ;
+    box-shadow: 2px 2px 10px 2px #ccc9c9;
+
 }
 .navbar-left{
     margin-left: 450px;
