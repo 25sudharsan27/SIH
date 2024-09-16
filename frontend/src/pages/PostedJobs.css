@@ -1,8 +1,16 @@
-.job-page-container {
-    display: flex;
+
+  .sidebar{
+    z-index:10000;
   }
-.posted-jobs-container {
-    padding: 20px;
+  .miain{
+    display:flex;
+
+  }
+  .posted-jobs-container {
+    margin:20px;
+    display:flex;
+    flex-direction:column;
+    align-items: center;
     background-color: #ffffff;
     color:#464D5F;
     min-height: 100vh;
@@ -12,10 +20,16 @@
   .posted-jobs {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    max-width:80%;
     gap: 20px;
+  }
+  .job-board{
+    width:100%;
   }
   
   .job-card {
+    margin:30px;
+    min-width:300px;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
@@ -36,8 +50,10 @@
   .job-actions {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    margin-top: 15px;
+    justify-content: flex-end;
+    margin-top:-10px;
+    height:100%;
+
   }
   
   .edit-btn, .close-btn {
@@ -57,31 +73,6 @@
     color: white;
   }
 
-  /* Sidebar styling */
-.sidebar {
-    z-index:1000;
-    width: 250px;
-    background-color: #ffffff;
-    padding: 20px;
-    height: 150vh;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-  }
-  
-  .sidebar ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .sidebar ul li {
-    margin-bottom: 20px;
-  }
-  
-  .sidebar ul li a {
-    text-decoration: none;
-    color: #464D5F;
-    font-weight: bold;
-  }
-  
   .title{
     display:flex;
     justify-content:space-between;
@@ -96,4 +87,13 @@
   .bodies{
     display:flex;
     justify-content:space-between;
+  }
+
+  #close{
+    background-color: #ff4d4d;
+    margin-top:10px;
+
+  }
+  #close:hover{
+    background-color: #af2626;
   }

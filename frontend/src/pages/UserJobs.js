@@ -3,13 +3,16 @@ import './CreateJob.css';
 import OrganizationNavbar from './components/organizationnavbar';
 import {BrowserRouter as Router, Route, BrowserRouter, Routes} from 'react-router-dom';
 import ViewJobs from './ViewJobs.js';
-const Organization = () =>{
+import ViewJob from './ViewJob.js';
+import UserNavbar from './components/usernavbar.js';
+const User = () =>{
     return(
         <div>
-            <OrganizationNavbar/>
+            <UserNavbar/>
 
             <Routes>
                 <Route path="/viewjobs" element={<ViewJobs/>}/>
+                <Route path="/viewjobs/job" element={<ViewJob/>}/>
 
             </ Routes>
         
@@ -18,4 +21,4 @@ const Organization = () =>{
 
 }
 
-export default Organization;
+export default User;

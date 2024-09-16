@@ -129,7 +129,6 @@ const jobs = [
     return (
     
       <div className="job-board">
-        <UserNavbar />
         <SearchBar/>
         <div className="posted-jobs-container">
         <div className="posted-jobs">

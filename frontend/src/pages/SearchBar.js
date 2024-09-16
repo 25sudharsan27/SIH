@@ -1,7 +1,7 @@
 import React from 'react';
 import './SearchBar.css';
 
-function SearchBar() {
+function SearchBar({condition}) {
   return (
     <div className="search-bar">
       <div className="filters">
@@ -20,14 +20,15 @@ function SearchBar() {
           <option>Chennai</option>
           <option>Remote</option>
         </select>
-        
-        <select className="dropdown">
-          <option>Company</option>
-          <option>CloudKnowledge</option>
-          <option>Optical Arc</option>
-          <option>Branch</option>
-          <option>Other</option>
-        </select>
+        {condition && (
+          <select className="dropdown">
+            <option>Company</option>
+            <option>CloudKnowledge</option>
+            <option>Optical Arc</option>
+            <option>Branch</option>
+            <option>Other</option>
+          </select>
+        )}
       </div>
       <div className="search-field">
         <input type="text" placeholder="Search..." />

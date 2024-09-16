@@ -10,7 +10,7 @@ import JobSeekerLogin from './pages/JobSeekerLogin';
 import OrganizationSignup from './pages/OrganizationSignup';
 import OrganizationLogin from './pages/OrganizationLogin';
 import Organization from './pages/Organizationjobs';
-import ViewJobs from './pages/ViewJobs';
+import User from './pages/UserJobs';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -25,7 +25,7 @@ root.render(
         <Route path="/organization/login" element={<OrganizationLogin/>}/>
         <Route path="/organization/signup" element={<OrganizationSignup/>}/>
         <Route path="/organization/jobs/*" element={<Organization/>}/>
-        <Route path="/user/jobs/*" element={<ViewJobs/>}/>
+        <Route path="/user/jobs/*" element={<User/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
