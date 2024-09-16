@@ -15,7 +15,7 @@ router.use(express.json({ limit: '50mb' }));
 router.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 
-router.get("/jobs",jobdetails);
+router.post("/jobs",authToken,jobdetails);
 router.post("/updatejob",updatejob);
 router.post("/filterjobs",filterjobdetails);
 
