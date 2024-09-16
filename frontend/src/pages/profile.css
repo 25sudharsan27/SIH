@@ -1,0 +1,154 @@
+*{
+    text-decoration: none;
+}
+
+.container{
+    display:flex;
+    flex-direction: column;
+}
+.box{
+    height:100px;
+    width:100px;
+
+}
+.profile-header{
+    display:flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 20px;
+    width:100%;
+}
+
+.about-section{
+
+    width:100%;
+}
+.about-section-a{
+    margin-left:40px;
+
+    width:85%;
+    padding-left:30px;    
+}
+.complete{
+    
+    width:100%;
+    height:100%;
+    background-color: white;
+}
+
+.skills-section{
+    /* margin-left:-60px; */
+    /* width:30%; */
+    width:400px;
+    max-width:400px;
+
+}
+.about{
+    height:100%;
+    width:100%;
+}
+.skills-section{
+    padding-left:30px;
+    margin-left:40px;
+}
+.skills-section h3{
+    font-size:xx-large;
+}
+
+
+.about-text{
+    padding: 20px;
+    font-size: 20px;
+    font-weight: 500;
+    width:80%;
+}
+
+.about-section-a h3{
+    font-size:xx-large;
+}
+.about-section-a p{
+    font-weight:50;
+}
+
+.addskill{
+    font-size:15px;
+    color:rgb(60, 60, 141);
+}
+
+.skills-list{
+    height:200px;
+    overflow-y: scroll;
+}
+
+
+.experience-section{
+    margin-left:60px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+}
+.exp-h3{
+    font-size:xx-large;
+    margin-left:60px;
+}
+.experience-item{
+    padding:20px;
+    border-radius:12px;
+    display:flex;
+    margin:50px;
+    width:600px;
+    box-shadow: 2px 1px 10px rgba(0, 0, 0, 0.1);
+}
+
+.title{
+    font-size:x-large;
+}
+
+.description{
+    font-weight:100;
+}
+
+.experience-item-a{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width:40%;
+}
+
+.projects-section{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    max-width:80%;
+    gap: 20px;
+    margin:60px;
+    padding:20px;
+}
+
+.project-item{
+    border-radius:10px;
+    box-shadow: 2px 1px 10px rgba(0, 0, 0, 0.1);
+    padding:25px;
+}
+
+.project-item-t{
+    font-size:large;
+}
+
+.project-item-s{
+    font-weight:100;
+}
+
+.pro{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+}
+
+
+
+

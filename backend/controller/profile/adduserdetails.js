@@ -2,10 +2,17 @@ const userModel = require("../../models/userModel");
 
 const updateUserDetails = async (req, res) => {
   try {
-    const { user_id,following,skills, about, projects, jobs, experiences, volunteering, education } = req.body;
+    const {following,skills, about, projects, jobs, experiences, volunteering, education,tagline,portfolio } = req.body;
 
     
     // Find the user by email
+    const user_id = req?.user_id;
+
+    if(!user_id){
+      throw new Error("Cache not found");
+    }
+
+
     const user = await userModel.findOne({"_id" :user_id });
 
     if (!user) {
@@ -32,6 +39,12 @@ const updateUserDetails = async (req, res) => {
     // Update about
     if (about) {
       user.about = about;
+    }
+    if(tagline){
+      user.tagline = tagline;
+    }
+    if(portfolio){
+      user.portfolio = portfolio;
     }
 
     

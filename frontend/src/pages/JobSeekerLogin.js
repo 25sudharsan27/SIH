@@ -1,14 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import './JobSeekerLogin.css';
+import { useNavigate } from 'react-router-dom';
+// import Context from '../context';
+
+
 
 const JobSeekerLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  // const generalContext = useContext(Context);
+  // console.log("generalContext ",generalContext.fetchUserDetails());
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Implement your login logic here
     console.log("Email:", email, "Password:", password);
+    try {
+      const response = await fetch("http://localhost:8000/api/login", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          "email":email,
+          "password":password,
+        }),
+        credentials: 'include', // This option will send cookies with the request and receive any cookies from the server
+      });
+      
+
+      const userdata = await response.json();
+
+      if (userdata.success) {
+        alert('Signup successful');
+        console.log(userdata);
+        // const data = await generalContext.fetchUserDetails();
+
+        navigate('/user/profile');
+      } else {
+        alert('Signup failed : '+userdata.message);
+        if(userdata.message === 'User Already Exists'){
+          console.log("went to login page");
+          navigate('/jobseeker/login');        }
+        console.log(userdata);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+   
   }
 
   return (
