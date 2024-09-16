@@ -73,7 +73,10 @@ const userSchema = new mongoose.Schema(
         type :mongoose.Schema.Types.ObjectId,
         ref: "Jobs",
       }
-    ]
+    ],
+    tagline : String,
+    portfolio : String,
+    about:String,
   },
   { timestamps: true }
 );

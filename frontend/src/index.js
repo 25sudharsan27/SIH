@@ -11,11 +11,13 @@ import OrganizationSignup from './pages/OrganizationSignup';
 import OrganizationLogin from './pages/OrganizationLogin';
 import Organization from './pages/Organizationjobs';
 import User from './pages/UserJobs';
-
-
+import {store} from './store/store';
+import { Provider } from 'react-redux';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+
   <React.StrictMode>
+    <Provider store={store}>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
@@ -25,9 +27,11 @@ root.render(
         <Route path="/organization/login" element={<OrganizationLogin/>}/>
         <Route path="/organization/signup" element={<OrganizationSignup/>}/>
         <Route path="/organization/jobs/*" element={<Organization/>}/>
-        <Route path="/user/jobs/*" element={<User/>}/>
+        <Route path="/user/*" element={<User/>}/>
+        
       </Routes>
     </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 
