@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const organizationSchema = new mongoose.Schema(
   {
+    organization : Boolean,
     companyname: String,
     email: {
       type: String,

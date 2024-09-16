@@ -1,0 +1,95 @@
+
+.container {
+    display: flex;
+    width:100%;
+  }
+  
+  .sidebar {
+    background-color: #f1f1f1;
+    padding: 20px;
+    width: 200px;
+  }
+  
+  .sidebar h3 {
+    margin-bottom: 20px;
+    cursor: pointer;
+    color: #007BFF;
+  }
+  
+  .main-content {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  
+  .logo {
+    height: 50px;
+  }
+  
+  .applicant-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .applicant-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .view-btn {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .skills-section, .resume-section, .extra-questions {
+    margin-top: 20px;
+  }
+  
+  .skills-section ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .skills-section ul li {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .resume-section {
+    margin-top: 20px;
+    box-shadow :5px 5px 5px 5px #888888;
+    width:70%;
+    padding:25px;
+
+  }
+  
+  .resume-section ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .extra-questions {
+    margin-top: 20px;
+  }
+  
+
+  .hided{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+
+  }

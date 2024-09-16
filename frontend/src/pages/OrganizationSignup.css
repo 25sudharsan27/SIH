@@ -1,0 +1,76 @@
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .form-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 40px;
+  }
+  
+  .signup-form {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 40px;
+    width: 400px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-subtitle {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .password-container {
+    position: relative;
+  }
+  
+  .password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .address-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .small-input {
+    width: 48%;
+  }
+  
+  .submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .submit-button:hover {
+    background-color: #0056b3;
+  }
+  #pwd{
+    margin-top:-10px;
+    margin-right:-20px;
+  }
