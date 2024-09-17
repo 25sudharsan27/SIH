@@ -40,6 +40,34 @@ function JobBoard() {
     fetchJobs();
   }, []);
 
+  // Function to close a job
+  const handleCloseJob = async (jobId) => {
+    try {
+      const response = await fetch("http://localhost:8000/organization/closejob", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "org_email":"s",
+          "jobs":jobId,
+          "confirm":"confirm"
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      // Remove the closed job from the state
+      setJobs(jobs.filter(job => job._id !== jobId));
+      window.location.reload();
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
   // Get current jobs for the current page
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
@@ -86,7 +114,12 @@ function JobBoard() {
                   </div>
                   <div className="job-actions">
                     <button className="edit-btn">Edit</button>
-                    <button id="close" className="edit-btn">Close</button>
+                    <button 
+                      className="close-btn" 
+                      onClick={() => handleCloseJob(job._id)}
+                    >
+                      Close
+                    </button>
                   </div>
                 </div>
               </div>
