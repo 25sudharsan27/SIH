@@ -4,7 +4,7 @@ import Skill from './Skill'
 
 function Interview() {
   return (
-    <div className='container'>
+    <div className='containerr'>
         <div>
             <p>AI-Interview</p>
             <div className='interview-box'>
