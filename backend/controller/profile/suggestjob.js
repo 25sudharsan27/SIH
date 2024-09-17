@@ -4,8 +4,8 @@ const { calculateSkillMatch } = require("./utils/skillMatcher");
 
 const SuggestJob = async (req, res) => {
     try {
-        const user_id = req.body.user_id;
-
+        const user_id = req.user_id;
+        console.log("sudharsan "+user_id);
         // Fetch the user data
         const user = await userModel.findById(user_id);
         

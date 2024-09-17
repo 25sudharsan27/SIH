@@ -1,19 +1,21 @@
 const express = require("express");
 const router = express.Router();
-const cookieparser = require('cookie-parser');
 const jobModel = require("../../models/public/jobsModel");
 
 const filterjobdetails = async (req, res) => {
   try {
-    const { state, country, city, experienceLevel, workMode } = req.body;
+    const { experienceLevel, location } = req.body;
 
     // Build the filter object with only provided fields
     const filter = {};
-    if (location) filter.location = location;
-    if (country) filter.country = country;
-    if (city) filter.city = city;
     if (experienceLevel) filter.experienceLevel = experienceLevel;
-    if (workMode) filter.workMode = workMode;
+    if (location) {
+      filter.$or = [
+        { city: location },
+        { state: location },
+        { country: location }
+      ];
+    }
 
     const jobs = await jobModel.find(filter).lean(); // Use lean() for better performance
 

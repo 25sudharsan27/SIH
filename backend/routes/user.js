@@ -24,7 +24,7 @@ router.post("/adddetails",authToken,adduserdetails);
 router.post("/delete",authToken,deleteUserDetails);
 router.post("/applytojob",authToken,applytojob)
 router.post("/userdetails",authToken,UserDetails)
-router.post("/suggestedjob",SuggestedJob);
+router.post("/suggestedjob",authToken,SuggestedJob);
 
 
 module.exports = router;
