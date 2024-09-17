@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import './profile.css';
 import Modal from './Model'; // Ensure this is imported correctly
 import { selectOrganization, setOrganizationDetails } from '../store/OrganizationSlice';
+import editIcon from './images/edit-icon.svg'
+import saveIcon from './images/floppy-disk-regular.svg'
 
 // Component for displaying and editing organization profile
 const OrganizationProfile = () => {
@@ -76,7 +78,14 @@ const OrganizationProfile = () => {
       <div className="about">
         <div className="about-section">
           <div className="about-section-a">
-            <h3>About</h3>
+            <div className='simply'>
+              <h3>About</h3>
+              {isEditingAbout ? (
+                <img onClick={handleSaveAbout} src={saveIcon} className='editbtn'></img>
+              ) : (
+                <img onClick={() => setIsEditingAbout(true)} src={editIcon} className='editbtn'></img>
+              )}
+            </div>
             {isEditingAbout ? (
               <textarea
                 value={aboutText}
@@ -85,11 +94,6 @@ const OrganizationProfile = () => {
               />
             ) : (
               <p>{organizationData.about}</p>
-            )}
-            {isEditingAbout ? (
-              <a onClick={handleSaveAbout}>Save</a>
-            ) : (
-              <a onClick={() => setIsEditingAbout(true)}>Edit</a>
             )}
           </div>
         </div>

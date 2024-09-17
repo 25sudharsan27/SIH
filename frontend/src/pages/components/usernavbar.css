@@ -6,6 +6,8 @@ body {
     padding: 0;
 }
 
+
+
 /* Navbar Styles */
 .navbar {
     z-index: 1000000;
@@ -43,6 +45,11 @@ body {
 .navbar-item:hover {
     background-color: #3C5AA5;
     color: white;
+}
+
+.highlight{
+    color: white;
+    background: #3C5AA5;
 }
 
 /* Profile Dropdown Styles */

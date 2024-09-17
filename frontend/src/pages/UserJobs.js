@@ -53,7 +53,6 @@ const User = () =>{
                 <Route path="/viewjobs/job/:id" element={<ViewJob/>}/>
                 <Route path="/profile" element={<ProfilePage/>}/>
                 <Route path="/interview" element={<Interview/>}/>
-
             </ Routes>
         
         </div>
