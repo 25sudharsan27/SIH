@@ -1,149 +1,202 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './ViewJob.css';
+import { useParams } from 'react-router-dom';
 
+function ViewJob() {
+  const { id } = useParams();
+  const job_id = id;
+  console.log("job_id: " + job_id);
 
-const jobData = {
-    jobTitle: "Full Stack Intern",
-    location: "Bengaluru, Karnataka, India",
-    employmentType: "On-site",
-    jobType: "Internship",
-    stipend: "₹20,000",
-    about: "Cloud Counselage Pvt. Ltd is looking for interns, with an interest in Full-stack development, who can develop front- and back-end software.",
-    responsibilities: [
-      "Compliance with company policies",
-      "Complete task assigned before the deadline",
-      "Follow the instructions provided by supervisors"
-    ],
-    benefits: [
-      "Experience Certificate/Letter from Cloud Counselage Pvt. Ltd on successful completion of the internship",
-      "Industry Best Practices Training",
-      "Practical Software & Systems Applications",
-      "Hands-on experience working with a Team",
-      "Working on Live/Associate Projects"
-    ],
-    requirements: [
-      "Final-year students or fresh graduates",
-      "Good problem-solving skills",
-      "Willing to work remotely with minimum supervision",
-      "Strong interest in Full-stack development"
-    ],
-    skillsRequired: [
-      "Web Development",
-      "TypeScript",
-      "Next.js",
-      "Node.js",
-      "Express.js",
-      "React.js"
-    ],
-    resources: {
-      "TypeScript": [
-        { name: "TypeScript Tutorial for Beginners", url: "https://typescriptlang.org" },
-        { name: "TypeScript Documentation", url: "https://www.typescriptlang.org/docs/handbook/intro.html" }
-      ],
-      "Next.js": [
-        { name: "Next.js Tutorial for Beginners", url: "https://nextjs.org/learn" },
-        { name: "Next.js Documentation", url: "https://nextjs.org/docs" }
-      ]
+  const [jobData, setJobData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [resume, setResume] = useState(null);
+  const [extraAnswers, setExtraAnswers] = useState({});
+  const [additionalInfo, setAdditionalInfo] = useState('');
+
+  useEffect(() => {
+    // Define an async function inside useEffect
+    const fetchJobData = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/public/viewjob", {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ job_id }), // Pass the job_id in the body
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok.");
+        }
+
+        const responseData = await response.json(); // Parse JSON response
+        console.log("Response data: ", responseData);
+
+        setJobData(responseData.data); // Assuming responseData.data contains the job data
+      } catch (error) {
+        console.error("Failed to fetch job data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchJobData(); // Call the async function
+  }, [job_id]);
+
+  const handleResumeChange = (event) => {
+    setResume(event.target.files[0]);
+  };
+
+  const handleExtraAnswerChange = (index, value) => {
+    setExtraAnswers(prev => ({
+      ...prev,
+      [index]: value
+    }));
+  };
+
+  const handleAdditionalInfoChange = (event) => {
+    setAdditionalInfo(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!jobData) return;
+
+    const extra = jobData.extra_questions.map((_, index) => extraAnswers[index] || '');
+
+    const formData = new FormData();
+    formData.append('user_id', 'USER_ID'); // Replace with actual user ID
+    formData.append('job_id', job_id);
+    formData.append('extra', JSON.stringify(extra));
+    formData.append('resume', resume);
+
+    try {
+      const response = await fetch("http://localhost:8000/user/applytojob", {
+        method: "POST",
+        body: formData,
+        credentials: "include",
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Failed to apply to job.");
+      }
+
+      alert("Application submitted successfully.");
+    } catch (error) {
+      console.error("Error applying to job:", error);
+      alert("Failed to submit application.");
     }
   };
 
-function ViewJob() {
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!jobData) {
+    return <div>No job data available.</div>;
+  }
+
   return (
     <div>
-    <div className="job-listing">
-      {/* Header Section */}
-      <div className="job-header">
-        <div className="company-logo">
-          <img src="company-logo.png" alt="Company Logo" />
-        </div>
-        <div className="job-title-section">
-          <h1>{jobData.jobTitle}</h1>
-          <p>{jobData.location}</p>
-          <div className="job-details">
-            <span>{jobData.employmentType}</span>
-            <span>{jobData.jobType}</span>
-            <span>Stipend: {jobData.stipend}</span>
+      <div className="job-listing">
+        {/* Header Section */}
+        <div className="job-header">
+          <div className="company-logo">
+            <img src="company-logo.png" alt="Company Logo" />
+          </div>
+          <div className="job-title-section">
+            <h1>{jobData.title}</h1>
+            <p>{jobData.city}</p>
+            <p>{jobData.state}</p>
+            <p>{jobData.country}</p>
+            <div className="job-details">
+              <span>{jobData.experienceLevel}</span>
+              <span>{jobData.workMode}</span>
+              <span>Stipend: {jobData.stipend || 'N/A'}</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* About Job Section */}
-      <div className="about-job">
-        <h2>About this Job</h2>
-        <p>{jobData.about}</p>
+        {/* About Job Section */}
+        <div className="about-job">
+          <h2>About this Job</h2>
+          <p>{jobData.description}</p>
 
-        <h3>Responsibilities</h3>
-        <ul>
-          {jobData.responsibilities.map((responsibility, index) => (
-            <li key={index}>{responsibility}</li>
-          ))}
-        </ul>
+          <h3>Responsibilities</h3>
+          <ul>
+            {(jobData.responsibilities || []).map((responsibility, index) => (
+              <li key={index}>{responsibility}</li>
+            ))}
+          </ul>
 
-        <h3>Benefits</h3>
-        <ul>
-          {jobData.benefits.map((benefit, index) => (
-            <li key={index}>{benefit}</li>
-          ))}
-        </ul>
-      </div>
+          <h3>Benefits</h3>
+          <ul>
+            {(jobData.benefits || []).map((benefit, index) => (
+              <li key={index}>{benefit}</li>
+            ))}
+          </ul>
+        </div>
 
-      {/* Requirements Section */}
-      <div className="requirements">
-        <h3>Requirements</h3>
-        <ul>
-          {jobData.requirements.map((requirement, index) => (
-            <li key={index}>{requirement}</li>
-          ))}
-        </ul>
-      </div>
+        {/* Requirements Section */}
+        <div className="requirements">
+          <h3>Requirements</h3>
+          <ul>
+            {(jobData.requirements || []).map((requirement, index) => (
+              <li key={index}>{requirement}</li>
+            ))}
+          </ul>
+        </div>
 
-      {/* Skills Required Section */}
-      <div className ="skills-resources">
-      <div className="skills-required">
-        <h3>Skills Required</h3>
-        <ul>
-          {jobData.skillsRequired.map((skill, index) => (
-            <li key={index}>{skill}</li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Resources Section */}
-      <div className="resources">
-        <h3>Resources</h3>
-        <div className="resource-links">
-          {Object.keys(jobData.resources).map((tech, index) => (
-            <div key={index}>
-              <h4>{tech}</h4>
-              {jobData.resources[tech].map((resource, resIndex) => (
-                <a key={resIndex} href={resource.url} target="_blank" rel="noopener noreferrer">
-                  {resource.name}
-                </a>
+        {/* Skills Required Section */}
+        <div className="skills-resources">
+          <div className="skills-required">
+            <h3>Skills Required</h3>
+            <ul>
+              {jobData.skills.map((skill, index) => (
+                <li key={index}>{skill}</li>
               ))}
-            </div>
-          ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Application Form */}
+        <div className="application-form">
+          <h3>Submit Application</h3>
+          <form onSubmit={handleSubmit}>
+            <label className="resu">
+              Upload Resume:
+              <input type="file" name="resume" onChange={handleResumeChange} />
+            </label>
+
+            <label className="final">
+              Extra Questions:
+              <ul>
+                {jobData.extra_questions.map((question, index) => (
+                  <li key={index}>
+                    <label>{question}</label>
+                    <input
+                      type="text"
+                      value={extraAnswers[index] || ''}
+                      onChange={(e) => handleExtraAnswerChange(index, e.target.value)}
+                    />
+                  </li>
+                ))}
+              </ul>
+              <textarea
+                placeholder="Enter any additional information here"
+                value={additionalInfo}
+                onChange={handleAdditionalInfoChange}
+              ></textarea>
+            </label>
+
+            <button type="submit">Submit Application</button>
+          </form>
         </div>
       </div>
-      </div>
-
-      {/* Application Form */}
-      <div className="application-form">
-        <h3>Submit Application</h3>
-        <form>
-          <label className="resu">
-            Upload Resume:
-            <input type="file" name="resume" />
-          </label>
-
-          <label className="final">
-            Extra Questions:
-            <textarea placeholder="Enter any additional information here"></textarea>
-          </label>
-
-          <button type="submit">Submit Application</button>
-        </form>
-      </div>
-    </div>
     </div>
   );
 }

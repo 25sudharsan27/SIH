@@ -3,10 +3,12 @@ import './ViewJobs.css';
 import UserNavbar from './components/usernavbar';
 import SearchBar from './SearchBar';
 import Pagination from './Pagination';
+import { useNavigate } from 'react-router-dom';
 
 function JobBoard() {
   const [jobs, setJobs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const navigate = useNavigate();
   const jobsPerPage = 6;
 
   useEffect(() => {
@@ -15,10 +17,13 @@ function JobBoard() {
         const response = await fetch("http://localhost:8000/public/jobs",{
           method : "POST",
           credentials : "include",
+          headers: {
+            'Content-Type': 'application/json'
+          },
         });
         const data = await response.json();
         console.log('Fetched Jobs:', data); // Log the data
-        setJobs(Array.isArray(data) ? data : []); // Ensure data is an array
+        setJobs(Array.isArray(data.data) ? data.data : []); // Ensure data is an array
       } catch (error) {
         console.error('Error fetching jobs:', error);
       }
@@ -31,7 +36,7 @@ function JobBoard() {
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
   const currentJobs = Array.isArray(jobs) ? jobs.slice(indexOfFirstJob, indexOfLastJob) : [];
-
+  console.log(currentJobs);
   // Change page
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -55,7 +60,7 @@ function JobBoard() {
                   <p><b>Stipend:</b> {job.stipend}</p>
                 </div>
                 <div className="job-actions">
-                  <button className="edit-btn">Apply</button>
+                  <button onClick={()=>{navigate('/user/viewjobs/job/'+job._id)}} className="edit-btn">Apply</button>
                 </div>
               </div>
             </div>

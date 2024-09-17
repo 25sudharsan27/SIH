@@ -11,11 +11,15 @@ const jobModel = require("../../models/public/jobsModel");
 
 const jobdetails = async (req,res) => {
     try{
-        const user = await jobModel.find({status : "open"}); // Use lean() to return a plain object
-        console.log(user);
+        const {job_id} = req.body;
+        const job = await jobModel.findOne({"_id" : job_id}); // Use lean() to return a plain object
+        console.log("job final "+job);
+        if(!job){
+            throw new Error("Job not found");
+        }
         res.status(200).json({
-            data : user,
-            message : "working well ",
+            data : job,
+            message : "job data ",
             error : false,
             success : true
         }) 
