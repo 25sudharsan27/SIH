@@ -23,6 +23,7 @@
 }
 .editbtn{
     height:25px;
+    min-height: 25px;
     margin-left: 15px;
     cursor: pointer;
 }
@@ -84,7 +85,7 @@
     border:1px solid grey;
     box-shadow: 5px 5px hsla(0, 0%, 50%, 0.584);
     border-radius: 10px;
-    width: 80%;
+    width: 60%;
 }
 
 

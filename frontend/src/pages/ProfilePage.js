@@ -5,6 +5,9 @@ import edit from './images/edit.png';
 import save from './images/save.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUser } from '../store/userSlice';
+import editIcon from './images/edit-icon.svg'
+import saveIcon from './images/floppy-disk-regular.svg'
+import linkIcon from './images/link-solid.svg'
 
 // import profile from './images/logesh.jpg'
 import './Model.css';
@@ -166,7 +169,14 @@ const ProfilePage = () => {
           {/* About Section */}
           <div className="about-section">
             <div className="about-section-a">
-              <h3>About</h3>
+              <div className='simply'>
+                <h3>About</h3>
+                {isEditingAbout ? (
+                  <img sonClick={handleSaveAbout} className='editbtn' src={saveIcon}></img>
+                ) : (
+                  <img className='editbtn' onClick={() => setIsEditingAbout(true)} src={editIcon}></img>
+                )}
+              </div>
               {isEditingAbout ? (
                 <textarea
                   value={aboutText}
@@ -176,23 +186,20 @@ const ProfilePage = () => {
               ) : (
                 <p>{userData.about}</p>
               )}
-              {isEditingAbout ? (
-                <a onClick={handleSaveAbout}>Save</a>
-              ) : (
-                <a onClick={() => setIsEditingAbout(true)}>Edit</a>
-              )}
             </div>
           </div>
 
           <div className="skills-section">
             <div className="skill-section-a">
-              <h3>Skills</h3>
+              <div className='simply'>
+                <h3>Skills</h3>
+                <img className="addskill editbtn" onClick={handleAddSkill} src={editIcon}></img>
+              </div>
               <div className="skills-list">
                 {(userData.skills || []).map((skill, index) => (
-                  <p key={index} className="skill-item">{skill}</p>
+                  <p key={index} className="skill-item">{skill.toUpperCase()}</p>
                 ))}
               </div>
-              <a className="addskill" onClick={handleAddSkill}>Add Skill</a>
             </div>
           </div>
         </div>
@@ -227,14 +234,17 @@ const ProfilePage = () => {
               <div key={index} className="project-item">
                 <h4 className="project-item-t">{project.title}</h4>
                 <p className="project-item-s">{project.description}</p>
-                {project.link && <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">View Project</a>}
+                <div className='project-link-holder'>
+                  {project.link && <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">View Project</a>}
+                  <img className='editbtn' src={linkIcon}></img>
+                </div>
               </div>
             ))}
             {(userData.projects || []).length > 5 && visibleProjectsCount < (userData.projects || []).length && (
               <a href="#" className="show-more" onClick={handleShowMoreProjects}>Show More</a>
             )}
-            <a href="#" className="add-more-projects" onClick={() => setIsAddProjectModalOpen(true)}>Add Project</a>
           </div>
+          <a href="#" className="add-more-projects" onClick={() => setIsAddProjectModalOpen(true)}>Add Project</a>
         </div>
       </div>
 
