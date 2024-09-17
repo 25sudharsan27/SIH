@@ -13,6 +13,7 @@ const authToken = require("../middleware/authToken");
 const deleteUserDetails = require("../controller/profile/deleteuserdetails");
 const applytojob = require("../controller/profile/applytojob");
 const UserDetails = require('../controller/userDetails')
+const SuggestedJob = require("../controller/profile/suggestjob")
 
 router.use(cookieparser());
 router.use(bodyParser.json());
@@ -23,6 +24,7 @@ router.post("/adddetails",authToken,adduserdetails);
 router.post("/delete",authToken,deleteUserDetails);
 router.post("/applytojob",authToken,applytojob)
 router.post("/userdetails",authToken,UserDetails)
+router.post("/suggestedjob",SuggestedJob);
 
 
 module.exports = router;
