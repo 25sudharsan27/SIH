@@ -54,6 +54,8 @@ const ProfilePage = () => {
     });
     const data = await updateUser.json();
     console.log("data : ", data);
+    window.location.reload(); // Reload the page to clear state and redirect to login
+
   };
 
   // Add a new skill
@@ -74,6 +76,8 @@ const ProfilePage = () => {
       });
       const data = await updateUser.json();
       console.log("data : ", data);
+      window.location.reload(); // Reload the page to clear state and redirect to login
+
     }
   };
 
@@ -97,6 +101,8 @@ const ProfilePage = () => {
     const data = await updateUser.json();
     console.log("data : ", data);
     setIsAddProjectModalOpen(false);
+    window.location.reload(); // Reload the page to clear state and redirect to login
+
   };
 
   // Add a new experience
@@ -115,6 +121,8 @@ const ProfilePage = () => {
     const data = await updateUser.json();
     console.log("data : ", data);
     setIsAddExperienceModalOpen(false);
+    window.location.reload(); // Reload the page to clear state and redirect to login
+
   };
 
   // Show More Projects
@@ -168,7 +176,8 @@ const ProfilePage = () => {
                 <p>{userData.about}</p>
               )}
               {isEditingAbout ? (
-                <a onClick={() => { handleSaveAbout(); setIsEditingAbout(false); }}>Save</a>
+                <a onClick={() => { handleSaveAbout(); setIsEditingAbout(false);         window.location.reload(); // Reload the page to clear state and redirect to login
+                }}>Save</a>
               ) : (
                 <a onClick={() => setIsEditingAbout(true)}>Edit</a>
               )}

@@ -7,7 +7,7 @@ const LandingPage = () => {
   return (
     <body>
     <div className="landing-page">
-      <h1 className="title">Welcome to Career Catalyst</h1>
+      <h1 className="title">Welcome to Job Intern Catalyst</h1>
       <div className="card-container">
         <div className="card">
           <h2>Organization or Job Provider</h2>
