@@ -1,21 +1,17 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import './profile.css';
 import Modal from './Model'; // Make sure this is imported correctly
 import edit from './images/edit.png';
 import save from './images/save.png';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectUser } from '../store/userSlice';
-
 // import profile from './images/logesh.jpg'
 import './Model.css';
 
 const ProfilePage = () => {
   // Get user data from Redux store
+  const userData = useSelector((state) => state.user.user);
 
-  const userData = useSelector(selectUser);
-  console.log(userData);
-
-  // Initialize state variables
+  // State for handling editable about section and skills
   const [isEditingAbout, setIsEditingAbout] = useState(false);
   const [aboutText, setAboutText] = useState(userData?.about || '');
   const [skills, setSkills] = useState(userData?.skills || []);
@@ -60,6 +56,7 @@ const ProfilePage = () => {
     const data = await updateUser.json();
     console.log("data : ", data);
     window.location.reload(); // Reload the page to clear state and redirect to login
+
   };
 
   // Add a new skill
@@ -81,6 +78,7 @@ const ProfilePage = () => {
       const data = await updateUser.json();
       console.log("data : ", data);
       window.location.reload(); // Reload the page to clear state and redirect to login
+
     }
   };
 
@@ -98,13 +96,14 @@ const ProfilePage = () => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        "projects": [...(userData?.projects || []), newProject]
+        "projects": [...userData.projects, newProject]
       })
     });
     const data = await updateUser.json();
     console.log("data : ", data);
     setIsAddProjectModalOpen(false);
     window.location.reload(); // Reload the page to clear state and redirect to login
+
   };
 
   // Add a new experience
@@ -117,24 +116,25 @@ const ProfilePage = () => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        "experiences": [...(userData?.experiences || []), newExperience]
+        "experiences": [...userData.experiences, newExperience]
       })
     });
     const data = await updateUser.json();
     console.log("data : ", data);
     setIsAddExperienceModalOpen(false);
     window.location.reload(); // Reload the page to clear state and redirect to login
+
   };
 
   // Show More Projects
   const handleShowMoreProjects = () => {
-    setVisibleProjectsCount((userData?.projects || []).length);
+    setVisibleProjectsCount(userData.projects.length);
     setIsShowMoreProjectsOpen(true);
   };
 
   // Show More Experiences
   const handleShowMoreExperiences = () => {
-    setVisibleExperiencesCount((userData?.experiences || []).length);
+    setVisibleExperiencesCount(userData.experiences.length);
     setIsShowMoreExperiencesOpen(true);
   };
 
@@ -147,7 +147,7 @@ const ProfilePage = () => {
       <div className="profile-header">
         <div className="profile-left">
           <img
-            src={userData.profilepic || save}
+            src={  userData.profilepic || save}
             alt="Profile Picture"
             className="profile-picture"
           />
@@ -177,7 +177,8 @@ const ProfilePage = () => {
                 <p>{userData.about}</p>
               )}
               {isEditingAbout ? (
-                <a onClick={handleSaveAbout}>Save</a>
+                <a onClick={() => { handleSaveAbout(); setIsEditingAbout(false);         window.location.reload(); // Reload the page to clear state and redirect to login
+                }}>Save</a>
               ) : (
                 <a onClick={() => setIsEditingAbout(true)}>Edit</a>
               )}
@@ -188,7 +189,7 @@ const ProfilePage = () => {
             <div className="skill-section-a">
               <h3>Skills</h3>
               <div className="skills-list">
-                {(userData.skills || []).map((skill, index) => (
+                {userData.skills.map((skill, index) => (
                   <p key={index} className="skill-item">{skill}</p>
                 ))}
               </div>
@@ -200,7 +201,7 @@ const ProfilePage = () => {
         {/* Experience Section */}
         <h3 className="exp-h3">Experience</h3>
         <div className="experience-section">
-          {(userData.experiences || []).slice(0, visibleExperiencesCount).map((experience, index) => (
+          {userData.experiences.slice(0, visibleExperiencesCount).map((experience, index) => (
             <div key={index} className="experience-item">
               <div className="experience-item-a">
                 <img src={experience.media[0] || 'images/company-logo-placeholder.svg'} alt={experience.company} className="company-logo" />
@@ -213,7 +214,7 @@ const ProfilePage = () => {
               </div>
             </div>
           ))}
-          {(userData.experiences || []).length > 5 && visibleExperiencesCount < (userData.experiences || []).length && (
+          {userData.experiences.length > 5 && visibleExperiencesCount < userData.experiences.length && (
             <a href="#" className="show-more" onClick={handleShowMoreExperiences}>Show More</a>
           )}
           <a href="#" className="add-more-projects" onClick={() => setIsAddExperienceModalOpen(true)}>Add Experience</a>
@@ -223,14 +224,14 @@ const ProfilePage = () => {
         <h3 className="exp-h3">Projects</h3>
         <div className="pro">
           <div className="projects-section">
-            {(userData.projects || []).slice(0, visibleProjectsCount).map((project, index) => (
+            {userData.projects.slice(0, visibleProjectsCount).map((project, index) => (
               <div key={index} className="project-item">
                 <h4 className="project-item-t">{project.title}</h4>
                 <p className="project-item-s">{project.description}</p>
                 {project.link && <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">View Project</a>}
               </div>
             ))}
-            {(userData.projects || []).length > 5 && visibleProjectsCount < (userData.projects || []).length && (
+            {userData.projects.length > 5 && visibleProjectsCount < userData.projects.length && (
               <a href="#" className="show-more" onClick={handleShowMoreProjects}>Show More</a>
             )}
             <a href="#" className="add-more-projects" onClick={() => setIsAddProjectModalOpen(true)}>Add Project</a>
@@ -316,7 +317,7 @@ const ProfilePage = () => {
       <Modal isOpen={isShowMoreProjectsOpen} onClose={() => setIsShowMoreProjectsOpen(false)}>
         <h3>All Projects</h3>
         <div className="projects-section">
-          {(userData.projects || []).map((project, index) => (
+          {userData.projects.map((project, index) => (
             <div key={index} className="project-item">
               <h4 className="project-item-t">{project.title}</h4>
               <p className="project-item-s">{project.description}</p>
@@ -330,7 +331,7 @@ const ProfilePage = () => {
       <Modal isOpen={isShowMoreExperiencesOpen} onClose={() => setIsShowMoreExperiencesOpen(false)}>
         <h3>All Experiences</h3>
         <div className="experience-section">
-          {(userData.experiences || []).map((experience, index) => (
+          {userData.experiences.map((experience, index) => (
             <div key={index} className="experience-item">
               <div className="experience-item-a">
                 <img src={experience.media[0] || 'images/company-logo-placeholder.svg'} alt={experience.company} className="company-logo" />

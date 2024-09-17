@@ -9,15 +9,15 @@ const filterjobdetails = async (req, res) => {
     // Build the filter object with only provided fields
     const filter = {};
     if (experienceLevel) filter.experienceLevel = experienceLevel;
-    if (location) {
-      filter.$or = [
-        { city: location },
-        { state: location },
-        { country: location }
-      ];
-    }
+    // if (location) {
+    //   filter.$or = [
+    //     { city: location },
+    //     { state: location },
+    //     { country: location }
+    //   ];
+    // }
 
-    const jobs = await jobModel.find(filter).lean(); // Use lean() for better performance
+    const jobs = await jobModel.find(filter); // Use lean() for better performance
 
     if (jobs.length === 0) {
       return res.status(404).json({

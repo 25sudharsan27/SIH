@@ -12,8 +12,10 @@ async function OrganizationSignUpController(req,res){
         const password = req.body.password;
         const logo = req.body.logo;
         const about = req.body.about;
-        const location = req.body.location;
-        const organization = await organizationModel.findOne({companyname,email});
+        const country = req.body.country;
+        const city = req.body.city;
+        const state = req.body.state;
+        const organization = await organizationModel.findOne({email});
         
         
         
@@ -29,6 +31,9 @@ async function OrganizationSignUpController(req,res){
         }
         if(!companyname){
             throw new Error("Please provide name")
+        }
+        if(!country || !city || !state){
+            throw new Error("Please provide location details");
         }
         const salt = bcrypt.genSaltSync(10);
         const hashPassword = await bcrypt.hashSync(password,salt);

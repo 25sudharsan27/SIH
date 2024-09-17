@@ -1,22 +1,24 @@
-import { createSlice} from '@reduxjs/toolkit';
-
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    user : null
-}
+    user: null, // This will store the complete user data
+};
 
-export const userSlice = createSlice({
-    name : "counter",
+const userSlice = createSlice({
+    name: 'user',
     initialState,
-    reducers : {
-        setUserDetails : (state,action) =>{
-            console.log(action);
-            state.user = action.payload;
-            console.log(action.payload);
-        }
+    reducers: {
+        setUserDetails: (state, action) => {
+            state.user = action.payload; // Set the complete user data
+        },
+        // Optionally add other reducers if needed
     },
-})
+});
 
-export const {setUserDetails} = userSlice.actions;
+// Selectors
+export const selectUser = (state) => state.user.user;
 
-export default userSlice.reducer
+// Actions
+export const { setUserDetails } = userSlice.actions;
+
+export default userSlice.reducer;

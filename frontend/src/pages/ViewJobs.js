@@ -91,6 +91,24 @@ function JobBoard() {
     setCurrentPage(pageNumber);
   };
 
+  const handleFilter = async ()=>{
+    console.log("reached here");
+    console.log("experience "+experienceLevel);
+    if(experienceLevel!=""){
+      const response = await fetch("http://localhost:8000/public/filterjobs", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body:JSON.stringify({"experienceLevel" :experienceLevel})
+      });
+      const data = await response.json();
+      setJobs(data.data);
+    }
+
+  }
+
   return (
     <div>
       <div className="search-bar">
@@ -99,7 +117,7 @@ function JobBoard() {
           <select
             className="dropdown"
             value={experienceLevel}
-            onChange={(e) => setExperienceLevel(e.target.value)}
+            onChange={(e) => {setExperienceLevel(e.target.value); handleFilter()}}
           >
             <option value="">Experience Level</option>
             <option value="Intern">Intern</option>
@@ -112,7 +130,7 @@ function JobBoard() {
           <select
             className="dropdown"
             value={location}
-            onChange={(e) => setLocation(e.target.value)}
+            onChange={(e) => {setLocation(e.target.value); handleFilter()}}
           >
             <option value="">Location</option>
             <option value="Bengaluru">Bengaluru</option>

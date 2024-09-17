@@ -1,14 +1,44 @@
 import React, { useState } from 'react';
 import './JobSeekerLogin.css';
+import { useNavigate } from 'react-router-dom';
 
 const JobSeekerLogin = () => {
+  const navigate = new useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     // Implement your login logic here
     console.log("Email:", email, "Password:", password);
+    try {
+      const response = await fetch('http://localhost:8000/organization/login', { // Replace with your API endpoint
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          "email":email,
+          "password":password
+        }),
+      });
+      
+      const data = await response.json();
+      if (response.ok) {
+        console.log('Registration successful', data);
+        alert("successfully created");
+        navigate("/organization/profile")
+
+        // Redirect or show success message
+      } else {
+        console.error('Registration failed', data);
+        // Handle error
+      }
+    } catch (error) {
+      console.error('Network error', error);
+      // Handle network error
+    }
+
   }
 
   return (
