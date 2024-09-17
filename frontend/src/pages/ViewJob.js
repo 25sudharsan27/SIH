@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './ViewJob.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+
 
 function ViewJob() {
   const { id } = useParams();
   const job_id = id;
   console.log("job_id: " + job_id);
+  const navigate = new useNavigate();
+
 
   const [jobData, setJobData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -61,36 +64,40 @@ function ViewJob() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     if (!jobData) return;
-
+  
+    // Prepare extra data
     const extra = jobData.extra_questions.map((_, index) => extraAnswers[index] || '');
-
-    const formData = new FormData();
-    formData.append('user_id', 'USER_ID'); // Replace with actual user ID
-    formData.append('job_id', job_id);
-    formData.append('extra', JSON.stringify(extra));
-    formData.append('resume', resume);
-
+  
     try {
       const response = await fetch("http://localhost:8000/user/applytojob", {
         method: "POST",
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          job_id: job_id,
+          extra: extra,
+          // Resume is not included since it's not being uploaded
+        }),
         credentials: "include",
       });
-
+  
       const result = await response.json();
-
+  
       if (!response.ok) {
         throw new Error(result.message || "Failed to apply to job.");
       }
-
+  
       alert("Application submitted successfully.");
+      navigate('/user/viewjobs');
     } catch (error) {
       console.error("Error applying to job:", error);
       alert("Failed to submit application.");
     }
   };
+  
 
   if (loading) {
     return <div>Loading...</div>;

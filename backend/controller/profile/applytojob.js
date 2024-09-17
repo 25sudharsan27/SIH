@@ -1,45 +1,23 @@
-const jobModel = require("../../models/public/jobsModel");
-const userModel = require("../../models/userModel");
-const organizationModel = require("../../models/organizationModel");
+const userModel = require("../../models/userModel")
+const jobModel = require("../../models/public/jobsModel")
 
 
 const applyToJob = async (req, res) => {
   try {
-    const { user_id, job_id, extra } = req.body;
+    const { job_id, extra } = req.body;
+    const user_id = req.user_id;
+    console.log("job_id" + job_id);
+
+    if (!job_id) {
+      throw new Error("Job ID is required");
+    }
+    if (!user_id) {
+      throw new Error("User ID is required");
+    }
 
     // Find user and job by their IDs
-    const user = await userModel.findOne({"_id" : user_id});
-    const job = await jobModel.findOne({"_id":job_id});
-
-    console.log(user);
-    console.log(job);
-    if(!user){
-        throw new Error("User not found");
-    }
-    if(!job){
-        throw new Error("Job not found");
-    }
-    if(job.status !== "closed"){
-        throw new Error("Job is not open");
-    }
-
-    const skills = job.skills;
-    const user_skills = user.skills;
-    const final_skills =[];
-    for(let i=0;i<skills.length;i++){
-        if(user.skills.includes(skills[i])){
-            final_skills.push({
-                "skill":skills[i],
-                "match":true
-            });
-        }
-        else{
-            final_skills.push({
-                "skill":skills[i],
-                "match":false
-            });
-        }
-    }
+    const user = await userModel.findById(user_id);
+    const job = await jobModel.findById(job_id);
 
     if (!user) {
       throw new Error("User not found");
@@ -47,8 +25,20 @@ const applyToJob = async (req, res) => {
     if (!job) {
       throw new Error("Job not found");
     }
-    if(user.applied_jobs.includes(job_id)){
-        throw new Error("You have already applied to this job");
+    if (job.status !== "open") {
+      throw new Error("Job is not open");
+    }
+
+    const skills = job.skills;
+    const user_skills = user.skills;
+    const final_skills = skills.map(skill => ({
+      "skill" : skill,
+      match: user_skills.includes(skill),
+    }));
+    console.log("final skills "+final_skills)
+
+    if (user.applied_jobs.includes(job_id)) {
+      throw new Error("You have already applied to this job");
     }
 
     // Check if extra answers match the number of extra questions
@@ -56,15 +46,15 @@ const applyToJob = async (req, res) => {
       throw new Error("Please answer all the questions");
     }
 
-    // Handle resume (assuming user has a resume stored)
-    const resume = user.resume || ""; // Replace with actual logic to retrieve the resume if needed
-
     // Create application object
     const application = {
       id: user_id,
-      resume : resume,
-      extra_questions: extra,
-      skills : final_skills
+      resume: "", // No resume is provided
+      extra_questions: job.extra_questions.map((question, index) => ({
+        question,
+        answer: extra[index] || "",
+      })),
+      skills: final_skills,
     };
 
     // Add the application to the job
@@ -74,19 +64,17 @@ const applyToJob = async (req, res) => {
     user.applied_jobs.push(job_id);
 
     // Save both job and user documents
-    const final_job = await job.save();
-    const final_user = await user.save();
+    await job.save();
+    await user.save();
 
     // Return success response
     res.status(200).json({
       message: "Applied to job successfully",
       success: true,
-      final_job,
-      final_user,
     });
   } catch (err) {
     res.status(400).json({
-      message: err.message || err,
+      message: err.message || "An error occurred",
       error: true,
       success: false,
     });
