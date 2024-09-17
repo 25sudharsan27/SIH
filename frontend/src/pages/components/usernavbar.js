@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie'; // Optional
 import './usernavbar.css';
+import User from '../UserJobs';
+import { Link } from 'react-router-dom';
 
 // Function to clear specific cookies
 const clearCookie = (name) => {
@@ -16,6 +18,8 @@ const clearAllCookies = () => {
         document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
     });
 };
+
+
 
 const UserNavbar = () => {
     const [isDropdownVisible, setDropdownVisible] = React.useState(false);
@@ -37,14 +41,27 @@ const UserNavbar = () => {
         // history.push('/login');
     };
 
+    const [nav,SetNav] = useState("");
+
+    useEffect(()=>{
+        if(nav !== ""){
+            document.querySelectorAll('.navbar-item').forEach(a => a.classList.remove('highlight'));
+            document.getElementById(nav).classList.add('highlight');
+        }
+    },[nav]);
+
+    function handleSetNav(m){
+        SetNav(m);
+    }
+
     return (
         <nav className="navbar">
             <div className="navbar-left">
-                <a href="/user/viewjobs" className="navbar-item">Jobs</a>
-                <a href="interview" className="navbar-item">Interview Prep</a>
-                <a href="#" className="navbar-item">Message</a>
-                <a href="#" className="navbar-item">Community</a>
-                <a href="#" className="navbar-item">Build Resume</a>
+                <Link to="/user/viewjobs" className="navbar-item" onClick={e => handleSetNav("jobs")} id="jobs">Jobs</Link>
+                <Link to="interview" className="navbar-item" onClick={e => handleSetNav("interview")} id="interview">Interview Prep</Link>
+                <Link to="#" className="navbar-item" onClick={e => handleSetNav("message")} id="message">Message</Link>
+                <Link to="#" className="navbar-item" onClick={e => handleSetNav("community")} id="community">Community</Link>
+                <Link to="#" className="navbar-item" onClick={e => handleSetNav("buildResume")} id="buildResume">Build Resume</Link>
             </div>
             <div className="navbar-right">
                 <div 
