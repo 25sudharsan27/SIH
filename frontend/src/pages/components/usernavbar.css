@@ -115,6 +115,10 @@ body {
     display: block;
 }
 
+.active{
+    display: block;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .navbar-left, .navbar-right {

@@ -17,6 +17,18 @@ const OrganizationNavbar = () => {
     function handleSetOrgNav(m){
         SetorgNav(m);
     }
+
+    let sidebar = false;
+    function openSidebar(){
+        if(!sidebar){
+            document.querySelector('.dropdown-content').style.display = 'block';
+        }
+        else{
+            document.querySelector('.dropdown-content').style.display = 'none';
+        }
+        sidebar = !sidebar;
+    }
+    
     return (
         <nav className="navbar">
             <div className="navbar-left">
@@ -24,9 +36,7 @@ const OrganizationNavbar = () => {
                 <Link to="/organization/createjob" className="navbar-item" id="jobs" onClick={()=> handleSetOrgNav("jobs")}>Jobs</Link>
                 <Link to="#" className="navbar-item" id="message" onClick={()=> handleSetOrgNav("message")}>Message</Link>
                 <Link to="#" className="navbar-item" id="commmunity" onClick={()=> handleSetOrgNav("commmunity")}>Community</Link>
-
-               
-
+                
             </div>
             <div className="navbar-right">
                 <div className="profile-dropdown">
@@ -34,15 +44,16 @@ const OrganizationNavbar = () => {
                         src="Images/user-icon-svgrepo-com (1).svg" 
                         alt="Logo" 
                         className="profile-logo" 
+                        onClick={openSidebar}
                     />
                     <div className="dropdown-content">
-                        <div className="Profdrop">
+                        <div className="Profdrop" onClick={openSidebar}>
                             <img 
                                 src="Images/user-icon-svgrepo-com (1).svg" 
                                 className="profa" 
                                 alt="logo" 
                             />
-                            <a href="#">Profile</a>
+                            <Link to="profile">Profile</Link>
                         </div>
                         <div className="Profdrop">
                             <img 
@@ -50,7 +61,7 @@ const OrganizationNavbar = () => {
                                 className="profa" 
                                 alt="logo" 
                             />
-                            <a href="#">Settings</a>
+                            <Link to="#">Settings</Link>
                         </div>
                         <div className="Profdrop">
                             <img 
@@ -58,7 +69,7 @@ const OrganizationNavbar = () => {
                                 className="profa" 
                                 alt="logo" 
                             />
-                            <a href="#">Logout</a>
+                            <Link to="../../">Logout</Link>
                         </div> 
                     </div>
                 </div>
