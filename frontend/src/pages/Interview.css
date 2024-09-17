@@ -1,0 +1,22 @@
+.interview-box{
+    padding: 0 10%;
+    height: 400px;
+    display: flex;
+}
+.interview-box-left{
+    flex-basis: 60%;
+    background: rgb(75, 75, 75);
+    border-radius: 20px;
+}
+.interview-box-right{
+    flex-basis: 40%;
+    background: rgba(128, 128, 128, 0.532);
+    border-radius: 20px;
+}
+.skill-container{
+    margin-top: 5%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    gap:4rem;
+    row-gap: 2rem;
+}

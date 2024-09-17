@@ -1,0 +1,32 @@
+.skill-box{
+    border: 1px solid grey;
+    border-radius: 20px;
+    box-shadow: 2px 2px 2px 2px hsla(0, 0%, 50%, 0.375);
+    width : 200px;
+    padding: 15px 8px;
+    display: flex;
+    justify-content: space-between;
+}
+.logo{
+    height:50px;
+}
+.skill-name{
+    font-size: 20px;
+    font-weight: 600;
+    padding-bottom: 20px;
+}
+.skill-left{
+    display: flex;
+    flex-direction: column;
+}
+.skill-right{
+    display: flex;
+    flex-direction: column;
+    padding-right: 10%;
+}
+.skill-start-btn{
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin-top: 15px;
+}
