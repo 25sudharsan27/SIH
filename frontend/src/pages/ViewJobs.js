@@ -39,6 +39,8 @@ function JobBoard() {
         const data = await response.json();
         console.log('Fetched Jobs:', data);  // Log the data for debugging
         setJobs(Array.isArray(data.data) ? data.data : []);  // Ensure jobs is an array
+        console.log(jobs);
+
       } catch (error) {
         console.error('Error fetching jobs:', error);
         setError('Failed to fetch jobs. Please try again later.');

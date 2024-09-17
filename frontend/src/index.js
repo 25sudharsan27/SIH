@@ -27,7 +27,6 @@ root.render(
         <Route path="/jobseeker/login" element={<JobSeekerLogin />} />
         <Route path="/organization/login" element={<OrganizationLogin/>}/>
         <Route path="/organization/signup" element={<OrganizationSignup/>}/>
-        <Route path="/organization/jobs/*" element={<Organization/>}/>
         <Route path="/user/*" element={<User/>}/>
         <Route path="/organization/*" element={<OrganizationRouter/>} />
         

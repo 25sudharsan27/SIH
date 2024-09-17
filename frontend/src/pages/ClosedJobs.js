@@ -131,9 +131,9 @@ const jobs = [
       <div className="miain">
         <aside className="sidebar">
           <ul>
-            <li><Link to="/organization/jobs/createjob" >Create Job</Link></li>
-            <li><Link  to="/organization/jobs/" >Posted Jobs</Link></li>
-            <li><Link className="high" to="/organization/jobs/closedjobs">Closed Jobs</Link></li>
+            <li><Link to="/organization/createjob" >Create Job</Link></li>
+            <li><Link  to="/organization/postedjobs" >Posted Jobs</Link></li>
+            <li><Link className="high" to="/organization/closedjobs">Closed Jobs</Link></li>
           </ul>
       </aside>
       <div className="job-board">

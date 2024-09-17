@@ -133,3 +133,8 @@ aside{
 .high{
   font-size:20px;
 }
+
+.form-section{
+  display:flex;
+  flex-direction:column;
+}
