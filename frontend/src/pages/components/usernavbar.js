@@ -104,7 +104,7 @@ const UserNavbar = () => {
                                 className="profa" 
                                 alt="Logout" 
                             />
-                            <a href="#">Logout</a>
+                            <a href="../../">Logout</a>
                         </div> 
                     </div>
                 </div>

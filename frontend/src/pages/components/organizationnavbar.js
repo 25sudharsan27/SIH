@@ -1,13 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './usernavbar.css';
+import { Link } from 'react-router-dom';
+
 
 const OrganizationNavbar = () => {
+
+    const [orgNav,SetorgNav] = useState("");
+
+    useEffect(()=>{
+    if(orgNav !== ""){
+        document.querySelectorAll('.navbar-item').forEach(e => e.classList.remove('highlight'));
+        document.getElementById(orgNav).classList.add('highlight');
+    }
+    },[orgNav]);
+
+    function handleSetOrgNav(m){
+        SetorgNav(m);
+    }
     return (
         <nav className="navbar">
             <div className="navbar-left">
-                <a href="#" className="navbar-item">Jobs</a>
-                <a href="#" className="navbar-item">Message</a>
-                <a href="#" className="navbar-item">Community</a>
+                <Link to="#" className="navbar-item" id="jobs" onClick={()=> handleSetOrgNav("jobs")}>Jobs</Link>
+                <Link to="#" className="navbar-item" id="message" onClick={()=> handleSetOrgNav("message")}>Message</Link>
+                <Link to="#" className="navbar-item" id="commmunity" onClick={()=> handleSetOrgNav("commmunity")}>Community</Link>
             </div>
             <div className="navbar-right">
                 <div className="profile-dropdown">

@@ -172,7 +172,7 @@ const ProfilePage = () => {
               <div className='simply'>
                 <h3>About</h3>
                 {isEditingAbout ? (
-                  <img sonClick={handleSaveAbout} className='editbtn' src={saveIcon}></img>
+                  <img onClick={handleSaveAbout} className='editbtn' src={saveIcon}></img>
                 ) : (
                   <img className='editbtn' onClick={() => setIsEditingAbout(true)} src={editIcon}></img>
                 )}

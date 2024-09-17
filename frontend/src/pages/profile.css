@@ -18,8 +18,8 @@
     display:flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px;
-    margin: 0px 10%;
+    padding: 20px 10%;
+    background: hsla(0, 0%, 50%, 0.162);
 }
 .editbtn{
     height:25px;
@@ -181,10 +181,18 @@
 
 
 .profile-picture{
-    height:200px;
-    width:200px;
+    min-height:200px;
+    min-width:200px;
+    background: white;
+    box-shadow: 1px 1px 1px 1px rgba(255, 255, 255, 0.608);
+    border-radius: 15px;
 }
 
 .add-more-projects{
     margin-top: 10px;
 }
+
+/* .profile-left{
+    border: 2px solid;
+    width: 100%;
+} */
