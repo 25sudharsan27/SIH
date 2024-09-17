@@ -6,6 +6,9 @@ import edit from './images/edit.png';
 import save from './images/save.png';
 // import profile from './images/logesh.jpg'
 import './Model.css';
+import editIcon from './images/edit-icon.svg'
+import saveIcon from './images/floppy-disk-regular.svg'
+import linkImg from './images/link-solid.svg'
 
 const ProfilePage = () => {
   // Get user data from Redux store
@@ -166,7 +169,15 @@ const ProfilePage = () => {
           {/* About Section */}
           <div className="about-section">
             <div className="about-section-a">
-              <h3>About</h3>
+              <div className='simply'>
+                <h3>About</h3>
+                {isEditingAbout ? (
+                  <a onClick={() => { handleSaveAbout(); setIsEditingAbout(false);         window.location.reload(); // Reload the page to clear state and redirect to login
+                  }}><img className='editbtn' src={saveIcon}></img></a>
+                ) : (
+                  <a onClick={() => setIsEditingAbout(true)}><img className='editbtn' src={editIcon}></img></a>
+                )}
+              </div>
               {isEditingAbout ? (
                 <textarea
                   value={aboutText}
@@ -176,24 +187,21 @@ const ProfilePage = () => {
               ) : (
                 <p>{userData.about}</p>
               )}
-              {isEditingAbout ? (
-                <a onClick={() => { handleSaveAbout(); setIsEditingAbout(false);         window.location.reload(); // Reload the page to clear state and redirect to login
-                }}>Save</a>
-              ) : (
-                <a onClick={() => setIsEditingAbout(true)}>Edit</a>
-              )}
+              
             </div>
           </div>
 
           <div className="skills-section">
             <div className="skill-section-a">
-              <h3>Skills</h3>
+              <div className='simply'>
+                <h3>Skills</h3>
+                <a className="addskill" onClick={handleAddSkill}><img className='editbtn' src={editIcon}></img></a>
+              </div>
               <div className="skills-list">
                 {userData.skills.map((skill, index) => (
-                  <p key={index} className="skill-item">{skill}</p>
+                  <p key={index} className="skill-item">{skill.toUpperCase()}</p>
                 ))}
               </div>
-              <a className="addskill" onClick={handleAddSkill}>Add Skill</a>
             </div>
           </div>
         </div>
@@ -207,9 +215,9 @@ const ProfilePage = () => {
                 <img src={experience.media[0] || 'images/company-logo-placeholder.svg'} alt={experience.company} className="company-logo" />
                 <p>{experience.company}</p>
               </div>
-              <div>
+              <div className='centerIt'>
                 <h4 className="title">{experience.title}</h4>
-                <p>{new Date(experience.startDate).toLocaleDateString()} - {experience.endDate ? new Date(experience.endDate).toLocaleDateString() : 'Present'}</p>
+                <p className='vinu-t'>{new Date(experience.startDate).toLocaleDateString()} - {experience.endDate ? new Date(experience.endDate).toLocaleDateString() : 'Present'}</p>
                 <p className="description">{experience.description}</p>
               </div>
             </div>
@@ -226,17 +234,22 @@ const ProfilePage = () => {
           <div className="projects-section">
             {userData.projects.slice(0, visibleProjectsCount).map((project, index) => (
               <div key={index} className="project-item">
-                <h4 className="project-item-t">{project.title}</h4>
-                <p className="project-item-s">{project.description}</p>
-                {project.link && <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">View Project</a>}
+                <div>
+                  <h4 className="project-item-t">{project.title}</h4>
+                  <p className="project-item-s">{project.description}</p>
+                </div>
+                <div className='project-link-holder'>
+                  {project.link && <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">View Project<img className='editbtn' src={linkImg}></img></a>}
+                </div>
               </div>
             ))}
             {userData.projects.length > 5 && visibleProjectsCount < userData.projects.length && (
               <a href="#" className="show-more" onClick={handleShowMoreProjects}>Show More</a>
             )}
-            <a href="#" className="add-more-projects" onClick={() => setIsAddProjectModalOpen(true)}>Add Project</a>
           </div>
+          <a href="#" className="add-more-projects" onClick={() => setIsAddProjectModalOpen(true)}>Add Project</a>
         </div>
+        <br/><br/><br/><br/>
       </div>
 
       {/* Add Project Modal */}
