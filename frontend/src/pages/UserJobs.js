@@ -4,6 +4,7 @@ import OrganizationNavbar from './components/organizationnavbar';
 import {BrowserRouter as Router, Route, BrowserRouter, Routes} from 'react-router-dom';
 import ViewJobs from './ViewJobs.js';
 import ViewJob from './ViewJob.js';
+import Interview from './Interview.js';
 
 import UserNavbar from './components/usernavbar.js';
 import { setUserDetails } from '../store/userSlice.js';
@@ -51,6 +52,7 @@ const User = () =>{
                 <Route path="/viewjobs" element={<ViewJobs/>}/>
                 <Route path="/viewjobs/job/:id" element={<ViewJob/>}/>
                 <Route path="/profile" element={<ProfilePage/>}/>
+                <Route path="/interview" element={<Interview/>}/>
 
             </ Routes>
         

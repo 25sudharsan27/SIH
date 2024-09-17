@@ -41,7 +41,7 @@ const UserNavbar = () => {
         <nav className="navbar">
             <div className="navbar-left">
                 <a href="/user/viewjobs" className="navbar-item">Jobs</a>
-                <a href="#" className="navbar-item">Interview Prep</a>
+                <a href="interview" className="navbar-item">Interview Prep</a>
                 <a href="#" className="navbar-item">Message</a>
                 <a href="#" className="navbar-item">Community</a>
                 <a href="#" className="navbar-item">Build Resume</a>
