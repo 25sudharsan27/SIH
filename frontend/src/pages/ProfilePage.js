@@ -4,6 +4,7 @@ import './profile.css';
 import Modal from './Model'; // Make sure this is imported correctly
 import edit from './images/edit.png';
 import save from './images/save.png';
+// import profile from './images/logesh.jpg'
 import './Model.css';
 
 const ProfilePage = () => {
@@ -146,7 +147,7 @@ const ProfilePage = () => {
       <div className="profile-header">
         <div className="profile-left">
           <img
-            src={userData.profilepic || save}
+            src={  userData.profilepic || save}
             alt="Profile Picture"
             className="profile-picture"
           />
