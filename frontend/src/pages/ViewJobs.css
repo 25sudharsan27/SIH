@@ -79,3 +79,20 @@
     display:flex;
     justify-content:space-between;
   }
+
+  .filter-btn{
+    background-color: #6187D0;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .filter-btn:hover{
+    background-color: #3f5e9e;
+  }
+
+  .filter-btn:active{
+    background-color: #2e4a7a;
+  }

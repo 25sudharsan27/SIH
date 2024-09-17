@@ -9,7 +9,7 @@ function calculateSkillMatch(userSkills, jobSkills) {
 
     const similarity = dotProduct / (userMagnitude * jobMagnitude);
 
-    return similarity >= 0.75; 
+    return similarity >= 0.50; 
 }
 
 module.exports = { calculateSkillMatch };
