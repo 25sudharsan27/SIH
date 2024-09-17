@@ -8,7 +8,7 @@ async function OrganizationSignUpController(req,res){
         console.log(req.body);
                 
         const email = req.body.email;
-        const companyname = req.body.companyname;
+        const name = req.body.name;
         const password = req.body.password;
         const logo = req.body.logo;
         const about = req.body.about;
@@ -29,7 +29,7 @@ async function OrganizationSignUpController(req,res){
         if(!password){
             throw new Error("Please provide password")
         }
-        if(!companyname){
+        if(!name){
             throw new Error("Please provide name")
         }
         if(!country || !city || !state){

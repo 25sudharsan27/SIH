@@ -10,6 +10,7 @@ import JobSeekerLogin from './pages/JobSeekerLogin';
 import OrganizationSignup from './pages/OrganizationSignup';
 import OrganizationLogin from './pages/OrganizationLogin';
 import Organization from './pages/Organizationjobs';
+import OrganizationRouter from './pages/OrganizationRouter';
 import User from './pages/UserJobs';
 import {store} from './store/store';
 import { Provider } from 'react-redux';
@@ -28,6 +29,7 @@ root.render(
         <Route path="/organization/signup" element={<OrganizationSignup/>}/>
         <Route path="/organization/jobs/*" element={<Organization/>}/>
         <Route path="/user/*" element={<User/>}/>
+        <Route path="/organization/*" element={<OrganizationRouter/>} />
         
       </Routes>
     </BrowserRouter>
