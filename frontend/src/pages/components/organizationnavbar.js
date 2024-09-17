@@ -5,7 +5,7 @@ const OrganizationNavbar = () => {
     return (
         <nav className="navbar">
             <div className="navbar-left">
-                <a href="#" className="navbar-item">Jobs</a>
+                <a href="/organization/createjob" className="navbar-item">Jobs</a>
                 <a href="#" className="navbar-item">Message</a>
                 <a href="#" className="navbar-item">Community</a>
             </div>

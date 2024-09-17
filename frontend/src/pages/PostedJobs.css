@@ -4,6 +4,7 @@
   }
   .miain{
     display:flex;
+    flex-direction:row;
 
   }
   .posted-jobs-container {

@@ -13,6 +13,9 @@ import Context from '../context/index.js';
 import ProfilePage from './ProfilePage.js';
 import { useNavigate } from 'react-router-dom';
 import OrganizationProfile from './OrganizationProfile.js'
+import CreateJob from './CreateJob.js';
+import PostedJobs from './PostedJobs';
+import ClosedJobs from './ClosedJobs.js';
 
 const Organization = () =>{
   const Navigate = useNavigate();
@@ -51,6 +54,9 @@ const Organization = () =>{
 
             <Routes>
                 <Route path="/profile" element={<OrganizationProfile/>}/>
+                <Route path="/createjob" element ={<CreateJob/>}/>
+                <Route path="/postedjobs" element={<PostedJobs/>}/>
+                <Route path="/closedjobs" element={<ClosedJobs/>}/>
             </Routes>
         
         </div>

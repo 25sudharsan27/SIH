@@ -27,8 +27,8 @@ router.post("/login",organizationsignin);
 router.post("/addorganization",orgauthToken,updateOrganizationDetails);
 router.post("/closejob",closejob);
 router.post("/getclosedjobs",getclosedjobs);
-router.post("/getopenjobs",getopenjobs);
-router.post("/addjob",AddJob);
+router.post("/getopenjobs",orgauthToken,getopenjobs);
+router.post("/addjob",orgauthToken,AddJob);
 router.post("/organizationdetails",orgauthToken,OrganizationDetails);
 
 // router.post("/acceptjob",acceptjobs);
