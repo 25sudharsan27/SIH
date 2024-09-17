@@ -20,15 +20,13 @@ const OrganizationNavbar = () => {
     return (
         <nav className="navbar">
             <div className="navbar-left">
-<<<<<<< main
-                <Link to="#" className="navbar-item" id="jobs" onClick={()=> handleSetOrgNav("jobs")}>Jobs</Link>
+
+                <Link to="/organization/createjob" className="navbar-item" id="jobs" onClick={()=> handleSetOrgNav("jobs")}>Jobs</Link>
                 <Link to="#" className="navbar-item" id="message" onClick={()=> handleSetOrgNav("message")}>Message</Link>
                 <Link to="#" className="navbar-item" id="commmunity" onClick={()=> handleSetOrgNav("commmunity")}>Community</Link>
-=======
-                <a href="/organization/createjob" className="navbar-item">Jobs</a>
-                <a href="#" className="navbar-item">Message</a>
-                <a href="#" className="navbar-item">Community</a>
->>>>>>> main
+
+               
+
             </div>
             <div className="navbar-right">
                 <div className="profile-dropdown">
