@@ -211,6 +211,7 @@
     margin-top:30px;
 }
 
+
 .iconnn{
     height: 20px;
 }
@@ -223,6 +224,7 @@
 .heatmap-container{
     display: flex;
 }
+
 
 .logoo{
     height: 30px;
@@ -238,4 +240,10 @@
 }
 .images-con a{
     text-decoration: none;
+}
+
+.heatmap{
+    height:100px;
+    width:400px;
+
 }
