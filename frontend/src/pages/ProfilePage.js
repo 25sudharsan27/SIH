@@ -8,6 +8,7 @@ import { selectUser } from '../store/userSlice';
 import editIcon from './images/edit-icon.svg'
 import saveIcon from './images/floppy-disk-regular.svg'
 import linkIcon from './images/link-solid.svg'
+import heatmap from './components/Images/heatmap.png'
 
 // import profile from './images/logesh.jpg'
 import './Model.css';
@@ -160,6 +161,7 @@ const ProfilePage = () => {
           </p>
         </div>
         <div>
+          <img className="heatmap" src={heatmap} alt="hi"/>
           <a href="https://sudharsanb.liveblog365.com">https://sudharsanb.liveblog365.com</a>
         </div>
       </div>
