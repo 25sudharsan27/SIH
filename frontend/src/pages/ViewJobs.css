@@ -185,3 +185,22 @@
 .company-log{
   height: 70px;
 }
+
+#view-search-id{
+  border: none;
+}
+
+.filter-btn{
+  border: none;
+  background: hsl(223, 47%, 44%);
+  padding: 8px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 400;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.filter-btn:hover{
+  background-color: hsl(223, 47%, 54%);
+}

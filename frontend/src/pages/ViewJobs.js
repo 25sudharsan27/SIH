@@ -170,6 +170,7 @@ function JobBoard() {
             placeholder="Search..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            id="view-search-id"
           />
           <span onClick={handleFilter} className="search-icon">🔍</span>
         </div>

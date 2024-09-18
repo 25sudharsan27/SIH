@@ -56,7 +56,7 @@ function Interview() {
         </div>
       </div>
       <div>
-        <p>Skill Assessment</p>
+        <p id="skill-assessment">Skill Assessment</p>
         <div className='skill-container'>
           {skills.length > 0 ? (
             skills.map((skill, index) => (
