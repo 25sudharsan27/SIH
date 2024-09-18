@@ -4,6 +4,11 @@ import './usernavbar.css';
 import User from '../UserJobs';
 import { Link } from 'react-router-dom';
 
+import prof from './Images/user-icon-svgrepo-com (1).svg';
+import myjob from './Images/cube-svgrepo-com.svg';
+import setting from './Images/settings-2-svgrepo-com.svg';
+import logout from './Images/log-out-1-svgrepo-com.svg';
+import profile from './Images/profile.svg';
 
 
 // Function to clear specific cookies
@@ -70,7 +75,7 @@ const UserNavbar = () => {
                     className={`profile-dropdown ${isDropdownVisible ? 'active' : ''}`}
                 >
                     <img 
-                        src="Images/user-icon-svgrepo-com (1).svg" 
+                        src={profile}
                         alt="Profile" 
                         className="profile-logo" 
                         onClick={toggleDropdown} 
@@ -78,7 +83,7 @@ const UserNavbar = () => {
                     <div className="dropdown-content">
                         <div className="Profdrop">
                             <img 
-                                src="Images/user-icon-svgrepo-com (1).svg" 
+                                src={prof} 
                                 className="profa" 
                                 alt="Profile" 
                             />
@@ -86,7 +91,7 @@ const UserNavbar = () => {
                         </div>
                         <div className="Profdrop">
                             <img 
-                                src="Images/cube-svgrepo-com.svg" 
+                                src={myjob}
                                 className="profa" 
                                 alt="My Jobs" 
                             />
@@ -94,7 +99,7 @@ const UserNavbar = () => {
                         </div>
                         <div className="Profdrop">
                             <img 
-                                src="Images/cube-svgrepo-com.svg" 
+                                src="Images/cube-svgrepo-com.svg"
                                 className="profa" 
                                 alt="My Jobs" 
                             />
@@ -102,7 +107,7 @@ const UserNavbar = () => {
                         </div>
                         <div className="Profdrop">
                             <img 
-                                src="Images/settings-2-svgrepo-com.svg" 
+                                src={setting}
                                 className="profa" 
                                 alt="Settings" 
                             />
@@ -110,7 +115,7 @@ const UserNavbar = () => {
                         </div>
                         <div className="Profdrop" onClick={handleLogout}>
                             <img 
-                                src="Images/log-out-1-svgrepo-com.svg" 
+                                src={logout} 
                                 className="profa" 
                                 alt="Logout" 
                             />

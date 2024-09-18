@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import './ViewJobs.css';
-import UserNavbar from './components/usernavbar';  // Assuming you have this component
-import Pagination from './Pagination';  // Assuming Pagination is implemented correctly
+import UserNavbar from './components/usernavbar';
+import Pagination from './Pagination';
 import { useNavigate } from 'react-router-dom';
 import './SearchBar.css';
 
 function JobBoard() {
-  const [jobs, setJobs] = useState([]);            // To store job data
-  const [currentPage, setCurrentPage] = useState(1);  // For pagination
-  const [searchTerm, setSearchTerm] = useState('');   // For search functionality
-  const [experienceLevel, setExperienceLevel] = useState('');  // Experience level filter
-  const [location, setLocation] = useState('');      // Location filter
-  const [loading, setLoading] = useState(false);     // Loading indicator for API calls
-  const [error, setError] = useState('');            // Error message handling
+  const [jobs, setJobs] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [experienceLevel, setExperienceLevel] = useState('');
+  const [location, setLocation] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
-  const jobsPerPage = 6;                             // Jobs per page for pagination
+  const jobsPerPage = 6;
 
-  // Fetch jobs from API on component mount and when filters change
+  // Fetch jobs on component mount and when filters change
   useEffect(() => {
     const fetchJobs = async () => {
       setLoading(true);
-      setError('');  // Reset error state before new API call
+      setError('');
       try {
         const response = await fetch("http://localhost:8000/public/jobs", {
           method: "POST",
@@ -28,34 +28,29 @@ function JobBoard() {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({
-            experienceLevel,
-            location
-          })
+          body: JSON.stringify({ experienceLevel, location })
         });
         if (!response.ok) {
-          throw new Error(`Error: ${response.statusText}`);  // Handling non-200 responses
+          throw new Error(`Error: ${response.statusText}`);
         }
         const data = await response.json();
-        console.log('Fetched Jobs:', data);  // Log the data for debugging
-        setJobs(Array.isArray(data.data) ? data.data : []);  // Ensure jobs is an array
-        console.log(jobs);
-
+        setJobs(Array.isArray(data.data) ? data.data : []);
       } catch (error) {
         console.error('Error fetching jobs:', error);
         setError('Failed to fetch jobs. Please try again later.');
       } finally {
-        setLoading(false);  // Turn off loading indicator
+        setLoading(false);
       }
     };
 
     fetchJobs();
-  }, [experienceLevel, location]);  // Refetch jobs when filters change
+  }, [experienceLevel, location]);
 
   // Handle "Suggest Me Jobs" button click
   const handleSuggest = async () => {
     setLoading(true);
-    setError('');  // Reset error state before new API call
+    setError('');
+    setCurrentPage(1); // Reset pagination
     try {
       const response = await fetch("http://localhost:8000/user/suggestedjob", {
         method: "POST",
@@ -65,16 +60,15 @@ function JobBoard() {
         },
       });
       if (!response.ok) {
-        throw new Error(`Error: ${response.statusText}`);  // Handling non-200 responses
+        throw new Error(`Error: ${response.statusText}`);
       }
       const data = await response.json();
-      console.log('Suggested Jobs:', data);
       setJobs(Array.isArray(data.data) ? data.data : []);
     } catch (error) {
       console.error('Error fetching suggested jobs:', error);
       setError('Failed to fetch suggested jobs. Please try again later.');
     } finally {
-      setLoading(false);  // Turn off loading indicator
+      setLoading(false);
     }
   };
 
@@ -93,39 +87,29 @@ function JobBoard() {
     setCurrentPage(pageNumber);
   };
 
-  const handleFilter = async ()=>{
-    console.log("reached here");
-    console.log("experience "+experienceLevel);
-    if(experienceLevel!="" ){
+  // Handle filtering
+  const handleFilter = async () => {
+    setLoading(true);
+    setError('');
+    setCurrentPage(1); // Reset pagination
+    try {
       const response = await fetch("http://localhost:8000/public/filterjobs", {
         method: "POST",
         credentials: "include",
         headers: {
           'Content-Type': 'application/json'
         },
-        body:JSON.stringify({"experienceLevel" :experienceLevel,"search" : searchTerm})
+        body: JSON.stringify({ experienceLevel, search: searchTerm })
       });
       const data = await response.json();
-      setJobs(data.data);
+      setJobs(Array.isArray(data.data) ? data.data : []);
+    } catch (error) {
+      console.error('Error fetching filtered jobs:', error);
+      setError('Failed to fetch jobs. Please try again later.');
+    } finally {
+      setLoading(false);
     }
-    else{
-      const response = await fetch("http://localhost:8000/public/filterjobs", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body:JSON.stringify({"experienceLevel" :experienceLevel,"search" : searchTerm})
-      });
-      const data = await response.json();
-      setJobs(data.data);
-    }
-
-
-
-  }
-
-
+  };
 
   return (
     <div>
@@ -135,7 +119,7 @@ function JobBoard() {
           <select
             className="dropdown"
             value={experienceLevel}
-            onChange={(e) => {setExperienceLevel(e.target.value); handleFilter()}}
+            onChange={(e) => { setExperienceLevel(e.target.value); handleFilter(); }}
           >
             <option value="">Experience Level</option>
             <option value="Intern">Intern</option>
@@ -148,7 +132,7 @@ function JobBoard() {
           <select
             className="dropdown"
             value={location}
-            onChange={(e) => {setLocation(e.target.value); handleFilter()}}
+            onChange={(e) => { setLocation(e.target.value); handleFilter(); }}
           >
             <option value="">Location</option>
             <option value="Bengaluru">Bengaluru</option>
@@ -171,7 +155,7 @@ function JobBoard() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <span onClick={()=>{handleFilter()}} className="search-icon">🔍</span>
+          <span onClick={handleFilter} className="search-icon">🔍</span>
         </div>
       </div>
 
