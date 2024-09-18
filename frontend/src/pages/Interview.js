@@ -48,7 +48,7 @@ function Interview() {
 
   return (
     <div className='containerr'>
-      <div>
+      <div className='none'>
         <p>AI-Interview</p>
         <div className='interview-box'>
           <div className='interview-box-left'></div>

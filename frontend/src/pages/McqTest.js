@@ -65,7 +65,7 @@ function Interview() {
 
   return (
     <div className='containerr'>
-      <div>
+      <div className='none'>
         <p>AI-Interview</p>
         <div className='interview-box'>
           <div className='interview-box-left'></div>
@@ -74,13 +74,13 @@ function Interview() {
       </div>
       <div>
         <p>Skill Assessment: {skillData?.TestName || "Loading..."}</p>
-        <div className='skill-container'>
+        <div className='questions-container'>
           {skillData?.questions?.length > 0 ? ( // Check if skillData and questions are defined
             skillData.questions.map((question, index) => (
               <div key={index} className="question">
-                <p>{question.text}</p>
+                <p>{index+1 +" ) " +question.text}</p>
                 {question.options.map((option) => (
-                  <div key={option}>
+                  <div key={option} className='answers'>
                     <input
                       type="radio"
                       name={`question-${index}`}

@@ -3,6 +3,9 @@
     height: 400px;
     display: flex;
 }
+.none{
+    display: none;
+}
 .interview-box-left{
     flex-basis: 60%;
     background: rgb(75, 75, 75);
