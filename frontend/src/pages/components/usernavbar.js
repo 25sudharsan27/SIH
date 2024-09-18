@@ -92,6 +92,14 @@ const UserNavbar = () => {
                         </div>
                         <div className="Profdrop">
                             <img 
+                                src="Images/cube-svgrepo-com.svg" 
+                                className="profa" 
+                                alt="My Jobs" 
+                            />
+                            <a href="/mentorship">Mentorship</a>
+                        </div>
+                        <div className="Profdrop">
+                            <img 
                                 src="Images/settings-2-svgrepo-com.svg" 
                                 className="profa" 
                                 alt="Settings" 
