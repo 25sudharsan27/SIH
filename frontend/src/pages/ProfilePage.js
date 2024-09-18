@@ -213,7 +213,7 @@ const ProfilePage = () => {
                 <img src={experience.media[0] || 'images/company-logo-placeholder.svg'} alt={experience.company} className="company-logo" />
                 <p>{experience.company}</p>
               </div>
-              <div>
+              <div id="exp1">
                 <h4 className="title">{experience.title}</h4>
                 <p>{new Date(experience.startDate).toLocaleDateString()} - {experience.endDate ? new Date(experience.endDate).toLocaleDateString() : 'Present'}</p>
                 <p className="description">{experience.description}</p>

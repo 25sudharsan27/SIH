@@ -9,6 +9,7 @@ import myjob from './Images/cube-svgrepo-com.svg';
 import setting from './Images/settings-2-svgrepo-com.svg';
 import logout from './Images/log-out-1-svgrepo-com.svg';
 import profile from './Images/profile.svg';
+import mentorship from './Images/mentorship.svg';
 
 
 // Function to clear specific cookies
@@ -99,7 +100,7 @@ const UserNavbar = () => {
                         </div>
                         <div className="Profdrop">
                             <img 
-                                src="Images/cube-svgrepo-com.svg"
+                                src={mentorship}
                                 className="profa" 
                                 alt="My Jobs" 
                             />
