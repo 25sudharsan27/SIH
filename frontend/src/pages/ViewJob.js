@@ -163,10 +163,15 @@ function ViewJob() {
           <div className="skills-required">
             <h3>Skills Required</h3>
             <ul>
-              {jobData.skills.map((skill, index) => (
-                <li key={index}>{skill}</li>
-              ))}
-            </ul>
+  {jobData.skills.map((skill, index) => (
+    <li key={index}>
+      <a href={`https://example.com/skills/${skill}`} target="_blank" rel="noopener noreferrer">
+        {skill}
+      </a>
+    </li>
+  ))}
+</ul>
+
           </div>
         </div>
 
