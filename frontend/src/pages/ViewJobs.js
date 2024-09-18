@@ -5,6 +5,15 @@ import Pagination from './Pagination';
 import { useNavigate } from 'react-router-dom';
 import './SearchBar.css';
 
+import Amazon from './images/amazon.png'
+import Google from './images/google.png'
+import flipkart from './images/flipkart.png'
+import JPMorgan from './images/JPMorgan.png'
+import microsoft from './images/microsoft.png'
+import nvidia from './images/nvidia.png'
+import oracle from './images/oracle.png'
+import salesForce from './images/salesForce.png'
+
 function JobBoard() {
   const [jobs, setJobs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -15,6 +24,8 @@ function JobBoard() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const jobsPerPage = 6;
+
+  const img = [Amazon,Google,flipkart,JPMorgan,microsoft,nvidia,oracle,salesForce];
 
   // Fetch jobs on component mount and when filters change
   useEffect(() => {
@@ -111,6 +122,11 @@ function JobBoard() {
     }
   };
 
+  function getRandomImg(){
+    const ran = Math.floor(Math.random()*8);
+    return img[ran];
+  }
+
   return (
     <div>
       <div className="search-bar">
@@ -154,6 +170,7 @@ function JobBoard() {
             placeholder="Search..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            id="view-search-id"
           />
           <span onClick={handleFilter} className="search-icon">🔍</span>
         </div>
@@ -173,7 +190,7 @@ function JobBoard() {
               currentJobs.map((job) => (
                 <div key={job._id} className="job-card">
                   <div className="title">
-                    <img src={job.img || '/default-job-image.png'} alt="job" />
+                    <img src={job.img || getRandomImg()} alt="job" className="company-log"/>
                     <h3>{job.title}</h3>
                   </div>
                   <div className="bodies">

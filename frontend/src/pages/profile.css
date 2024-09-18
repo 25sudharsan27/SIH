@@ -161,6 +161,7 @@
 
 .project-item-t{
     font-size:large;
+    color: #3C5AA5;
 }
 
 .project-item-s{
@@ -187,6 +188,10 @@
     border-radius: 15px;
 }
 
+.company-logo{
+    height: 120px;
+}
+
 .add-more-projects{
     margin-top: 15px;
 }
@@ -199,4 +204,10 @@
 #exp1{
     margin-left:30px;
     margin-top:30px;
+}
+
+
+.heatmap{
+    height:100px;
+    width:400px;
 }

@@ -15,19 +15,21 @@ function Skill({ skillData = {} }) {
   const testName = skillData.TestName || 'Unknown Test'; // Provide a default test name if needed
 
   return (
-    <div className='skill-box'>
-      <div className='skill-left'>
-        <p className='skill-name'>{testName}</p>
-        <div>
-          <p className='time'>{numberOfQuestions} MCQs</p>
-          <p className='time'>30 Min</p> {/* Adjust as needed */}
+      <div className='skill-box'>
+        <div className='skill-top'>
+          <div className='skill-left'>
+            <p className='skill-name'>{testName}</p>
+            <div>
+              <p className='time'>{numberOfQuestions} MCQs</p>
+              <p className='time'>30 Min</p> {/* Adjust as needed */}
+            </div>
+          </div>
+          <div className='skill-right'>
+            <img src={pythonLogo} className="logo" alt="Skill Logo" />
+          </div>
         </div>
-      </div>
-      <div className='skill-right'>
-        <img src={pythonLogo} className="logo" alt="Skill Logo" />
         <button onClick={()=>{navigate('/mcqtest/'+skillData._id)}}  className='skill-start-btn'>Start</button>
       </div>
-    </div>
   );
 }
 
