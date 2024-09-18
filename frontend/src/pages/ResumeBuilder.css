@@ -5,7 +5,7 @@ body {
     padding: 0;
   }
   
-  .container {
+  .containerrr {
     width: 60%;
     margin: 30px auto;
     background-color: white;
@@ -22,35 +22,36 @@ body {
     margin-bottom: 15px;
   }
   
-  label {
+  .bugLabel {
     display: block;
     margin-bottom: 5px;
   }
   
-  input, textarea {
+  .buger, .bugs {
     width: 100%;
     padding: 8px;
     box-sizing: border-box;
   }
   
-  textarea {
+  .bugs {
     height: 80px;
   }
   
-  button {
+  .resumebtn {
     display: inline-block;
     width: 48%;
     padding: 10px;
     margin: 5px 1%;
-    background-color: #28a745;
+    background-color: hsl(223, 47%, 44%);
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: 0.5s ease;
   }
   
-  button:hover {
-    background-color: #218838;
+  .resumebtn:hover {
+    background-color: hsl(223, 47%, 54%);
   }
   
   .resume-output {

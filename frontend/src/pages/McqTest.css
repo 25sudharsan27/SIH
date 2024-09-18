@@ -1,14 +1,5 @@
-*{
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-}
-.questions-container{
-    /* display: flex;
-    flex-direction: column; */
-}
-.container {
+
+.containerr {
     width: 80%;
     margin: 0 auto;
     padding: 20px;
@@ -31,11 +22,17 @@ h1 {
     margin-left: 20px;
 }
 
-.answers{
-    border: 2px solid;
-    /* display: flex;
-    flex-direction: row; */
+/* .answers{
+    display: inline-block;
+} */
+
+/* .answers-left input{
+    width: auto;
 }
+
+.answers-right{
+    flex-basis: 50%;
+} */
 
 button {
     display: block;

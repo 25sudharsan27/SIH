@@ -180,98 +180,98 @@ const ResumeBuilder = () => {
   
 
   return (
-    <div className="container">
+    <div className="containerrr">
       <h1>Resume Builder</h1>
       <div>
-        <button onClick={() => setMode('manual')}>Manual Entry</button>
-        <button onClick={() => setMode('api')}>Fetch from API</button>
+        <button className='resumebtn' onClick={() => setMode('manual')}>Manual Entry</button>
+        <button className='resumebtn' onClick={() => setMode('api')}>Get Details from profile</button>
       </div>
 
       {mode === 'manual' ? (
         <form>
           <div className="form-group">
-            <label htmlFor="name">Full Name:</label>
-            <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
+            <label className='bugLabel' htmlFor="name">Full Name:</label>
+            <input type="text" className='buger' id="name" name="name" value={formData.name} onChange={handleChange} required />
           </div>
 
           <div className="form-group">
-            <label htmlFor="email">Email:</label>
-            <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
+            <label className='bugLabel' htmlFor="email">Email:</label>
+            <input type="email" className='buger' id="email" name="email" value={formData.email} onChange={handleChange} required />
           </div>
 
           <div className="form-group">
-            <label htmlFor="age">Age:</label>
-            <input type="number" id="age" name="age" value={formData.age} onChange={handleChange} />
+            <label className='bugLabel' htmlFor="age">Age:</label>
+            <input type="number" className='buger' id="age" name="age" value={formData.age} onChange={handleChange} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="city">City:</label>
-            <input type="text" id="city" name="city" value={formData.city} onChange={handleChange} />
+            <label className='bugLabel' htmlFor="city">City:</label>
+            <input type="text" className='buger' id="city" name="city" value={formData.city} onChange={handleChange} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="state">State:</label>
-            <input type="text" id="state" name="state" value={formData.state} onChange={handleChange} />
+            <label className='bugLabel' htmlFor="state">State:</label>
+            <input type="text" className='buger' id="state" name="state" value={formData.state} onChange={handleChange} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="country">Country:</label>
-            <input type="text" id="country" name="country" value={formData.country} onChange={handleChange} />
+            <label className='bugLabel' htmlFor="country">Country:</label>
+            <input type="text" className='buger' id="country" name="country" value={formData.country} onChange={handleChange} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="about">About:</label>
+            <label className='bugLabel' htmlFor="about">About:</label>
             <textarea id="about" name="about" value={formData.about} onChange={handleChange} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="skills">Skills (comma-separated):</label>
-            <textarea id="skills" name="skills" value={formData.skills.join(', ')} onChange={(e) => handleArrayChange(e, 'skills')} />
+            <label className='bugLabel' htmlFor="skills">Skills (comma-separated):</label>
+            <textarea id="skills" className='bugs' name="skills" value={formData.skills.join(', ')} onChange={(e) => handleArrayChange(e, 'skills')} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="projects">Projects (comma-separated, each item as title:description (link)):</label>
-            <textarea id="projects" name="projects" value={formData.projects.join(', ')} onChange={(e) => handleArrayChange(e, 'projects')} />
+            <label className='bugLabel' htmlFor="projects">Projects (comma-separated, each item as title:description (link)):</label>
+            <textarea id="projects" className='bugs' name="projects" value={formData.projects.join(', ')} onChange={(e) => handleArrayChange(e, 'projects')} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="experiences">Experiences (comma-separated, each item as title at company (startDate - endDate)):</label>
-            <textarea id="experiences" name="experiences" value={formData.experiences.join(', ')} onChange={(e) => handleArrayChange(e, 'experiences')} />
+            <label className='bugLabel' htmlFor="experiences">Experiences (comma-separated, each item as title at company (startDate - endDate)):</label>
+            <textarea id="experiences" className='bugs' name="experiences" value={formData.experiences.join(', ')} onChange={(e) => handleArrayChange(e, 'experiences')} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="volunteering">Volunteering (comma-separated, each item as title at organization (startDate - endDate)):</label>
-            <textarea id="volunteering" name="volunteering" value={formData.volunteering.join(', ')} onChange={(e) => handleArrayChange(e, 'volunteering')} />
+            <label className='bugLabel' htmlFor="volunteering">Volunteering (comma-separated, each item as title at organization (startDate - endDate)):</label>
+            <textarea id="volunteering" className='bugs' name="volunteering" value={formData.volunteering.join(', ')} onChange={(e) => handleArrayChange(e, 'volunteering')} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="education">Education (comma-separated, each item as title - institution):</label>
-            <textarea id="education" name="education" value={formData.education.join(', ')} onChange={(e) => handleArrayChange(e, 'education')} />
+            <label className='bugLabel' htmlFor="education">Education (comma-separated, each item as title - institution):</label>
+            <textarea id="education" className='bugs' name="education" value={formData.education.join(', ')} onChange={(e) => handleArrayChange(e, 'education')} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="socialLinks">Social Links (LinkedIn, Twitter, GitHub, Portfolio):</label>
-            <input type="text" id="linkedin" name="social.linkedin" placeholder="LinkedIn" value={formData.social.linkedin} onChange={handleChange} />
-            <input type="text" id="twitter" name="social.twitter" placeholder="Twitter" value={formData.social.twitter} onChange={handleChange} />
-            <input type="text" id="github" name="social.github" placeholder="GitHub" value={formData.social.github} onChange={handleChange} />
-            <input type="text" id="portfolio" name="social.portfolio" placeholder="Portfolio" value={formData.social.portfolio} onChange={handleChange} />
+            <label className='bugLabel' htmlFor="socialLinks">Social Links (LinkedIn, Twitter, GitHub, Portfolio):</label>
+            <input type="text" className='buger' id="linkedin" name="social.linkedin" placeholder="LinkedIn" value={formData.social.linkedin} onChange={handleChange} />
+            <input type="text" className='buger' id="twitter" name="social.twitter" placeholder="Twitter" value={formData.social.twitter} onChange={handleChange} />
+            <input type="text" className='buger' id="github" name="social.github" placeholder="GitHub" value={formData.social.github} onChange={handleChange} />
+            <input type="text" className='buger' id="portfolio" name="social.portfolio" placeholder="Portfolio" value={formData.social.portfolio} onChange={handleChange} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="tagline">Tagline:</label>
-            <input type="text" id="tagline" name="tagline" value={formData.tagline} onChange={handleChange} />
+            <label className='bugLabel' htmlFor="tagline">Tagline:</label>
+            <input className='buger' type="text" id="tagline" name="tagline" value={formData.tagline} onChange={handleChange} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="portfolio">Portfolio:</label>
-            <input type="text" id="portfolio" name="portfolio" value={formData.portfolio} onChange={handleChange} />
+            <label className='bugLabel' htmlFor="portfolio">Portfolio:</label>
+            <input className='buger' type="text" id="portfolio" name="portfolio" value={formData.portfolio} onChange={handleChange} />
           </div>
         </form>
       ) : (
         userData && (
           <>
-            <button onClick={generateResume}>Generate Resume</button>
-            <button onClick={downloadPDF}>Download PDF</button>
+            <button className='resumebtn' onClick={generateResume}>Generate Resume</button>
+            <button className='resumebtn' onClick={downloadPDF}>Download PDF</button>
 
             <div id="resumeOutput" className="resume-output">
               {/* Generated resume will appear here */}
