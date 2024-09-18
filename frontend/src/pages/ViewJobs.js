@@ -123,7 +123,8 @@ function JobBoard() {
   };
 
   function getRandomImg(){
-
+    const ran = Math.floor(Math.random()*8);
+    return img[ran];
   }
 
   return (
@@ -188,7 +189,7 @@ function JobBoard() {
               currentJobs.map((job) => (
                 <div key={job._id} className="job-card">
                   <div className="title">
-                    <img src={job.img || getRandomImg()} alt="job" />
+                    <img src={job.img || getRandomImg()} alt="job" className="company-log"/>
                     <h3>{job.title}</h3>
                   </div>
                   <div className="bodies">
