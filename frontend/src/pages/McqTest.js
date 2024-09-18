@@ -1,0 +1,106 @@
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import './Interview.css';
+
+function Interview() {
+  const { id } = useParams(); // Extract the id from the URL
+  const [skillData, setSkillData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [answers, setAnswers] = useState({});
+  const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    const fetchSkillData = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/public/getmcq", {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ "id" : id }) // Send the id in the request body
+        });
+        console.log(response);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+    
+        setSkillData(data.data); // Set the fetched skill data
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSkillData();
+  }, [id]);
+
+  const handleChange = (questionIndex, option) => {
+    setAnswers((prev) => ({ ...prev, [questionIndex]: option }));
+  };
+
+  const handleSubmit = () => {
+    let score = 0;
+    if (skillData && skillData.questions) {
+      skillData.questions.forEach((question, index) => {
+        if (answers[index] === question.answer) {
+          score++;
+        }
+      });
+    }
+    alert(`You scored ${score} out of ${skillData.questions.length}`);
+    setSubmitted(true);
+  };
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
+
+  return (
+    <div className='containerr'>
+      <div>
+        <p>AI-Interview</p>
+        <div className='interview-box'>
+          <div className='interview-box-left'></div>
+          <div className='interview-box-right'></div>
+        </div>
+      </div>
+      <div>
+        <p>Skill Assessment: {skillData?.TestName || "Loading..."}</p>
+        <div className='skill-container'>
+          {skillData?.questions?.length > 0 ? ( // Check if skillData and questions are defined
+            skillData.questions.map((question, index) => (
+              <div key={index} className="question">
+                <p>{question.text}</p>
+                {question.options.map((option) => (
+                  <div key={option}>
+                    <input
+                      type="radio"
+                      name={`question-${index}`}
+                      value={option}
+                      onChange={() => handleChange(index, option)}
+                      checked={answers[index] === option}
+                    />
+                    <label>{option}</label>
+                  </div>
+                ))}
+              </div>
+            ))
+          ) : (
+            <p>No questions available</p> // Better message if no questions are found
+          )}
+          {!submitted && <button className='skill-start-btn' onClick={handleSubmit}>Submit</button>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Interview;

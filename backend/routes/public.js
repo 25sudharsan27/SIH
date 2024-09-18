@@ -9,6 +9,9 @@ const jobdetails = require("../controller/public/jobdetails");
 const updatejob = require("../controller/public/updatejob");
 const filterjobdetails = require("../controller/public/filterjobdetails");
 const viewJob = require("../controller/public/singlejobdetails");
+const addmcqtest = require("../controller/public/addmcqtest")
+const getmcqtest = require("../controller/public/getmcqtest");
+const getdata = require("../controller/public/getmcq");
 
 router.use(cookieparser());
 router.use(bodyParser.json());
@@ -20,6 +23,9 @@ router.post("/jobs",authToken,jobdetails);
 router.post("/updatejob",updatejob);
 router.post("/filterjobs",filterjobdetails);
 router.post("/viewjob",viewJob);
+router.post("/addmcq",addmcqtest);
+router.post("/getmcq",getmcqtest);
+router.post("/getdata",getdata);
 
 // router.post("/forget-password", forgetPasswordController);
 // router.post("/reset-password",resetPasswordController)

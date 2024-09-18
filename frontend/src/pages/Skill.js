@@ -1,23 +1,34 @@
-import React from 'react'
-import './Skill.css'
-import pythonLogo from './images/python-logo.png'
+import React from 'react';
+import './Skill.css';
+import pythonLogo from './images/python-logo.png'; // Replace with a prop or default image if needed
+import { useNavigate } from 'react-router-dom';
 
-function Skill() {
+function Skill({ skillData = {} }) {
+  
+  // Default to an empty object
+  const navigate = new useNavigate();
+  if (!skillData || !skillData.questions) {
+    return <div>Loading...</div>;
+  }
+
+  const numberOfQuestions = skillData.questions.length; // Use optional chaining if unsure
+  const testName = skillData.TestName || 'Unknown Test'; // Provide a default test name if needed
+
   return (
     <div className='skill-box'>
-        <div className='skill-left'>
-            <p className='skill-name'>Python-Easy</p>
-            <div>
-              <p className='time'>25 MCQs</p>
-              <p className='time'>30 Min</p>
-            </div>
+      <div className='skill-left'>
+        <p className='skill-name'>{testName}</p>
+        <div>
+          <p className='time'>{numberOfQuestions} MCQs</p>
+          <p className='time'>30 Min</p> {/* Adjust as needed */}
         </div>
-        <div className='skill-right'>
-            <img src={pythonLogo} className="logo"></img>
-            <button className='skill-start-btn'>Start</button>
-        </div>
+      </div>
+      <div className='skill-right'>
+        <img src={pythonLogo} className="logo" alt="Skill Logo" />
+        <button onClick={()=>{navigate('/mcqtest/'+skillData._id)}}  className='skill-start-btn'>Start</button>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Skill
+export default Skill;
