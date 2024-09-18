@@ -222,5 +222,20 @@
 
 .heatmap-container{
     display: flex;
+}
 
+.logoo{
+    height: 30px;
+}
+.images-con{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+.images-con img{
+    margin: 10px;
+    cursor: pointer;
+}
+.images-con a{
+    text-decoration: none;
 }

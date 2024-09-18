@@ -12,18 +12,18 @@ const LandingPage = () => {
         <div className="card">
           <h2>Organization or Job Provider</h2>
           
-          <p>Create new Account? <a href="/organization/signup">Signup</a></p>
+          <p>Create new Account? <a href="/organization/signup" className='colorKaro'>Signup</a></p>
           <p>or</p>
-          <p>Already have one? <a href="/organization/login">Login</a></p>
+          <p>Already have one? <a href="/organization/login" className='colorKaro'>Login</a></p>
           
         </div>
        
         <div className="card">
           <h2>Job Seeker or Student</h2>
           <div>
-          <p>Create new Account? <a href="/jobseeker/signup">Signup</a></p>
+          <p>Create new Account? <a href="/jobseeker/signup" className='colorKaro'>Signup</a></p>
           <p>or</p>
-          <p>Already have one? <a href="/jobseeker/login">Login</a></p>
+          <p>Already have one? <a href="/jobseeker/login" className='colorKaro'>Login</a></p>
           </div>
         </div>
       </div>
