@@ -180,3 +180,8 @@
   width: 100px; /* Ensures consistent button size */
   text-align: center;
 }
+
+
+.company-log{
+  height: 70px;
+}
