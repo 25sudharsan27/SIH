@@ -8,6 +8,8 @@ import { selectUser } from '../store/userSlice';
 import editIcon from './images/edit-icon.svg'
 import saveIcon from './images/floppy-disk-regular.svg'
 import linkIcon from './images/link-solid.svg'
+import Amazon from './images/amazon.png'
+import Google from './images/google.png'
 import heatmap from './components/Images/heatmap.png'
 
 // import profile from './images/logesh.jpg'
@@ -212,7 +214,8 @@ const ProfilePage = () => {
           {(userData.experiences || []).slice(0, visibleExperiencesCount).map((experience, index) => (
             <div key={index} className="experience-item">
               <div className="experience-item-a">
-                <img src={experience.media[0] || 'images/company-logo-placeholder.svg'} alt={experience.company} className="company-logo" />
+                <img src={(experience.company === 'Amazon')?Amazon:
+                  (experience.company === 'Google')?Google:'' || experience.media[0]} alt={experience.company} className="company-logo" />
                 <p>{experience.company}</p>
               </div>
               <div id="exp1">

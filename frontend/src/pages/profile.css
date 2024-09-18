@@ -161,6 +161,7 @@
 
 .project-item-t{
     font-size:large;
+    color: #3C5AA5;
 }
 
 .project-item-s{
@@ -185,6 +186,10 @@
     background: white;
     box-shadow: 1px 1px 1px 1px rgba(255, 255, 255, 0.608);
     border-radius: 15px;
+}
+
+.company-logo{
+    height: 120px;
 }
 
 .add-more-projects{
