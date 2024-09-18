@@ -1,4 +1,6 @@
-
+  .main{
+    display: flex;
+  }
   .sidebar{
     z-index:10000;
   }
@@ -19,13 +21,16 @@
   }
   
   .posted-jobs {
-    display: grid;
+    /* display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     max-width:80%;
-    gap: 20px;
+    gap: 20px; */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    row-gap: 0px;
   }
   .job-board{
-    width:100%;
+    flex-basis: 80%;
   }
   
   .job-card {
