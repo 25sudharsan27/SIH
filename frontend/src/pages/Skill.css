@@ -31,13 +31,14 @@
     cursor: pointer;
     margin-top: 15px;
     font-size: 20px;
+    width: 100%;
     border-radius: 10px;
     box-shadow: 2px 2px 2px 2px rgba(128, 128, 128, 0.136);
-    background: hsl(202, 68%, 52%);
+    background: hsl(223, 47%, 44%);
     padding: 10px;
     transition: 0.5s;
 }
 
 .skill-start-btn:hover{
-    background: hsl(202, 68%, 60%);
+    background: hsl(223, 47%, 54%);
 }
