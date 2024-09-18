@@ -2,13 +2,20 @@
     border: 1px solid grey;
     border-radius: 20px;
     box-shadow: 2px 2px 2px 2px hsla(0, 0%, 50%, 0.375);
-    min-width : 200px;
+    min-width : 250px;
+    min-height: 200px;
     padding: 15px 15px;
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.skill-top{
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
 }
 .logo{
-    height:50px;
+    min-height:80px;
 }
 .skill-name{
     font-size: 20px;
@@ -31,6 +38,7 @@
     cursor: pointer;
     margin-top: 15px;
     font-size: 20px;
+    color: white;
     width: 100%;
     border-radius: 10px;
     box-shadow: 2px 2px 2px 2px rgba(128, 128, 128, 0.136);

@@ -19,10 +19,16 @@
 .skill-container{
     margin-top: 5%;
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
     gap:4rem;
     row-gap: 2rem;
 }
 .containerr{
     margin: 0 10%;
+}
+
+#skill-assessment{
+    margin-top: 40px;
+    font-size: 50px;
+    color: #3C5AA5;
 }
