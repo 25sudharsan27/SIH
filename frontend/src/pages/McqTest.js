@@ -78,19 +78,25 @@ function Interview() {
           {skillData?.questions?.length > 0 ? ( // Check if skillData and questions are defined
             skillData.questions.map((question, index) => (
               <div key={index} className="question">
-                <p>{index+1 +" ) " +question.text}</p>
-                {question.options.map((option) => (
-                  <div key={option} className='answers'>
-                    <input
-                      type="radio"
-                      name={`question-${index}`}
-                      value={option}
-                      onChange={() => handleChange(index, option)}
-                      checked={answers[index] === option}
-                    />
-                    <label>{option}</label>
-                  </div>
-                ))}
+                <p>{(index+1) +" ) " +question.text}</p>
+                <div className='answers-container'>
+                  {question.options.map((option) => (
+                    <div key={option} className='answers'>
+                      <div className='answers-left'>
+                        <input
+                        type="radio"
+                        name={`question-${index}`}
+                        value={option}
+                        onChange={() => handleChange(index, option)}
+                        checked={answers[index] === option}
+                        />
+                      </div>
+                      <div className='answers-right'>
+                        {option}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             ))
           ) : (
