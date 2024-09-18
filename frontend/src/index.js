@@ -16,6 +16,7 @@ import {store} from './store/store';
 import { Provider } from 'react-redux';
 import Mcqtest from './pages/McqTest';
 import MentorshipApp from './pages/Mentorship';
+import CoursePage from './pages/CoursePage';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -35,6 +36,7 @@ root.render(
         <Route path="/organization/*" element={<OrganizationRouter/>} />
         <Route path="/mcqtest/:id" element={<Mcqtest/>}/>
         <Route path="/mentorship" element={<MentorshipApp/>}/>
+        <Route path="/user/courses" element={<CoursePage/>} />
 
 
         
