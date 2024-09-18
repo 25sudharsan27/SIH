@@ -4,6 +4,7 @@ import UserNavbar from './components/usernavbar';
 import SearchBar from './SearchBar';
 import Pagination from './Pagination';
 import { Link } from 'react-router-dom';
+import google from './images/google.png'
 
 function JobBoard() {
   const [jobs, setJobs] = useState([]);
@@ -75,7 +76,7 @@ function JobBoard() {
             {currentJobs.length > 0 ? currentJobs.map((job) => (
               <div key={job._id} className="job-card">
                 <div className="title">
-                  <img src={job.img || '/default-job-image.jpg'} alt={job.title} />
+                  <img src={job.img || google} alt={job.title} className='logo'/>
                   <h3>{job.title}</h3>
                 </div>
                 <div className="bodies">
