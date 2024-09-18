@@ -61,7 +61,7 @@ const UserNavbar = () => {
                 <Link to="interview" className="navbar-item" onClick={e => handleSetNav("interview")} id="interview">Interview Prep</Link>
                 <Link to="#" className="navbar-item" onClick={e => handleSetNav("message")} id="message">Message</Link>
                 <Link to="#" className="navbar-item" onClick={e => handleSetNav("community")} id="community">Community</Link>
-                <Link to="#" className="navbar-item" onClick={e => handleSetNav("buildResume")} id="buildResume">Build Resume</Link>
+                <Link to="/user/resumebuilder" className="navbar-item" onClick={e => handleSetNav("buildResume")} id="buildResume">Build Resume</Link>
             </div>
             <div className="navbar-right">
                 <div 

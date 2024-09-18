@@ -96,20 +96,36 @@ function JobBoard() {
   const handleFilter = async ()=>{
     console.log("reached here");
     console.log("experience "+experienceLevel);
-    if(experienceLevel!=""){
+    if(experienceLevel!="" ){
       const response = await fetch("http://localhost:8000/public/filterjobs", {
         method: "POST",
         credentials: "include",
         headers: {
           'Content-Type': 'application/json'
         },
-        body:JSON.stringify({"experienceLevel" :experienceLevel})
+        body:JSON.stringify({"experienceLevel" :experienceLevel,"search" : searchTerm})
+      });
+      const data = await response.json();
+      setJobs(data.data);
+    }
+    else{
+      const response = await fetch("http://localhost:8000/public/filterjobs", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body:JSON.stringify({"experienceLevel" :experienceLevel,"search" : searchTerm})
       });
       const data = await response.json();
       setJobs(data.data);
     }
 
+
+
   }
+
+
 
   return (
     <div>
@@ -155,7 +171,7 @@ function JobBoard() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <span className="search-icon">🔍</span>
+          <span onClick={()=>{handleFilter()}} className="search-icon">🔍</span>
         </div>
       </div>
 

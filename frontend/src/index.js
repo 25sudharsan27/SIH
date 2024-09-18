@@ -14,6 +14,7 @@ import OrganizationRouter from './pages/OrganizationRouter';
 import User from './pages/UserJobs';
 import {store} from './store/store';
 import { Provider } from 'react-redux';
+import Mcqtest from './pages/McqTest';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
@@ -29,6 +30,8 @@ root.render(
         <Route path="/organization/signup" element={<OrganizationSignup/>}/>
         <Route path="/user/*" element={<User/>}/>
         <Route path="/organization/*" element={<OrganizationRouter/>} />
+        <Route path="/mcqtest/:id" element={<Mcqtest/>}/>
+        
         
       </Routes>
     </BrowserRouter>

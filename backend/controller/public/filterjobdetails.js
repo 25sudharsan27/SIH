@@ -4,11 +4,13 @@ const jobModel = require("../../models/public/jobsModel");
 
 const filterjobdetails = async (req, res) => {
   try {
-    const { experienceLevel, location } = req.body;
+    const { experienceLevel, location, search } = req.body;
 
     // Build the filter object with only provided fields
     const filter = {};
     if (experienceLevel) filter.experienceLevel = experienceLevel;
+
+    // Uncomment this if you also want to filter by location
     // if (location) {
     //   filter.$or = [
     //     { city: location },
@@ -17,7 +19,12 @@ const filterjobdetails = async (req, res) => {
     //   ];
     // }
 
-    const jobs = await jobModel.find(filter); // Use lean() for better performance
+    // If a search keyword is provided, use a case-insensitive regex to search in job title
+    if (search) {
+      filter.title = { $regex: search, $options: "i" }; // 'i' makes it case-insensitive
+    }
+
+    const jobs = await jobModel.find(filter).lean(); // Use lean() for better performance
 
     if (jobs.length === 0) {
       return res.status(404).json({

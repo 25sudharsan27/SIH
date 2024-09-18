@@ -13,6 +13,8 @@ import Context from '../context/index.js';
 import ProfilePage from './ProfilePage.js';
 import { useNavigate } from 'react-router-dom';
 
+import ResumeBuilder from './ResumeBuilder.js';
+
 const User = () =>{
   const Navigate = useNavigate();
     const dispatch = useDispatch();
@@ -53,7 +55,8 @@ const User = () =>{
                 <Route path="/viewjobs/job/:id" element={<ViewJob/>}/>
                 <Route path="/profile" element={<ProfilePage/>}/>
                 <Route path="/interview" element={<Interview/>}/>
-            </ Routes>
+                <Route path="/resumebuilder" element={<ResumeBuilder/>}/>
+            </Routes>
         
         </div>
       </Context.Provider>
