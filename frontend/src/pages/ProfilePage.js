@@ -10,7 +10,10 @@ import saveIcon from './images/floppy-disk-regular.svg'
 import linkIcon from './images/link-solid.svg'
 import Amazon from './images/amazon.png'
 import Google from './images/google.png'
+
 import HeatMap from './HeatMap';
+import heatmap from './components/Images/heatmap.png'
+
 
 
 

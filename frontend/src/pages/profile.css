@@ -211,6 +211,7 @@
     margin-top:30px;
 }
 
+
 .iconnn{
     height: 20px;
 }
@@ -223,4 +224,8 @@
 .heatmap-container{
     display: flex;
 
+
+.heatmap{
+    height:100px;
+    width:400px;
 }
