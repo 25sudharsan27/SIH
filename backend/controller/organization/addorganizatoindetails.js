@@ -3,14 +3,15 @@ const jobModel = require("../../models/public/jobsModel");
 
 const updateOrganizationDetails = async (req, res) => {
   try {
-    const { email, about, jobs, followers, connections } = req.body;
-
-    if (!email) {
-      throw new Error("Email is required");
+    const {  about, jobs, followers, connections } = req.body;
+    const user_id = req?.user_id;
+    
+    if(!user_id){
+      throw new Error("may be issue with authentication");
     }
 
     // Find the organization by email
-    const organization = await organizationModel.findOne({ email });
+    const organization = await organizationModel.findOne({ "_id" : user_id });
     
     if (!organization) {
       throw new Error("Organization not found");

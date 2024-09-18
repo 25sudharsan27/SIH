@@ -1,57 +1,63 @@
-const organizationModel = require("../../models/organizationModel");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
+const organizationModel = require('../../models/organizationModel');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+
+dotenv.config(); // Ensure dotenv is configured
 
 async function userSignInController(req, res) {
     try {
-        console.log("checking");
-        const email = req.body.email;
-        const password = req.body.password;
+        const { email, password } = req.body;
 
-        if (!email) {
-            throw new Error("Please provide Email");
-        }
-
-        if (!password) {
-            throw new Error("Please provide a password");
+        if (!email || !password) {
+            return res.status(400).json({ 
+                message: 'Email and password are required', 
+                error: true, 
+                success: false 
+            });
         }
 
         const organization = await organizationModel.findOne({ email });
         if (!organization) {
-            throw new Error("Organization Not found");
+            return res.status(404).json({ 
+                message: 'Organization not found', 
+                error: true, 
+                success: false 
+            });
         }
 
-        // Use 'organization.password' instead of 'user.password'
         const checkPassword = await bcrypt.compare(password, organization.password);
-        console.log(`checkPassword = ${checkPassword}`);
-
         if (checkPassword) {
             const tokenData = {
-                "_id": organization._id,
-                "email": organization.email // Use 'organization.email' instead of 'user.email'
+                _id: organization._id,
+                email: organization.email
             };
 
-            const token = await jwt.sign(tokenData, process.env.ORG_TOKEN_SECRET_KEY, { expiresIn: 60 * 60 * 8 });
+            const token = jwt.sign(tokenData, process.env.ORG_TOKEN_SECRET_KEY, { expiresIn: '8h' });
 
-            const tokenOption = {
+            const tokenOptions = {
                 httpOnly: true,
-                secure: true
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict' // Optional: adds an additional layer of security
             };
 
-            res.cookie("token", token, tokenOption).status(200).json({
+            res.cookie('token', token, tokenOptions).status(200).json({
                 data: token,
-                message: "User Password is correct",
+                message: 'User authenticated successfully',
                 error: false,
                 success: true
             });
         } else {
-            throw new Error("User Password is Incorrect");
+            res.status(401).json({ 
+                message: 'Incorrect password', 
+                error: true, 
+                success: false 
+            });
         }
     } catch (error) {
-        console.log("error: ", error.message);
-        res.json({
-            message: error.message || error,
+        console.error('Server error:', error.message);
+        res.status(500).json({
+            message: 'Internal Server Error',
             error: true,
             success: false
         });

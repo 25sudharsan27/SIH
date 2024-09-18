@@ -1,0 +1,27 @@
+{
+    "name": "job-suggestion-api",
+    "version": "1.0.0",
+    "description": "An API to suggest jobs for users based on 75% skill match using Node.js and MongoDB.",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "dev": "nodemon app.js"
+    },
+    "keywords": [
+        "job",
+        "suggestion",
+        "skill-matching",
+        "api",
+        "chatbot"
+    ],
+    "author": "Your Name",
+    "license": "MIT",
+    "dependencies": {
+        "express": "^4.21.0",
+        "job-suggestion-api": "file:",
+        "mongoose": "^7.0.4"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.22"
+    }
+}

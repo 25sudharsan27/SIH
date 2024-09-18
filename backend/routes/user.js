@@ -12,16 +12,19 @@ const adduserdetails = require("../controller/profile/adduserdetails");
 const authToken = require("../middleware/authToken");
 const deleteUserDetails = require("../controller/profile/deleteuserdetails");
 const applytojob = require("../controller/profile/applytojob");
-
+const UserDetails = require('../controller/userDetails')
+const SuggestedJob = require("../controller/profile/suggestjob")
 
 router.use(cookieparser());
 router.use(bodyParser.json());
 router.use(express.json({ limit: '50mb' }));
 router.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-router.post("/adddetails",adduserdetails);
-router.post("/delete",deleteUserDetails);
-router.post("/applytojob",applytojob)
+router.post("/adddetails",authToken,adduserdetails);
+router.post("/delete",authToken,deleteUserDetails);
+router.post("/applytojob",authToken,applytojob)
+router.post("/userdetails",authToken,UserDetails)
+router.post("/suggestedjob",authToken,SuggestedJob);
 
 
 module.exports = router;

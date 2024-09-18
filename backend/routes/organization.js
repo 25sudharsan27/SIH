@@ -12,18 +12,24 @@ const updateOrganizationDetails = require("../controller/organization/addorganiz
 const closejob = require("../controller/organization/closejob");
 const getclosedjobs = require("../controller/organization/getclosedjobs");
 const getopenjobs = require("../controller/organization/getopenjobs");
+const AddJob = require("../controller/organization/addjob");
+const OrganizationDetails = require("../controller/organization/organizationdetails")
+const orgauthToken = require("../middleware/orgauthToken")
 
 router.use(cookieparser());
 router.use(bodyParser.json());
 router.use(express.json({ limit: '50mb' }));
 router.use(express.urlencoded({ limit: '50mb', extended: true }));
 
+
 router.post("/signup",organizationsignup);
 router.post("/login",organizationsignin);
-router.post("/addorganization",updateOrganizationDetails);
-router.post("/closejob",closejob);
-router.post("/getclosedjobs",getclosedjobs);
-router.post("/getopenjobs",getopenjobs);
+router.post("/addorganization",orgauthToken,updateOrganizationDetails);
+router.post("/closejob",orgauthToken,closejob);
+router.post("/getclosedjobs",orgauthToken,getclosedjobs);
+router.post("/getopenjobs",orgauthToken,getopenjobs);
+router.post("/addjob",orgauthToken,AddJob);
+router.post("/organizationdetails",orgauthToken,OrganizationDetails);
 
 // router.post("/acceptjob",acceptjobs);
 // router.post("/forget-password", forgetPasswordController);

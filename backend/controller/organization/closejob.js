@@ -3,7 +3,9 @@ const jobModel = require("../../models/public/jobsModel");
 
 const updateOrganizationDetails = async (req, res) => {
   try {
-    const { org_email, use_id, jobs, confirm } = req.body;
+    const { org_email, jobs, confirm } = req.body;
+    const use_id = req.user_id;
+    
 
     if (!org_email) {
       throw new Error("Email is required");

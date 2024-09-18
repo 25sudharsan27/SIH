@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const organizationSchema = new mongoose.Schema(
   {
+    organization : Boolean,
     companyname: String,
     email: {
       type: String,
@@ -31,11 +32,11 @@ const organizationSchema = new mongoose.Schema(
     connections : [String],
     posted_jobs:[{
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Jobs",
+      ref: "Job",
     }],
     closed_jobs:[{
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Jobs",
+      ref: "Job",
     }],
     
   },

@@ -1,0 +1,140 @@
+/* Container to hold both the sidebar and main content */
+.job-page-container {
+  display: flex;
+}
+
+/* Sidebar styling */
+.sidebar {
+  
+  z-index:-1000;
+  max-width: 190px;
+  background-color: #f0f0f0;
+  padding: 20px;
+  height: 150vh;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+.oneLine{
+  display: flex;
+}
+
+.fifty{
+  width : 50%;
+}
+
+.sidebar ul {
+  margin-left:20px;
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 20px;
+}
+
+.sidebar ul li a {
+  
+  text-decoration: none;
+  color: #3C5AA5;
+  font-weight: bold;
+}
+
+.form-address{
+  display: flex;
+  justify-content: space-between;
+}
+
+.fifty{
+  flex-basis: 48%;
+}
+
+/* Main content styling */
+.job-form-container {
+  flex: 1;
+  padding: 20px;
+}
+
+.job-form {
+  padding-top: 100px;
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-section {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.specify-width{
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.specify-widthh{
+  width : 125px;
+}
+
+.form-section label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-section input,
+.form-section select,
+.form-section textarea {
+  width: 95%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.create-btn {
+  padding: 10px 20px;
+  background-color: #6187D0;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.create-btn:hover {
+  background-color: #537dcd;
+}
+
+.btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.another {
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wid {
+  padding-right: 40px;
+}
+aside{
+  height:100%;
+}
+
+.high{
+  font-size:20px;
+}
+
+.form-section{
+  display:flex;
+  flex-direction:column;
+}

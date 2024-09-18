@@ -1,0 +1,21 @@
+{
+  "name": "posts_api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cloudinary": "^2.5.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "mongoose": "^8.6.2",
+    "multer": "^1.4.5-lts.1",
+    "posts_api": "file:",
+    "ws": "^8.18.0"
+  }
+}
