@@ -12,6 +12,8 @@ import Amazon from './images/amazon.png'
 import Google from './images/google.png'
 import heatmap from './components/Images/heatmap.png'
 
+
+
 // import profile from './images/logesh.jpg'
 import './Model.css';
 
