@@ -4,6 +4,8 @@ import './usernavbar.css';
 import User from '../UserJobs';
 import { Link } from 'react-router-dom';
 
+
+
 // Function to clear specific cookies
 const clearCookie = (name) => {
     document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
