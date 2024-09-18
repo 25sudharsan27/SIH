@@ -11,6 +11,8 @@ import linkIcon from './images/link-solid.svg'
 import Amazon from './images/amazon.png'
 import Google from './images/google.png'
 
+
+
 // import profile from './images/logesh.jpg'
 import './Model.css';
 
