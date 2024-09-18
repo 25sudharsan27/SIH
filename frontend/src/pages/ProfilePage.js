@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './profile.css';
 import Modal from './Model'; // Make sure this is imported correctly
 import edit from './images/edit.png';
-import save from './images/save.png';
+import dummyIcon from './images/logesh_2.jpg';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUser } from '../store/userSlice';
 import editIcon from './images/edit-icon.svg'
@@ -150,7 +150,7 @@ const ProfilePage = () => {
       <div className="profile-header">
         <div className="profile-left">
           <img
-            src={userData.profilepic || save}
+            src={userData.profilepic || dummyIcon}
             alt="Profile Picture"
             className="profile-picture"
           />

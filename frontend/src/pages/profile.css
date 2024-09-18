@@ -181,15 +181,14 @@
 
 
 .profile-picture{
-    min-height:200px;
-    min-width:200px;
+    height:200px;
     background: white;
     box-shadow: 1px 1px 1px 1px rgba(255, 255, 255, 0.608);
     border-radius: 15px;
 }
 
 .add-more-projects{
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 /* .profile-left{

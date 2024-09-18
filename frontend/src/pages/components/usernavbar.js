@@ -75,7 +75,7 @@ const UserNavbar = () => {
                         className="profile-logo" 
                         onClick={toggleDropdown} 
                     />
-                    <div className="dropdown-content active">
+                    <div className="dropdown-content">
                         <div className="Profdrop">
                             <img 
                                 src="Images/user-icon-svgrepo-com (1).svg" 
