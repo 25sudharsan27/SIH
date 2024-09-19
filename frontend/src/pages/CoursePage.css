@@ -1,192 +1,169 @@
 body {
-    font-family: 'Poppins';
-    margin: 0;
-    padding: 0;
-    background-color: #f7f7f7;
-    color: #2c2c2c;
-  }
+  font-family: 'Poppins';
+  margin: 0;
+  padding: 0;
+  background-color: #f7f7f7;
+  color: #2c2c2c;
+}
 
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Center content */
+}
 
-  h1, h2 {
-    font-family: 'Playfair Display', serif;
-    color: #333;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
+h1, h2 {
+  font-family: 'Playfair Display', serif;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  /* Center text */
+}
 
-  a {
-    color: #02101e;
-    text-decoration: none;
-    transition: color 0.3s ease, border-bottom 0.3s ease;
-  }
+a {
+  color: #02101e;
+  text-decoration: none;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+}
 
-  a:hover {
-    color: #0056b3;
-    border-bottom: 2px solid #0056b3;
-  }
+a:hover {
+  color: #0056b3;
+  border-bottom: 2px solid #0056b3;
+}
 
-  .error {
-    color: #ff4d4d;
-    text-align: center;
-    font-size: 18px;
-  }
+.error {
+  color: #ff4d4d;
+  text-align: center;
+  font-size: 18px;
+}
 
-  /* Navbar Styles
-  .navbar {
-    background-color: #2c3e50;
-    padding: 15px 0;
-    text-align: center;
-  }
+/* Search Box */
+.search-container {
+  text-align: center;
+  margin-bottom: 40px;
+}
 
-  .navbar a {
-    color: white;
-    padding: 15px 25px;
-    text-decoration: none;
-    font-weight: bold;
-  }
+input[type="text"] {
+  padding: 15px;
+  width: 60%;
+  max-width: 600px;
+  border: 2px solid #ccc;
+  border-radius: 30px;
+  font-size: 18px;
+  text-align: center;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  /* Added box-shadow transition */
+}
 
-  .navbar a:hover {
-    background-color: #34495e;
-  } */
+input[type="text"]:focus {
+  outline: none;
+  border-color: #007bff;
+}
 
-  /* Search Box */
-  .search-container {
-    text-align: center;
-    margin-bottom: 30px;
-  }
+input[type="text"]:hover {
+  border-color: #007bff;
+  /* Change border color on hover */
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+  /* Subtle shadow on hover */
+}
 
+/* Course Info */
+.course-info {
+  background-color: white;
+  border-radius: 0px;
+  padding: 50px 100px;
+  /* 50px top/bottom, 100px left/right */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 50px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.course-info:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.course-info h1 {
+  margin-bottom: 15px;
+  font-size: 2.5rem;
+  color: #464D5F;
+  padding-bottom: 10px;
+  text-align: center;
+  /* Center text */
+}
+
+.course-info p {
+  font-size: 18px;
+  color: #464D5F;
+  margin-bottom: 10px;
+  text-align: center;
+  /* Center text */
+}
+
+.course-info section {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.course-info section:hover {
+  background-color: #f0f8ff;
+  /* Hover effect */
+}
+
+.course-info section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #464D5F;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 5px;
+  text-align: center;
+  /* Center text */
+}
+
+.course-info a {
+  font-size: 16px;
+  display: block;
+  margin-bottom: 12px;
+  color: #464D5F;
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, border 0.3s ease;
+}
+
+.course-info a:hover {
+  background-color: #f0f8ff;
+  border-color: #007bff;
+}
+
+.no-data {
+  text-align: center;
+  font-size: 22px;
+  color: #e74c3c;
+  font-family: 'Playfair Display', serif;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   input[type="text"] {
-    padding: 15px;
-    width: 60%;
-    max-width: 600px;
-    border: 2px solid #ccc;
-    border-radius: 30px;
-    font-size: 18px;
-    text-align: center;
+    width: 90%;
   }
 
-  input[type="text"]:focus {
-    outline: none;
-    border-color: #007bff;
-  }
-
-  /* Course Info */
   .course-info {
-    background-color: white;
-    border-radius: 15px;
-    padding: 40px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    margin-bottom: 50px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .course-info:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-  }
-
-  .course-info h1 {
-    margin-bottom: 15px;
-    font-size: 2.5rem;
-    color: #464D5F;
-    /* border-bottom: 2px solid #007bff; */
-    padding-bottom: 10px;
-  }
-
-  .course-info p {
-    font-size: 18px;
-    color: #464D5F;
-    margin-bottom: 10px;
+    padding: 20px;
   }
 
   .course-info section {
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #fafafa;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    margin-bottom: 20px;
+    padding: 15px;
   }
-
-  .course-info section h2 {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-    color: #464D5F;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 5px;
-  }
-
-  .course-info a {
-    font-size: 16px;
-    display: block;
-    margin-bottom: 12px;
-    color: #464D5F;
-    padding: 10px;
-    border: 1px solid transparent;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, border 0.3s ease;
-  }
-
-  .course-info a:hover {
-    background-color: #f0f8ff;
-    border-color: #007bff;
-  }
-
-  /* Tips Section */
-  .course-info section h2 + p {
-    font-size: 16px;
-    color: #666;
-  }
-
-  p {
-    margin: 0;
-  }
-
-  .no-data {
-    text-align: center;
-    font-size: 22px;
-    color: #e74c3c;
-    font-family: 'Playfair Display', serif;
-  }
-
-  /* Section Box Styles */
-  .course-info section {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 15px;
-    border: 1px solid #ddd;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .course-info section h2 {
-    margin-bottom: 10px;
-    font-size: 1.6rem;
-    color: #06080a;
-  }
-
-  .course-info section p {
-    font-size: 16px;
-    color: #555;
-    margin-bottom: 10px;
-  }
-
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    input[type="text"] {
-      width: 90%;
-    }
-
-    .course-info {
-      padding: 20px;
-    }
-
-    .course-info section {
-      padding: 15px;
-    }
-  }
+}

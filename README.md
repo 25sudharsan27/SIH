@@ -1,201 +1,140 @@
-***API Endpoints***
-***Authentication***
+# Job and Internship Platform
 
-POST /api/signup
-Description: Registers a new user.
-Request:
-json
-```
+Welcome to our Job and Internship Platform! This website connects students and job seekers with organizations offering job opportunities. It also provides various tools to enhance the user's profile, prepare for interviews, and find mentorship. Below is a detailed breakdown of each section of our platform.
 
-{
-  "name": "John Doe",
-  "email": "johndoe@example.com",
-  "password": "password123"
-}
-```
-Response:
-json
-```
+## Features
 
-{
-  "message": "User registered successfully",
-  "success": true
-}
-```
-POST /api/login
-Description: Authenticates a user and returns a JWT token.
-Request:
-json
+### 1. User Profile Section
 
-```
-{
-  "email": "johndoe@example.com",
-  "password": "password123"
-}
-```
-Response:
-json
-```
-{
-  "message": "Login successful",
-  "token": "jwt_token_here",
-  "success": true
-}
-```
-GET /api/user-details
-Description: Returns the details of the authenticated user.
-Headers:
-Authorization: Bearer <JWT Token>
-Response:
-json
-```
-{
-  "data": {
-    "name": "John Doe",
-    "email": "johndoe@example.com",
-    "skills": [],
-    "projects": [],
-    "jobs": []
-  },
-  "success": true
-}
-```
-GET /api/logout
-Description: Logs out the authenticated user by clearing the token.
-Headers:
-Authorization: Bearer <JWT Token>
-Response:
-json
-```
-{
-  "message": "User logged out",
-  "success": true
-}
-```
-POST /api/forget-password
-Description: Sends a password reset email to the user.
-Request:
-json
-```
-{
-  "email": "johndoe@example.com"
-}
-```
-Response:
-json
-```
-{
-  "message": "Password reset email sent",
-  "success": true
-}
-```
-User Profile
-POST /user/adddetails
-Description: Adds or updates user details like skills, projects, jobs, etc.
-Request:
-json
-```
-{
-  "email": "johndoe@example.com",
-  "skills": ["JavaScript", "Node.js"],
-  "projects": [
-    {
-      "title": "Project A",
-      "description": "Project description",
-      "link": "http://example.com",
-      "media": ["http://example.com/image.png"]
-    }
-  ]
-}
-```
-Response:
-json
-```
-{
-  "message": "User details updated successfully",
-  "success": true
-}
-```
-POST /user/delete
-Description: Deletes specific fields like skills, projects, etc.
-Request:
-json
-```
-Copy code
-{
-  "email": "johndoe@example.com",
-  "fieldToDelete": "skills",
-  "valueToDelete": "JavaScript"
-}
-```
-Response:
-json
-```
-{
-  "message": "Details deleted successfully",
-  "success": true
-}
-```
-Public
-GET /public/jobs
-Description: Retrieves a list of available jobs.
-Response:
-json
-```
-{
-  "jobs": [
-    {
-      "title": "Web Developer",
-      "description": "Develop web applications",
-      "location": "Remote",
-      "company": "Tech Inc"
-    }
-  ],
-  "success": true
-}
-```
-POST /public/updatejob
-Description: Adds or updates a job listing.
-Request:
-json
-```
-{
-  "title": "Web Developer",
-  "description": "Develop web applications",
-  "location": "Remote",
-  "company": "Tech Inc"
-}
-```
-Response:
-json
-```
-{
-  "message": "Job updated successfully",
-  "success": true
-}
-```
-Job Management
-POST /public/jobs
-Description: Add or update jobs for authenticated users.
-Request:
-json
-```
-{
-  "email": "johndoe@example.com",
-  "jobs": [
-    {
-      "title": "Web Developer",
-      "description": "Full-time web developer",
-      "workMode": "remote",
-      "country": "USA",
-      "city": "San Francisco",
-      "company": "Tech Inc"
-    }
-  ]
-}
-```
-Response:
-{
-  "message": "Jobs added/updated successfully",
-  "success": true
-}
+In the profile section, users can enter their experiences, projects, and skills. Additionally, the profile displays heatmaps from various platforms such as Codeforces, CodeChef, GeeksforGeeks, and LeetCode.
+
+![User Profile](./website%20photos//JobSeekerLogin.png)
+![User Profile](./website%20photos//UserProfile.png)
+![User Profile](./website%20photos//UserProfile2.png)
+![User Profile](./website%20photos//UserProfile4.png)
+
+
+### 2. Job Section
+
+Users can view jobs posted by organizations. The jobs can be filtered using the search bar based on different criteria, and our algorithm provides suggested jobs using vector mapping that matches the user’s skills by more than 70%.
+
+![Job Section](./website%20photos/Jobs.png)
+![Job Section](./website%20photos//Jobs2.png)
+
+
+### 3. Community Section
+
+Our community section allows users to view posts made by job seekers and job providers. It's a great place for interaction and knowledge sharing between users of the platform.
+
+![Community Section](./website%20photos//Community.png)
+
+
+### 4. Interview Preparation Section
+
+This section allows users to take MCQ tests for self-evaluation in various skills. At the end of each test, users receive a score based on their performance.
+
+![Interview Preparation](./website%20photos/InterviewPrep.png)
+![MCQ TEST](./website%20photos/McqTest.png)
+
+### 5. Resume Builder
+
+Users can build a resume using either manually entered data or pre-filled information from their user profile. This feature offers multiple templates to suit different needs.
+
+PDF Generated Resume 
+![Generate Resume](./website%20photos/Resume.png)
+
+![Resume Builder](./website%20photos/ResumeBuilder.png)
+![Resume Builder](./website%20photos/ResumeBuilder2.png)
+
+HTML Generated Resume 
+
+![Resume Builder](./website%20photos/ResumeBuilder3.png)
+![Resume Builder](./website%20photos/ResumeBuilder4.png)
+
+
+### 6. Mentorship Page
+
+Users can connect with mentors provided by our platform to improve their performance. Mentorships are tailored to help users enhance their skills and prepare for job opportunities.
+
+
+
+![Mentorship Page](./website%20photos/Mentorship.png)
+
+### 7. Post Creation Page
+
+Users can create posts and share them on the public community page. This is useful for job seekers to share their achievements or job providers to share job openings or updates.
+
+![Create Posts](./website%20photos/CreatePost.png)
+
+
+### 8. Organization Pages
+
+Organizations have a separate section where they can log in and manage job postings. This includes creating jobs by providing details like the title, description, stipend, and openings. Organizations can also view, update, and close jobs. Closed jobs are displayed in a separate "Closed Jobs" section.
+
+![Organization Jobs](./website%20photos/OrganizationLogin.png)
+![Organization Jobs](./website%20photos/OrganizationSignup.png)
+![Organization Jobs](./website%20photos/OrganizationProfile.png)
+![Organization Jobs](./website%20photos/OrganizationProfile2.png)
+
+## Technical Details
+
+- **Frontend**: The frontend of our platform is built using **ReactJS**, with **Redux** used for session and state management.
+- **Backend**: The backend is powered by **Node.js** and **Express.js**.
+- **Database**: We use **MongoDB** as our database to store user, organization, job, and post information.
+
+## Database Schemas
+
+We use separate schemas for the following entities:
+- **User**
+- **Organization**
+- **Job**
+- **Post**
+
+## Setup Instructions
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/yourusername/your-repo.git
+   cd your-repo
+   ```
+
+2. **Install Dependencies**: For Backend
+  ```bash
+  cd backend
+  npm install
+  ```
+
+3. **Install Dependencies**: For Frontend
+  ```bash
+  cd frontend
+  npm install
+  ```
+
+4. **Environment Setup** : Create a .env file in the backend directory and configure your MongoDB URL, JWT secret, and other necessary enivornment variables:
+  ```bash
+  MONGODB_URI = your-mongodb-uri
+  JWT_SECRET= your-secret-key
+  ```
+
+5. **Run the development servers**: For Backend
+  ```bash
+  node index
+  ```
+
+6. For Frontend
+  ```bash
+  npm start
+  ```
+<br/>
+<br/>
+
+# Contribution
+
+We welcome contributions! If you'd like to contribute to this project, please fork the repository and create a pull request with your changes.
+
+# License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+
+
+
