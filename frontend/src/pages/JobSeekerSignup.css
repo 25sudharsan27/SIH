@@ -1,76 +1,128 @@
+/* Signup Container */
 .signup-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 50px;
-    font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  font-family: Arial, sans-serif;
+}
+
+/* Form Title */
+.form-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: #333;
+  /* Darker text */
+  animation: fadeIn 1s ease-out;
+  /* Animation for form title */
+}
+
+/* Signup Form */
+.signup-form {
+  background: #ffffff;
+  /* White background */
+  border-radius: 10px;
+  padding: 40px;
+  width: 400px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.signup-form:hover {
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
+}
+
+/* Form Subtitle */
+.form-subtitle {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+  /* Darker text */
+  animation: fadeIn 1.5s ease-out;
+  /* Animation for subtitle */
+}
+
+/* Form Input */
+.form-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+/* Password Container */
+.password-container {
+  position: relative;
+}
+
+/* Password Toggle */
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  color: #007BFF;
+  /* Color for the toggle */
+}
+
+/* Address Container */
+.address-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Small Input */
+.small-input {
+  width: 48%;
+}
+
+/* Submit Button */
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(90deg, #007BFF, #00BFFF);
+  /* Gradient background */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.submit-button:hover {
+  background: linear-gradient(90deg, #0056b3, #00A3E0);
+  /* Darker gradient on hover */
+  transform: scale(1.05);
+}
+
+/* Padding Adjustment for Password Field */
+#pwd {
+  margin-top: -10px;
+  margin-right: -20px;
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  .form-title {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 40px;
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .signup-form {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 40px;
-    width: 400px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .form-subtitle {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .form-input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  
-  .password-container {
-    position: relative;
-  }
-  
-  .password-toggle {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    cursor: pointer;
-    font-size: 18px;
-  }
-  
-  .address-container {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .small-input {
-    width: 48%;
-  }
-  
-  .submit-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .submit-button:hover {
-    background-color: #0056b3;
-  }
-  #pwd{
-    margin-top:-10px;
-    margin-right:-20px;
-  }
+}

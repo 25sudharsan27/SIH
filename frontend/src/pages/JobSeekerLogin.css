@@ -1,60 +1,134 @@
+/* Container Styling */
 .login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 50px;
-    font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  font-family: Arial, sans-serif;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Title Styling */
+.form-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  background: linear-gradient(90deg, #0056b3, #007BFF);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: slideInFromLeft 1.2s ease-out;
+}
+
+/* Form Styling */
+.login-form {
+  background: linear-gradient(135deg, #e0f7fa, #f0f4f5);
+  border-radius: 10px;
+  padding: 40px;
+  width: 400px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  animation: popUp 1.2s ease-out;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  color: #3788e6;
+  /* Darker blue for form text */
+}
+
+/* Hover effect on form */
+.login-form:hover {
+  transform: translateY(-10px);
+  /* Slight upward shift */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  /* Stronger shadow on hover */
+}
+
+/* Form Subtitle */
+.form-subtitle {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Form Group */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Form Group Labels */
+.form-group label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #0056b3;
+  /* Dark blue labels */
+}
+
+/* Input Fields */
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  color: #0056b3;
+  /* Dark blue input text */
+}
+
+/* Hover effect on input */
+.form-input:hover {
+  border-color: #007BFF;
+}
+
+/* Submit Button */
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(90deg, #638ab4, #6bb9ce);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover effect on button */
+.submit-button:hover {
+  background: linear-gradient(90deg, #0056b3, #007BFF);
+  transform: translateY(-2px);
+  /* Slight lift effect */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
   }
-  
-  .form-title {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 40px;
+
+  100% {
+    opacity: 1;
   }
-  
-  .login-form {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 40px;
-    width: 400px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
   }
-  
-  .form-subtitle {
-    font-size: 24px;
-    margin-bottom: 20px;
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
   }
-  
-  .form-group {
-    margin-bottom: 20px;
+}
+
+@keyframes popUp {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
   }
-  
-  .form-group label {
-    display: block;
-    font-size: 16px;
-    margin-bottom: 5px;
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
-  
-  .form-input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  
-  .submit-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .submit-button:hover {
-    background-color: #0056b3;
-  }
-  
+}
