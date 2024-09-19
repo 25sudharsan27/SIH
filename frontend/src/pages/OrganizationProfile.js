@@ -6,6 +6,8 @@ import Modal from './Model'; // Ensure this is imported correctly
 import { selectOrganization, setOrganizationDetails } from '../store/OrganizationSlice';
 import editIcon from './images/edit-icon.svg'
 import saveIcon from './images/floppy-disk-regular.svg'
+import google from './images/google.png'
+import linkIcon from './images/link-solid.svg'
 
 // Component for displaying and editing organization profile
 const OrganizationProfile = () => {
@@ -62,15 +64,22 @@ const OrganizationProfile = () => {
       {/* Profile Header */}
       <div className="profile-header">
         <div className="profile-left">
-          <img
-            src={organizationData.logo || 'images/logo-placeholder.svg'}
-            alt="Organization Logo"
-            className="profile-picture"
-          />
+            <img
+              src={organizationData.logo || google}
+              alt="Organization Logo"
+              className="profile-picture company-log"
+            />
           <h2>{organizationData.companyname}</h2>
           <p className="location">
             {organizationData.city}, {organizationData.state}, {organizationData.country}
           </p>
+        </div>
+        <div className='profile-right'> 
+          <p>Company Rating : 4/5</p>
+          <p>Company Size : 10,000 - 50,000</p>
+          <p>4th Sep 1998- Present</p>
+          <p>HeadQuarters : <a href="https://maps.app.goo.gl/P8PBMSPnTJQJAsMY6" target='blank' id="headQ">Googleplex, California
+          <img src={linkIcon} className='iconnn'></img></a></p>
         </div>
       </div>
 

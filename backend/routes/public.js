@@ -13,6 +13,8 @@ const addmcqtest = require("../controller/public/addmcqtest")
 const getmcqtest = require("../controller/public/getmcqtest");
 const getdata = require("../controller/public/getmcq");
 const AddPost = require("../controller/public/addpost");
+const getpost = require("../controller/public/getpost");
+const userAuth = require("../middleware/authToken");
 
 router.use(cookieparser());
 router.use(bodyParser.json());
@@ -27,7 +29,8 @@ router.post("/viewjob",viewJob);
 router.post("/addmcq",addmcqtest);
 router.post("/getmcq",getmcqtest);
 router.post("/getdata",getdata);
-router.post("/addpost",AddPost);
+router.post("/addpost",userAuth,AddPost);
+router.post("/getpost",getpost);
 
 // router.post("/forget-password", forgetPasswordController);
 // router.post("/reset-password",resetPasswordController)

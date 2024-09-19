@@ -18,6 +18,7 @@ import Mcqtest from './pages/McqTest';
 import MentorshipApp from './pages/Mentorship';
 import CoursePage from './pages/CoursePage';
 import Posts from './pages/Community';
+import CreatePost from './pages/CreatePost';
 
 
 
@@ -40,7 +41,7 @@ root.render(
         <Route path="/mentorship" element={<MentorshipApp/>}/>
         <Route path="/user/courses" element={<CoursePage/>} />
         <Route path="/posts" element={<Posts/>}/>
-
+        <Route path="/addpost" element={<CreatePost/>}/>
         
       </Routes>
     </BrowserRouter>

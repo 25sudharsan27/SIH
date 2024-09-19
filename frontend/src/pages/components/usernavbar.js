@@ -114,6 +114,14 @@ const UserNavbar = () => {
                             />
                             <a href="#">Settings</a>
                         </div>
+                        <div className="Profdrop">
+                            <img 
+                                src={setting}
+                                className="profa" 
+                                alt="Settings" 
+                            />
+                            <a href="/addpost">Create Post</a>
+                        </div>
                         <div className="Profdrop" onClick={handleLogout}>
                             <img 
                                 src={logout} 

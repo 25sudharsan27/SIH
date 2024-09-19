@@ -1,0 +1,65 @@
+.post-page-container {
+    display: flex;
+  }
+  
+  .sidebar {
+    width: 20%;
+    background-color: #f4f4f4;
+    padding: 20px;
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+  }
+  
+  .sidebar li {
+    margin: 10px 0;
+  }
+  
+  .sidebar li a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .post-form-container {
+    width: 80%;
+    padding: 20px;
+  }
+  
+  .post-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-section {
+    margin-bottom: 15px;
+  }
+  
+  .specify-widthh {
+    display: inline-block;
+    width: 120px;
+  }
+  
+  textarea {
+    width: 100%;
+    resize: vertical;
+  }
+  
+  .create-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .create-btn:hover {
+    background-color: #0056b3;
+  }
+  
+
+  .post-page-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

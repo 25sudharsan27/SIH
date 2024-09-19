@@ -5,7 +5,7 @@ async function AddPost(req,res){
     try{        
         const description = req.body.description;
         const title = req.body.title;
-        const user_id = req.body.user_id;
+        const user_id = req.user_id;
 
         const postdata = postModel({
             description : description,

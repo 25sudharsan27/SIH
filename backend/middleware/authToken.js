@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 async function authToken(req,res,next){
     try{
         const token =  req.cookies?.token;
-        console.log(token);
+        // console.log(token);
         if(!token){
             return res.status(400).json({
                 message: "user not Logging",
@@ -16,12 +16,12 @@ async function authToken(req,res,next){
         jwt.verify(token,process.env.TOKEN_SECRET_KEY,
             function (err,decoded){
                 // console.log(err);
-                console.log("decoded : ",decoded, "\n id ",decoded?._id);
+                // console.log("decoded : ",decoded, "\n id ",decoded?._id);
                 if(err){
                     console.log("error auth",err);
                 }
                 req.user_id = decoded?._id;
-                console.log("user id : ",req.user_id);
+                // console.log("user id : ",req.user_id);
                 next();
             }
         )

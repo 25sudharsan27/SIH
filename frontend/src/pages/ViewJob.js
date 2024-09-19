@@ -69,23 +69,25 @@ function ViewJob() {
   
     // Prepare extra data
     const extra = jobData.extra_questions.map((_, index) => extraAnswers[index] || '');
-  
+    console.log("Extra data: ", extra);
+    console.log("job data : ",job_id);
     try {
       const response = await fetch("http://localhost:8000/user/applytojob", {
-        method: "POST",
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: "include",
         body: JSON.stringify({
           job_id: job_id,
           extra: extra,
           // Resume is not included since it's not being uploaded
         }),
-        credentials: "include",
+        
       });
   
       const result = await response.json();
-  
+      console.log("result : ",result);
       if (!response.ok) {
         throw new Error(result.message || "Failed to apply to job.");
       }

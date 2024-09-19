@@ -57,6 +57,13 @@ const applyToJob = async (req, res) => {
       skills: final_skills,
     };
 
+    if (!Array.isArray(job.applicants)) {
+      job.applicants = [];
+    }
+    if (!Array.isArray(user.applied_jobs)) {
+      user.applied_jobs = [];
+    }
+    
     // Add the application to the job
     job.applicants.push(application);
 

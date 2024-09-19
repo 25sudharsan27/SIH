@@ -10,9 +10,10 @@ import saveIcon from './images/floppy-disk-regular.svg'
 import linkIcon from './images/link-solid.svg'
 import Amazon from './images/amazon.png'
 import Google from './images/google.png'
-import heatmap from './components/Images/heatmap.png'
-
-
+import HeatMap from './HeatMap';
+import leetcode from './images/leetcode.svg'
+import hackerrank from './images/hackerrank.svg'
+import github from './images/github.svg'
 
 // import profile from './images/logesh.jpg'
 import './Model.css';
@@ -159,14 +160,28 @@ const ProfilePage = () => {
             alt="Profile Picture"
             className="profile-picture"
           />
-          <h2>{userData.name}</h2>
+          <h2 id="pro-name">{userData.name}</h2>
           <p className="location">
-            {userData.city},<br /> {userData.state},<br /> {userData.country}
+            {userData.city}, {userData.state}, {userData.country}
           </p>
         </div>
         <div>
-          <img className="heatmap" src={heatmap} alt="hi"/>
-          <a href="https://sudharsanb.liveblog365.com">https://sudharsanb.liveblog365.com</a>
+          <div className='heatmap-container'>
+            <HeatMap msg={'Jan'}/>
+            <HeatMap msg={'Feb'}/>
+            <HeatMap msg={'Mar'}/>
+            <HeatMap msg={'Apr'}/>
+            <HeatMap msg={'May'}/>
+            <HeatMap msg={'Sep'}/>
+            <HeatMap msg={'Oct'}/>
+            <HeatMap msg={'Nov'}/>
+            <HeatMap msg={'Dec'}/>
+          </div>
+          <div className='images-con'>
+            <a href="https://leetcode.com/u/vinukanth75/" target='blank'><img src={leetcode} className='logoo'></img></a>
+            <a href="https://www.hackerrank.com/profile/vinukanth75" target='blank'><img src={hackerrank} className='logoo'></img></a>
+            <a href="https://github.com/vinu75kanth" target='blank'><img src={github} className='logoo'></img></a>
+          </div>
         </div>
       </div>
 

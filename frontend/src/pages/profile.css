@@ -18,7 +18,7 @@
     display:flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 10%;
+    padding: 50px 10%;
     background: hsla(0, 0%, 50%, 0.162);
 }
 .editbtn{
@@ -183,9 +183,14 @@
 
 .profile-picture{
     height:200px;
+    width: 200px;
     background: white;
     box-shadow: 1px 1px 1px 1px rgba(255, 255, 255, 0.608);
     border-radius: 15px;
+}
+
+#pro-name{
+    text-align: center;
 }
 
 .company-logo{
@@ -206,8 +211,31 @@
     margin-top:30px;
 }
 
+.iconnn{
+    height: 20px;
+}
 
-.heatmap{
-    height:100px;
-    width:400px;
+#headQ{
+    color:#3C5AA5;
+    text-decoration: none;
+}
+
+.heatmap-container{
+    display: flex;
+}
+
+.logoo{
+    height: 30px;
+}
+.images-con{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+.images-con img{
+    margin: 10px;
+    cursor: pointer;
+}
+.images-con a{
+    text-decoration: none;
 }
