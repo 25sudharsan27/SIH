@@ -1,57 +1,57 @@
+/* Additional Styles for Enhanced Aesthetics */
 
 .containerr {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    /* Slightly lighter background for contrast */
 }
 
 h1 {
-    text-align: center;
+    color: #3C5AA5;
+    /* Change heading color for better emphasis */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    /* Add a subtle shadow */
 }
 
 .question {
-    /* display: flex;
-    flex-direction: column;
-    margin-bottom: 20px; */
+    padding: 15px;
+    /* Add padding around the question */
+    background-color: #e7f3fe;
+    /* Light blue background */
+    border-radius: 5px;
+    /* Rounded corners for questions */
+    margin-bottom: 15px;
+    /* Space between questions */
 }
 
 .options {
     margin-left: 20px;
+    margin-top: 10px;
+    /* Space above options */
 }
-
-/* .answers{
-    display: inline-block;
-} */
-
-/* .answers-left input{
-    width: auto;
-}
-
-.answers-right{
-    flex-basis: 50%;
-} */
 
 button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* Smooth transitions */
 }
 
 button:hover {
     background-color: #218838;
+    /* Keep existing hover color */
+    transform: translateY(-2px);
+    /* Lift effect on hover */
 }
 
 #result-container {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: bold;
+    background-color: #f0f8ff;
+    /* Light background for result container */
+    border: 1px solid #3C5AA5;
+    /* Border to define the area */
+    border-radius: 5px;
+    /* Rounded corners */
+    padding: 15px;
+    /* Inner padding */
+    text-align: center;
+    /* Center text */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
 }
