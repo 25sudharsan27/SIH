@@ -1,36 +1,45 @@
-/* 
 body {
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
     color: #333;
     padding: 20px;
-} */
+}
 
 .containe {
     max-width: 800px;
     margin: auto;
-    background: #fff;
+    background: linear-gradient(135deg, #87ceeb, #b0e0e6);
+    /* Gradient background */
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    /* Slightly stronger shadow */
     border-radius: 8px;
 }
 
 h1 {
     text-align: center;
     margin-bottom: 20px;
+    color: #333;
+    /* Keeping the text color */
 }
 
 .mentor-card {
     padding: 15px;
-    background: #f0f0f0;
+    background: #e0f7fa;
+    /* Light sky blue */
     margin: 10px 0;
     border-radius: 8px;
     cursor: pointer;
     transition: 0.3s;
+    border: 1px solid #87ceeb;
+    /* Sky blue border */
 }
 
 .mentor-card:hover {
-    background-color: #e0e0e0;
+    background-color: #b2ebf2;
+    /* Darker sky blue on hover */
+    transform: scale(1.02);
+    /* Slight scale effect on hover */
 }
 
 .hidden {
@@ -42,6 +51,6 @@ h1 {
 }
 
 #success-message {
-    color: green;
+    color: rgb(98, 126, 227);
     margin-top: 10px;
 }

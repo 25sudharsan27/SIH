@@ -1,100 +1,132 @@
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width:100%;
-    height:100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index:10000;
-  }
-  
-  .modal-content {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    position: relative;
-    width: 80%;
-    max-width: 500px;
-    max-height:80vh;
-    overflow-y:auto;
-  }
-  
-  .modal-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    border: none;
-    background: #e74c3c;
-    color: white;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-.addproject{
-    display:flex;
-    flex-direction: column;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px;
-}
-.addproject input{
-  width:80%;
-  padding:10px;
-  margin:10px;
-}
-.addproject textarea{
-  width:80%;
-  padding:10px;
-  margin:10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: fadeIn 0.3s ease;
+  /* Fade-in effect */
 }
 
-.addproject button, .addexperience button{
-  padding:10px;
-  margin:10px;
-  width:80%;
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  width: 80%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: #e74c3c;
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.modal-close:hover {
+  background: #c0392b;
+  /* Darker red on hover */
+  transform: scale(1.1);
+  /* Slight enlargement on hover */
+}
+
+.addproject,
+.addexperience {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.addproject input,
+.addexperience input,
+.addproject textarea,
+.addexperience textarea {
+  width: 80%;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+  /* Border color transition */
+}
+
+.addproject input:focus,
+.addexperience input:focus,
+.addproject textarea:focus,
+.addexperience textarea:focus {
+  border-color: #6187D0;
+  /* Change border color on focus */
+  outline: none;
+  /* Remove default outline */
+}
+
+.addproject button,
+.addexperience button {
+  padding: 10px;
+  margin: 10px;
+  width: 80%;
   background-color: #6187D0;
   color: white;
-  border:none;
-  border-radius:5px;
-  cursor:pointer;
-}
-.addproject button:hover, .addexperience button:hover{
-  background-color: #6187D0;
-  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  /* Transition for hover effect */
 }
 
-.addexperience{
-  display:flex;
-  flex-direction:column;
-  padding:20px;
-}
-.addexperience input{
-  width:80%;
-  padding:10px;
-  margin:10px;
-}
-.addexperience textarea{
-  width:80%;
-  padding:10px;
-  margin:10px;
+.addproject button:hover,
+.addexperience button:hover {
+  background-color: #4a6ab0;
+  /* Darker blue on hover */
+  transform: scale(1.05);
+  /* Slight enlargement on hover */
 }
 
-.add-more-projects{
+.add-more-projects {
   text-decoration: none;
-  background-color:hsl(223, 47%, 44%);
-  padding:15px 17px;
-  color:white;
-  border-radius:5px;
-  transition: 0.5s;
+  background-color: hsl(223, 47%, 44%);
+  padding: 15px 17px;
+  color: white;
+  border-radius: 5px;
+  transition: background-color 0.5s ease, transform 0.3s ease;
+  /* Smooth transition */
 }
-.add-more-projects:hover{
+
+.add-more-projects:hover {
   background-color: hsl(223, 47%, 54%);
+  transform: scale(1.05);
+  /* Slight enlargement on hover */
+}
+
+/* Keyframes for fade-in effect */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
