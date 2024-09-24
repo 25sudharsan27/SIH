@@ -2,6 +2,11 @@
 
 Welcome to our Job and Internship Platform! This website connects students and job seekers with organizations offering job opportunities. It also provides various tools to enhance the user's profile, prepare for interviews, and find mentorship. Below is a detailed breakdown of each section of our platform.
 
+## Flow Chart 
+
+![Flow Chart](./website%20photos/flow-chart.png)
+
+
 ## Features
 
 ### 1. User Profile Section
@@ -75,6 +80,9 @@ Organizations have a separate section where they can log in and manage job posti
 ![Organization Jobs](./website%20photos/OrganizationSignup.png)
 ![Organization Jobs](./website%20photos/OrganizationProfile.png)
 ![Organization Jobs](./website%20photos/OrganizationProfile2.png)
+![Organization Jobs](./website%20photos/ClosedJobs.png)
+![Organization Jobs](./website%20photos/CreateJob.png)
+![Organization Jobs](./website%20photos/CreateJob2.png)
 
 ## Technical Details
 
