@@ -19,11 +19,15 @@ const User = () =>{
   const Navigate = useNavigate();
     const dispatch = useDispatch();
   const fetchUserDetails = async()=>{
-    const dataResponse = await fetch("http://localhost:8000/user/userdetails",
+    const dataResponse = await fetch(process.env.REACT_APP_userdetails_api,
       {
-        method : "POST",
+        method : process.env.REACT_APP_userdetails_method,
         credentials : "include",
-      }
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      },
+      
     )
     const dataApi = await dataResponse.json();
     

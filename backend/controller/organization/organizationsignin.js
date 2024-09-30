@@ -42,6 +42,10 @@ async function userSignInController(req, res) {
             };
 
             res.cookie('token', token, tokenOptions).status(200).json({
+                sameSite: 'None', // Allow cross-site usage
+                secure: true,     // Send cookie only over HTTPS
+                httpOnly: true,   // Accessible only by the web server
+                maxAge: 24 * 60 * 60 * 1000 ,
                 data: token,
                 message: 'User authenticated successfully',
                 error: false,

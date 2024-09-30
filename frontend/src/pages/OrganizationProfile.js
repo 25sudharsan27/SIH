@@ -22,8 +22,8 @@ const OrganizationProfile = () => {
   // Fetch organization details
   const fetchOrganizationDetails = async () => {
     const response = await fetch(process.env.REACT_APP_organization_details, {
-      method :process.env.REACT_APP_organization_details_method,
-      credentials: 'include',
+      method: process.env.REACT_APP_organization_details_method,
+      withCredentials: true,
     });
     const data = await response.json();
     if (data.success) {
@@ -41,8 +41,8 @@ const OrganizationProfile = () => {
   // Save updated about section
   const handleSaveAbout = async () => {
     setIsEditingAbout(false);
-    const response = await fetch(process.env.REACT_APP_saveabout_api, {
-      method: process.env.REACT_APP_saveabout_method,
+    const response = await fetch('http://localhost:8000/organization//addorganization', {
+      method: 'POST',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
