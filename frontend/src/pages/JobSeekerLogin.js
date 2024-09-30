@@ -17,9 +17,8 @@ const JobSeekerLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Implement your login logic here
-    console.log("Email:", email, "Password:", password);
     try {
-      const response = await fetch("http://localhost:8000/api/login", {
+      const response = await fetch(process.env.REACT_APP_userlogin_api, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

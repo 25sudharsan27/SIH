@@ -16,8 +16,8 @@ const Posts = () => {
     // Define an async function inside the useEffect
     const fetchPosts = async () => {
       try {
-        const response = await fetch("http://localhost:8000/public/getpost", {
-          method: "POST",
+        const response = await fetch(process.env.REACT_APP_community_api, {
+          method: process.env.REACT_APP_community_method,
           headers: {
             "Content-Type": "application/json",
           },

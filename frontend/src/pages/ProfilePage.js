@@ -56,8 +56,9 @@ const ProfilePage = () => {
   // Save updated about section
   const handleSaveAbout = async () => {
     setIsEditingAbout(false);
-    const updateUser = await fetch("http://localhost:8000/user/adddetails", {
-      method: 'POST',
+    console.log("aboutText : ", process.env?.REACT_APP_saveabout_api);
+    const updateUser = await fetch(process.env.REACT_APP_saveabout_api, {
+      method: "POST",
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
@@ -67,7 +68,6 @@ const ProfilePage = () => {
       })
     });
     const data = await updateUser.json();
-    console.log("data : ", data);
     window.location.reload(); // Reload the page to clear state and redirect to login
   };
 
@@ -77,8 +77,8 @@ const ProfilePage = () => {
     if (newSkill) {
       const updatedSkills = [...skills, newSkill];
       setSkills(updatedSkills);
-      const updateUser = await fetch("http://localhost:8000/user/adddetails", {
-        method: 'POST',
+      const updateUser = await fetch(process.env.REACT_APP_addskill_api, {
+        method: process.env.REACT_APP_addskill_method,
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
@@ -88,7 +88,6 @@ const ProfilePage = () => {
         })
       });
       const data = await updateUser.json();
-      console.log("data : ", data);
       window.location.reload(); // Reload the page to clear state and redirect to login
     }
   };
@@ -100,8 +99,8 @@ const ProfilePage = () => {
       return;
     }
     // Send new project data to the server (optional)
-    const updateUser = await fetch("http://localhost:8000/user/adddetails", {
-      method: 'POST',
+    const updateUser = await fetch(process.env.REACT_APP_addproject_api, {
+      method: process.env.REACT_APP_addproject_method,
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
@@ -111,7 +110,6 @@ const ProfilePage = () => {
       })
     });
     const data = await updateUser.json();
-    console.log("data : ", data);
     setIsAddProjectModalOpen(false);
     window.location.reload(); // Reload the page to clear state and redirect to login
   };
@@ -119,8 +117,8 @@ const ProfilePage = () => {
   // Add a new experience
   const handleAddExperience = async () => {
     // Send new experience data to the server (optional)
-    const updateUser = await fetch("http://localhost:8000/user/adddetails", {
-      method: 'POST',
+    const updateUser = await fetch(process.env.REACT_APP_addexperience_api , {
+      method: process.env.REACT_APP_addexperience_method,
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
@@ -130,7 +128,6 @@ const ProfilePage = () => {
       })
     });
     const data = await updateUser.json();
-    console.log("data : ", data);
     setIsAddExperienceModalOpen(false);
     window.location.reload(); // Reload the page to clear state and redirect to login
   };

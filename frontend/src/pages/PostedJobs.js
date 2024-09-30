@@ -16,8 +16,8 @@ function JobBoard() {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await fetch("http://localhost:8000/organization/getopenjobs", {
-          method: "POST",
+        const response = await fetch(process.env.REACT_APP_postedjob_api, {
+          method: process.env.REACT_APP_postedjob_method,
           credentials: "include",
           headers: {
             'Content-Type': 'application/json'
@@ -44,8 +44,8 @@ function JobBoard() {
   // Function to close a job
   const handleCloseJob = async (jobId) => {
     try {
-      const response = await fetch("http://localhost:8000/organization/closejob", {
-        method: "POST",
+      const response = await fetch(process.env.REACT_APP_handleclosejob_api, {
+        method: process.env.REACT_APP_handleclosejob_method,
         credentials: "include",
         headers: {
           'Content-Type': 'application/json'

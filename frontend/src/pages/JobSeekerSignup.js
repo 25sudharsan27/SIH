@@ -42,8 +42,8 @@ const JobSeekerSignup = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/api/signup", {
-        method: 'POST',
+      const response = await fetch(process.env.REACT_APP_usersignup_api, {
+        method: process.env.REACT_APP_usersignup_method,
         headers: {
           'Content-Type': 'application/json',
         },

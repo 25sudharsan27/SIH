@@ -40,8 +40,8 @@ const JobSeekerSignup = () => {
     // Validation can be added here
     
     try {
-      const response = await fetch('http://localhost:8000/organization/signup', { // Replace with your API endpoint
-        method: 'POST',
+      const response = await fetch(process.env.REACT_APP_orgsignup_api, { // Replace with your API endpoint
+        method: process.env.REACT_APP_orgsignup_method,
         headers: {
           'Content-Type': 'application/json',
           

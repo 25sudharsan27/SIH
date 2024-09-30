@@ -78,8 +78,8 @@ const JobForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8000/organization/addjob", {
-        method: 'POST',
+      const response = await fetch(process.env.REACT_APP_createjob_api, {
+        method: process.env.REACT_APP_createjob_method,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -105,7 +105,6 @@ const JobForm = () => {
       const result = await response.json();
       if (result.success) {
         alert("Job added successfully");
-        console.log('Job added successfully:', result.data);
         window.location.reload();
       } else {
         alert("Error generated");

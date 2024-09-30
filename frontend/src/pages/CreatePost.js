@@ -19,8 +19,8 @@ const CreatePost = () => {
   const handleSubmit = async (e) => {
     e.preventDefault(); // This will prevent the default form submission behavior
     try {
-      const response = await fetch("http://localhost:8000/public/addpost", {
-        method: 'POST',
+      const response = await fetch(process.env.REACT_APP_addpost_api, {
+        method: process.env.REACT_APP_addpost_method,
         headers: {
           'Content-Type': 'application/json',
         },

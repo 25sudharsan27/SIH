@@ -19,9 +19,10 @@ function ViewJob() {
   useEffect(() => {
     // Define an async function inside useEffect
     const fetchJobData = async () => {
+      console.log("fetching url : "+process.env.REACT_APP_viewjobdetails_api)
       try {
-        const response = await fetch("http://localhost:8000/public/viewjob", {
-          method: "POST",
+        const response = await fetch(process.env.REACT_APP_viewjobdetails_api, {
+          method: process.env.REACT_APP_viewjobdetails_method,
           credentials: "include",
           headers: {
             'Content-Type': 'application/json',
@@ -34,7 +35,6 @@ function ViewJob() {
         }
 
         const responseData = await response.json(); // Parse JSON response
-        console.log("Response data: ", responseData);
 
         setJobData(responseData.data); // Assuming responseData.data contains the job data
       } catch (error) {
@@ -72,8 +72,8 @@ function ViewJob() {
     console.log("Extra data: ", extra);
     console.log("job data : ",job_id);
     try {
-      const response = await fetch("http://localhost:8000/user/applytojob", {
-        method: 'POST',
+      const response = await fetch(process.env.REACT_APP_applyjob_api, {
+        method: process.env.REACT_APP_applyjob_method,
         headers: {
           'Content-Type': 'application/json',
         },

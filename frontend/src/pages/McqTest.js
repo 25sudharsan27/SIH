@@ -13,8 +13,8 @@ function Interview() {
   useEffect(() => {
     const fetchSkillData = async () => {
       try {
-        const response = await fetch("http://localhost:8000/public/getmcq", {
-          method: "POST",
+        const response = await fetch(process.env.REACT_APP_mcq_api, {
+          method: process.env.REACT_APP_mcq_method,
           headers: {
             'Content-Type': 'application/json'
           },

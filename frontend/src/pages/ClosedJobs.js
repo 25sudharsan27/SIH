@@ -16,8 +16,8 @@ function JobBoard() {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await fetch("http://localhost:8000/organization/getclosedjobs", {
-          method: "POST",
+        const response = await fetch(process.env.REACT_APP_closedjob_api, {
+          method: process.env.REACT_APP_closedjob_method,
           credentials: "include",
           headers: {
             'Content-Type': 'application/json'

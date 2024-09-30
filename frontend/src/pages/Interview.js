@@ -10,8 +10,8 @@ function Interview() {
   useEffect(() => {
     const fetchSkills = async () => {
       try {
-        const response = await fetch('http://localhost:8000/public/getdata', {
-          method: "POST",
+        const response = await fetch(process.env.REACT_APP_interview_api, {
+          method: process.env.REACT_APP_interview_method,
           headers: {
             'Content-Type': 'application/json'
           },

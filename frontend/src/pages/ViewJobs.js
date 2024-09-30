@@ -33,8 +33,8 @@ function JobBoard() {
       setLoading(true);
       setError('');
       try {
-        const response = await fetch("http://localhost:8000/public/jobs", {
-          method: "POST",
+        const response = await fetch(process.env.REACT_APP_viewjobs_api, {
+          method: process.env.REACT_APP_viewjobs_method,
           credentials: "include",
           headers: {
             'Content-Type': 'application/json'
@@ -63,8 +63,8 @@ function JobBoard() {
     setError('');
     setCurrentPage(1); // Reset pagination
     try {
-      const response = await fetch("http://localhost:8000/user/suggestedjob", {
-        method: "POST",
+      const response = await fetch(process.env.REACT_APP_suggested_jobs, {
+        method: process.env.REACT_APP_suggested_jobs_method,
         credentials: "include",
         headers: {
           'Content-Type': 'application/json'
@@ -104,8 +104,8 @@ function JobBoard() {
     setError('');
     setCurrentPage(1); // Reset pagination
     try {
-      const response = await fetch("http://localhost:8000/public/filterjobs", {
-        method: "POST",
+      const response = await fetch(process.env.REACT_APP_filter_jobs, {
+        method: process.env.REACT_APP_filter_jobs_method,
         credentials: "include",
         headers: {
           'Content-Type': 'application/json'
