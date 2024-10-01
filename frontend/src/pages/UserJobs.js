@@ -23,11 +23,7 @@ const User = () =>{
       {
         method : process.env.REACT_APP_userdetails_method,
         credentials : "include",
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      },
-      
+      }
     )
     const dataApi = await dataResponse.json();
     

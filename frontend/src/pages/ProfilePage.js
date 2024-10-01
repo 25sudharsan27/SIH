@@ -56,7 +56,7 @@ const ProfilePage = () => {
   // Save updated about section
   const handleSaveAbout = async () => {
     setIsEditingAbout(false);
-    console.log("aboutText : ", process.env?.REACT_APP_saveabout_api);
+    console.log("aboutText : ", process.env.REACT_APP_saveabout_api);
     const updateUser = await fetch(process.env.REACT_APP_saveabout_api, {
       method: "POST",
       credentials: 'include',
@@ -68,6 +68,7 @@ const ProfilePage = () => {
       })
     });
     const data = await updateUser.json();
+    console.log("data : ", data);
     window.location.reload(); // Reload the page to clear state and redirect to login
   };
 
@@ -88,6 +89,7 @@ const ProfilePage = () => {
         })
       });
       const data = await updateUser.json();
+      console.log("data : ", data);
       window.location.reload(); // Reload the page to clear state and redirect to login
     }
   };
@@ -110,6 +112,7 @@ const ProfilePage = () => {
       })
     });
     const data = await updateUser.json();
+    console.log("data : ", data);
     setIsAddProjectModalOpen(false);
     window.location.reload(); // Reload the page to clear state and redirect to login
   };
@@ -128,6 +131,7 @@ const ProfilePage = () => {
       })
     });
     const data = await updateUser.json();
+    console.log("data : ", data);
     setIsAddExperienceModalOpen(false);
     window.location.reload(); // Reload the page to clear state and redirect to login
   };
