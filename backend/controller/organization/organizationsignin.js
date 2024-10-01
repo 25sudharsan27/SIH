@@ -38,14 +38,11 @@ async function userSignInController(req, res) {
             const tokenOptions = {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite: 'strict' // Optional: adds an additional layer of security
+                sameSite: 'None' // Optional: adds an additional layer of security
             };
 
             res.cookie('token', token, tokenOptions).status(200).json({
-                sameSite: 'None', // Allow cross-site usage
-                secure: true,     // Send cookie only over HTTPS
-                httpOnly: true,   // Accessible only by the web server
-                maxAge: 24 * 60 * 60 * 1000 ,
+                
                 data: token,
                 message: 'User authenticated successfully',
                 error: false,
