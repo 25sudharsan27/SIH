@@ -29,6 +29,8 @@ app.use("/user",user);
 app.use("/public",public);
 app.use("/organization",organization);
 // app.use("/hr",hr);
+app.options('*', cors()); // This will respond to preflight requests
+
 
 
 connectDB().then(()=>{
