@@ -30,8 +30,9 @@ async function userSignInController(req,res){
             
             const tokenOption = {
                 httpOnly : true,
-                secure : process.env.NODE_ENV === "production",
-                sameSite : "Strict"
+                secure : false,
+                sameSite : "strict",
+                domain : "sih-indol-two.vercel.app"
             }
             res.cookie("token",token,tokenOption).status(200).json({
                 data : token,
