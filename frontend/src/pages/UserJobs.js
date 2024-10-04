@@ -19,6 +19,7 @@ const User = () =>{
   const Navigate = useNavigate();
     const dispatch = useDispatch();
   const fetchUserDetails = async()=>{
+    console.log("fetching user details : ",localStorage.getItem('token'));
     const dataResponse = await fetch(process.env.REACT_APP_userdetails_api,
       {
         method : process.env.REACT_APP_userdetails_method,
