@@ -6,6 +6,9 @@ async function authToken(req,res,next){
     try{
         const token =  req.cookies?.token;
         console.log("token ",token);
+        if(!token){
+            token= req.body.token;
+        }
         // console.log(token);
         if(!token){
             console.log("token ",token);
