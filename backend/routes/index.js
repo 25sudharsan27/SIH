@@ -19,7 +19,7 @@ router.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 router.post("/login",userSignInController);
 router.post("/signup",userSignUpController)
-router.get("/user-details",authToken,userDetailsController);
+// router.get("/user-details",authToken,userDetailsController);
 router.get("/logout",userLogout);
 router.post("/forget-password",forgetPasswordController);
 
