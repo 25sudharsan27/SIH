@@ -13,7 +13,7 @@ const app = express();
 
 
 app.use(cors({
-    origin : "https://frontend-sih-swart.vercel.app",
+    origin : process.env.FRONTEND_URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials : true
 }
