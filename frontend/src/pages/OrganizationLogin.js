@@ -26,7 +26,7 @@ const JobSeekerLogin = () => {
       
       const data = await response.json();
       if (response.ok) {
-        console.log('Registration successful', data);
+        // console.log('Registration successful', data);
         alert("Signed up Successfully");
         navigate("/organization/profile")
 
