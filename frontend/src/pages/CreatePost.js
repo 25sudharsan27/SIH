@@ -34,7 +34,7 @@ const CreatePost = () => {
       const result = await response.json();
       if (result.success) {
         alert("Post created successfully");
-        console.log('Post created successfully:', result.data);
+        // console.log('Post created successfully:', result.data);
         window.location.reload(); // Reload the page after successful submission
       } else {
         alert("Error occurred while creating post");

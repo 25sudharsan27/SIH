@@ -20,7 +20,7 @@ function Interview() {
           },
           body: JSON.stringify({ "id" : id }) // Send the id in the request body
         });
-        console.log(response);
+        // console.log(response);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

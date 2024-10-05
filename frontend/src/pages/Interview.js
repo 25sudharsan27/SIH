@@ -17,14 +17,14 @@ function Interview() {
           },
         });
 
-        console.log('Response:', response); // Log the raw response
+        // console.log('Response:', response); // Log the raw response
 
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
 
         const data = await response.json();
-        console.log('Data:', data); // Log the parsed data
+        // console.log('Data:', data); // Log the parsed data
 
         // Adjust this based on your API's response structure
         setSkills(data.data || data); 

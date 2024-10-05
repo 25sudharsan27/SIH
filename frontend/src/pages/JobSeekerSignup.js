@@ -62,15 +62,15 @@ const JobSeekerSignup = () => {
 
       if (data.success) {
         alert('Signup successful');
-        console.log(data);
+        // console.log(data);
 
         navigate('/jobseeker/login');
       } else {
         alert('Signup failed : '+data.message);
         if(data.message === 'User Already Exists'){
-          console.log("went to login page");
+          // console.log("went to login page");
           navigate('/jobseeker/login');        }
-        console.log(data);
+        // console.log(data);
       }
     } catch (error) {
       console.error('Error:', error);

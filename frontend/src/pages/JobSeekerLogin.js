@@ -35,7 +35,7 @@ const JobSeekerLogin = () => {
 
       if (userdata.success) {
         alert('Signup successful');
-        console.log(userdata);
+        // console.log(userdata);
         // const data = await generalContext.fetchUserDetails();
 
         navigate('/user/profile');
@@ -44,7 +44,7 @@ const JobSeekerLogin = () => {
         if(userdata.message === 'User Already Exists'){
           console.log("went to login page");
           navigate('/jobseeker/login');        }
-        console.log(userdata);
+        // console.log(userdata);
       }
     } catch (error) {
       console.error('Error:', error);

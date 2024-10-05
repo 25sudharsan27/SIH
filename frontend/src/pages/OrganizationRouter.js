@@ -35,11 +35,11 @@ const Organization = () =>{
       dispatch(setUserDetails(dataApi.data))
     }
     if(!dataApi.success){
-      console.log("error : ",dataApi.message);
+      // console.log("error : ",dataApi.message);
       Navigate('/');
       return {};
     }
-    console.log("data of user : ",dataApi);
+    // console.log("data of user : ",dataApi);
     return dataApi;
   }
   

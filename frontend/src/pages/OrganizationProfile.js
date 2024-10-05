@@ -21,7 +21,7 @@ const OrganizationProfile = () => {
 
   // Fetch organization details
   const fetchOrganizationDetails = async () => {
-    console.log("details : ",process.env.REACT_APP_organization_details)
+    // console.log("details : ",process.env.REACT_APP_organization_details)
     const response = await fetch(process.env.REACT_APP_organization_details, {
       method: process.env.REACT_APP_organization_details_method,
       credentials: 'include',

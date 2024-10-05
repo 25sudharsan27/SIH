@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 function ViewJob() {
   const { id } = useParams();
   const job_id = id;
-  console.log("job_id: " + job_id);
+  // console.log("job_id: " + job_id);
   const navigate = new useNavigate();
 
 
@@ -19,7 +19,7 @@ function ViewJob() {
   useEffect(() => {
     // Define an async function inside useEffect
     const fetchJobData = async () => {
-      console.log("fetching url : "+process.env.REACT_APP_viewjobdetails_api)
+      // console.log("fetching url : "+process.env.REACT_APP_viewjobdetails_api)
       try {
         const response = await fetch(process.env.REACT_APP_viewjobdetails_api, {
           method: process.env.REACT_APP_viewjobdetails_method,

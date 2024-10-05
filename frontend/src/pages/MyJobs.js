@@ -22,7 +22,7 @@ function JobBoard() {
           },
         });
         const data = await response.json();
-        console.log('Fetched Jobs:', data); // Log the data
+        // console.log('Fetched Jobs:', data); // Log the data
         setJobs(Array.isArray(data.data) ? data.data : []); // Ensure data is an array
       } catch (error) {
         console.error('Error fetching jobs:', error);
@@ -36,7 +36,7 @@ function JobBoard() {
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
   const currentJobs = Array.isArray(jobs) ? jobs.slice(indexOfFirstJob, indexOfLastJob) : [];
-  console.log(currentJobs);
+  // console.log(currentJobs);
   // Change page
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
