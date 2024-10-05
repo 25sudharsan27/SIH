@@ -19,15 +19,10 @@ const User = () =>{
   const Navigate = useNavigate();
     const dispatch = useDispatch();
   const fetchUserDetails = async()=>{
-    console.log("fetching user details : ",localStorage.getItem('token'));
     const dataResponse = await fetch(process.env.REACT_APP_userdetails_api,
       {
         method : process.env.REACT_APP_userdetails_method,
         credentials : "include",
-        headers : {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({token : localStorage.getItem('token')}),
       }
     )
     const dataApi = await dataResponse.json();

@@ -19,11 +19,9 @@ const JobSeekerLogin = () => {
     // Implement your login logic here
     try {
       const response = await fetch(process.env.REACT_APP_userlogin_api, {
-        
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          
         },
         body: JSON.stringify({
           "email":email,
@@ -34,11 +32,9 @@ const JobSeekerLogin = () => {
       
 
       const userdata = await response.json();
-      
+
       if (userdata.success) {
         alert('Signup successful');
-        localStorage.setItem('token', userdata.data);
-        console.log("this is token : ",localStorage.getItem('token'));
         console.log(userdata);
         // const data = await generalContext.fetchUserDetails();
 

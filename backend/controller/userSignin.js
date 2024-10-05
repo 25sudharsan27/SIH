@@ -33,7 +33,6 @@ async function userSignInController(req,res){
                 secure : process.env.NODE_ENV === "production",
                 sameSite : "Strict"
             }
-            console.log("token passed : ",token);
             res.cookie("token",token,tokenOption).status(200).json({
                 data : token,
                 message : "User Password is correct",

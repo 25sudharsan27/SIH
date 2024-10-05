@@ -21,7 +21,7 @@ const Organization = () =>{
   const Navigate = useNavigate();
     const dispatch = useDispatch();
   const fetchUserDetails = async()=>{
-    const dataResponse = await fetch("http://localhost:8000/organization/organizationdetails",
+    const dataResponse = await fetch(process.env.REACT_APP_organization_details,
       {
         method : "POST",
         credentials : "include",
