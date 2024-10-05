@@ -22,7 +22,6 @@ const JobSeekerLogin = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          "Access-Control-Allow-Origin": "https://sih-indol-two.vercel.app/",
         },
         body: JSON.stringify({
           "email":email,
