@@ -15,11 +15,14 @@
     align-items: center;
 }
 .profile-header{
+    width:100%;
+    padding-top:30px;
+    padding-bottom:30px;
     display:flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 50px 10%;
-    background: hsla(0, 0%, 50%, 0.162);
+    justify-content: space-evenly;
+    /* padding: 50px 10%; */
+    background-color: hsla(0, 0%, 50%, 0.162);
 }
 .editbtn{
     height:25px;
@@ -37,8 +40,8 @@
     padding-left:30px;    
 }
 .complete{
-    
     width:100%;
+    
     height:100%;
     background-color: white;
 }
@@ -51,8 +54,6 @@
 }
 .skills-section{
     flex-basis:30%;
-    padding-left:30px;
-    margin-left:40px;
 }
 .skills-section h3{
     font-size:xx-large;
@@ -72,6 +73,20 @@
 .about-section-a p{
     font-weight:50;
 }
+
+.about-section{
+    /* display:flex; */
+    width:100%;
+}
+.about1{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+
 
 .addskill{
     font-size:15px;
@@ -201,10 +216,16 @@
     margin-top: 15px;
 }
 
-/* .profile-left{
-    border: 2px solid;
-    width: 100%;
-} */
+
+
+.profile-left{
+    display:flex;
+    flex-direction:column;
+    width:300px;
+    align-items: center;
+    justify-content: center;
+}
+
 
 #exp1{
     margin-left:30px;
@@ -238,4 +259,170 @@
 }
 .images-con a{
     text-decoration: none;
+}
+
+
+
+@media (max-width: 1000px){
+    .profile-picture{
+        height:150px;
+        width: 150px;
+    }
+    .profile-left{
+        width:200px;
+    }
+    #pro-name{
+        font-size: large;
+    }
+    .location{
+        font-size: small;
+    }
+    .heatmap-container{
+        width: 60%;
+    }
+}
+@media (max-width: 780px){
+    .profile-picture{
+        height:150px;
+        width: 150px;
+    }
+    .profile-left{
+        width:200px;
+    }
+    #pro-name{
+        font-size: large;
+    }
+    .location{
+        font-size: small;
+    }
+    .profile-header{
+        flex-direction: column;
+    }
+    .heatmap-container{
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 505px){
+    .heatmap-container{
+        display:none;
+    }
+}
+
+
+@media (max-width: 900px){
+    .exp-h3{
+        margin-left:30px;
+        margin-top:60px;
+        font-size:large;
+
+    }
+    .experience-item-a p{
+        font-size:smaller;
+    }
+
+    #hi10{
+        font-size:medium;
+    }
+    #hi11{
+        font-size:medium;
+    }
+    .description{
+        font-size:smaller;
+    }
+    .experience-item-a img{
+        height: 70px;
+        width:
+    }
+    .experience-section{
+        margin:0px;
+
+    }
+    .experience-item{
+        height:150px;
+        margin:0px;
+        
+    }
+    .experience-item-a{
+
+        min-width:150px;
+    }
+
+    .about1{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .about-section-a{
+        margin-left:0px;
+        font-size:smaller;
+    }
+    .about-section-a h3{
+        font-size:large;
+    }
+    .skills-section{
+        margin-left:30px;
+    }
+    .skills-list{
+        width: 100%;
+    }
+    .skills-section h3{
+        font-size:large;
+    }
+    .skills-section p{
+        font-size:smaller;
+    }
+    .project-item{
+        min-height: 150px;
+        min-width: 200px;
+    }
+
+    .project-item-t{
+        font-size:medium;
+    }
+    .project-item-s{
+        font-size:smaller;
+    }
+    .pro{
+        margin: 5px;
+    }
+    .project-link-holder{
+        margin-top: 10px;
+    }
+    .project-link-holder a{
+        font-size:smaller;
+    }
+    .project-link-holder a img{
+        height: 20px;
+    }
+    .projects-section{
+        max-width: 80%;
+    }
+    .project-item{
+        padding: 5px;
+    }
+    
+    
+}
+
+@media (max-width: 450px){
+    #hi10{
+        font-size:12px;
+    }
+    #hi11{
+        font-size:12px;
+    }
+    .description{
+        font-size:11px;
+    }
+    .experience-item-a img{
+        height: 50px;
+        width: 50px;
+    }
+    .experience-item{
+        height:100px;
+    }
+    .experience-item-a{
+        min-width:70px;
+        min-height:50px;
+    }
 }

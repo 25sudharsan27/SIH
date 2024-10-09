@@ -61,17 +61,49 @@ const UserNavbar = () => {
     function handleSetNav(m){
         SetNav(m);
     }
+    const [isOpen, setIsOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
 
     return (
         <nav className="navbar">
             <div className="navbar-left">
+                <div>
                 <Link to="/user/viewjobs" className="navbar-item" onClick={e => handleSetNav("jobs")} id="jobs">Jobs</Link>
                 <Link to="interview" className="navbar-item" onClick={e => handleSetNav("interview")} id="interview">Interview Prep</Link>
                 <Link to="/user/courses" className="navbar-item" onClick={e => handleSetNav("message")} id="message">Courses</Link>
                 <Link to="/posts" className="navbar-item" onClick={e => handleSetNav("community")} id="community">Community</Link>
                 <Link to="/user/resumebuilder" className="navbar-item" onClick={e => handleSetNav("buildResume")} id="buildResume">Build Resume</Link>
+                </div>
             </div>
+            <>
+           
+            {!isOpen && (
+                <button className="sidebar-toggle" onClick={toggleSidebar}>
+                ☰
+                </button>
+            )}
+            <div id="hi7" className={`sidebar ${isOpen ? 'open' : ''}`}>
+                <div className="sidebar-header">
+                <h2 className="sidebar-title">Menu</h2>
+                <button className="sidebar-close" onClick={toggleSidebar}>×</button>
+                </div>
+                <nav className="sidebar-nav">
+                <div className="hi9">
+                <Link to="/user/viewjobs" className="navbar-item" onClick={e => handleSetNav("jobs")} id="jobs">Jobs</Link>
+                <Link to="interview" className="navbar-item" onClick={e => handleSetNav("interview")} id="interview">Interview Prep</Link>
+                <Link to="/user/courses" className="navbar-item" onClick={e => handleSetNav("message")} id="message">Courses</Link>
+                <Link to="/posts" className="navbar-item" onClick={e => handleSetNav("community")} id="community">Community</Link>
+                <Link to="/user/resumebuilder" className="navbar-item" onClick={e => handleSetNav("buildResume")} id="buildResume">Build Resume</Link>
+                </div>
+                </nav>
+            </div>
+            </>
+            
             <div className="navbar-right">
+                <div className="navbar-righta">
                 <div 
                     className={`profile-dropdown ${isDropdownVisible ? 'active' : ''}`}
                 >
@@ -132,6 +164,7 @@ const UserNavbar = () => {
                         </div> 
                     </div>
                 </div>
+            </div>
             </div>
         </nav>
     );

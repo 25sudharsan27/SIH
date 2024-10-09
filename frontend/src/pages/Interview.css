@@ -70,3 +70,48 @@
     transition: transform 0.3s ease;
     /* Smooth transition */
 }
+
+.question{
+    margin-top:30px;
+}
+.answers{
+    display:flex;
+}
+.answer{
+    margin:10px;
+    padding:10px;
+    border-radius:5px;
+    cursor:pointer;
+}
+.answer:hover{
+    background-color: #f9f9f9;
+}
+.answer.correct{
+    background-color: #218838;
+    color:white;
+}
+.answers-right{
+    font-size:smaller;
+}
+.answers-container{
+    margin-top:20px;
+}
+.answers-right{
+    margin-left:10px;
+}
+
+
+.hi100{
+    font-size:x-large;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.hi111{
+    margin-top:30px;
+}
+

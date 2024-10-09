@@ -14,3 +14,11 @@
 .activate{
     background: #3C5AA5;
 }
+
+@media (max-width: 1000px){
+    
+    .grid{
+        height: 6px;
+        width: 6px;
+    }
+}

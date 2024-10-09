@@ -137,11 +137,11 @@ function JobBoard() {
             value={experienceLevel}
             onChange={(e) => { setExperienceLevel(e.target.value); handleFilter(); }}
           >
-            <option value="">Experience Level</option>
-            <option value="Intern">Intern</option>
-            <option value="Junior">Junior</option>
-            <option value="Mid">Mid</option>
-            <option value="Senior">Senior</option>
+            <option id="i13" value="">Experience Level</option>
+            <option id="i13" value="Intern">Intern</option>
+            <option id="i13" value="Junior">Junior</option>
+            <option id="i13" value="Mid">Mid</option>
+            <option id="i13" value="Senior">Senior</option>
           </select>
 
           {/* Location Dropdown */}
@@ -150,11 +150,11 @@ function JobBoard() {
             value={location}
             onChange={(e) => { setLocation(e.target.value); handleFilter(); }}
           >
-            <option value="">Location</option>
-            <option value="Bengaluru">Bengaluru</option>
-            <option value="Pune">Pune</option>
-            <option value="Chennai">Chennai</option>
-            <option value="Remote">Remote</option>
+            <option id="i13" value="">Location</option>
+            <option id="i13" value="Bengaluru">Bengaluru</option>
+            <option id="i13" value="Pune">Pune</option>
+            <option id="i13" value="Chennai">Chennai</option>
+            <option id="i13" value="Remote">Remote</option>
           </select>
 
           {/* Suggest Me Jobs Button */}

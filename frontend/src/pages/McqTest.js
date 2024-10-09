@@ -72,8 +72,8 @@ function Interview() {
           <div className='interview-box-right'></div>
         </div>
       </div>
-      <div>
-        <p>Skill Assessment: {skillData?.TestName || "Loading..."}</p>
+      <div className="hi111">
+        <p className="hi100">Skill Assessment: {skillData?.TestName || "Loading..."}</p>
         <div className='questions-container'>
           {skillData?.questions?.length > 0 ? ( // Check if skillData and questions are defined
             skillData.questions.map((question, index) => (

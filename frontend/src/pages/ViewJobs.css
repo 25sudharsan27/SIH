@@ -1,30 +1,30 @@
 .posted-jobs-container {
-  margin: 20px;
+  /* margin: 20px; */
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #ffffff;
   color: #464D5F;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   width: 100%;
 }
 
 .posted-jobs {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  max-width: 80%;
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  /* max-width: 80%; */
+  /* gap: 20px; */
 }
 
 .job-card {
-  margin: 30px;
-  min-width: 300px;
+  /* margin: 30px; */
+  /* min-width: 300px; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-color: #fff;
   border-radius: 10px;
-  padding: 20px;
+  /* padding: 20px; */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -33,7 +33,7 @@
 }
 
 .job-card p {
-  margin: 5px 0;
+  /* margin: 5px 0; */
 }
 
 .job-actions {
@@ -136,7 +136,7 @@
 .search-bar {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  padding: 10px;
   background-color: #f5f5f5;
   width: 100%;
 }
@@ -148,7 +148,7 @@
 }
 
 .dropdown {
-  padding: 8px;
+  /* padding: 8px; */
   border-radius: 4px;
   border: 1px solid #ccc;
 }
@@ -157,6 +157,8 @@
   display: flex;
   align-items: center;
 }
+
+
 
 .search-field input {
   padding: 8px;
@@ -188,6 +190,7 @@
 
 #view-search-id{
   border: none;
+  height:8px;
 }
 
 .filter-btn{
@@ -198,9 +201,59 @@
   color: white;
   font-weight: 400;
   cursor: pointer;
+  font-size:x-small;
+
   transition: 0.5s;
+
 }
 
 .filter-btn:hover{
   background-color: hsl(223, 47%, 54%);
+}
+
+@media (max-width: 800px){
+  .search-bar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+  }
+  .search-field{
+    margin-top:20px;
+    border:1px solid black;
+    width: 90%;
+  }
+  #view-search-id{
+    border-radius:5px;
+  }
+  #i13,.dropdown{
+    font-size:xx-small;
+  }
+  .filter-btn{
+    display:none;
+  }
+  .job-card{
+    margin:0px;
+    /* min-width:50px; */
+  }
+  .posted-jobs{
+    margin:0px;
+  }
+  .posted-jobs-container{
+    margin:0px;
+  }
+  .job-board{
+
+    margin:0px;
+  }
+  .company-log{
+    width: 80px;
+  }
+  .title h3{
+    font-size: 15px;
+  }
+  .texts p{
+    font-size: 12px;
+  }
+
 }

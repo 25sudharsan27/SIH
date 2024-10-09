@@ -78,3 +78,34 @@
     width: 100%;
     height: auto;
   }
+
+
+@media (max-width : 800px){
+  .posts{
+    width:100%;
+    border:1px solid black;
+  }
+  .post-card{
+    width:95%;
+    margin:10px;
+    border:1px solid black;
+  }
+  .post-content{
+    padding:30px;
+  }
+  .post-content h2{
+    font-size:15px;
+  }
+  .post-content p{
+    font-size:12px;
+  }
+  .post-info{
+    padding:30px;
+  }
+  .like-button, .comment-button{
+    font-size:12px;
+  }
+  .post-info span{
+    font-size:12px;
+  }
+}
