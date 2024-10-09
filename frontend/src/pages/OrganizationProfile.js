@@ -42,7 +42,7 @@ const OrganizationProfile = () => {
   // Save updated about section
   const handleSaveAbout = async () => {
     setIsEditingAbout(false);
-    const response = await fetch('http://localhost:8000/organization//addorganization', {
+    const response = await fetch(process.env.REACT_APP_organization_saveabout_api, {
       method: 'POST',
       credentials: 'include',
       headers: {
