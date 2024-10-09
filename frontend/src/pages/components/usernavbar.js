@@ -85,7 +85,7 @@ const UserNavbar = () => {
                 ☰
                 </button>
             )}
-            <div id="hi7" className={`sidebar ${isOpen ? 'open' : ''}`}>
+            <div id="hi7" className={`sidebar1 ${isOpen ? 'open' : ''}`}>
                 <div className="sidebar-header">
                 <h2 className="sidebar-title">Menu</h2>
                 <button className="sidebar-close" onClick={toggleSidebar}>×</button>

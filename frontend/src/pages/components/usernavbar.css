@@ -157,7 +157,7 @@ body {
     display:none;
 
 }
-.sidebar {
+.sidebar1 {
     position: fixed;
     top: 0;
     left: 0;
@@ -177,7 +177,7 @@ body {
 }
 
 
-.sidebar.open {
+.sidebar1.open {
     transform: translateX(0);
 }
 .sidebar-header {

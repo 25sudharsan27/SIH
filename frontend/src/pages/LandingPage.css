@@ -43,12 +43,16 @@ box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .card h2 {
+  color:#3C5AA5;
+  
+  font-family:'Popins', sans-serif;
 font-size: 24px;
-margin-bottom: 20px;
+margin-bottom: 50px;
 }
 
 .card p {
-font-size: 16px;
+font-family:'Popins', sans-serif;
+font-size: 15px;
 margin-bottom: 10px;
 }
 
@@ -64,4 +68,34 @@ text-decoration: underline;
 
 .colorKaro{
 color: #3C5AA5;
+}
+
+
+#i119{
+  margin-top:80px;
+}
+
+#i120{
+
+}
+#i131{
+  color:#3C5AA5;
+  font-family:"Poppins", sans-serif;
+}
+
+#i132 p a{
+  color:#3C5AA5;
+  font-family:"Poppins", sans-serif;
+}
+
+
+
+@media (max-width: 768px) {
+  #i119{
+    display:flex;
+    flex-direction: column;
+  }
+  #i132{
+    width:200px;
+  }
 }
