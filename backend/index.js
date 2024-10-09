@@ -13,7 +13,7 @@ const app = express();
 
 
 app.use(cors({
-    origin : "https://frontend-sih-swart.vercel.app","http://localhost:3000",
+    origin : "https://frontend-sih-swart.vercel.app",
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials : true
 }
