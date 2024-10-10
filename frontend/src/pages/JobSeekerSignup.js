@@ -80,11 +80,12 @@ const JobSeekerSignup = () => {
   return (
     <div className="signup-container">
       <h1 className="form-title">Student or Job Seeker</h1>
-      <div className="signup-form">
-        <h2 className="form-subtitle">Signup</h2>
+      <div id="i145" className="signup-form">
+        <h2 id="i146" className="form-subtitle">Signup</h2>
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
+          < input
+            id="i147"
+
             placeholder="Name"
             className="form-input"
             value={name}
@@ -92,6 +93,7 @@ const JobSeekerSignup = () => {
           />
 
           <input
+          id="i147"
             type="email"
             placeholder="Email"
             className="form-input"
@@ -101,7 +103,8 @@ const JobSeekerSignup = () => {
 
           <div className="password-container">
             <input
-              type={showPassword ? 'text' : 'password'}
+            id="i147"
+              type={showPassword ? '' : 'password'}
               placeholder="Password"
               className="form-input"
               value={password}
@@ -114,7 +117,8 @@ const JobSeekerSignup = () => {
 
           <div className="password-container">
             <input
-              type={showConfirmPassword ? 'text' : 'password'}
+            id="i147"
+              type={showConfirmPassword ? '' : 'password'}
               placeholder="Confirm Password"
               className="form-input"
               value={confirmPassword}
@@ -127,14 +131,14 @@ const JobSeekerSignup = () => {
 
           <div className="address-container">
             <input
-              type="text"
+            id="i147"
               placeholder="Country"
               className="form-input small-input"
               value={country}
               onChange={(e) => setCountry(e.target.value)}
             />
             <input
-              type="text"
+            id="i147"
               placeholder="State"
               className="form-input small-input"
               value={state}
@@ -144,13 +148,14 @@ const JobSeekerSignup = () => {
 
           <div className="address-container">
             <input
-              type="text"
+            id="i147"
               placeholder="City"
               className="form-input small-input"
               value={city}
               onChange={(e) => setCity(e.target.value)}
             />
             <input
+            id="i147"
               type="number"
               placeholder="Age"
               className="form-input small-input"
@@ -159,7 +164,7 @@ const JobSeekerSignup = () => {
             />
           </div>
 
-          <button type="submit" className="submit-button">
+          <button id="i148" type="submit" className="submit-button">
             Signup
           </button>
         </form>

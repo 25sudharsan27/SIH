@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import './JobSeekerLogin.css';
+// import './JobSeekerLogin.css';
 import { useNavigate } from 'react-router-dom';
+import './OrganizationLogin.css';
 
 const JobSeekerLogin = () => {
   const navigate = new useNavigate();
@@ -43,14 +44,14 @@ const JobSeekerLogin = () => {
   }
 
   return (
-    <div className="login-container">
-      <h1 className="form-title">Organization or Job Provider</h1>
-      <div className="login-form">
-        <h2 className="form-subtitle">Login</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Email</label>
-            <input 
+    <div id="i135" className="login-container">
+      <h1 id="i136" className="form-title">Organization or Job Provider</h1>
+      <div id="i137" className="login-form">
+        <h2 id="i138" className="form-subtitle">Login</h2>
+        <form id="i139" onSubmit={handleSubmit}>
+          <div id="i140" className="form-group">
+            <label id="i141">Email</label>
+            <input id="i142"
               type="email" 
               className="form-input" 
               value={email} 
@@ -59,8 +60,8 @@ const JobSeekerLogin = () => {
             />
           </div>
           <div className="form-group">
-            <label>Password</label>
-            <input 
+            <label id="i141">Password</label>
+            <input id="i142"
               type="password" 
               className="form-input" 
               value={password} 
@@ -68,7 +69,7 @@ const JobSeekerLogin = () => {
               required 
             />
           </div>
-          <button type="submit" className="submit-button">Login</button>
+          <button id="i143" type="submit" className="submit-button">Login</button>
         </form>
       </div>
     </div>

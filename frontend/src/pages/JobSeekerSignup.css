@@ -126,3 +126,26 @@
     transform: translateY(0);
   }
 }
+
+
+@media (max-width: 600px) {
+  #i145{
+    width:60%;
+  }
+  #i146{
+    font-family:"Poppins", sans-serif;
+    font-size:20px;
+  }
+  #i147{
+    font-size:12px;
+    height:15px;
+  }
+  .form-title{
+    font-family:"Poppins", sans-serif;
+  }
+  #i148{
+    height:35px;
+    width:100px;
+    font-size:12px;
+  }
+}

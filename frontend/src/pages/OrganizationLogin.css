@@ -58,3 +58,30 @@
     background-color: #0056b3;
   }
   
+
+
+  @media (max-width: 600px) {
+    #i137{
+      width:60%;
+    }
+    #i141{
+      font-size:12px;
+    }
+    #i142{
+      font-size:12px;
+    }
+    #i138{
+      font-size:20px;
+    }
+    #i142{
+      height:10px;
+    }
+    #i143{
+      font-size:12px;
+      height:35px;
+      width:100px;
+
+    }
+  }
+
+  
