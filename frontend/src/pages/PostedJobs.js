@@ -88,14 +88,14 @@ function JobBoard() {
   }
 
   return (
-    <div className="main">
-      <aside className="sidebar">
-        <ul>
-          <li><Link to="/organization/createjob">Create Job</Link></li>
-          <li><Link className="high" to="/organization/postedjobs">Posted Jobs</Link></li>
-          <li><Link to="/organization/closedjobs">Closed Jobs</Link></li>
-        </ul>
-      </aside>
+    <div id="i166" className="main">
+      <div className="sidebar">
+          <div id="i163">
+            <div id="i168"><Link id="i164" to="/organization/createjob" >Create Job</Link></div>
+            <div id="i168"><Link id="i164"  to="/organization/postedjobs" className="high">Posted Jobs</Link></div>
+            <div id="i168"><Link id="i164" to="/organization/closedjobs">Closed Jobs</Link></div>
+          </div>
+        </div>
       <div className="job-board">
         <div className="posted-jobs-container">
           <div className="posted-jobs">

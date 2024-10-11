@@ -10,6 +10,7 @@ import setting from './Images/settings-2-svgrepo-com.svg';
 import logout from './Images/log-out-1-svgrepo-com.svg';
 import profile from './Images/profile.svg';
 import mentorship from './Images/mentorship.svg';
+import userimg from './Images/user-icon-svgrepo-com (1).svg'
 
 // Function to clear specific cookies
 const clearCookie = (name) => {
@@ -94,7 +95,7 @@ const UserNavbar = () => {
                 <div className="navbar-righta">
                     <div className={`profile-dropdown ${isDropdownVisible ? 'active' : ''}`}>
                         <img 
-                            src={profile}
+                            src={userimg}
                             alt="Profile" 
                             className="profile-logo" 
                             onClick={toggleDropdown} 

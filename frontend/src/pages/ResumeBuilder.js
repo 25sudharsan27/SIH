@@ -191,7 +191,7 @@ const ResumeBuilder = () => {
         <form>
           <div className="form-group">
             <label className='bugLabel' htmlFor="name">Full Name:</label>
-            <input type="text" className='buger' id="name" name="name" value={formData.name} onChange={handleChange} required />
+            <input  className='buger' id="name" name="name" value={formData.name} onChange={handleChange} required />
           </div>
 
           <div className="form-group">
@@ -206,17 +206,17 @@ const ResumeBuilder = () => {
 
           <div className="form-group">
             <label className='bugLabel' htmlFor="city">City:</label>
-            <input type="text" className='buger' id="city" name="city" value={formData.city} onChange={handleChange} />
+            <input  className='buger' id="city" name="city" value={formData.city} onChange={handleChange} />
           </div>
 
           <div className="form-group">
             <label className='bugLabel' htmlFor="state">State:</label>
-            <input type="text" className='buger' id="state" name="state" value={formData.state} onChange={handleChange} />
+            <input  className='buger' id="state" name="state" value={formData.state} onChange={handleChange} />
           </div>
 
           <div className="form-group">
             <label className='bugLabel' htmlFor="country">Country:</label>
-            <input type="text" className='buger' id="country" name="country" value={formData.country} onChange={handleChange} />
+            <input  className='buger' id="country" name="country" value={formData.country} onChange={handleChange} />
           </div>
 
           <div className="form-group">
@@ -251,20 +251,20 @@ const ResumeBuilder = () => {
 
           <div className="form-group">
             <label className='bugLabel' htmlFor="socialLinks">Social Links (LinkedIn, Twitter, GitHub, Portfolio):</label>
-            <input type="text" className='buger' id="linkedin" name="social.linkedin" placeholder="LinkedIn" value={formData.social.linkedin} onChange={handleChange} />
-            <input type="text" className='buger' id="twitter" name="social.twitter" placeholder="Twitter" value={formData.social.twitter} onChange={handleChange} />
-            <input type="text" className='buger' id="github" name="social.github" placeholder="GitHub" value={formData.social.github} onChange={handleChange} />
-            <input type="text" className='buger' id="portfolio" name="social.portfolio" placeholder="Portfolio" value={formData.social.portfolio} onChange={handleChange} />
+            <input  className='buger' id="linkedin" name="social.linkedin" placeholder="LinkedIn" value={formData.social.linkedin} onChange={handleChange} />
+            <input  className='buger' id="twitter" name="social.twitter" placeholder="Twitter" value={formData.social.twitter} onChange={handleChange} />
+            <input  className='buger' id="github" name="social.github" placeholder="GitHub" value={formData.social.github} onChange={handleChange} />
+            <input  className='buger' id="portfolio" name="social.portfolio" placeholder="Portfolio" value={formData.social.portfolio} onChange={handleChange} />
           </div>
 
           <div className="form-group">
             <label className='bugLabel' htmlFor="tagline">Tagline:</label>
-            <input className='buger' type="text" id="tagline" name="tagline" value={formData.tagline} onChange={handleChange} />
+            <input className='buger'  id="tagline" name="tagline" value={formData.tagline} onChange={handleChange} />
           </div>
 
           <div className="form-group">
             <label className='bugLabel' htmlFor="portfolio">Portfolio:</label>
-            <input className='buger' type="text" id="portfolio" name="portfolio" value={formData.portfolio} onChange={handleChange} />
+            <input className='buger'  id="portfolio" name="portfolio" value={formData.portfolio} onChange={handleChange} />
           </div>
         </form>
       ) : (

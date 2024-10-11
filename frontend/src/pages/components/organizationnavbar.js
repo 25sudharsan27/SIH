@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import './usernavbar.css';
+import './organizationnavbar.css';
 import { Link } from 'react-router-dom';
-
+import userimg from './Images/user-icon-svgrepo-com (1).svg'
+import logoutimg from './Images/log-out-1-svgrepo-com.svg'
+import settingimg from './Images/settings-2-svgrepo-com.svg'
+import profileimg from './Images/user-icon-svgrepo-com (1).svg';
 
 const OrganizationNavbar = () => {
 
     const [orgNav,SetorgNav] = useState("");
+    const [nav, setNav] = useState("");
+    const [isOpen, setIsOpen] = useState(false);
+
 
     useEffect(()=>{
     if(orgNav !== ""){
@@ -28,7 +34,14 @@ const OrganizationNavbar = () => {
         }
         sidebar = !sidebar;
     }
-    
+    const handleSetNav = (m) => {
+        setNav(m);
+    };
+
+    const toggleSudharsan = () => {
+        setIsOpen(!isOpen);
+    };
+
     return (
         <nav className="navbar">
             <div className="navbar-left">
@@ -38,10 +51,31 @@ const OrganizationNavbar = () => {
                 <Link to="#" className="navbar-item" id="commmunity" onClick={()=> handleSetOrgNav("commmunity")}>Community</Link>
                 
             </div>
+            {!isOpen && (
+                <button className="sudharsan-toggle" onClick={toggleSudharsan}>
+                    ☰
+                </button>
+            )}
+
+            <div className={`sudharsan ${isOpen ? 'open' : ''}`}>
+                <div className="sudharsan-header">
+                    <h2 className="sudharsan-title">Menu</h2>
+                    <button className="sudharsan-close" onClick={toggleSudharsan}>×</button>
+                </div>
+                <nav className="sudharsan-nav">
+                    <div className="sudharsan-links">
+                    <Link to="/organization/createjob" className="navbar-item" id="jobs" onClick={()=> handleSetOrgNav("jobs")}>Jobs</Link>
+                <Link to="#" className="navbar-item" id="message" onClick={()=> handleSetOrgNav("message")}>Message</Link>
+                <Link to="#" className="navbar-item" id="commmunity" onClick={()=> handleSetOrgNav("commmunity")}>Community</Link>
+                
+                    </div>
+                </nav>
+            </div>
+
             <div className="navbar-right">
                 <div className="profile-dropdown">
                     <img 
-                        src="Images/user-icon-svgrepo-com (1).svg" 
+                        src={userimg}
                         alt="Logo" 
                         className="profile-logo" 
                         onClick={openSidebar}
@@ -49,7 +83,7 @@ const OrganizationNavbar = () => {
                     <div className="dropdown-content">
                         <div className="Profdrop" onClick={openSidebar}>
                             <img 
-                                src="Images/user-icon-svgrepo-com (1).svg" 
+                                src={userimg}
                                 className="profa" 
                                 alt="logo" 
                             />
@@ -57,7 +91,7 @@ const OrganizationNavbar = () => {
                         </div>
                         <div className="Profdrop">
                             <img 
-                                src="Images/settings-2-svgrepo-com.svg" 
+                                src={settingimg}
                                 className="profa" 
                                 alt="logo" 
                             />
@@ -65,7 +99,7 @@ const OrganizationNavbar = () => {
                         </div>
                         <div className="Profdrop">
                             <img 
-                                src="Images/log-out-1-svgrepo-com.svg" 
+                                src={logoutimg}
                                 className="profa" 
                                 alt="logo" 
                             />

@@ -5,6 +5,7 @@ import SearchBar from './SearchBar';
 import Pagination from './Pagination';
 import { Link } from 'react-router-dom';
 import google from './images/google.png'
+import './ClosedJobs.css';
 
 function JobBoard() {
   const [jobs, setJobs] = useState([]);
@@ -62,15 +63,15 @@ function JobBoard() {
   }
 
   return (
-    <div className="main">
-      <aside className="sidebar">
-        <ul>
-          <li><Link to="/organization/createjob">Create Job</Link></li>
-          <li><Link  to="/organization/postedjobs">Posted Jobs</Link></li>
-          <li><Link className="high" to="/organization/closedjobs">Closed Jobs</Link></li>
-        </ul>
-      </aside>
-      <div className="job-board">
+    <div id="i165" className="main">
+      <div className="sidebar">
+          <div id="i163">
+            <div id="i168"><Link id="i164" to="/organization/createjob" >Create Job</Link></div>
+            <div id="i168"><Link id="i164"  to="/organization/postedjobs" >Posted Jobs</Link></div>
+            <div id="i168"><Link id="i164" to="/organization/closedjobs" className="high">Closed Jobs</Link></div>
+          </div>
+        </div>
+      <div  className="job-board">
         <div className="posted-jobs-container">
           <div className="posted-jobs">
             {currentJobs.length > 0 ? currentJobs.map((job) => (

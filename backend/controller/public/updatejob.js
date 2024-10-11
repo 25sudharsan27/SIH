@@ -2,9 +2,11 @@ const Job = require("../../models/public/jobsModel");
 const User = require("../../models/userModel");
 
 const addOrUpdateJob = async (req, res) => {
+  console.log("hi");
   try {
-    const { userId, title, description, link, experienceLevel, workMode, country, city, location, company, opening, skills } = req.body;
-
+    const { userId, title, description, link, experienceLevel, workMode, country, city, location, company, opening, skills,requirements,benefits,responsibilities } = req.body;
+    
+    console.log(req.body);
     // Validate input
     if (!userId || !title || !experienceLevel || !workMode) {
       throw new Error("Required fields: userId, title, experienceLevel, and workMode");
@@ -33,6 +35,7 @@ const addOrUpdateJob = async (req, res) => {
           location,
           company,
           opening,
+          requirements,benefits,responsibilities,
           skills: Array.isArray(skills) ? skills : [skills], // If skills are provided as a string, convert to an array
         },
         { new: true, runValidators: true }
@@ -51,6 +54,7 @@ const addOrUpdateJob = async (req, res) => {
           location,
           company,
           opening,
+          requirements,benefits,responsibilities,
           skills: Array.isArray(skills) ? skills : [skills], // If skills are provided as a string, convert to an array
         });
       }

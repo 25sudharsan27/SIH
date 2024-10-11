@@ -98,6 +98,39 @@
   } */
 
 
+#i155{
+  width:100%;
+  height:100%;
+  font-family:"Popins",sans-serif;
+}
+
+#i155 h1{
+  font-family:"Popins",sans-serif;
+}
+
+#i181{
+  font-weight:thin;
+  color:#555;
+}
+
+.job-title-section{
+  width:100%;
+}
+
+#i156{
+  display:flex;
+  /* flex-direction: column; */
+  justify-content:flex-start;
+  
+  align-items:flex-start;
+  font-size:20px;
+  margin-top:50px;
+  
+}
+#i157{
+  margin-left:40px;
+}
+
   body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -134,6 +167,7 @@
   .job-title-section {
     flex: 1;
     margin-left: 20px;
+    
   }
   
   .job-title-section h1 {
@@ -142,9 +176,16 @@
     color: #333;
     font-weight: 600;
   }
+
+  #i156 div{
+    margin-top:20px;
+
+  }
+
   
   .job-title-section p {
-    margin: 5px 0 10px;
+    /* margin: 5px 0 10px; */
+    
     color: #666;
     font-size: 16px;
   }
@@ -289,6 +330,42 @@
     .about-job h2, .about-job h3, .requirements h3, .skills-required h3, .resources h3, .application-form h3 {
       font-size: 20px;
     }
+
+    #i155 h1{
+      font-size:20px;
+    }
+    #i157 p{
+      font-size:13px;
+    }
+    #i156 .company-logo img{
+      width:40px;
+      height:40px;
+    }
+    #i183{
+      font-size:12px;
+    }
+    #i184{
+      font-size:15px;
+    }
+    #i181{
+      font-size:12px;
+      margin:0px;
+      width:90%;
+    }
+    #i185{
+      display:flex;
+      flex-direction:column;
+    }
+    #i186{
+      width:100%;
+    }
+    #i150{
+      max-width:100%;
+    }
+    #i187{
+      width:90%;
+    }
+
   }
   
   .final{
@@ -314,3 +391,22 @@
   .resources{
     width:70%;
   }
+
+  #i150{
+    margin-top:20px;
+    border-radius:4px solid #ddd;
+    height:40px;
+    /* width:90%; */
+  }
+
+  #i151{
+    margin-top:30px;
+  }
+
+  #i152{
+    font-size:large;
+    font-weight:bold;
+
+  }
+
+

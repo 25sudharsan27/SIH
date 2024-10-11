@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './ViewJob.css';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import companyimg from './images/google.png'
+
 
 function ViewJob() {
   const { id } = useParams();
@@ -35,8 +37,8 @@ function ViewJob() {
         }
 
         const responseData = await response.json(); // Parse JSON response
-
         setJobData(responseData.data); // Assuming responseData.data contains the job data
+        console.log(responseData.data);
       } catch (error) {
         console.error("Failed to fetch job data:", error);
       } finally {
@@ -114,59 +116,70 @@ function ViewJob() {
       <div className="job-listing">
         {/* Header Section */}
         <div className="job-header">
-          <div className="company-logo">
-            <img src="company-logo.png" alt="Company Logo" />
-          </div>
+          
           <div className="job-title-section">
-            <h1>{jobData.title}</h1>
-            <p>{jobData.city}</p>
-            <p>{jobData.state}</p>
-            <p>{jobData.country}</p>
+            <div id="i155">
+            <h1 >{jobData.title}</h1>
+            </div>
+            <div id="i156">
+              <div className="company-logo">
+                <img src={companyimg} alt="Company Logo" />
+                <p>{jobData.companyname}</p>
+              </div>
+              <div id="i157">
+                <p>{jobData.city}</p>
+                <p>{jobData.state}</p>
+                <p>{jobData.country}</p>
+              </div>
+           
+            </div>
             <div className="job-details">
-              <span>{jobData.experienceLevel}</span>
-              <span>{jobData.workMode}</span>
-              <span>Stipend: {jobData.stipend || 'N/A'}</span>
+              <span id="i183">{jobData.experienceLevel}</span>
+              <span id="i183">{jobData.workMode}</span>
+              <span id="i183">Stipend: {jobData.stipend || 'N/A'}</span>
             </div>
           </div>
         </div>
 
         {/* About Job Section */}
         <div className="about-job">
-          <h2>About this Job</h2>
-          <p>{jobData.description}</p>
+          <h3 id="i184">About this Job</h3>
+          <p id="i181">{jobData.description}</p>
 
-          <h3>Responsibilities</h3>
-          <ul>
-            {(jobData.responsibilities || []).map((responsibility, index) => (
-              <li key={index}>{responsibility}</li>
-            ))}
+          <h3  id="i184">Responsibilities</h3>
+          <ul id="i185">
+            {jobData?.responsibilities ? (jobData.responsibilities.split(".")).map((responsibility, index) => (
+              <li  id="i181" key={index}>{responsibility}</li> 
+            )) : ""}
           </ul>
 
-          <h3>Benefits</h3>
-          <ul>
-            {(jobData.benefits || []).map((benefit, index) => (
-              <li key={index}>{benefit}</li>
-            ))}
+          <h3  id="i184">Benefits</h3>
+          <ul id="i185">
+            
+            {jobData?.benefits ? (jobData.benefits.split(".")).map((responsibility, index) => (
+              <li  id="i181" key={index}>{responsibility}</li> 
+            )) : ""}
           </ul>
         </div>
 
         {/* Requirements Section */}
         <div className="requirements">
-          <h3>Requirements</h3>
-          <ul>
-            {(jobData.requirements || []).map((requirement, index) => (
-              <li key={index}>{requirement}</li>
-            ))}
+          <h3  id="i184">Requirements</h3>
+          <ul id="i185">
+            
+            {jobData.requirements ? (jobData.requirements.split(".")).map((responsibility, index) => (
+              <li id="i181" key={index}>{responsibility}</li> 
+            )): ""}
           </ul>
         </div>
 
         {/* Skills Required Section */}
         <div className="skills-resources">
           <div className="skills-required">
-            <h3>Skills Required</h3>
-            <ul>
+            <h3  id="i184">Skills Required</h3>
+            <ul id="i185">
               {jobData.skills.map((skill, index) => (
-                <li key={index}>{skill}</li>
+                <li id="i181" key={index}>{skill}</li>
               ))}
             </ul>
           </div>
@@ -174,35 +187,39 @@ function ViewJob() {
 
         {/* Application Form */}
         <div className="application-form">
-          <h3>Submit Application</h3>
+          <h3 id="i184">Submit Application</h3>
           <form onSubmit={handleSubmit}>
-            <label className="resu">
+            <label  id="i181" className="resu">
               Upload Resume:
-              <input type="file" name="resume" onChange={handleResumeChange} />
+              <input id="i186" type="file" name="resume" onChange={handleResumeChange} />
             </label>
 
-            <label className="final">
-              Extra Questions:
-              <ul>
+            <label id="i152" className="final">
+              <h3  id="i184">Extra Questions:</h3>
+              <div>
                 {jobData.extra_questions.map((question, index) => (
-                  <li key={index}>
-                    <label>{question}</label>
-                    <input
-                      type="text"
+                  <div id="i151" key={index}>
+                    <label  id="i181" >{question}</label>
+                    <textarea
+
+                      placeholder="Write your response here"
+                      id="i150"
                       value={extraAnswers[index] || ''}
                       onChange={(e) => handleExtraAnswerChange(index, e.target.value)}
-                    />
-                  </li>
+                    >
+                    </textarea>
+                  </div>
                 ))}
-              </ul>
+              </div>
               <textarea
+              id="i150"
                 placeholder="Enter any additional information here"
                 value={additionalInfo}
                 onChange={handleAdditionalInfoChange}
               ></textarea>
             </label>
 
-            <button type="submit">Submit Application</button>
+            <button id="i187" type="submit">Submit Application</button>
           </form>
         </div>
       </div>

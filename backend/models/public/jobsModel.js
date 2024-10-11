@@ -15,7 +15,10 @@ const jobSchema = new mongoose.Schema({
   opening: { type: Number },
   extra_questions: { type: [String] }, // Array of extra questions
   status: { type: String },
-  stipend: { type: Number } // Assuming stipend is a number
+  stipend: { type: Number }, // Assuming stipend is a number
+  requirements :{type : String, required: true},
+  benefits :{type : String, required : true},
+  responsibilities :{type : String, required : true},
 });
 
 const Job = mongoose.model('Job', jobSchema);

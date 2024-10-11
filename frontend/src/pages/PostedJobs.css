@@ -1,6 +1,7 @@
 .main{
   display: flex;
 }
+
 .sidebar{
   z-index:10000;
 }

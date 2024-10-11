@@ -54,7 +54,6 @@ const CreatePost = () => {
             <div className="form-section oneLine">
               <label className='specify-widthh'>Title</label>
               <input
-                type="text"
                 name="title"
                 value={formData.title}
                 onChange={handleChange}
@@ -76,7 +75,6 @@ const CreatePost = () => {
             <div className="form-section oneLine">
               <label className='specify-widthh'>Image URL (optional)</label>
               <input
-                type="text"
                 name="image"
                 value={formData.image}
                 onChange={handleChange}

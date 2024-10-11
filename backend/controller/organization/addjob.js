@@ -3,8 +3,8 @@ const organizationModel = require("../../models/organizationModel");
 
 const AddJob = async (req, res) => {
   try {
-    const { title, description, link, skills, city, state, country, workMode, experienceLevel, opening, extra_questions, status,stipend } = req.body;
-
+    const { title, description, link, skills, city, state, country, workMode, experienceLevel, opening, extra_questions, status,stipend,requirements,benefits,responsibilities } = req.body;
+    console.log("recieving ");
     // Ensure user_id is available in the request
     const user_id = req.user_id; // Assuming `user_id` is set by authentication middleware
 
@@ -39,7 +39,8 @@ const AddJob = async (req, res) => {
       opening,
       extra_questions,
       status: "open",
-      stipend
+      stipend,
+      requirements,benefits,responsibilities
     });
 
     // Save the job and update the organization

@@ -1,7 +1,35 @@
 /* Container to hold both the sidebar and main content */
 .job-page-container {
   display: flex;
+  
 }
+Link{
+  color: #3C5AA5;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+}
+
+#i164{
+  color: #3C5AA5;
+  font-family: 'Poppins', sans-serif;
+  
+}
+#i168{
+  margin:20px;
+}
+#i171{
+  background-color: red;
+  color:white;
+  border:none;
+  padding:10px;
+  border-radius:5px;
+  margin-top:15px;
+  margin-bottom:15px;
+}
+
+
+
+
 
 /* Sidebar styling */
 .sidebar {
@@ -137,4 +165,75 @@ aside{
 .form-section{
   display:flex;
   flex-direction:column;
+}
+
+
+@media (max-width: 755px) {
+
+  .job-page-container {
+    flex-direction: column;
+  }
+
+  #i169{
+    width:80%;
+  }
+  .sidebar {
+    min-width: 100%;
+    height: auto;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  .job-form-container {
+    padding: 10px;
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+  }
+  .job-form{
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+  }
+
+  .job-form {
+    padding: 10px;
+  }
+
+  .form-section {
+    flex-direction: column;
+  }
+
+  .form-section label {
+    margin-bottom: 5px;
+  }
+
+  .form-section input,
+  .form-section select,
+  .form-section textarea {
+    width: 100%;
+  }
+
+  ul{
+    display:flex;
+    hyphens: none;
+    overflow-wrap: normal;
+    word-break: normal;
+    
+  }
+  li{
+    hyphens: none;
+    content: "";
+    
+  }
+  #i163{
+    display:flex;
+    width:100%;
+    justify-content:space-evenly;
+
+  }
+  #i168{
+    margin:0px;
+  }
 }
