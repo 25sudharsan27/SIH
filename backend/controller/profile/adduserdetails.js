@@ -2,7 +2,7 @@ const userModel = require("../../models/userModel");
 
 const updateUserDetails = async (req, res) => {
   try {
-    const {following,skills, about, projects, jobs, experiences, volunteering, education,tagline,portfolio } = req.body;
+    const {following,skills, about, projects, jobs, experiences, volunteering, education,tagline,portfolio,city,state,country } = req.body;
 
     
     // Find the user by email
@@ -46,7 +46,16 @@ const updateUserDetails = async (req, res) => {
     if(portfolio){
       user.portfolio = portfolio;
     }
-
+    if(city){
+      user.city = city;
+    }
+    if(state){
+      user.state = state;
+    }
+    if(country){
+      user.country = country;
+    }
+    
     
 
     // Handle projects

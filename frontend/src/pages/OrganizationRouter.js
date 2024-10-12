@@ -16,6 +16,7 @@ import OrganizationProfile from './OrganizationProfile.js'
 import CreateJob from './CreateJob.js';
 import PostedJobs from './PostedJobs';
 import ClosedJobs from './ClosedJobs.js';
+import Applicants from './Applicants.js';
 
 const Organization = () =>{
   const Navigate = useNavigate();
@@ -57,6 +58,7 @@ const Organization = () =>{
                 <Route path="/createjob" element ={<CreateJob/>}/>
                 <Route path="/postedjobs" element={<PostedJobs/>}/>
                 <Route path="/closedjobs" element={<ClosedJobs/>}/>
+                <Route path="/applicants/:id" element={<Applicants/>}/>
             </Routes>
         
         </div>

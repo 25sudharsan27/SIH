@@ -20,11 +20,11 @@ import github from './images/github.svg'
 // import profile from './images/logesh.jpg'
 import './Model.css';
 
-const ProfilePage = () => {
+const ProfilePage =  () => {
   // Get user data from Redux store
 
   const userData = useSelector(selectUser);
-  // console.log(userData);
+  console.log(userData);
 
   // Initialize state variables
   const [isEditingAbout, setIsEditingAbout] = useState(false);
@@ -34,6 +34,35 @@ const ProfilePage = () => {
   const [isAddExperienceModalOpen, setIsAddExperienceModalOpen] = useState(false);
   const [isShowMoreProjectsOpen, setIsShowMoreProjectsOpen] = useState(false);
   const [isShowMoreExperiencesOpen, setIsShowMoreExperiencesOpen] = useState(false);
+  const [isShowMoreEducationOpen,setIsShowMoreEducationOpen] = useState(false);
+
+  const [isAddEducationModalOpen, setIsAddEducationModalOpen] = useState(false);
+
+  const [isAddProfileDetailsOpen, setIsAddProfileDetailsOpen] = useState(false);
+
+  const [userdata, setUserdata] = useState({
+    name: '',
+    tagline: '',
+    city: '',
+    state: '',
+    country: '',
+  });
+
+  useEffect(() => {
+    if (userData) {
+      setAboutText(userData.about || '');
+      setSkills(userData.skills || []);
+      setUserdata({
+        name: userData.name || '',
+        tagline: userData.tagline || '',
+        city: userData.city || '',
+        state: userData.state || '',
+        country: userData.country || '',
+      });
+    }
+  }, [userData]);
+
+  
 
   const [newProject, setNewProject] = useState({
     title: '',
@@ -51,9 +80,20 @@ const ProfilePage = () => {
     media: []
   });
 
+  const [newEducation, setNewEducation] = useState({
+    title: '',
+    institution: '',
+    startDate: '',
+    endDate: '',
+    description: '',
+    media: []
+  });
+
+
   // State for visible items
   const [visibleProjectsCount, setVisibleProjectsCount] = useState(5);
   const [visibleExperiencesCount, setVisibleExperiencesCount] = useState(5);
+  const [visibleEducationCount, setVisibleEducationCount] = useState(5);
 
   // Save updated about section
   const handleSaveAbout = async () => {
@@ -72,6 +112,24 @@ const ProfilePage = () => {
     const data = await updateUser.json();
     // console.log("data : ", data);
     window.location.reload(); // Reload the page to clear state and redirect to login
+  };
+
+  const handleUpdateDetails = async () => {
+    try {
+      const response = await fetch(process.env.REACT_APP_addskill_api, {
+        method: "POST",
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userdata),
+      });
+      
+      if (!response.ok) throw new Error('Failed to update profile details');
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // Add a new skill
@@ -138,6 +196,25 @@ const ProfilePage = () => {
     window.location.reload(); // Reload the page to clear state and redirect to login
   };
 
+  const handleAddEducation = async () => {
+    // Send new experience data to the server (optional)
+    const updateUser = await fetch(process.env.REACT_APP_addexperience_api , {
+      method: process.env.REACT_APP_addexperience_method,
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "education": [...(userData?.education || []), newEducation]
+      })
+    });
+    const data = await updateUser.json();
+    // console.log("data : ", data);
+    setIsShowMoreEducationOpen(false);
+    window.location.reload(); // Reload the page to clear state and redirect to login
+  };
+
+
   // Show More Projects
   const handleShowMoreProjects = () => {
     setVisibleProjectsCount((userData?.projects || []).length);
@@ -148,6 +225,12 @@ const ProfilePage = () => {
   const handleShowMoreExperiences = () => {
     setVisibleExperiencesCount((userData?.experiences || []).length);
     setIsShowMoreExperiencesOpen(true);
+  };
+
+  // Show More Education
+  const handleShowMoreEducation = () => {
+    setVisibleEducationCount((userData?.education || []).length);
+    setIsShowMoreEducationOpen(true);
   };
 
   // Fetch leetcode details
@@ -163,15 +246,18 @@ const ProfilePage = () => {
       {/* Profile Header */}
       <div className="profile-header">
           <div className="profile-left">
-            <img
-              src={userData.profilepic || dummyIcon}
-              alt="Profile Picture"
-              className="profile-picture"
-            />
-            <h2 id="pro-name">{userData.name}</h2>
-            <p className="location">
-              {userData.city}, {userData.state}, {userData.country}
-            </p>
+          <img
+
+            src={userData.profilepic || dummyIcon}
+            alt="Profile Picture"
+            className="profile-picture"
+          />
+          <img onClick={() => setIsAddProfileDetailsOpen(true)} className='editbtn' style={{height:"10px",margin:"10px"}} src={edit} alt="edit" />
+          <h2 style={{fontFamily:"Poppins"}} id="pro-name">{userData.name}</h2>
+          <p style={{fontFamily:"Poppins"}}>{userData.tagline}</p>
+          <p className="location">
+            {userData.city}, {userData.state}, {userData.country}
+          </p>
           </div>
 
 
@@ -280,14 +366,75 @@ const ProfilePage = () => {
           </div>
           <a href="#" className="add-more-projects" onClick={() => setIsAddProjectModalOpen(true)}>Add Project</a>
         </div>
+        <h3 className="exp-h3">Education</h3>
+        <div className="experience-section">
+          {(userData.education || []).slice(0, visibleExperiencesCount).map((experience, index) => (
+            <div key={index} className="experience-item">
+              <div className="experience-item-a">
+                <img src={(experience.institution === 'Amazon')?Amazon:
+                  (experience.institution !== 'Amazon')?Google:'' || experience.media[0]} alt={experience.institution} className="company-logo" />
+                <p>{experience.institution}</p>
+              </div>
+              <div id="exp1">
+                <h4 id="hi10" className="title">{experience.title}</h4>
+                <p  id="hi11">{new Date(experience.startDate).toLocaleDateString()} - {experience.endDate ? new Date(experience.endDate).toLocaleDateString() : 'Present'}</p>
+                <p className="description">{experience.description}</p>
+              </div>
+            </div>
+          ))}
+          {(userData.education || []).length > 5 && visibleExperiencesCount < (userData.education || []).length && (
+            <a href="#" className="show-more" onClick={handleShowMoreEducation}>Show More</a>
+          )}
+          <a href="#" className="add-more-projects" onClick={() => setIsAddEducationModalOpen(true)}>Add Experience</a>
+        </div>
+
       </div>
+
+
+      
+      <Modal isOpen={isAddProfileDetailsOpen} onClose={() => setIsAddProfileDetailsOpen(false)}>
+          <h3>Update Profile Details</h3>
+          <form className="addproject" onSubmit={(e) => { e.preventDefault(); handleUpdateDetails(); }}>
+            <input
+              placeholder="Name"
+              value={userdata.name}
+              onChange={(e) => setUserdata({ ...userdata, name: e.target.value })}
+              required
+            />
+            <input
+              placeholder="TagLine"
+              value={userdata.tagline}
+              onChange={(e) => setUserdata({ ...userdata, tagline: e.target.value })}
+              required
+            />
+            <input
+              placeholder="City"
+              value={userdata.city}
+              onChange={(e) => setUserdata({ ...userdata, city: e.target.value })}
+              required
+            />
+            <input
+              placeholder="State"
+              value={userdata.state}
+              onChange={(e) => setUserdata({ ...userdata, state: e.target.value })}
+              required
+            />
+            <input
+              placeholder="Country"
+              value={userdata.country}
+              onChange={(e) => setUserdata({ ...userdata, country: e.target.value })}
+              required
+            />
+            <button type="submit">Update Details</button>
+          </form>
+        </Modal>
 
       {/* Add Project Modal */}
       <Modal isOpen={isAddProjectModalOpen} onClose={() => setIsAddProjectModalOpen(false)}>
         <h3>Add New Project</h3>
         <form className="addproject" onSubmit={(e) => { e.preventDefault(); handleAddProject(); }}>
           <input
-            type="text"
+            
             placeholder="Title"
             value={newProject.title}
             onChange={(e) => setNewProject({ ...newProject, title: e.target.value })}
@@ -314,14 +461,14 @@ const ProfilePage = () => {
         <h3>Add New Experience</h3>
         <form className="addexperience" onSubmit={(e) => { e.preventDefault(); handleAddExperience(); }}>
           <input
-            type="text"
+            
             placeholder="Title"
             value={newExperience.title}
             onChange={(e) => setNewExperience({ ...newExperience, title: e.target.value })}
             required
           />
           <input
-            type="text"
+            
             placeholder="Company"
             value={newExperience.company}
             onChange={(e) => setNewExperience({ ...newExperience, company: e.target.value })}
@@ -356,6 +503,53 @@ const ProfilePage = () => {
         </form>
       </Modal>
 
+
+      <Modal isOpen={isAddEducationModalOpen} onClose={() => setIsAddEducationModalOpen(false)}>
+        <h3>Add New Education</h3>
+        <form className="addexperience" onSubmit={(e) => { e.preventDefault(); handleAddEducation(); }}>
+          <input
+            
+            placeholder="Title"
+            value={newEducation.title}
+            onChange={(e) => setNewEducation({ ...newEducation, title: e.target.value })}
+            required
+          />
+          <input
+            
+            placeholder="Institution or College or School"
+            value={newEducation.company}
+            onChange={(e) => setNewEducation({ ...newEducation, company: e.target.value })}
+            required
+          />
+          <div>
+            <label>Start Date</label>
+            <input
+              type="date"
+              placeholder="Start Date"
+              value={newEducation.startDate}
+              onChange={(e) => setNewEducation({ ...newEducation, startDate: e.target.value })}
+              required
+            />
+          </div>
+          <div>
+            <label>End Date</label>
+            <input
+              type="date"
+              placeholder="End Date"
+              value={newEducation.endDate}
+              onChange={(e) => setNewEducation({ ...newEducation, endDate: e.target.value })}
+            />
+          </div>
+          <textarea
+            placeholder="Description"
+            value={newEducation.description}
+            onChange={(e) => setNewEducation({ ...newEducation, description: e.target.value })}
+            required
+          />
+          <button type="submit">Add Education</button>
+        </form>
+      </Modal>
+
       {/* Show More Projects Modal */}
       <Modal isOpen={isShowMoreProjectsOpen} onClose={() => setIsShowMoreProjectsOpen(false)}>
         <h3>All Projects</h3>
@@ -379,6 +573,26 @@ const ProfilePage = () => {
               <div className="experience-item-a">
                 <img src={experience.media[0] || 'images/company-logo-placeholder.svg'} alt={experience.company} className="company-logo" />
                 <p>{experience.company}</p>
+              </div>
+              <div>
+                <h4 className="title">{experience.title}</h4>
+                <p>{new Date(experience.startDate).toLocaleDateString()} - {experience.endDate ? new Date(experience.endDate).toLocaleDateString() : 'Present'}</p>
+                <p className="description">{experience.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Modal>
+
+
+      <Modal isOpen={isShowMoreEducationOpen} onClose={() => setIsShowMoreEducationOpen(false)}>
+        <h3>All Educations</h3>
+        <div className="experience-section">
+          {(userData.education || []).map((experience, index) => (
+            <div key={index} className="experience-item">
+              <div className="experience-item-a">
+                <img src={experience.media[0] || 'images/company-logo-placeholder.svg'} alt={experience.company} className="company-logo" />
+                <p>{experience.institution}</p>
               </div>
               <div>
                 <h4 className="title">{experience.title}</h4>

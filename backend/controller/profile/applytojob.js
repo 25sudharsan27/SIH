@@ -33,7 +33,7 @@ const applyToJob = async (req, res) => {
     const user_skills = user.skills;
     const final_skills = skills.map(skill => ({
       "skill" : skill,
-      match: user_skills.includes(skill),
+      match: user_skills.includes(skill.trim().toUpperCase()),
     }));
     console.log("final skills "+final_skills)
 

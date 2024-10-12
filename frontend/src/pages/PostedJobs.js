@@ -5,8 +5,10 @@ import SearchBar from './SearchBar';
 import Pagination from './Pagination';
 import { Link } from 'react-router-dom';
 import google from './images/google.png'
+import { useNavigate } from 'react-router-dom';
 
 function JobBoard() {
+  const navigator = useNavigate();
   const [jobs, setJobs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
@@ -114,7 +116,7 @@ function JobBoard() {
                     <p><b>Stipend:</b> {job.stipend}</p>
                   </div>
                   <div className="job-actions">
-                    <button className="edit-btn">Edit</button>
+                    <button onClick={()=>{navigator("../applicants/"+job._id)}} className="edit-btn">View Applicants</button>
                     <button 
                       className="close-btn" 
                       onClick={() => handleCloseJob(job._id)}

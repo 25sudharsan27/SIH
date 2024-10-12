@@ -5,7 +5,7 @@ import userModel from '../../models/userModel.js';
 
 const UserDetails = async(req,res)=>{
     try{
-        const user = await userModel.findOne({"_id" : req.body.user_id});
+        const user = await userModel.find([{"_id" : req.body.user_id}]);
         if(!user){
             throw new Error("User not found");
         }

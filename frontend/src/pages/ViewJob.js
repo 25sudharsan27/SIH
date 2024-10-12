@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import './ViewJob.css';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../store/userSlice';
 
 import companyimg from './images/google.png'
 
 
 function ViewJob() {
+  
+  const userData = useSelector(selectUser);
+
   const { id } = useParams();
   const job_id = id;
   // console.log("job_id: " + job_id);
