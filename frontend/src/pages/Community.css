@@ -83,12 +83,10 @@
 @media (max-width : 800px){
   .posts{
     width:100%;
-    border:1px solid black;
   }
   .post-card{
     width:95%;
     margin:10px;
-    border:1px solid black;
   }
   .post-content{
     padding:30px;

@@ -4,8 +4,11 @@ import UserNavbar from './components/usernavbar';
 import SearchBar from './SearchBar';
 import Pagination from './Pagination';
 import { useNavigate } from 'react-router-dom';
+import { selectUser } from '../store/userSlice';
+import { useSelector } from 'react-redux';
 
 function JobBoard() {
+  const userData = useSelector(selectUser);
   const [jobs, setJobs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
@@ -13,30 +16,50 @@ function JobBoard() {
 
   useEffect(() => {
     const fetchJobs = async () => {
-      try {
-        const response = await fetch("http://localhost:8000/public/jobs",{
-          method : "POST",
-          credentials : "include",
-          headers: {
-            'Content-Type': 'application/json'
-          },
-        });
-        const data = await response.json();
-        // console.log('Fetched Jobs:', data); // Log the data
-        setJobs(Array.isArray(data.data) ? data.data : []); // Ensure data is an array
-      } catch (error) {
-        console.error('Error fetching jobs:', error);
+      if (!userData || !userData.applied_jobs || userData.applied_jobs.length === 0) return;
+
+      const fetchedJobIds = new Set(); // Create a Set to track fetched job IDs
+
+      for (const jobId of userData.applied_jobs) {
+        if (fetchedJobIds.has(jobId)) {
+          continue; // Skip if job ID has already been fetched
+        }
+
+        try {
+          const response = await fetch(process.env.REACT_APP_viewmyjobdetails_api, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ job_id: jobId }),
+          });
+          const data = await response.json();
+
+          if (data.success) {
+            // Check if the job already exists in the state before adding it
+            setJobs(prevJobs => {
+              if (!prevJobs.some(job => job._id === data.data._id)) {
+                fetchedJobIds.add(jobId); // Add job ID to the set
+                return [...prevJobs, data.data]; // Append new job data
+              }
+              return prevJobs; // Return the existing state if job already exists
+            });
+          }
+        } catch (error) {
+          console.error('Error fetching job:', error);
+        }
       }
     };
 
     fetchJobs();
-  }, []);
+  }, [userData]);
 
   // Get current jobs for the current page
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
-  const currentJobs = Array.isArray(jobs) ? jobs.slice(indexOfFirstJob, indexOfLastJob) : [];
-  // console.log(currentJobs);
+  const currentJobs = jobs.slice(indexOfFirstJob, indexOfLastJob);
+
   // Change page
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -44,13 +67,12 @@ function JobBoard() {
 
   return (
     <div className="job-board">
-      <SearchBar />
       <div className="posted-jobs-container">
         <div className="posted-jobs">
           {currentJobs.map((job) => (
             <div key={job._id} className="job-card">
               <div className="title">
-                <img src={job.img} alt="image" /> 
+                <img src={job.img} alt="image" />
                 <h3>{job.title}</h3>
               </div>
               <div className="bodies">
@@ -60,7 +82,7 @@ function JobBoard() {
                   <p><b>Stipend:</b> {job.stipend}</p>
                 </div>
                 <div className="job-actions">
-                  <button onClick={()=>{navigate('/user/viewjobs/job/'+job._id)}} className="edit-btn">Apply</button>
+                  <button className="edit-btn">View</button>
                 </div>
               </div>
             </div>

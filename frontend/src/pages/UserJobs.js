@@ -14,6 +14,7 @@ import ProfilePage from './ProfilePage.js';
 import { useNavigate } from 'react-router-dom';
 
 import ResumeBuilder from './ResumeBuilder.js';
+import MyJob from './MyJobs.js';
 
 const User = () =>{
   const Navigate = useNavigate();
@@ -56,6 +57,7 @@ const User = () =>{
                 <Route path="/profile" element={<ProfilePage/>}/>
                 <Route path="/interview" element={<Interview/>}/>
                 <Route path="/resumebuilder" element={<ResumeBuilder/>}/>
+                <Route path="/myjobs" element={<MyJob/>}/>
             </Routes>
         
         </div>

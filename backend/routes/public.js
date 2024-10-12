@@ -31,9 +31,10 @@ router.post("/getmcq",getmcqtest);
 router.post("/getdata",getdata);
 router.post("/addpost",userAuth,AddPost);
 router.post("/getpost",getpost);
-
+router.post("/getmyjobs",authToken,require("../controller/public/getmyjob"));
 // router.post("/forget-password", forgetPasswordController);
 // router.post("/reset-password",resetPasswordController)
+
 
 
 module.exports = router;

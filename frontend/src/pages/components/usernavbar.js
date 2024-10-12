@@ -107,7 +107,7 @@ const UserNavbar = () => {
                             </div>
                             <div className="Profdrop">
                                 <img src={myjob} className="profa" alt="My Jobs" />
-                                <a href="#">My Jobs</a>
+                                <a href="/user/myjobs">My Jobs</a>
                             </div>
                             <div className="Profdrop">
                                 <img src={mentorship} className="profa" alt="Mentorship" />
