@@ -5,14 +5,15 @@ import Pagination from './Pagination';
 import { useNavigate } from 'react-router-dom';
 import './SearchBar.css';
 
-import Amazon from './images/amazon.png'
-import Google from './images/google.png'
-import flipkart from './images/flipkart.png'
-import JPMorgan from './images/JPMorgan.png'
-import microsoft from './images/microsoft.png'
-import nvidia from './images/nvidia.png'
-import oracle from './images/oracle.png'
-import salesForce from './images/salesForce.png'
+import Amazon from './images/amazon.png';
+import Google from './images/google.png';
+import flipkart from './images/flipkart.png';
+import JPMorgan from './images/JPMorgan.png';
+import microsoft from './images/microsoft.png';
+import nvidia from './images/nvidia.png';
+import oracle from './images/oracle.png';
+import salesForce from './images/salesForce.png';
+import search from './images/loupe.png';
 
 function JobBoard() {
   const [jobs, setJobs] = useState([]);
@@ -25,7 +26,7 @@ function JobBoard() {
   const navigate = useNavigate();
   const jobsPerPage = 6;
 
-  const img = [Amazon,Google,flipkart,JPMorgan,microsoft,nvidia,oracle,salesForce];
+  const img = [Amazon, Google, flipkart, JPMorgan, microsoft, nvidia, oracle, salesForce];
 
   // Fetch jobs on component mount and when filters change
   useEffect(() => {
@@ -63,13 +64,15 @@ function JobBoard() {
     setError('');
     setCurrentPage(1); // Reset pagination
     try {
-      const response = await fetch(process.env.REACT_APP_suggested_jobs, {
-        method: process.env.REACT_APP_suggested_jobs_method,
+      console.log("fetching url : ", process.env.REACT_APP_suggeseted_jobs)
+      const response = await fetch(process.env.REACT_APP_suggeseted_jobs, {
+        method: "POST",
         credentials: "include",
         headers: {
           'Content-Type': 'application/json'
         },
       });
+      console.log("response : ", response);
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
       }
@@ -83,9 +86,10 @@ function JobBoard() {
     }
   };
 
-  // Filter jobs based on search term
+  // Filter jobs based on search term and experience level
   const filteredJobs = jobs.filter(job =>
-    job.title.toLowerCase().includes(searchTerm.toLowerCase())
+    job.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+    (experienceLevel ? job.experienceLevel === experienceLevel : true)
   );
 
   // Pagination logic
@@ -99,31 +103,13 @@ function JobBoard() {
   };
 
   // Handle filtering
-  const handleFilter = async () => {
-    setLoading(true);
-    setError('');
+  const handleFilter = () => {
     setCurrentPage(1); // Reset pagination
-    try {
-      const response = await fetch(process.env.REACT_APP_filter_jobs, {
-        method: process.env.REACT_APP_filter_jobs_method,
-        credentials: "include",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ experienceLevel, search: searchTerm })
-      });
-      const data = await response.json();
-      setJobs(Array.isArray(data.data) ? data.data : []);
-    } catch (error) {
-      console.error('Error fetching filtered jobs:', error);
-      setError('Failed to fetch jobs. Please try again later.');
-    } finally {
-      setLoading(false);
-    }
+    // Filter happens automatically in the filteredJobs variable.
   };
 
-  function getRandomImg(){
-    const ran = Math.floor(Math.random()*8);
+  function getRandomImg() {
+    const ran = Math.floor(Math.random() * img.length);
     return img[ran];
   }
 
@@ -137,11 +123,11 @@ function JobBoard() {
             value={experienceLevel}
             onChange={(e) => { setExperienceLevel(e.target.value); handleFilter(); }}
           >
-            <option id="i13" value="">Experience Level</option>
-            <option id="i13" value="Intern">Intern</option>
-            <option id="i13" value="Junior">Junior</option>
-            <option id="i13" value="Mid">Mid</option>
-            <option id="i13" value="Senior">Senior</option>
+            <option value="">Experience Level</option>
+            <option value="Intern">Intern</option>
+            <option value="Junior">Junior</option>
+            <option value="Mid">Mid</option>
+            <option value="Senior">Senior</option>
           </select>
 
           {/* Location Dropdown */}
@@ -150,11 +136,11 @@ function JobBoard() {
             value={location}
             onChange={(e) => { setLocation(e.target.value); handleFilter(); }}
           >
-            <option id="i13" value="">Location</option>
-            <option id="i13" value="Bengaluru">Bengaluru</option>
-            <option id="i13" value="Pune">Pune</option>
-            <option id="i13" value="Chennai">Chennai</option>
-            <option id="i13" value="Remote">Remote</option>
+            <option value="">Location</option>
+            <option value="Bengaluru">Bengaluru</option>
+            <option value="Pune">Pune</option>
+            <option value="Chennai">Chennai</option>
+            <option value="Remote">Remote</option>
           </select>
 
           {/* Suggest Me Jobs Button */}
@@ -164,15 +150,17 @@ function JobBoard() {
         </div>
 
         {/* Search Field */}
-        <div className="search-field">
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            id="view-search-id"
-          />
-          <span onClick={handleFilter} className="search-icon">🔍</span>
+        
+        <div id="i211">
+        <input
+        
+        placeholder="Search..."
+        value={searchTerm}
+        onChange={(e) => { setSearchTerm(e.target.value); handleFilter(); }}
+        id="i212"
+      />
+                <span onClick={handleFilter} className="search-icon"><img style={{opacity:"0.4" ,height:"17px",marginTop:"3px",marginRight:"2px"}} src={search} alt="search"/></span>
+
         </div>
       </div>
 
@@ -190,7 +178,7 @@ function JobBoard() {
               currentJobs.map((job) => (
                 <div key={job._id} className="job-card">
                   <div className="title">
-                    <img src={job.img || getRandomImg()} alt="job" className="company-log"/>
+                    <img src={job.img || getRandomImg()} alt="job" className="company-log" />
                     <h3>{job.title}</h3>
                   </div>
                   <div className="bodies">

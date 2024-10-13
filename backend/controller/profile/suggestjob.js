@@ -18,10 +18,10 @@ const SuggestJob = async (req, res) => {
 
         // Fetch all job postings
         const jobs = await jobModel.find({});
-
+        console.log(jobs);
         // Filter jobs based on skill matching
-        const matchingJobs = jobs.filter(job => calculateSkillMatch(userSkills, job.skills)); // Ensure `job.skills` matches the skill array
-
+        const matchingJobs = jobs.filter(job =>  calculateSkillMatch(userSkills, job.skills)); // Ensure `job.skills` matches the skill array
+        
         res.json({
             success: true,
             data: matchingJobs,

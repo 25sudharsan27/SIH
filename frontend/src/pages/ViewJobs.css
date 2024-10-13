@@ -228,7 +228,8 @@
     width: 90%;
   }
   #view-search-id{
-    border-radius:5px;
+    /* border-radius:5px; */
+    border:1px solid black;
   }
   #i13,.dropdown{
     font-size:xx-small;
@@ -260,4 +261,21 @@
     font-size: 12px;
   }
 
+}
+
+
+#i211{
+  display:flex;
+  justify-content: space-between;
+  height:35px;
+  padding-left:5px;
+  padding-right:5px;
+  border-radius: 8px;
+  align-items: center;
+  border:1px solid #ddd;
+}
+#i212{
+  height:30px;
+  outline: none;
+  border: none;
 }
