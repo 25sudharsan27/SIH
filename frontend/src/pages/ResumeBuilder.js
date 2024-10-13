@@ -61,10 +61,22 @@ const ResumeBuilder = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevFormData => ({
-      ...prevFormData,
-      [name]: value
-    }));
+
+    if (name.startsWith('social.')) {
+      const socialKey = name.split('.')[1];
+      setFormData(prevFormData => ({
+        ...prevFormData,
+        social: {
+          ...prevFormData.social,
+          [socialKey]: value
+        }
+      }));
+    } else {
+      setFormData(prevFormData => ({
+        ...prevFormData,
+        [name]: value
+      }));
+    }
   };
 
   const handleArrayChange = (e, key) => {
@@ -106,78 +118,67 @@ const ResumeBuilder = () => {
 
   const downloadPDF = () => {
     const doc = new jsPDF();
-  
-    // Set font and size for the header
+    
     doc.setFontSize(28);
     doc.setFont("helvetica", "bold");
-    doc.text(formData.name, 20, 20); // Name
-    
-    // Contact info section
+    doc.text(formData.name, 20, 20);
+
     doc.setFontSize(10);
     doc.setFont("helvetica", "normal");
-    doc.text(`${formData.city}, ${formData.state}, ${formData.country}`, 20, 30); // Location
-    doc.text(formData.email, 20, 40); // Email
-    doc.text(formData.social.linkedin, 20, 50); // LinkedIn (you can add other social links similarly)
-  
-    // Section: Technical Skills
+    doc.text(`${formData.city}, ${formData.state}, ${formData.country}`, 20, 30);
+    doc.text(formData.email, 20, 40);
+    doc.text(formData.social.linkedin, 20, 50);
+
     doc.setFontSize(10);
     doc.setFont("helvetica", "bold");
     doc.text("TECHNICAL SKILLS", 20, 70);
-  
+    
     doc.setFontSize(10);
     doc.setFont("helvetica", "normal");
-    const skillsList = `
-      Languages: ${formData.skills.join(', ')}
-    `;
-    doc.text(skillsList, 20, 80); // List of skills
-    
-    // Section: Power Skills
+    const skillsList = `Languages: ${formData.skills.join(', ')}`;
+    doc.text(skillsList, 20, 80);
+
     doc.setFontSize(10);
     doc.setFont("helvetica", "bold");
     doc.text("POWER SKILLS", 20, 100);
-  
+    
     doc.setFontSize(12);
     doc.setFont("helvetica", "normal");
     doc.text("Problem Solving, Communication, Public Speaking, Leadership", 20, 110);
-  
-    // Section: Projects
+
     doc.setFontSize(10);
     doc.setFont("helvetica", "bold");
     doc.text("PROJECTS", 20, 130);
-  
+    
     doc.setFontSize(12);
     doc.setFont("helvetica", "normal");
     formData.projects.forEach((project, index) => {
-      doc.text(`${index + 1}. ${project}`, 20, 140 + index * 10); // Dynamic project listing
+      doc.text(`${index + 1}. ${project}`, 20, 140 + index * 10);
     });
-  
-    // Section: Education
+
     doc.setFontSize(10);
     doc.setFont("helvetica", "bold");
     doc.text("EDUCATION", 20, 170);
-  
+    
     doc.setFontSize(10);
     doc.setFont("helvetica", "normal");
     formData.education.forEach((education, index) => {
-      doc.text(`${index + 1}. ${education}`, 20, 180 + index * 10); // Dynamic education listing
+      doc.text(`${index + 1}. ${education}`, 20, 180 + index * 10);
     });
-  
-    // Section: Social Links
+
     doc.setFontSize(10);
     doc.setFont("helvetica", "bold");
     doc.text("SOCIAL LINKS", 20, 210);
-  
+    
     doc.setFontSize(10);
     doc.setFont("helvetica", "normal");
     doc.text(`LinkedIn: ${formData.social.linkedin}`, 20, 220);
     doc.text(`Twitter: ${formData.social.twitter}`, 20, 230);
     doc.text(`GitHub: ${formData.social.github}`, 20, 240);
     doc.text(`Portfolio: ${formData.social.portfolio}`, 20, 250);
-  
-    // Saving the PDF with the user's name
+
     doc.save(`${formData.name}_resume.pdf`);
   };
-  
 
   return (
     <div className="containerrr">
@@ -188,10 +189,10 @@ const ResumeBuilder = () => {
       </div>
 
       {mode === 'manual' ? (
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
           <div className="form-group">
             <label className='bugLabel' htmlFor="name">Full Name:</label>
-            <input  className='buger' id="name" name="name" value={formData.name} onChange={handleChange} required />
+            <input className='buger' id="name" name="name" value={formData.name} onChange={handleChange} required />
           </div>
 
           <div className="form-group">
@@ -206,17 +207,17 @@ const ResumeBuilder = () => {
 
           <div className="form-group">
             <label className='bugLabel' htmlFor="city">City:</label>
-            <input  className='buger' id="city" name="city" value={formData.city} onChange={handleChange} />
+            <input className='buger' id="city" name="city" value={formData.city} onChange={handleChange} />
           </div>
 
           <div className="form-group">
             <label className='bugLabel' htmlFor="state">State:</label>
-            <input  className='buger' id="state" name="state" value={formData.state} onChange={handleChange} />
+            <input className='buger' id="state" name="state" value={formData.state} onChange={handleChange} />
           </div>
 
           <div className="form-group">
             <label className='bugLabel' htmlFor="country">Country:</label>
-            <input  className='buger' id="country" name="country" value={formData.country} onChange={handleChange} />
+            <input className='buger' id="country" name="country" value={formData.country} onChange={handleChange} />
           </div>
 
           <div className="form-group">
@@ -250,21 +251,28 @@ const ResumeBuilder = () => {
           </div>
 
           <div className="form-group">
-            <label className='bugLabel' htmlFor="socialLinks">Social Links (LinkedIn, Twitter, GitHub, Portfolio):</label>
-            <input  className='buger' id="linkedin" name="social.linkedin" placeholder="LinkedIn" value={formData.social.linkedin} onChange={handleChange} />
-            <input  className='buger' id="twitter" name="social.twitter" placeholder="Twitter" value={formData.social.twitter} onChange={handleChange} />
-            <input  className='buger' id="github" name="social.github" placeholder="GitHub" value={formData.social.github} onChange={handleChange} />
-            <input  className='buger' id="portfolio" name="social.portfolio" placeholder="Portfolio" value={formData.social.portfolio} onChange={handleChange} />
+            <label className='bugLabel'>Social Links:</label>
+            <input className='buger' name="social.linkedin" placeholder="LinkedIn" value={formData.social.linkedin} onChange={handleChange} />
+            <input className='buger' name="social.twitter" placeholder="Twitter" value={formData.social.twitter} onChange={handleChange} />
+            <input className='buger' name="social.github" placeholder="GitHub" value={formData.social.github} onChange={handleChange} />
+            <input className='buger' name="social.portfolio" placeholder="Portfolio" value={formData.social.portfolio} onChange={handleChange} />
           </div>
 
           <div className="form-group">
             <label className='bugLabel' htmlFor="tagline">Tagline:</label>
-            <input className='buger'  id="tagline" name="tagline" value={formData.tagline} onChange={handleChange} />
+            <input className='buger' id="tagline" name="tagline" value={formData.tagline} onChange={handleChange} />
           </div>
 
           <div className="form-group">
             <label className='bugLabel' htmlFor="portfolio">Portfolio:</label>
-            <input className='buger'  id="portfolio" name="portfolio" value={formData.portfolio} onChange={handleChange} />
+            <input className='buger' id="portfolio" name="portfolio" value={formData.portfolio} onChange={handleChange} />
+          </div>
+
+          <button className='resumebtn' onClick={generateResume}>Generate Resume</button>
+          <button className='resumebtn' onClick={downloadPDF}>Download PDF</button>
+
+          <div id="resumeOutput" className="resume-output">
+            {/* Generated resume will appear here */}
           </div>
         </form>
       ) : (
