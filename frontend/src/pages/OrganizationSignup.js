@@ -2,6 +2,15 @@ import React, { useState } from 'react';
 import './JobSeekerSignup.css';
 import { useNavigate } from 'react-router-dom';
 
+import {
+  CitySelect,
+  CountrySelect,
+  StateSelect,
+} from "react-country-state-city";
+import "react-country-state-city/dist/react-country-state-city.css";
+
+
+
 const JobSeekerSignup = () => {
 
   const navigate = new useNavigate();
@@ -15,6 +24,11 @@ const JobSeekerSignup = () => {
     city: ''
   });
 
+  const [country, setCountry] = useState('');
+  const [state, setState] = useState('');
+  const [city, setCity] = useState('');
+  const [countryid, setCountryid] = useState(0);
+  const [stateid, setStateid] = useState(0);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -46,7 +60,7 @@ const JobSeekerSignup = () => {
           'Content-Type': 'application/json',
           
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, country: country, state: state, city: city }),
       });
       
       const data = await response.json();
@@ -123,31 +137,40 @@ const JobSeekerSignup = () => {
             </span>
           </div>
           
-          <div className="address-container">
-            <input id="i147"
-              name="country"
-              value={formData.country}
-              onChange={handleChange}
-              placeholder="Country"
-              className="form-input small-input"
-            />
-            <input id="i147"
-              name="state"
-              value={formData.state}
-              onChange={handleChange}
-              placeholder="State"
-              className="form-input small-input"
-            />
-          </div>
-          <div className="address-container">
-            <input id="i147"
-              name="city"
-              value={formData.city}
-              onChange={handleChange}
-              placeholder="City"
-              className="form-input small-input"
-            />
-          </div>
+          <CountrySelect
+            onChange={(e) => {
+              setCountryid(e.id);
+              setCountry(e.name); // Set the selected country name
+              setState(''); // Reset state and city when country changes
+              setCity('');
+            }}
+            placeHolder="Select Country"
+            value={countryid} // Set selected country id
+          />
+          <br />
+
+          <StateSelect
+            countryid={countryid}
+            onChange={(e) => {
+              setStateid(e.id);
+              setState(e.name); // Set the selected state name
+              setCity(''); // Reset city when state changes
+            }}
+            placeHolder="Select State"
+            value={stateid} // Set selected state id
+          />
+          <br />
+
+          <CitySelect
+            countryid={countryid}
+            stateid={stateid}
+            onChange={(e) => {
+              setCity(e.name); // Set the selected city name
+            }}
+            placeHolder="Select City"
+            value={city} // Set selected city name
+          />
+          <br />
 
           <button id="i148" type="submit" className="submit-button">Signup</button>
         </form>

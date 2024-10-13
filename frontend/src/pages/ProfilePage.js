@@ -15,6 +15,13 @@ import HeatMap from './HeatMap';
 import leetcode from './images/leetcode.svg'
 import hackerrank from './images/hackerrank.svg'
 import github from './images/github.svg'
+import {
+  CitySelect,
+  CountrySelect,
+  StateSelect,
+} from "react-country-state-city";
+import "react-country-state-city/dist/react-country-state-city.css";
+
 
 
 // import profile from './images/logesh.jpg'
@@ -35,6 +42,13 @@ const ProfilePage =  () => {
   const [isShowMoreProjectsOpen, setIsShowMoreProjectsOpen] = useState(false);
   const [isShowMoreExperiencesOpen, setIsShowMoreExperiencesOpen] = useState(false);
   const [isShowMoreEducationOpen,setIsShowMoreEducationOpen] = useState(false);
+
+  const [country, setCountry] = useState('');
+  const [state, setState] = useState('');
+  const [city, setCity] = useState('');
+  const [countryid, setCountryid] = useState(0);
+  const [stateid, setStateid] = useState(0);
+
 
   const [isAddEducationModalOpen, setIsAddEducationModalOpen] = useState(false);
 
@@ -122,7 +136,7 @@ const ProfilePage =  () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(userdata),
+        body: JSON.stringify({ ...userdata, state: state, city: city, country: country }),
       });
       
       if (!response.ok) throw new Error('Failed to update profile details');
@@ -407,24 +421,42 @@ const ProfilePage =  () => {
               onChange={(e) => setUserdata({ ...userdata, tagline: e.target.value })}
               required
             />
-            <input
-              placeholder="City"
-              value={userdata.city}
-              onChange={(e) => setUserdata({ ...userdata, city: e.target.value })}
-              required
-            />
-            <input
-              placeholder="State"
-              value={userdata.state}
-              onChange={(e) => setUserdata({ ...userdata, state: e.target.value })}
-              required
-            />
-            <input
-              placeholder="Country"
-              value={userdata.country}
-              onChange={(e) => setUserdata({ ...userdata, country: e.target.value })}
-              required
-            />
+            
+          <CountrySelect
+            onChange={(e) => {
+              setCountryid(e.id);
+              setCountry(e.name); // Set the selected country name
+              setState(''); // Reset state and city when country changes
+              setCity('');
+            }}
+            placeHolder="Select Country"
+            value={countryid} // Set selected country id
+          />
+          <br />
+
+          <StateSelect
+            countryid={countryid}
+            onChange={(e) => {
+              setStateid(e.id);
+              setState(e.name); // Set the selected state name
+              setCity(''); // Reset city when state changes
+            }}
+            placeHolder="Select State"
+            value={stateid} // Set selected state id
+          />
+          <br />
+
+          <CitySelect
+            countryid={countryid}
+            stateid={stateid}
+            onChange={(e) => {
+              setCity(e.name); // Set the selected city name
+            }}
+            placeHolder="Select City"
+            value={city} // Set selected city name
+          />
+          <br />
+            
             <button type="submit">Update Details</button>
           </form>
         </Modal>

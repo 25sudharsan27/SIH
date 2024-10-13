@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import './JobSeekerSignup.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import {
+  CitySelect,
+  CountrySelect,
+  StateSelect,
+} from "react-country-state-city";
+import "react-country-state-city/dist/react-country-state-city.css";
 
 const JobSeekerSignup = () => {
   // State variables for form fields
@@ -12,6 +18,8 @@ const JobSeekerSignup = () => {
   const [state, setState] = useState('');
   const [city, setCity] = useState('');
   const [age, setAge] = useState('');
+  const [countryid, setCountryid] = useState(0);
+  const [stateid, setStateid] = useState(0);
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -31,7 +39,8 @@ const JobSeekerSignup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (password.length < 8) {
+   
+     if (password.length < 8) {
       alert('Password should be at least 8 characters long');
       return; // Stop further execution if password is too short
     }
@@ -40,7 +49,8 @@ const JobSeekerSignup = () => {
       alert('Passwords do not match');
       return; // Stop further execution if passwords don't match
     }
-
+    // Uncomment the following lines for API integration
+    
     try {
       const response = await fetch(process.env.REACT_APP_usersignup_api, {
         method: process.env.REACT_APP_usersignup_method,
@@ -62,19 +72,17 @@ const JobSeekerSignup = () => {
 
       if (data.success) {
         alert('Signup successful');
-        // console.log(data);
-
         navigate('/jobseeker/login');
       } else {
-        alert('Signup failed : '+data.message);
-        if(data.message === 'User Already Exists'){
-          // console.log("went to login page");
-          navigate('/jobseeker/login');        }
-        // console.log(data);
+        alert('Signup failed: ' + data.message);
+        if (data.message === 'User Already Exists') {
+          navigate('/jobseeker/login');
+        }
       }
     } catch (error) {
       console.error('Error:', error);
     }
+    
   };
 
   return (
@@ -83,9 +91,8 @@ const JobSeekerSignup = () => {
       <div id="i145" className="signup-form">
         <h2 id="i146" className="form-subtitle">Signup</h2>
         <form onSubmit={handleSubmit}>
-          < input
+          <input
             id="i147"
-
             placeholder="Name"
             className="form-input"
             value={name}
@@ -100,8 +107,7 @@ const JobSeekerSignup = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-
-          <div className="password-container">
+ <div className="password-container">
             <input
             id="i147"
               type={showPassword ? '' : 'password'}
@@ -110,11 +116,10 @@ const JobSeekerSignup = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <span id="pwd" onClick={togglePasswordVisibility} className="password-toggle">
+            <span onClick={togglePasswordVisibility} className="password-toggle">
               {showPassword ? '🙈' : '👁️'}
             </span>
           </div>
-
           <div className="password-container">
             <input
             id="i147"
@@ -124,36 +129,48 @@ const JobSeekerSignup = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            <span id="pwd" onClick={toggleConfirmPasswordVisibility} className="password-toggle">
+            <span onClick={toggleConfirmPasswordVisibility} className="password-toggle">
               {showConfirmPassword ? '🙈' : '👁️'}
             </span>
           </div>
 
-          <div className="address-container">
-            <input
-            id="i147"
-              placeholder="Country"
-              className="form-input small-input"
-              value={country}
-              onChange={(e) => setCountry(e.target.value)}
-            />
-            <input
-            id="i147"
-              placeholder="State"
-              className="form-input small-input"
-              value={state}
-              onChange={(e) => setState(e.target.value)}
-            />
-          </div>
+
+          <CountrySelect
+            onChange={(e) => {
+              setCountryid(e.id);
+              setCountry(e.name); // Set the selected country name
+              setState(''); // Reset state and city when country changes
+              setCity('');
+            }}
+            placeHolder="Select Country"
+            value={countryid} // Set selected country id
+          />
+          <br />
+
+          <StateSelect
+            countryid={countryid}
+            onChange={(e) => {
+              setStateid(e.id);
+              setState(e.name); // Set the selected state name
+              setCity(''); // Reset city when state changes
+            }}
+            placeHolder="Select State"
+            value={stateid} // Set selected state id
+          />
+          <br />
+
+          <CitySelect
+            countryid={countryid}
+            stateid={stateid}
+            onChange={(e) => {
+              setCity(e.name); // Set the selected city name
+            }}
+            placeHolder="Select City"
+            value={city} // Set selected city name
+          />
+          <br />
 
           <div className="address-container">
-            <input
-            id="i147"
-              placeholder="City"
-              className="form-input small-input"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-            />
             <input
             id="i147"
               type="number"
@@ -164,7 +181,7 @@ const JobSeekerSignup = () => {
             />
           </div>
 
-          <button id="i148" type="submit" className="submit-button">
+          <button  id="i148" type="submit" className="submit-button">
             Signup
           </button>
         </form>
