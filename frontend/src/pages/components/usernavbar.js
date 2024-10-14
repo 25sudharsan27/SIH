@@ -62,7 +62,7 @@ const UserNavbar = () => {
             <div className="navbar-left">
                 <div>
                     <Link to="/user/viewjobs" className="navbar-item" onClick={e => handleSetNav("jobs")} id="jobs">Jobs</Link>
-                    <Link to="interview" className="navbar-item" onClick={e => handleSetNav("interview")} id="interview">Interview Prep</Link>
+                    <Link to="/user/interview" className="navbar-item" onClick={e => handleSetNav("interview")} id="interview">Interview Prep</Link>
                     <Link to="/user/courses" className="navbar-item" onClick={e => handleSetNav("message")} id="message">Courses</Link>
                     <Link to="/posts" className="navbar-item" onClick={e => handleSetNav("community")} id="community">Community</Link>
                     <Link to="/user/resumebuilder" className="navbar-item" onClick={e => handleSetNav("buildResume")} id="buildResume">Build Resume</Link>
@@ -83,7 +83,7 @@ const UserNavbar = () => {
                 <nav className="sudharsan-nav">
                     <div className="sudharsan-links">
                         <Link to="/user/viewjobs" className="navbar-item" onClick={e => handleSetNav("jobs")} id="jobs">Jobs</Link>
-                        <Link to="interview" className="navbar-item" onClick={e => handleSetNav("interview")} id="interview">Interview Prep</Link>
+                        <Link to="/user/interview" className="navbar-item" onClick={e => handleSetNav("interview")} id="interview">Interview Prep</Link>
                         <Link to="/user/courses" className="navbar-item" onClick={e => handleSetNav("message")} id="message">Courses</Link>
                         <Link to="/posts" className="navbar-item" onClick={e => handleSetNav("community")} id="community">Community</Link>
                         <Link to="/user/resumebuilder" className="navbar-item" onClick={e => handleSetNav("buildResume")} id="buildResume">Build Resume</Link>

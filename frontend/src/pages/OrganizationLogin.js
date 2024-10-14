@@ -7,11 +7,14 @@ const JobSeekerLogin = () => {
   const navigate = new useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isBuffereing , setIsBuffering] = useState(false);
+
 
   const handleSubmit = async(e) => {
     e.preventDefault();
     // Implement your login logic here
-    console.log("Email:", email, "Password:", password);
+    setIsBuffering(true);
+
     try {
       const response = await fetch(process.env.REACT_APP_orglogin_api, { // Replace with your API endpoint
         method: process.env.REACT_APP_orglogin_method,
@@ -28,23 +31,59 @@ const JobSeekerLogin = () => {
       const data = await response.json();
       if (response.ok) {
         // console.log('Registration successful', data);
-        alert("Signed up Successfully");
+        const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+        messageContainer.id = "i233"
+        messageContainer.textContent = 'Logged Sucessfully ';
+        
+        document.body.appendChild(messageContainer);
+
+        // Remove the message after a few seconds
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
         navigate("/organization/profile")
 
         // Redirect or show success message
       } else {
-        console.error('Registration failed', data);
+        setIsBuffering(false);
+
+        // console.error('Registration failed', data);
+        const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+
+        messageContainer.textContent = 'Signup failed: ' +( data.message==="Organization not found" ? "Check your Email Id" : data.message);
+        
+        document.body.appendChild(messageContainer);
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
         // Handle error
       }
     } catch (error) {
-      console.error('Network error', error);
-      // Handle network error
+      setIsBuffering(false);
+
+        const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+        messageContainer.textContent = 'Signup failed: ' + error.message;
+        
+        document.body.appendChild(messageContainer);
+
+        // Remove the message after a few seconds
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
     }
 
   }
 
   return (
     <div id="i135" className="login-container">
+      {isBuffereing &&<div className="buffer">
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+        </div>
+      </div>}
       <h1 id="i136" className="form-title">Organization or Job Provider</h1>
       <div id="i137" className="login-form">
         <h2 id="i138" className="form-subtitle">Login</h2>

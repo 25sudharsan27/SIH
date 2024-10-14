@@ -21,7 +21,7 @@ async function OrganizationSignUpController(req,res){
         
         if(organization){
             console.log("organization already exists");
-            throw new Error ("User Already Exists");
+            throw new Error ("Organization Already Exists");
         }
         if(!email){
             throw new Error("Please provide email")

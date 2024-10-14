@@ -24,6 +24,9 @@ const JobSeekerSignup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  const [isBuffereing , setIsBuffering] = useState(false);
+
+
   const navigate = useNavigate();
 
   // Toggles for showing and hiding passwords
@@ -38,19 +41,47 @@ const JobSeekerSignup = () => {
   // Form submission handler
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsBuffering(true);
 
    
      if (password.length < 8) {
-      alert('Password should be at least 8 characters long');
+      setIsBuffering(false);
+
+      const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+        messageContainer.textContent = 'Signup failed: ' + "Password should be at least 8 characters long";
+        
+        document.body.appendChild(messageContainer);
+
+        // Remove the message after a few seconds
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
+        
+      
       return; // Stop further execution if password is too short
     }
 
     if (password !== confirmPassword) {
-      alert('Passwords do not match');
+      setIsBuffering(false);
+
+      const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+        messageContainer.textContent = 'Signup failed: ' + "Passwords do not match";
+        
+        document.body.appendChild(messageContainer);
+
+        // Remove the message after a few seconds
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
+        
       return; // Stop further execution if passwords don't match
     }
     // Uncomment the following lines for API integration
     
+    setIsBuffering(true);
+
     try {
       const response = await fetch(process.env.REACT_APP_usersignup_api, {
         method: process.env.REACT_APP_usersignup_method,
@@ -71,22 +102,62 @@ const JobSeekerSignup = () => {
       const data = await response.json();
 
       if (data.success) {
-        alert('Signup successful');
+
+        const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+        messageContainer.id = "i233"
+        messageContainer.textContent = 'User Created Sucessfully ';
+        
+        document.body.appendChild(messageContainer);
+
+        // Remove the message after a few seconds
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
+
         navigate('/jobseeker/login');
       } else {
-        alert('Signup failed: ' + data.message);
+        setIsBuffering(false);
+
+        const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+        messageContainer.textContent = 'Signup failed: ' + data.message;
+        
+        document.body.appendChild(messageContainer);
+
+        // Remove the message after a few seconds
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
         if (data.message === 'User Already Exists') {
           navigate('/jobseeker/login');
         }
       }
     } catch (error) {
-      console.error('Error:', error);
+      setIsBuffering(false);
+
+        const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+        messageContainer.textContent = 'Signup failed: ' + error.message;
+        
+        document.body.appendChild(messageContainer);
+
+        // Remove the message after a few seconds
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
+      
     }
     
   };
 
   return (
     <div className="signup-container">
+      {isBuffereing &&<div className="buffer">
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+        </div>
+      </div>}
       <h1 className="form-title">Student or Job Seeker</h1>
       <div id="i145" className="signup-form">
         <h2 id="i146" className="form-subtitle">Signup</h2>

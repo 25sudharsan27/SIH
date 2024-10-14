@@ -31,6 +31,8 @@ const JobSeekerSignup = () => {
   const [stateid, setStateid] = useState(0);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isBuffereing , setIsBuffering] = useState(false);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,8 +52,41 @@ const JobSeekerSignup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsBuffering(true);
+
     
     // Validation can be added here
+    if (formData.password.length < 8) {
+      setIsBuffering(false);
+
+      const messageContainer = document.createElement('div');
+      messageContainer.className = 'popup-message';
+      messageContainer.textContent = 'Signup failed: Password should be at least 8 characters long';
+      
+      document.body.appendChild(messageContainer);
+
+      // Remove the message after a few seconds
+      setTimeout(() => {
+        document.body.removeChild(messageContainer);
+      }, 3000);
+      return;
+    }
+    if (formData.password !== formData.confirmPassword) {
+      setIsBuffering(false);
+
+      const messageContainer = document.createElement('div');
+      messageContainer.className = 'popup-message';
+      messageContainer.textContent = 'Signup failed: Passwords do not match';
+      
+      document.body.appendChild(messageContainer);
+
+      // Remove the message after a few seconds
+      setTimeout(() => {
+        document.body.removeChild(messageContainer);
+      },
+      3000);
+      return;
+    }
     
     try {
       const response = await fetch(process.env.REACT_APP_orgsignup_api, { // Replace with your API endpoint
@@ -66,16 +101,54 @@ const JobSeekerSignup = () => {
       const data = await response.json();
       if (response.ok) {
         // console.log('Registration successful', data);
-        alert("successfully created");
+        // alert("successfully created");
+
+ const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+        messageContainer.id = "i233"
+        messageContainer.textContent = 'Organization Created Sucessfully ';
+        
+        document.body.appendChild(messageContainer);
+
+        // Remove the message after a few seconds
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
         navigate("/organization/login")
 
         // Redirect or show success message
       } else {
-        console.error('Registration failed', data);
+        setIsBuffering(false);
+
+        const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+        messageContainer.textContent = 'Signup failed: ' + data.message;
+        
+        document.body.appendChild(messageContainer);
+
+        // Remove the message after a few seconds
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
+        if (data.message === 'Organization Already Exists') {
+          navigate("/organization/login")
+        }
         // Handle error
       }
     } catch (error) {
-      console.error('Network error', error);
+      
+      setIsBuffering(false);
+
+        const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+        messageContainer.textContent = 'Signup failed: ' + error.message;
+        
+        document.body.appendChild(messageContainer);
+
+        // Remove the message after a few seconds
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
       // Handle network error
     }
   };

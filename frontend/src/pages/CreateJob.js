@@ -3,6 +3,9 @@ import './CreateJob.css';
 import { Link } from 'react-router-dom';
 
 const JobForm = () => {
+
+  const [isBuffereing , setIsBuffering] = useState(false);
+
   const [formData, setFormData] = useState({
     company: '',
     jobTitle: '',
@@ -82,7 +85,8 @@ const JobForm = () => {
   const handleSubmit = async (e) => {
     console.log(formData);
     e.preventDefault();
-    
+    setIsBuffering(true);
+
   
     try {
       const response = await fetch(process.env.REACT_APP_createjob_api, {
@@ -114,19 +118,58 @@ const JobForm = () => {
 
       const result = await response.json();
       if (result.success) {
-        alert("Job added successfully");
+        setIsBuffering(false);
+
+        // alert("Job added successfully");
+        const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+        messageContainer.id = "i233"
+        messageContainer.textContent = 'Job Added Successfully';
+        
+        document.body.appendChild(messageContainer);
+
+        // Remove the message after a few seconds
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
         window.location.reload();
       } else {
-        alert("Error generated");
-        console.error('Error adding job:', result.message);
+        setIsBuffering(false);
+
+        const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+        messageContainer.textContent = 'Job Not Created : '+ result.message;
+        
+        document.body.appendChild(messageContainer);
+
+        // Remove the message after a few seconds
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
       }
     } catch (err) {
-      console.error('Error occurred during form submission:', err);
+      setIsBuffering(false);
+
+        const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+        messageContainer.textContent = 'Job Not Created : ' + err.message;
+        
+        document.body.appendChild(messageContainer);
+
+        // Remove the message after a few seconds
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
     }
   };
 
   return (
     <div>
+      {isBuffereing &&<div className="buffer">
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+        </div>
+      </div>}
       <div className="job-page-container">
         {/* Sidebar */}
         <div className="sidebar">
