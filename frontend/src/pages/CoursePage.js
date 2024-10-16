@@ -47,7 +47,9 @@ const CoursePage = () => {
       <UserNavbar />
       <div className="search-container">
         <input
-          type="text"
+        id="course_search"
+          style={{ width:'80%', fontSize: '1.2rem',marginTop:"20px",borderRadius:"8px",border:"1px solid #eee",boxShadow:"2px 1px 4px 1px #bbb",padding:"10px" }}
+          
           placeholder="Search for a course..."
           value={searchTitle}
           onChange={handleSearch}

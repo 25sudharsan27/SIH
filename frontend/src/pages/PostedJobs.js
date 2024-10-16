@@ -14,6 +14,18 @@ function JobBoard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const jobsPerPage = 6;
+  
+  const GenerateErrorPopup = () =>{
+    const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+
+        messageContainer.textContent = 'Error in Getting data, try after some time';
+        
+        document.body.appendChild(messageContainer);
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
+  }
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -81,16 +93,19 @@ function JobBoard() {
     setCurrentPage(pageNumber);
   };
 
-  if (loading) {
-    return <div className="loading">Loading...</div>;
-  }
+ 
 
   if (error) {
-    return <div className="error">Error: {error}</div>;
+    GenerateErrorPopup();
   }
 
   return (
     <div id="i166" className="main">
+      {loading &&<div className="buffer">
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+      </div>
+    </div> }
       <div id="i258" className="sidebar">
           <div id="i163">
             <div id="i168"><Link id="i164" to="/organization/createjob" >Create Job</Link></div>

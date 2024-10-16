@@ -11,7 +11,7 @@
 
 .posted-jobs {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, max(300px, 1fr));
   /* border:1px solid black; */
   width: 80%;
   /* gap: 20px; */
@@ -187,6 +187,7 @@
 
 .company-log{
   height: 70px;
+  width:30%;
 }
 
 #view-search-id{

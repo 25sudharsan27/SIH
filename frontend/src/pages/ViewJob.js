@@ -26,6 +26,7 @@ function ViewJob() {
   useEffect(() => {
     // Define an async function inside useEffect
     const fetchJobData = async () => {
+      setLoading(true); // Set loading state to true
       // console.log("fetching url : "+process.env.REACT_APP_viewjobdetails_api)
       try {
         const response = await fetch(process.env.REACT_APP_viewjobdetails_api, {
@@ -45,7 +46,17 @@ function ViewJob() {
         setJobData(responseData.data); // Assuming responseData.data contains the job data
         console.log(responseData.data);
       } catch (error) {
-        console.error("Failed to fetch job data:", error);
+        
+        // console.error("Failed to fetch job data:", error);
+        const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+
+        messageContainer.textContent = "Failed to fetch job data. Please try again later.";
+        
+        document.body.appendChild(messageContainer);
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
       } finally {
         setLoading(false);
       }
@@ -108,16 +119,24 @@ function ViewJob() {
   };
   
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!jobData) {
-    return <div>No job data available.</div>;
-  }
+  
 
   return (
     <div id="i251">
+      {
+        loading && <div className="buffer">
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+        </div>
+      </div>
+      }
+      {
+        !jobData && <div className="buffer">
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+        </div>
+      </div>
+      }
       <div className="job-listing">
         {/* Header Section */}
         <div className="job-header">

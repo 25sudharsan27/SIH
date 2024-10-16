@@ -15,6 +15,7 @@ import HeatMap from './HeatMap';
 import leetcode from './images/leetcode.svg'
 import hackerrank from './images/hackerrank.svg'
 import github from './images/github.svg'
+import userIcon from './images/user-icon-svgrepo-com (1).svg'
 import {
   CitySelect,
   CountrySelect,
@@ -54,6 +55,7 @@ const ProfilePage =  () => {
 
   const [isAddProfileDetailsOpen, setIsAddProfileDetailsOpen] = useState(false);
 
+  const [loading,setLoading] = useState(false);
   const [userdata, setUserdata] = useState({
     name: '',
     tagline: '',
@@ -112,6 +114,8 @@ const ProfilePage =  () => {
   // Save updated about section
   const handleSaveAbout = async () => {
     setIsEditingAbout(false);
+    setLoading(true);
+    try{
     // console.log("aboutText : ", process.env.REACT_APP_saveabout_api);
     const updateUser = await fetch(process.env.REACT_APP_saveabout_api, {
       method: "POST",
@@ -123,12 +127,29 @@ const ProfilePage =  () => {
         "about": aboutText
       })
     });
+    
     const data = await updateUser.json();
+    setLoading(false);
+    
     // console.log("data : ", data);
     window.location.reload(); // Reload the page to clear state and redirect to login
+    }catch(error){
+      setLoading(false);
+      const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+
+        messageContainer.textContent = 'Error in Saving About Section';
+        
+        document.body.appendChild(messageContainer);
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
+    }
   };
 
   const handleUpdateDetails = async () => {
+    setLoading(true);
+
     try {
       const response = await fetch(process.env.REACT_APP_addskill_api, {
         method: "POST",
@@ -141,17 +162,23 @@ const ProfilePage =  () => {
       
       if (!response.ok) throw new Error('Failed to update profile details');
       window.location.reload();
+      setLoading(false);
     } catch (error) {
-      console.error(error);
+      setLoading(false);
+      // console.error(error);
     }
   };
 
   // Add a new skill
   const handleAddSkill = async () => {
     const newSkill = prompt('Enter new skill:');
+    
     if (newSkill) {
+      setLoading(true);
+
       const updatedSkills = [...skills, newSkill];
       setSkills(updatedSkills);
+      try{
       const updateUser = await fetch(process.env.REACT_APP_addskill_api, {
         method: process.env.REACT_APP_addskill_method,
         credentials: 'include',
@@ -164,17 +191,42 @@ const ProfilePage =  () => {
       });
       const data = await updateUser.json();
       // console.log("data : ", data);
+      setLoading(false);
       window.location.reload(); // Reload the page to clear state and redirect to login
+    }catch(error){
+      setLoading(false);
+      const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+
+        messageContainer.textContent = 'Error in Adding Skill';
+        
+        document.body.appendChild(messageContainer);
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
+    }
+    setLoading(false);
     }
   };
 
   // Add a new project
   const handleAddProject = async () => {
+    setLoading(true);
     if (!newProject.title || !newProject.description) {
-      alert("Please enter title and description for the project");
+      const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+
+        messageContainer.textContent = ("Please enter title and description for the project");
+        
+        document.body.appendChild(messageContainer);
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
+        setLoading(false);
       return;
     }
     // Send new project data to the server (optional)
+    try{
     const updateUser = await fetch(process.env.REACT_APP_addproject_api, {
       method: process.env.REACT_APP_addproject_method,
       credentials: 'include',
@@ -189,11 +241,27 @@ const ProfilePage =  () => {
     // console.log("data : ", data);
     setIsAddProjectModalOpen(false);
     window.location.reload(); // Reload the page to clear state and redirect to login
+    setLoading(false);  
+  }catch(error){
+      setLoading(false);
+      const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+
+        messageContainer.textContent = 'Error in Adding Project';
+        
+        document.body.appendChild(messageContainer);
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
+    }
   };
 
   // Add a new experience
   const handleAddExperience = async () => {
+    setLoading(true);
+
     // Send new experience data to the server (optional)
+    try{
     const updateUser = await fetch(process.env.REACT_APP_addexperience_api , {
       method: process.env.REACT_APP_addexperience_method,
       credentials: 'include',
@@ -205,12 +273,28 @@ const ProfilePage =  () => {
       })
     });
     const data = await updateUser.json();
+    setLoading(false);
     // console.log("data : ", data);
     setIsAddExperienceModalOpen(false);
     window.location.reload(); // Reload the page to clear state and redirect to login
+    }catch(error){
+      setLoading(false);
+      const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+
+        messageContainer.textContent = 'Error in Adding Experience';
+        
+        document.body.appendChild(messageContainer);
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
+    }
   };
 
   const handleAddEducation = async () => {
+    setLoading(true);
+
+    try{
     // Send new experience data to the server (optional)
     const updateUser = await fetch(process.env.REACT_APP_addexperience_api , {
       method: process.env.REACT_APP_addexperience_method,
@@ -225,7 +309,20 @@ const ProfilePage =  () => {
     const data = await updateUser.json();
     // console.log("data : ", data);
     setIsShowMoreEducationOpen(false);
+    setLoading(false);
     window.location.reload(); // Reload the page to clear state and redirect to login
+    }catch(error){
+      setLoading(false);
+      const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+
+        messageContainer.textContent = 'Error in Adding Education';
+        
+        document.body.appendChild(messageContainer);
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
+    }
   };
 
 
@@ -252,17 +349,27 @@ const ProfilePage =  () => {
   
 
   // If no user data is available yet
-  if (!userData) return <p>Loading...</p>;
+  if (!userData){ return (<div className="buffer">
+  <div className="loading-container">
+    <div className="loading-spinner"></div>
+  </div>
+</div>)
+  }
 
   return (
     
     <div className="container">
       {/* Profile Header */}
+      {loading&&<div className="buffer">
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+      </div>
+    </div>}
       <div className="profile-header">
           <div className="profile-left">
           <img
 
-            src={userData.profilepic || dummyIcon}
+            src={userIcon}
             alt="Profile Picture"
             className="profile-picture"
           />
@@ -298,23 +405,26 @@ const ProfilePage =  () => {
       <div className="complete">
         <div className="about">
           {/* About Section */}
-          <div className="about1">
-          <div className="about-section">
+          <div className="about1" id="i302">
+          <div id="i303" className="about-section">
             <div className="about-section-a">
               <div className='simply'>
                 <h3>About</h3>
                 {isEditingAbout ? (
                   <img onClick={handleSaveAbout} className='editbtn' src={saveIcon}></img>
                 ) : (
-                  <img className='editbtn' onClick={() => setIsEditingAbout(true)} src={editIcon}></img>
+                  <img className='editbtn' onClick={() => setIsEditingAbout(true)} src={edit}></img>
                 )}
               </div>
               {isEditingAbout ? (
+              
                 <textarea
+                  id="i303"
                   value={aboutText}
                   onChange={(e) => setAboutText(e.target.value)}
                   className="about-text"
                 />
+                
               ) : (
                 <p>{userData.about}</p>
               )}
@@ -325,7 +435,7 @@ const ProfilePage =  () => {
             <div className="skill-section-a">
               <div className='simply'>
                 <h3>Skills</h3>
-                <img className="addskill editbtn" onClick={handleAddSkill} src={editIcon}></img>
+                <img className="addskill editbtn" onClick={handleAddSkill} src={edit}></img>
               </div>
               <div className="skills-list">
                 {(userData.skills || []).map((skill, index) => (
@@ -348,9 +458,11 @@ const ProfilePage =  () => {
                 <p>{experience.company}</p>
               </div>
               <div id="exp1">
+                <div>
                 <h4 id="hi10" className="title">{experience.title}</h4>
                 <p  id="hi11">{new Date(experience.startDate).toLocaleDateString()} - {experience.endDate ? new Date(experience.endDate).toLocaleDateString() : 'Present'}</p>
                 <p className="description">{experience.description}</p>
+                  </div>
               </div>
             </div>
           ))}
@@ -390,9 +502,11 @@ const ProfilePage =  () => {
                 <p>{experience.institution}</p>
               </div>
               <div id="exp1">
+                <div>
                 <h4 id="hi10" className="title">{experience.title}</h4>
                 <p  id="hi11">{new Date(experience.startDate).toLocaleDateString()} - {experience.endDate ? new Date(experience.endDate).toLocaleDateString() : 'Present'}</p>
                 <p className="description">{experience.description}</p>
+                </div>
               </div>
             </div>
           ))}

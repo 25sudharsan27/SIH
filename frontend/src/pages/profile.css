@@ -68,7 +68,12 @@
     font-weight: 500;
     width:80%;
 }
-
+#i303{
+    height:200px;
+}
+#i302{
+    width:100%;
+}
 .about-section-a h3{
     font-size:xx-large;
 }
@@ -82,8 +87,9 @@
 }
 .about1{
     display:flex;
-    justify-content: center;
-    align-items: center;
+    /* align-items:start; */
+    /* justify-content: center; */
+    /* align-items: center; */
 
 }
 
@@ -114,6 +120,8 @@
     justify-content: center;
 }
 .exp-h3{
+    margin-top:50px;
+    margin-bottom:30px;
     font-size:xx-large;
     margin-left:60px;
 }
@@ -123,7 +131,7 @@
     display:flex;
     margin:10px 50px;
     width:70%;
-    box-shadow: 2px 1px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 2px 2px 2px hsla(0, 0%, 50%, 0.262);
 }
 .centerIt{
     display: flex;
@@ -160,6 +168,7 @@
 }
 
 .projects-section{
+    /* padding:10px; */
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     max-width:80%;
@@ -167,9 +176,11 @@
 }
 
 .project-item{
+
     border-radius:10px;
-    box-shadow: 2px 1px 10px rgba(0, 0, 0, 0.1);
-    padding:10px;
+    box-shadow: 2px 2px 2px 2px hsla(0, 0%, 50%, 0.262);
+
+    padding:25px;
     min-height: 200px;
     display: flex;
     flex-direction: column;
@@ -230,8 +241,13 @@
 
 
 #exp1{
+    width:100%;
+    display:flex;
+    
+    justify-content: center;
+    align-items: center;
     margin-left:30px;
-    margin-top:30px;
+    /* margin-top:30px; */
 }
 
 .iconnn{
@@ -400,7 +416,7 @@
         max-width: 80%;
     }
     .project-item{
-        padding: 5px;
+        padding: 25px;
     }
     
     

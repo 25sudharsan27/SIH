@@ -47,6 +47,15 @@ function JobBoard() {
             });
           }
         } catch (error) {
+          const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+
+        messageContainer.textContent = ('Error fetching job. Please try again later.');
+        
+        document.body.appendChild(messageContainer);
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
           console.error('Error fetching job:', error);
         }
       }
@@ -66,6 +75,7 @@ function JobBoard() {
   };
 
   return (
+    
     <div  className="job-board">
       <div id="i256" className="posted-jobs-container">
         <div className="posted-jobs">

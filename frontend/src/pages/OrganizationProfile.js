@@ -58,7 +58,13 @@ const OrganizationProfile = () => {
     }
   };
 
-  if (!organizationData) return <p>Loading...</p>;
+  if (!organizationData) {
+    return (<div className="buffer">
+    <div className="loading-container">
+      <div className="loading-spinner"></div>
+    </div>
+  </div>)
+  }
 
   return (
     <div className="container">

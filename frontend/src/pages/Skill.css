@@ -1,5 +1,5 @@
 .skill-box{
-    border: 1px solid grey;
+    /* border: 1px solid grey; */
     border-radius: 20px;
     box-shadow: 2px 2px 2px 2px hsla(0, 0%, 50%, 0.375);
     min-width : 250px;
@@ -8,6 +8,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+#i290{
+    color: #464D5F;
+
 }
 .skill-top{
     display: flex;
@@ -19,7 +23,7 @@
 }
 .skill-name{
     font-size: 20px;
-    font-weight: 600;
+    /* font-weight: 600; */
     padding-bottom: 20px;
 }
 .skill-left{

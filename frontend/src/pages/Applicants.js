@@ -88,7 +88,11 @@ const Applicants = () => {
                 <div className="main-content">
                     <Header jobDetails={jobDetails} />
                     {loading ? (
-                        <p>Loading applicants...</p> // Show loading message
+                        <div className="buffer">
+                        <div className="loading-container">
+                          <div className="loading-spinner"></div>
+                        </div>
+                      </div> // Show loading message
                     ) : (
                         applicantsData.map((applicant, index) => (
                             

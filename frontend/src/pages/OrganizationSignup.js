@@ -155,6 +155,13 @@ const JobSeekerSignup = () => {
 
   return (
     <div className="signup-container">
+      {
+        isBuffereing && <div className="buffer">
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+        </div>
+      </div>
+      }
       <h1 className="form-title">Organization or Job Provider</h1>
       <div id="i145" className="signup-form">
         <h2 id="i146" className="form-subtitle">Signup</h2>

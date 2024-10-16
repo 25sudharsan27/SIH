@@ -165,7 +165,11 @@ function JobBoard() {
       </div>
 
       {/* Show loading indicator if API call is in progress */}
-      {loading && <p>Loading jobs...</p>}
+      {loading &&<div className="buffer">
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+        </div>
+      </div>}
 
       {/* Show error message if any error occurs */}
       {error && <p className="error-message">{error}</p>}
