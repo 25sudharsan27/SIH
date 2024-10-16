@@ -91,7 +91,7 @@ function JobBoard() {
 
   return (
     <div id="i166" className="main">
-      <div className="sidebar">
+      <div id="i258" className="sidebar">
           <div id="i163">
             <div id="i168"><Link id="i164" to="/organization/createjob" >Create Job</Link></div>
             <div id="i168"><Link id="i164"  to="/organization/postedjobs" className="high">Posted Jobs</Link></div>
@@ -99,7 +99,7 @@ function JobBoard() {
           </div>
         </div>
       <div className="job-board">
-        <div className="posted-jobs-container">
+        <div id="i256" className="posted-jobs-container">
           <div className="posted-jobs">
             {currentJobs.length > 0 ? currentJobs.map((job) => (
               <div key={job._id} className="job-card">

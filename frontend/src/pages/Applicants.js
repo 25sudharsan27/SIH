@@ -77,7 +77,7 @@ const Applicants = () => {
 
     return (
         <div className="job-page-container">
-            <div className="sidebar">
+            <div id="i258" className="sidebar">
           <div id="i163">
             <div id="i168"><Link id="i164" to="/organization/createjob" >Create Job</Link></div>
             <div id="i168"><Link id="i164"  to="/organization/postedjobs" className="high">Posted Jobs</Link></div>

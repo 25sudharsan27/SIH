@@ -172,8 +172,8 @@ const JobForm = () => {
       </div>}
       <div className="job-page-container">
         {/* Sidebar */}
-        <div className="sidebar">
-          <div id="i163">
+        <div id="i258"  className="sidebar">
+          <div  id="i163">
             <div id="i168"><Link id="i164" to="/organization/createjob" className="high">Create Job</Link></div>
             <div  id="i168"><Link id="i164"  to="/organization/postedjobs">Posted Jobs</Link></div>
             <div  id="i168"><Link id="i164" to="/organization/closedjobs">Closed Jobs</Link></div>

@@ -1,4 +1,5 @@
 /* Container to hold both the sidebar and main content */
+
 .job-page-container {
   display: flex;
   
@@ -175,7 +176,7 @@ aside{
   }
 
   #i169{
-    width:80%;
+    box-sizing: border-box;
   }
   .sidebar {
     min-width: 100%;
@@ -228,12 +229,17 @@ aside{
     
   }
   #i163{
+    box-sizing: border-box;
     display:flex;
-    width:100%;
     justify-content:space-evenly;
 
   }
   #i168{
     margin:0px;
   }
+}
+
+
+#i258{
+  box-sizing: border-box;
 }

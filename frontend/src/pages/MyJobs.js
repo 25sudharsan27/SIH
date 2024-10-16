@@ -66,8 +66,8 @@ function JobBoard() {
   };
 
   return (
-    <div className="job-board">
-      <div className="posted-jobs-container">
+    <div  className="job-board">
+      <div id="i256" className="posted-jobs-container">
         <div className="posted-jobs">
           {currentJobs.map((job) => (
             <div key={job._id} className="job-card">

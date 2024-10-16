@@ -114,7 +114,7 @@ function JobBoard() {
   }
 
   return (
-    <div>
+    <div >
       <div className="search-bar">
         <div className="filters">
           {/* Experience Level Dropdown */}
@@ -171,8 +171,8 @@ function JobBoard() {
       {error && <p className="error-message">{error}</p>}
 
       {/* Job Board */}
-      <div className="job-board">
-        <div className="posted-jobs-container">
+      <div   className="job-board">
+        <div id="i256" className="posted-jobs-container">
           <div className="posted-jobs">
             {currentJobs.length > 0 ? (
               currentJobs.map((job) => (

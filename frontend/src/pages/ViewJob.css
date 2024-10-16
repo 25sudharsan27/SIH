@@ -96,7 +96,17 @@
   .filter-btn:active{
     background-color: #2e4a7a;
   } */
+#i257{
+  border:1px solid black;
+}
+  #i256{
+    box-sizing: border-box;
+    margin-left:2px;
+  }
+  #i251{
+    box-sizing: border-box;
 
+  }
 
 #i155{
   width:100%;
@@ -126,9 +136,6 @@
   font-size:20px;
   margin-top:50px;
   
-}
-#i157{
-  margin-left:40px;
 }
 
   body {
@@ -166,7 +173,7 @@
   
   .job-title-section {
     flex: 1;
-    margin-left: 20px;
+    /* margin-left: 20px; */
     
   }
   
