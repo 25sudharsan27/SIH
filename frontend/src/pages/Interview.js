@@ -38,9 +38,7 @@ function Interview() {
     fetchSkills();
   }, []);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  
 
   if (error) {
     return <p>Error: {error.message}</p>;
@@ -48,6 +46,11 @@ function Interview() {
 
   return (
     <div className='containerr'>
+      {loading &&<div className="buffer">
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+        </div>
+      </div>}
       <div className='none'>
         <p>AI-Interview</p>
         <div className='interview-box'>

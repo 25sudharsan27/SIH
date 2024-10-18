@@ -74,7 +74,11 @@ const Posts = () => {
               </div>
             ))
           ) : (
-            <p>No posts available</p>
+            <div className="buffer">
+              <div className="loading-container">
+                <div className="loading-spinner"></div>
+              </div>
+            </div>
           )}
         </div>
       </div>
