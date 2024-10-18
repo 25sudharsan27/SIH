@@ -118,20 +118,15 @@ function ViewJob() {
     }
   };
   
-
+  if (!jobData) {
+    return <div>Loading...</div>;
+  }
   
 
   return (
     <div id="i251">
       {
         loading && <div className="buffer">
-        <div className="loading-container">
-          <div className="loading-spinner"></div>
-        </div>
-      </div>
-      }
-      {
-        !jobData && <div className="buffer">
         <div className="loading-container">
           <div className="loading-spinner"></div>
         </div>
