@@ -25,6 +25,7 @@ import "react-country-state-city/dist/react-country-state-city.css";
 
 
 
+
 // import profile from './images/logesh.jpg'
 import './Model.css';
 
@@ -367,18 +368,25 @@ const ProfilePage =  () => {
     </div>}
       <div className="profile-header">
           <div className="profile-left">
+
+          <div id="i400">
           <img
 
             src={userIcon}
             alt="Profile Picture"
             className="profile-picture"
           />
-          <img onClick={() => setIsAddProfileDetailsOpen(true)} className='editbtn' style={{height:"10px",margin:"10px"}} src={edit} alt="edit" />
-          <h2 style={{fontFamily:"Poppins"}} id="pro-name">{userData.name}</h2>
-          <p style={{fontFamily:"Poppins"}}>{userData.tagline}</p>
-          <p className="location">
+          </div>
+          <div id="i402">
+          <img onClick={() => setIsAddProfileDetailsOpen(true)} className='editbtn' style={{height:"10px"}} src={edit} alt="edit" />
+
+          </div>
+          <h2 style={{fontFamily:"Poppins",fontWeight:"600"}} id="pro-name">{userData.name}</h2>
+          <p style={{fontFamily:"Poppins",fontSize:"14px"}}>{userData.tagline}</p>
+          <p style={{fontSize:"14px"}} className="location">
             {userData.city}, {userData.state}, {userData.country}
           </p>
+
           </div>
 
 
@@ -409,11 +417,11 @@ const ProfilePage =  () => {
           <div id="i303" className="about-section">
             <div className="about-section-a">
               <div className='simply'>
-                <h3>About</h3>
+                <h3 >About</h3>
                 {isEditingAbout ? (
                   <img onClick={handleSaveAbout} className='editbtn' src={saveIcon}></img>
                 ) : (
-                  <img className='editbtn' onClick={() => setIsEditingAbout(true)} src={edit}></img>
+                  <img className='editbtn' onClick={() => setIsEditingAbout(true)} src={editIcon}></img>
                 )}
               </div>
               {isEditingAbout ? (
@@ -426,7 +434,7 @@ const ProfilePage =  () => {
                 />
                 
               ) : (
-                <p>{userData.about}</p>
+                <p id="405" style={{fontWeight:"400",fontSize:"15px"}}>{userData.about}</p>
               )}
             </div>
           </div>
@@ -435,7 +443,7 @@ const ProfilePage =  () => {
             <div className="skill-section-a">
               <div className='simply'>
                 <h3>Skills</h3>
-                <img className="addskill editbtn" onClick={handleAddSkill} src={edit}></img>
+                <img className="addskill editbtn" onClick={handleAddSkill} src={editIcon}></img>
               </div>
               <div className="skills-list">
                 {(userData.skills || []).map((skill, index) => (
@@ -448,20 +456,23 @@ const ProfilePage =  () => {
         </div>
 
         {/* Experience Section */}
-        <h3 className="exp-h3">Experiences</h3>
+        <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+</style>
+        <h3 style={{fontWeight:"700"}} className="exp-h3">Experiences</h3>
         <div className="experience-section">
           {(userData.experiences || []).slice(0, visibleExperiencesCount).map((experience, index) => (
             <div key={index} className="experience-item">
               <div className="experience-item-a">
                 <img src={(experience.company === 'Amazon')?Amazon:
                   (experience.company === 'Google')?Google:'' || experience.media[0]} alt={experience.company} className="company-logo" />
-                <p>{experience.company}</p>
+                <p id="i401">{experience.company}</p>
               </div>
               <div id="exp1">
                 <div>
-                <h4 id="hi10" className="title">{experience.title}</h4>
-                <p  id="hi11">{new Date(experience.startDate).toLocaleDateString()} - {experience.endDate ? new Date(experience.endDate).toLocaleDateString() : 'Present'}</p>
-                <p className="description">{experience.description}</p>
+                <h4 id="hi10" className="title" >{experience.title}</h4>
+                <p  id="hi11" style={{fontWeight:"500"}} >{new Date(experience.startDate).toLocaleDateString()} - {experience.endDate ? new Date(experience.endDate).toLocaleDateString() : 'Present'}</p>
+                <p className="description" style={{marginTop:"20px",fontWeight:"400"}}>{experience.description}</p>
                   </div>
               </div>
             </div>
@@ -473,13 +484,15 @@ const ProfilePage =  () => {
         </div>
 
         {/* Projects Section */}
-        <h3 className="exp-h3">Projects</h3>
+        <h3 style={{marginTop:"100px"}} className="exp-h3">Projects</h3>
         <div className="pro">
           <div className="projects-section">
             {(userData.projects || []).slice(0, visibleProjectsCount).map((project, index) => (
               <div key={index} className="project-item">
-                <h4 className="project-item-t">{project.title}</h4>
-                <p className="project-item-s">{project.description}</p>
+                <div style={{width:"100%",display:"flex",justifyContent:"center",alignItems:"center"}}>
+                <h4 className="project-item-t" style={{fontSize:"17px"}}>{project.title}</h4>
+                </div>
+                <p className="project-item-s" style={{fontWeight:"500"}}>{project.description}</p>
                 <div className='project-link-holder'>
                   {project.link && <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">View Project</a>}
                   <img className='editbtn' src={linkIcon}></img>
@@ -492,7 +505,7 @@ const ProfilePage =  () => {
           </div>
           <a href="#" className="add-more-projects" onClick={() => setIsAddProjectModalOpen(true)}>Add Project</a>
         </div>
-        <h3 className="exp-h3">Education</h3>
+        <h3 style={{marginTop:"100px"}} className="exp-h3">Education</h3>
         <div className="experience-section">
           {(userData.education || []).slice(0, visibleExperiencesCount).map((experience, index) => (
             <div key={index} className="experience-item">
@@ -505,7 +518,7 @@ const ProfilePage =  () => {
                 <div>
                 <h4 id="hi10" className="title">{experience.title}</h4>
                 <p  id="hi11">{new Date(experience.startDate).toLocaleDateString()} - {experience.endDate ? new Date(experience.endDate).toLocaleDateString() : 'Present'}</p>
-                <p className="description">{experience.description}</p>
+                <p className="description" style={{fontWeight:"500"}}>{experience.description}</p>
                 </div>
               </div>
             </div>

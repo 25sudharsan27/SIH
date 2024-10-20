@@ -2,6 +2,7 @@
     height: 10px;
     width: 10px;
     background: white;
+    margin:2px;
 }
 .grid-container{
     display: grid;
@@ -12,7 +13,10 @@
 }
 
 .activate{
-    background: #3C5AA5;
+    background: #2E4A73;
+}
+.light{
+    background-color: #818CA0;
 }
 
 @media (max-width: 1000px){

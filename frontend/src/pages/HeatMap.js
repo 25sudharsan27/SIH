@@ -4,7 +4,7 @@ import './HeatMap.css';
 function colorIt() {
     // Generate a random number between 1 and 10
     var x = Math.ceil(Math.random() * 10);
-    return x <= 5;
+    return x;
 }
 
 function HeatMap({ msg }) {
@@ -14,12 +14,12 @@ function HeatMap({ msg }) {
   return (
     <div>
       <div>
-        <p>{msg}</p>
+        <p style={{fontWeight:"600",marginLeft:"10px",fontSize:"14px"}}>{msg}</p>
       </div>
       <div className='grid-container'>
         {/* Use map to render grid items dynamically */}
         {gridItems.map((_, index) => (
-          <div key={index} className={colorIt() ? 'activate grid' : 'grid'}></div>
+          <div key={index} className={colorIt()<3 ? 'activate grid' : (colorIt()<6 ? 'grid' : "light grid")}></div>
         ))}
       </div>
     </div>

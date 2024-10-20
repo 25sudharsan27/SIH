@@ -1,5 +1,7 @@
 *{
     text-decoration: none;
+    color:#464D5F;
+
 
 }
 
@@ -16,20 +18,25 @@
     display: flex;
     align-items: center;
 }
+
+
+
 .profile-header{
-    width:100%;
+    box-shadow: inset 0px 5px 10px rgba(80, 80, 80, 0.5);    width:100%;
     padding-top:30px;
     padding-bottom:30px;
     display:flex;
     align-items: center;
     justify-content: space-evenly;
     /* padding: 50px 10%; */
-    background-color: hsla(0, 0%, 50%, 0.162);
+    background-color: #D9D9D9;
+    /* background-color: hsla(0, 0%, 50%, 0.162); */
 }
 .editbtn{
     height:25px;
     min-height: 25px;
     margin-left: 15px;
+    opacity: 0.7;
     cursor: pointer;
 }
 .about-section{
@@ -105,8 +112,8 @@
     padding: 15px;
     height:200px;
     overflow-y: scroll;
-    border:1px solid grey;
-    box-shadow: 5px 5px hsla(0, 0%, 50%, 0.584);
+    /* border:1px solid grey; */
+    box-shadow: 2px 2px 2px 2px hsla(0, 0%, 50%, 0.262);
     border-radius: 10px;
     width: 60%;
 }
@@ -114,9 +121,11 @@
 
 .experience-section{
     margin:0px 60px;
+    margin-top:60px;
+
     display:flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
 }
 .exp-h3{
@@ -129,9 +138,11 @@
     padding:20px;
     border-radius:12px;
     display:flex;
-    margin:10px 50px;
-    width:70%;
-    box-shadow: 2px 2px 2px 2px hsla(0, 0%, 50%, 0.262);
+    margin:10px 30px;
+
+    width:50%;
+    /* border:1px solid black; */
+    /* box-shadow: 2px 2px 2px 2px hsla(0, 0%, 50%, 0.262); */
 }
 .centerIt{
     display: flex;
@@ -155,16 +166,20 @@
     font-size: 16px;
 }
 
+
 .experience-item-a{
+    /* width:100px; */
     display:flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     flex-basis: 30%;
-    min-height: 150px;
+    padding: 30px;
+    /* min-height: 150px; */
     border-radius: 15px;
     box-shadow: 2px 2px 2px 2px hsla(0, 0%, 50%, 0.262);
     margin-right: 10px;
+
 }
 
 .projects-section{
@@ -193,6 +208,7 @@
 }
 
 .project-item-s{
+    font-size:small;
     font-weight:100;
 }
 
@@ -208,13 +224,22 @@
     justify-content: flex-end;
 }
 
+#i400{
+    padding:20px;
+    box-shadow: 2px 2px 2px 2px hsla(0, 0%, 50%, 0.262);
+    border-radius: 15px;
+    background-color: white;
+}
+
+.experience-item-a p{
+    font-size:x-large;
+}
 
 .profile-picture{
-    height:200px;
-    width: 200px;
-    background: white;
-    box-shadow: 1px 1px 1px 1px rgba(255, 255, 255, 0.608);
-    border-radius: 15px;
+    height:170px;
+    width: 170px;
+
+    
 }
 
 #pro-name{
@@ -223,6 +248,9 @@
 
 .company-logo{
     height: 120px;
+    margin-left:20px;
+    margin-right:20px;
+    margin-bottom:10px;
 }
 
 .add-more-projects{
@@ -235,8 +263,9 @@
     display:flex;
     flex-direction:column;
     width:300px;
-    align-items: center;
-    justify-content: center;
+    /* align-items: center; */
+    align-items:flex-start;
+    justify-content: flex-start;
 }
 
 
@@ -259,6 +288,13 @@
     text-decoration: none;
 }
 
+
+
+.profile-left h2,p{
+    margin-top:-50px;
+    color:#464D5F;
+}
+
 .heatmap-container{
     display: flex;
 }
@@ -279,6 +315,21 @@
     text-decoration: none;
 }
 
+#i402{
+    width:100%;
+    display:flex;
+    justify-content: flex-end;
+    /* margin-left: -50px; */
+    margin-top:60px;
+    align-items: center;
+}
+
+#pro-name{
+    font-size: xx-large;
+}
+#hi11{
+    font-size:large;
+}
 
 
 @media (max-width: 1000px){
@@ -290,7 +341,7 @@
         width:200px;
     }
     #pro-name{
-        font-size: large;
+        font-size: x-large;
     }
     .location{
         font-size: small;
@@ -354,11 +405,16 @@
     }
     .experience-section{
         margin:0px;
+        align-items: center;
+
 
     }
+
+   
     .experience-item{
         height:150px;
         margin:0px;
+        width:80%;
         
     }
     .experience-item-a{
@@ -423,6 +479,12 @@
 }
 
 @media (max-width: 450px){
+    #i407{
+        margin-top: 30px;
+    }
+    #i406{
+        font-size:small;
+    }
     #hi10{
         font-size:12px;
     }
