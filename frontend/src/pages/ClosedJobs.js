@@ -77,16 +77,18 @@ function JobBoard() {
             {currentJobs.length > 0 ? currentJobs.map((job) => (
               <div key={job._id} className="job-card">
                 <div className="title">
-                  <img src={job.img || google} alt={job.title} className='logo'/>
+                  <img src={job.img || google} alt={job.title} />
                   <h3>{job.title}</h3>
                 </div>
                 <div className="bodies">
                   <div id="i412" className="texts">
-                    <p>{job.city}</p>
-                    <p>{job.state}</p>
+                    <p>{job.city}, {job.state},</p>
                     <p>{job.country}</p>
-                    <p><b>{job.workMode}</b> - {job.experienceLevel}</p>
-                    <p><b>Stipend:</b> {job.stipend}</p>
+                    
+                  </div>
+                  <div id="i412">
+                  <p><b>{job.workMode}</b> - {job.experienceLevel}</p>
+                  <p><b>Stipend:</b> {job.stipend}</p>
                   </div>
               
                 </div>

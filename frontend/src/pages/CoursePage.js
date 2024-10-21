@@ -59,7 +59,7 @@ const CoursePage = () => {
       {error && <p className="error">{error}</p>}
       {filteredEntry ? (
         <div className="course-info">
-          <h1>{filteredEntry.Title}</h1>
+          <h1 style={{fontFamily:"Poppins"}}>{filteredEntry.Title}</h1>
           <p><strong>Tag:</strong> {filteredEntry.Tag}</p>
 
           <section>

@@ -44,7 +44,7 @@ transition: transform 0.3s ease;
 }
 
 .card:hover{
-  transform: scale(1.02);
+  background: linear-gradient(135deg, #e0f7fa, #f0f4f5);  transform: scale(1.02);
 }
 
 .card h2 {

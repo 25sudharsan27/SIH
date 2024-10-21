@@ -86,7 +86,7 @@ function JobBoard() {
                 <h3>{job.title}</h3>
               </div>
               <div className="bodies">
-                <div className="texts">
+                <div id="i412" className="texts">
                   <p>{`${job.city}, ${job.state}, ${job.country}`}</p>
                   <p><b>{job.workMode}</b> - {job.experienceLevel}</p>
                   <p><b>Stipend:</b> {job.stipend}</p>

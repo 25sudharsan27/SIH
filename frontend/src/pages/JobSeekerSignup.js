@@ -8,6 +8,9 @@ import {
 } from "react-country-state-city";
 import "react-country-state-city/dist/react-country-state-city.css";
 
+import eye from './images/eye.png';
+import hidden from './images/hidden.png';
+
 const JobSeekerSignup = () => {
   // State variables for form fields
   const [name, setName] = useState('');
@@ -188,7 +191,7 @@ const JobSeekerSignup = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <span onClick={togglePasswordVisibility} className="password-toggle">
-              {showPassword ? '🙈' : '👁️'}
+              {showPassword ? <img src={hidden} alt='👁️' style={{width:'20px'}}/> : <img src={eye} alt='👁️' style={{width:'20px'}}/>}
             </span>
           </div>
           <div className="password-container">
@@ -201,7 +204,7 @@ const JobSeekerSignup = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
             <span onClick={toggleConfirmPasswordVisibility} className="password-toggle">
-              {showConfirmPassword ? '🙈' : '👁️'}
+              {showConfirmPassword ? <img src={hidden} alt='👁️' style={{width:'20px'}}/> : <img src={eye} alt='👁️' style={{width:'20px'}}/>}
             </span>
           </div>
 

@@ -414,7 +414,7 @@ const ProfilePage =  () => {
         <div className="about">
           {/* About Section */}
           <div className="about1" id="i302">
-          <div id="i303" className="about-section">
+          <div  className="about-section">
             <div className="about-section-a">
               <div className='simply'>
                 <h3 >About</h3>

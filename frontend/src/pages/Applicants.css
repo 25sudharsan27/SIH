@@ -23,7 +23,7 @@
   
   .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     margin-bottom: 40px;
   }
@@ -83,7 +83,7 @@
 
   .resume-section {
     margin-top: 20px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 2px 2px 2px hsla(0, 0%, 50%, 0.262);
     width:70%;
     padding:25px;
 
@@ -102,6 +102,7 @@
   
 
   .hided{
+
     display:flex;
     justify-content: space-between;
 
@@ -115,6 +116,7 @@
 
 
   #i196{
+    font-weight: 500;
     font-size:14px;
   }
 

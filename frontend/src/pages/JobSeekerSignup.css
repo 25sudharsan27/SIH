@@ -1,3 +1,5 @@
+
+
 /* Signup Container */
 .signup-container {
   display: flex;
@@ -9,6 +11,8 @@
 
 /* Form Title */
 .form-title {
+  font-family: 'Poppins', sans-serif;
+
   font-size: 32px;
   font-weight: bold;
   margin-bottom: 40px;
@@ -20,6 +24,8 @@
 
 /* Signup Form */
 .signup-form {
+  font-family: 'Poppins', sans-serif;
+
   background: #ffffff;
   /* White background */
   border-radius: 10px;
@@ -36,6 +42,8 @@
 
 /* Form Subtitle */
 .form-subtitle {
+  font-family: 'Poppins', sans-serif;
+
   font-size: 24px;
   margin-bottom: 20px;
   color: #333;
@@ -109,6 +117,8 @@
   transform: scale(1.05);
 }
 
+#i147{
+}
 /* Padding Adjustment for Password Field */
 #pwd {
   margin-top: -10px;

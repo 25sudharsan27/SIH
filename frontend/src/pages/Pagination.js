@@ -38,10 +38,12 @@ function Pagination({ totalPages, currentPage, onPageChange }) {
   return (
     <div className="pagination">
       <button
+        id="i417"
         className="pagination-button"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
+        {`<  `}{` `}{` `}
         Previous
       </button>
 
@@ -56,11 +58,13 @@ function Pagination({ totalPages, currentPage, onPageChange }) {
       ))}
 
       <button
+        id="i418"
         className="pagination-button"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
         Next
+        {`  `}{` `}{`>`}
       </button>
     </div>
   );

@@ -77,7 +77,14 @@
 }
 #i303{
     height:200px;
+    font-size: 14px;
+    border-radius:12px;
+    outline: none;
+  border: none;
+    box-shadow: 2px 2px 2px 2px hsla(0, 0%, 50%, 0.262);
+
 }
+
 #i302{
     width:100%;
 }
