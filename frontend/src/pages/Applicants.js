@@ -107,7 +107,7 @@ const Applicants = () => {
 
 const Header = ({ jobDetails }) => (
     <div className="header">
-        <img src="logo.png" alt="Logo" className="logo" />
+        {/* <img src="logo.png" alt="Logo" className="logo" /> */}
         <h1 id="i191">{jobDetails?.title} Applications</h1>
         <p>{jobDetails?.city}, {jobDetails?.state}<br></br> {jobDetails?.country}</p>
     </div>

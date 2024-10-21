@@ -123,15 +123,15 @@ function JobBoard() {
                   <h3>{job.title}</h3>
                 </div>
                 <div className="bodies">
-                  <div className="texts">
+                  <div id="i412" className="texts">
                     <p>{job.city}</p>
                     <p>{job.state}</p>
                     <p>{job.country}</p>
-                    <p><b>{job.workMode}</b> - {job.experienceLevel}</p>
+                    <p><b>{job.workMode}</b> -<b> {job.experienceLevel}</b></p>
                     <p><b>Stipend:</b> {job.stipend}</p>
                   </div>
                   <div className="job-actions">
-                    <button onClick={()=>{navigator("../applicants/"+job._id)}} className="edit-btn">View Applicants</button>
+                    <button onClick={()=>{navigator("../applicants/"+job._id)}} className="i411">View Applicants</button>
                     <button 
                       className="close-btn" 
                       onClick={() => handleCloseJob(job._id)}

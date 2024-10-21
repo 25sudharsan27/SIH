@@ -8,7 +8,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition : transform 0.3s ease;
 }
+
+.skill-box:hover{
+    transform: scale(1.02);
+}
+
 #i290{
     color: #464D5F;
 

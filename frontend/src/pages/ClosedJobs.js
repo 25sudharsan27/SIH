@@ -81,7 +81,7 @@ function JobBoard() {
                   <h3>{job.title}</h3>
                 </div>
                 <div className="bodies">
-                  <div className="texts">
+                  <div id="i412" className="texts">
                     <p>{job.city}</p>
                     <p>{job.state}</p>
                     <p>{job.country}</p>
