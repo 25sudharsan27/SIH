@@ -125,6 +125,7 @@ body {
 
 /* Sudharsan Styles */
 .sudharsan {
+    
     position: fixed;
     top: 0;
     left: 0;
@@ -133,8 +134,14 @@ body {
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
 }
+.sudharsan.open + .overlay {
+    opacity: 1;
+    pointer-events: auto; /* Prevent clicks on background when sidebar is open */
+}
 
 .sudharsan.open {
+    /* other than this sudharsan everything has to get greyish in background  */ 
+    z-index:1000000000;
     transform: translateX(0);
 }
 

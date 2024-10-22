@@ -11,6 +11,7 @@ import logout from './Images/log-out-1-svgrepo-com.svg';
 import profile from './Images/profile.svg';
 import mentorship from './Images/mentorship.svg';
 import userimg from './Images/user-icon-svgrepo-com (1).svg'
+import { useRef } from 'react';
 
 // Function to clear specific cookies
 const clearCookie = (name) => {
@@ -31,10 +32,37 @@ const UserNavbar = () => {
     const [isDropdownVisible, setDropdownVisible] = useState(false);
     const [nav, setNav] = useState("");
     const [isOpen, setIsOpen] = useState(false);
-
+    const [isDropdownTwoVisible, setDropdownTwoVisible] = useState(false);
+    const dropdownTwoRef = useRef(null);
     const toggleDropdown = () => {
         setDropdownVisible(!isDropdownVisible);
     };
+
+    const toggleDropdownTwo = () => {
+        setDropdownTwoVisible(!isDropdownTwoVisible);
+        if (isDropdownVisible) setDropdownVisible(false); // Close first dropdown
+    };
+
+    const dropdownRef = useRef(null); // Create a ref for the dropdown
+
+    
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                dropdownRef.current && !dropdownRef.current.contains(event.target) &&
+                dropdownTwoRef.current && !dropdownTwoRef.current.contains(event.target)
+            ) {
+                setDropdownVisible(false); // Close dropdown one if clicked outside
+                setDropdownTwoVisible(false); // Close dropdown two if clicked outside
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     const handleLogout = () => {
         clearCookie('token'); // Replace with your actual cookie names
@@ -70,15 +98,15 @@ const UserNavbar = () => {
             </div>
 
             {!isOpen && (
-                <button className="sudharsan-toggle" onClick={toggleSudharsan}>
+                <button className="sudharsan-toggle" ref={dropdownTwoRef} onClick={toggleDropdownTwo}>
                     ☰
                 </button>
             )}
 
-            <div className={`sudharsan ${isOpen ? 'open' : ''}`}>
+            <div className={`sudharsan ${isDropdownTwoVisible ? 'open' : ''}`}>
                 <div className="sudharsan-header">
                     <h2 className="sudharsan-title">Menu</h2>
-                    <button className="sudharsan-close" onClick={toggleSudharsan}>×</button>
+                  
                 </div>
                 <nav className="sudharsan-nav">
                     <div className="sudharsan-links">
@@ -93,14 +121,14 @@ const UserNavbar = () => {
 
             <div className="navbar-right">
                 <div className="navbar-righta">
-                    <div className={`profile-dropdown ${isDropdownVisible ? 'active' : ''}`}>
+                    <div className={`profile-dropdown`}>
                         <img 
                             src={userimg}
                             alt="Profile" 
                             className="profile-logo" 
                             onClick={toggleDropdown} 
                         />
-                        <div className="dropdown-content">
+                        <div  className={`dropdown-content ${isDropdownVisible ? 'active' : ''}`} ref={dropdownRef}>
                             <div className="Profdrop">
                                 <img src={prof} className="profa" alt="Profile" />
                                 <Link to="/user/profile">Profile</Link>
