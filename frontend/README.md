@@ -9,79 +9,79 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
     
     
 # Users section
-REACT_APP_usersignup_api = "http:/your_backend_url/api/signup"
-REACT_APP_userlogin_api = "http:/your_backend_url/api/login"
+REACT_APP_usersignup_api = "http://your_backend_url/api/signup"
+REACT_APP_userlogin_api = "http://your_backend_url/api/login"
 REACT_APP_usersignup_method = "POST"
 
 ## View Jobs
-REACT_APP_viewjobs_api = "http:/your_backend_url/public/jobs"
+REACT_APP_viewjobs_api = "http://your_backend_url/public/jobs"
 REACT_APP_viewjobs_method = "POST"
-REACT_APP_suggeseted_jobs = "http:/your_backend_url/user/suggestedjob"
+REACT_APP_suggeseted_jobs = "http://your_backend_url/user/suggestedjob"
 REACT_APP_suggeseted_jobs_method = "POST"
-REACT_APP_filter_jobs = "http:/your_backend_url/public/filterjobs"
+REACT_APP_filter_jobs = "http://your_backend_url/public/filterjobs"
 REACT_APP_filter_jobs_method = "POST"
 
 
 ## View Job Details
-REACT_APP_viewjobdetails_api = "http:/your_backend_url/public/viewjob"
+REACT_APP_viewjobdetails_api = "http://your_backend_url/public/viewjob"
 REACT_APP_viewjobdetails_method = "POST"
-REACT_APP_applyjob_api = "http:/your_backend_url/user/applytojob"
+REACT_APP_applyjob_api = "http://your_backend_url/user/applytojob"
 REACT_APP_applyjob_method = "POST"
 
 
 ## View Profile
-REACT_APP_saveabout_api = "http:/your_backend_url/user/adddetails"
+REACT_APP_saveabout_api = "http://your_backend_url/user/adddetails"
 REACT_APP_saveabout_method = "POST"
-REACT_APP_addskill_api = "http:/your_backend_url/user/adddetails"
+REACT_APP_addskill_api = "http://your_backend_url/user/adddetails"
 REACT_APP_addskill_method = "POST"
-REACT_APP_addproject_api = "http:/your_backend_url/user/adddetails"
+REACT_APP_addproject_api = "http://your_backend_url/user/adddetails"
 REACT_APP_addproject_method = "POST"
-REACT_APP_addexperience_api = "http:/your_backend_url/user/adddetails"
+REACT_APP_addexperience_api = "http://your_backend_url/user/adddetails"
 REACT_APP_addexperience_method = "POST"
 
 ## Interview
-REACT_APP_interview_api = 'http:/your_backend_url/public/getdata'
+REACT_APP_interview_api = 'http://your_backend_url/public/getdata'
 REACT_APP_interview_method = 'POST'
-REACT_APP_mcq_api = "http:/your_backend_url/public/getmcq"
+REACT_APP_mcq_api = "http://your_backend_url/public/getmcq"
 REACT_APP_mcq_method = "POST"
 
 
 ## Organization section
-REACT_APP_orgsignup_api = 'http:/your_backend_url/organization/signup'
+REACT_APP_orgsignup_api = 'http/:/your_backend_url/organization/signup'
 REACT_APP_orgsignup_method = 'POST'
-REACT_APP_orglogin_api = 'http:/your_backend_url/organization/login'
+REACT_APP_orglogin_api = 'http://your_backend_url/organization/login'
 REACT_APP_orglogin_method = 'POST'
-REACT_APP_organization_details ='http:/your_backend_url/organization/organizationdetails'
+REACT_APP_organization_details ='http://your_backend_url/organization/organizationdetails'
 
 REACT_APP_organization_details_method = 'POST'
-REACT_APP_organization_saveabout_api = 'http:/your_backend_url/organization/addorganization'
+REACT_APP_organization_saveabout_api = 'http://your_backend_url/organization/addorganization'
 REACT_APP_saveabout_method = 'POST'
 
 
 ## Create Job
-REACT_APP_createjob_api = "http:/your_backend_url/organization/addjob"
+REACT_APP_createjob_api = "http://your_backend_url/organization/addjob"
 REACT_APP_createjob_method = "POST"
 
 ## closed Job
-REACT_APP_closedjob_api = "http:/your_backend_url/organization/getclosedjobs"
+REACT_APP_closedjob_api = "http://your_backend_url/organization/getclosedjobs"
 REACT_APP_closedjob_method = "POST"
 
 ## posted Jobs
-REACT_APP_postedjob_api = "http:/your_backend_url/organization/getopenjobs"
+REACT_APP_postedjob_api = "http://your_backend_url/organization/getopenjobs"
 REACT_APP_postedjob_method = "POST"
-REACT_APP_handleclosejob_api ="http:/your_backend_url/organization/closejob"
+REACT_APP_handleclosejob_api ="http://your_backend_url/organization/closejob"
 REACT_APP_handleclosejob_method = "POST"
 
 
 ## community
-REACT_APP_community_api = "http:/your_backend_url/public/getpost"
+REACT_APP_community_api = "http://your_backend_url/public/getpost"
 REACT_APP_community_method = "POST"
 
 ## Add Post
-REACT_APP_addpost_api = "http:/your_backend_url/public/addpost"
+REACT_APP_addpost_api = "http://your_backend_url/public/addpost"
 REACT_APP_addpost_method = "POST"
 
-REACT_APP_userdetails_api = "http:/your_backend_url/user/userdetails"
+REACT_APP_userdetails_api = "http://your_backend_url/user/userdetails"
 REACT_APP_userdetails_method = "POST"
 
 
