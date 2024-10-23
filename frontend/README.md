@@ -54,7 +54,7 @@ REACT_APP_orglogin_method = 'POST'
 REACT_APP_organization_details ='http:/your_backend_url/organization/organizationdetails'
 
 REACT_APP_organization_details_method = 'POST'
-REACT_APP_saveabout_api = 'http:/your_backend_url/organization//addorganization'
+REACT_APP_organization_saveabout_api = 'http:/your_backend_url/organization/addorganization'
 REACT_APP_saveabout_method = 'POST'
 
 
