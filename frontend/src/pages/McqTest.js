@@ -42,6 +42,13 @@ function Interview() {
     setAnswers((prev) => ({ ...prev, [questionIndex]: option }));
   };
 
+  const handleRestart = () => {
+    window.location.reload();
+  }
+  const handleContinue = () => {
+    setSubmitted(false);
+  }
+
   const handleSubmit = () => {
     let score = 0;
     if (skillData && skillData.questions) {
@@ -51,7 +58,18 @@ function Interview() {
         }
       });
     }
-    alert(`You scored ${score} out of ${skillData.questions.length}`);
+    const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+        messageContainer.id = "i233"
+        messageContainer.textContent = 'You scored ' + score + ' out of ' + skillData.questions.length;
+        
+        document.body.appendChild(messageContainer);
+
+        // Remove the message after a few seconds
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
+    // alert(`You scored ${score} out of ${skillData.questions.length}`);
     setSubmitted(true);
   };
 
@@ -102,7 +120,12 @@ function Interview() {
           ) : (
             <p>No questions available</p> // Better message if no questions are found
           )}
-          {!submitted && <button className='skill-start-btn' onClick={handleSubmit}>Submit</button>}
+          {!submitted && <button style={{margin:'20px'}} className='skill-start-btn' style={{backgroundColor:"green"}} onClick={handleSubmit}>Submit</button>}
+          <div style={{display:'flex'}}>
+          {submitted && <button style={{margin:'20px'}} className="skill-start-btn" onClick={handleContinue}>Continue</button>}
+
+          {submitted && <button style={{margin:'20px'}} className="skill-start-btn" onClick={handleRestart}>Restart</button>}
+          </div>
         </div>
       </div>
     </div>
