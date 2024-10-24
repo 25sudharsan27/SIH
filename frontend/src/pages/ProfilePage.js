@@ -532,7 +532,7 @@ const ProfilePage =  () => {
           {(userData.education || []).length > 5 && visibleExperiencesCount < (userData.education || []).length && (
             <a href="#" className="show-more" onClick={handleShowMoreEducation}>Show More</a>
           )}
-          <a href="#" className="add-more-projects" onClick={() => setIsAddEducationModalOpen(true)}>Add Experience</a>
+          <a href="#" className="add-more-projects" onClick={() => setIsAddEducationModalOpen(true)}>Add Education</a>
         </div>
 
       </div>
