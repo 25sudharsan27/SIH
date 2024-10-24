@@ -147,7 +147,7 @@
     display:flex;
     margin:10px 30px;
 
-    width:50%;
+    /* width:50%; */
     /* border:1px solid black; */
     /* box-shadow: 2px 2px 2px 2px hsla(0, 0%, 50%, 0.262); */
 }
@@ -238,8 +238,11 @@
     background-color: white;
 }
 
+
+
 .experience-item-a p{
     font-size:x-large;
+    display:none;
 }
 
 .profile-picture{
@@ -332,7 +335,7 @@
 }
 
 #pro-name{
-    font-size: xx-large;
+    font-size: auto;
 }
 #hi11{
     font-size:large;
@@ -506,10 +509,27 @@
         width: 50px;
     }
     .experience-item{
+        /* border:1px solid black; */
         height:100px;
     }
+    #exp1{
+        /* padding-top:50px; */
+        /* height:100%; */
+        overflow-y: scroll;
+    }
+    #hi510{
+        height:25px;
+    }
+
     .experience-item-a{
+    
         min-width:70px;
         min-height:50px;
+    }
+    .experience-item-a p{
+        display:block;
+    }
+    #hi{
+        display:none;
     }
 }

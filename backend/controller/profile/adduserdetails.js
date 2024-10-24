@@ -2,7 +2,7 @@ const userModel = require("../../models/userModel");
 
 const updateUserDetails = async (req, res) => {
   try {
-    const {following,skills, about, projects, jobs, experiences, volunteering, education,tagline,portfolio,city,state,country } = req.body;
+    const {name,following,skills, about, projects, jobs, experiences, volunteering, education,tagline,portfolio,city,state,country } = req.body;
 
     
     // Find the user by email
@@ -18,7 +18,9 @@ const updateUserDetails = async (req, res) => {
     if (!user) {
       throw new Error("User not found");
     }
-
+    if(name){
+      user.name = name;
+    }
     // Handle following
     if (following) {
         user.following = [...new Set([...user.following || [], following])]; // Add single string as an array element
@@ -164,6 +166,7 @@ const updateUserDetails = async (req, res) => {
 
     // Handle education
     if (education) {
+
       if (Array.isArray(education)) {
         education.forEach(ed => {
           const existingEducationIndex = (user.education || []).findIndex(e => e.title === ed.title);

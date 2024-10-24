@@ -469,10 +469,10 @@ const ProfilePage =  () => {
                 <p id="i401">{experience.company}</p>
               </div>
               <div id="exp1">
-                <div>
+                <div > 
                 <h4 id="hi10" className="title" >{experience.title}</h4>
                 <p  id="hi11" style={{fontWeight:"500"}} >{new Date(experience.startDate).toLocaleDateString()} - {experience.endDate ? new Date(experience.endDate).toLocaleDateString() : 'Present'}</p>
-                <p className="description" style={{marginTop:"20px",fontWeight:"400"}}>{experience.description}</p>
+                <p id="hi510" className="description" style={{marginTop:"20px",fontWeight:"400"}}>{experience.description}</p>
                   </div>
               </div>
             </div>
@@ -512,15 +512,21 @@ const ProfilePage =  () => {
               <div className="experience-item-a">
                 <img src={(experience.institution === 'Amazon')?Amazon:
                   (experience.institution !== 'Amazon')?Google:'' || experience.media[0]} alt={experience.institution} className="company-logo" />
-                <p>{experience.institution}</p>
+                <p id="i401" >{experience.institution}</p>
               </div>
               <div id="exp1">
-                <div>
+                <div  >
+                <h4 id="hi" className="title">{experience.institution}</h4>
+
                 <h4 id="hi10" className="title">{experience.title}</h4>
                 <p  id="hi11">{new Date(experience.startDate).toLocaleDateString()} - {experience.endDate ? new Date(experience.endDate).toLocaleDateString() : 'Present'}</p>
-                <p className="description" style={{fontWeight:"500"}}>{experience.description}</p>
+                <p id="hi510"  className="description" style={{fontWeight:"500"}}>{experience.description}</p>
+                
                 </div>
+                
               </div>
+              
+
             </div>
           ))}
           {(userData.education || []).length > 5 && visibleExperiencesCount < (userData.education || []).length && (
@@ -676,8 +682,8 @@ const ProfilePage =  () => {
           <input
             
             placeholder="Institution or College or School"
-            value={newEducation.company}
-            onChange={(e) => setNewEducation({ ...newEducation, company: e.target.value })}
+            value={newEducation.institution}
+            onChange={(e) => setNewEducation({ ...newEducation, institution: e.target.value })}
             required
           />
           <div>
