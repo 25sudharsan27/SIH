@@ -46,25 +46,6 @@ const JobSeekerSignup = () => {
     e.preventDefault();
     setIsBuffering(true);
 
-   
-     if (password.length < 8) {
-      setIsBuffering(false);
-
-      const messageContainer = document.createElement('div');
-        messageContainer.className = 'popup-message';
-        messageContainer.textContent = 'Signup failed: ' + "Password should be at least 8 characters long";
-        
-        document.body.appendChild(messageContainer);
-
-        // Remove the message after a few seconds
-        setTimeout(() => {
-          document.body.removeChild(messageContainer);
-        }, 3000);
-        
-      
-      return; // Stop further execution if password is too short
-    }
-
     if (password !== confirmPassword) {
       setIsBuffering(false);
 
@@ -81,6 +62,25 @@ const JobSeekerSignup = () => {
         
       return; // Stop further execution if passwords don't match
     }
+     if (password.length < 8) {
+      setIsBuffering(false);
+
+      const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+        messageContainer.textContent = 'Signup failed: ' + "Password should be at least 8 characters long";
+        
+        document.body.appendChild(messageContainer);
+
+        // Remove the message after a few seconds
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
+        
+      
+      // return; // Stop further execution if password is too short
+    }
+
+    
     // Uncomment the following lines for API integration
     
     setIsBuffering(true);
