@@ -63,9 +63,9 @@ const jobSchema = new mongoose.Schema(
       default : "open"
     },
     stipend : Number,
-    requirements :{type : String, required: true},
-    benefits :{type : String, required : true},
-    responsibilities :{type : String, required : true},
+    requirements :{type : String},
+    benefits :{type : String},
+    responsibilities :{type : String},
 
   },
   

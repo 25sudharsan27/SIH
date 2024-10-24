@@ -114,7 +114,16 @@ function ViewJob() {
       navigate('/user/viewjobs');
     } catch (error) {
       console.error("Error applying to job:", error);
-      alert("Failed to submit application.");
+      const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+        messageContainer.textContent = error.message || "Failed to apply to job.";
+        
+        document.body.appendChild(messageContainer);
+
+        // Remove the message after a few seconds
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
     }
   };
   
