@@ -182,6 +182,9 @@
     justify-content: center;
     flex-basis: 30%;
     padding: 30px;
+    /* width:30%; */
+    max-width:170px;
+    /* border:1px solid black; */
     /* min-height: 150px; */
     border-radius: 15px;
     box-shadow: 2px 2px 2px 2px hsla(0, 0%, 50%, 0.262);
@@ -216,7 +219,7 @@
 
 .project-item-s{
     font-size:small;
-    font-weight:100;
+    /* font-weight:100; */
 }
 
 .pro{
