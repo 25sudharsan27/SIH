@@ -9,13 +9,16 @@ body {
 /* Navbar Styles */
 .navbar {
     /* box-shadow: 2px 2px 2px 2px hsla(0, 1%, 21%, 0.262); */
-
+    position: fixed;
+    width:100%;
     z-index: 1000000;
     display: flex;
     align-items: center;
     background-color: #ffffff;
+    top:0px;
     padding: 25px 20px;
     box-shadow: 2px 2px 10px 2px #ccc9c9;
+    transition: background-color 0.3s ease;
 }
 
 .navbar-left {
@@ -29,7 +32,10 @@ body {
 }
 
 .navbar-right {
-    justify-content: flex-end;
+    display:flex;
+    width:200px;
+    justify-content: center;
+    /* border:1px solid black; */
 }
 
 .navbar-item {
@@ -62,6 +68,7 @@ body {
     display: inline-block;
 }
 
+
 .profile-logo {
     border-radius: 50%;
     cursor: pointer;
@@ -71,17 +78,25 @@ body {
 }
 
 .dropdown-content {
-    margin-top: 10px;
+    transform: translateY(-400px);
+    opacity: 0;
     padding: 10px;
     border-radius: 12px;
-    display: none;
+    display: block; /* Keep it visible, but with opacity 0 initially */
     position: absolute;
     right: 0;
     background-color: rgba(255, 255, 255, 0.9);
     min-width: 150px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
+    transition: transform 0.3s, opacity 0.3s;
 }
+
+.dropdown-content.active {
+    transform: translateY(30px);
+    opacity: 1;
+}
+
 
 .dropdown-content .Profdrop {
     display: flex;
@@ -110,8 +125,13 @@ body {
     transition: background-color 0.3s ease;
 }
 
+.dropdown-content a{
+    transition: 0.3s;
+}
 .dropdown-content a:hover {
-    background-color: #f0f0f0;
+    transition: 0.3s;
+    color:#24345e;
+    background-color: #cccccc;
 }
 
 /* Show dropdown on click */
@@ -125,7 +145,6 @@ body {
 
 /* Sudharsan Styles */
 .sudharsan {
-    
     position: fixed;
     top: 0;
     left: 0;
@@ -210,7 +229,7 @@ body {
     }
 
     .navbar-right {
-        width: 100%;
+        width: 90%;
         justify-content: flex-end;
     }
 }

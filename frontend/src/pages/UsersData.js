@@ -4,6 +4,7 @@ import UserNavbar from './components/usernavbar';
 import Pagination from './Pagination';
 import { useNavigate } from 'react-router-dom';
 import './SearchBar.css';
+import './UsersData.css';
 
 import Amazon from './images/amazon.png';
 import Google from './images/google.png';
@@ -34,18 +35,18 @@ function JobBoard() {
       setLoading(true);
       setError('');
       try {
-        const response = await fetch(process.env.REACT_APP_viewjobs_api, {
-          method: process.env.REACT_APP_viewjobs_method,
+        const response = await fetch(process.env.REACT_APP_profile_datas_api, {
+          method: "POST",
           credentials: "include",
           headers: {
             'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ experienceLevel, location })
+          }
         });
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
         }
         const data = await response.json();
+        console.log(await data);
         setJobs(Array.isArray(data.data) ? data.data : []);
       } catch (error) {
         console.error('Error fetching jobs:', error);
@@ -87,10 +88,11 @@ function JobBoard() {
   };
 
   // Filter jobs based on search term and experience level
-  const filteredJobs = jobs.filter(job =>
-    job.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    (experienceLevel ? job.experienceLevel === experienceLevel : true)
-  );
+  const filteredJobs = jobs.filter((job) => {
+    return job.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      (experienceLevel ? job.experienceLevel === experienceLevel : true) &&
+      (location ? job.city === location : true);
+  });
 
   // Pagination logic
   const indexOfLastJob = currentPage * jobsPerPage;
@@ -114,50 +116,42 @@ function JobBoard() {
   }
 
   return (
+    <div className='user-pages'>
+        <UserNavbar />
+
     <div style={{marginTop:"120px"}}>
       <div className="search-bar">
         <div className="filters">
           {/* Experience Level Dropdown */}
-          <select
-            className="dropdown"
-            value={experienceLevel}
-            onChange={(e) => { setExperienceLevel(e.target.value); handleFilter(); }}
-          >
-            <option value="">Experience Level</option>
-            <option value="Intern">Intern</option>
-            <option value="Junior">Junior</option>
-            <option value="Mid">Mid</option>
-            <option value="Senior">Senior</option>
-          </select>
 
           {/* Location Dropdown */}
-          <select
+          {/* <select
             className="dropdown"
             value={location}
-            onChange={(e) => { setLocation(e.target.value); handleFilter(); }}
+            onChange={(e) => { setLocation(e.target.value);  }}
           >
             <option value="">Location</option>
             <option value="Bengaluru">Bengaluru</option>
             <option value="Pune">Pune</option>
             <option value="Chennai">Chennai</option>
             <option value="Remote">Remote</option>
-          </select>
+          </select> */}
 
           {/* Suggest Me Jobs Button */}
-          <button onClick={handleSuggest} className="filter-btn">
-            Suggest Me Jobs
-          </button>
+          
         </div>
 
         {/* Search Field */}
         
-        <div id="i211">
+        <div className="profiles-search" id="i211">
         <input
         
         placeholder="Search..."
         value={searchTerm}
         onChange={(e) => { setSearchTerm(e.target.value); handleFilter(); }}
         id="i212"
+        className="profiles-search"
+        
       />
                 <span onClick={handleFilter} className="search-icon"><img style={{opacity:"0.4" ,height:"17px",marginTop:"3px",marginRight:"2px"}} src={search} alt="search"/></span>
 
@@ -182,23 +176,23 @@ function JobBoard() {
               currentJobs.map((job) => (
                 <div key={job._id} className="job-card">
                   <div className="title">
-                    <img src={job.pic} alt="job" id="i415" className="company-log" />
+                    <img src={job.profilepic} alt="job" id="i415" className="company-log" />
                     <div id="i416">
-                      <h3>{job.title}</h3>
+                      <h3>{job.name}</h3>
                     </div>
                   </div>
                   <div className="bodies">
                     <div id="i412" className="texts">
                       <p>{`${job.city}, ${job.state}, ${job.country}`}</p>
-                      <p><b>{job.workMode}</b> - {job.experienceLevel}</p>
-                      <p><b>Stipend:</b> {job.stipend}</p>
+                      <p>{job.description}</p>
                     </div>
                     <div className="job-actions">
                       <button
-                        onClick={() => { navigate('/user/viewjobs/job/' + job._id); }}
+                        onClick={() => { navigate('/profiles/' + job._id); }}
                         className="edit-btn"
+                        id="profiles-bbtn"
                       >
-                        Apply
+                        View Profile
                       </button>
                     </div>
                   </div>
@@ -217,6 +211,7 @@ function JobBoard() {
           onPageChange={handlePageChange}
         />
       </div>
+    </div>
     </div>
   );
 }

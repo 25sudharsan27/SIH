@@ -5,14 +5,22 @@ import userimg from './Images/user-icon-svgrepo-com (1).svg'
 import logoutimg from './Images/log-out-1-svgrepo-com.svg'
 import settingimg from './Images/settings-2-svgrepo-com.svg'
 import profileimg from './Images/user-icon-svgrepo-com (1).svg';
+import { useRef } from 'react';
 
 const OrganizationNavbar = () => {
 
     const [orgNav,SetorgNav] = useState("");
     const [nav, setNav] = useState("");
     const [isOpen, setIsOpen] = useState(false);
+        const [isDropdownVisible, setDropdownVisible] = useState(false);
+    
+    const toggleDropdown = () => {
+        setDropdownVisible(!isDropdownVisible);
+    };
 
+    const dropdownRef = useRef(null); // Create a ref for the dropdown
 
+    
     useEffect(()=>{
     if(orgNav !== ""){
         document.querySelectorAll('.navbar-item').forEach(e => e.classList.remove('highlight'));
@@ -41,6 +49,22 @@ const OrganizationNavbar = () => {
     const toggleSudharsan = () => {
         setIsOpen(!isOpen);
     };
+
+      useEffect(() => {
+            const handleClickOutside = (event) => {
+                if (
+                    dropdownRef.current && !dropdownRef.current.contains(event.target) 
+                ) {
+                    setDropdownVisible(false); // Close dropdown one if clicked outside
+                }
+            };
+    
+            document.addEventListener('mousedown', handleClickOutside);
+            return () => {
+                document.removeEventListener('mousedown', handleClickOutside);
+            };
+        }, []);
+    
 
     return (
         <nav className="navbar">
@@ -73,14 +97,15 @@ const OrganizationNavbar = () => {
             </div>
 
             <div className="navbar-right">
+                <div className="navbar-righta">
                 <div className="profile-dropdown">
                     <img 
                         src={userimg}
                         alt="Logo" 
                         className="profile-logo" 
-                        onClick={openSidebar}
+                        onClick={toggleDropdown}
                     />
-                    <div className="dropdown-content">
+                    <div  className={`dropdown-content ${isDropdownVisible ? 'active' : ''}`}  ref={dropdownRef}>
                         <div className="Profdrop" onClick={openSidebar}>
                             <img 
                                 src={userimg}
@@ -106,6 +131,7 @@ const OrganizationNavbar = () => {
                             <Link to="../../">Logout</Link>
                         </div> 
                     </div>
+                </div>
                 </div>
             </div>
         </nav>

@@ -48,7 +48,7 @@ const User = () =>{
 
     return(
       <Context.Provider value = {{fetchUserDetails}}>
-        <div>
+        <div className="user-pages">
             <UserNavbar/>
 
             <Routes>
@@ -58,6 +58,7 @@ const User = () =>{
                 <Route path="/interview" element={<Interview/>}/>
                 <Route path="/resumebuilder" element={<ResumeBuilder/>}/>
                 <Route path="/myjobs" element={<MyJob/>}/>
+                
             </Routes>
         
         </div>

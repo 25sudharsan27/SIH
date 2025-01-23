@@ -3,8 +3,9 @@ const jobModel = require("../../models/public/jobsModel");
 
 const updateOrganizationDetails = async (req, res) => {
   try {
-    const {  about, jobs, followers, connections } = req.body;
+    const {  about, pic,country,name,city,state,jobs, followers, connections } = req.body;
     const user_id = req?.user_id;
+    
     
     if(!user_id){
       throw new Error("may be issue with authentication");
@@ -21,7 +22,23 @@ const updateOrganizationDetails = async (req, res) => {
     if (about) {
       organization.about = about;
     }
-
+    console.log("picture : ",pic);
+    if(req.body.pic){
+      organization.pic = req.body.pic;
+    }
+    if(country){
+      organization.country = country;
+    }
+    if(name){
+      organization.companyname = name;
+    }
+    if(city){
+      organization.city = city;
+    }
+    if(state){
+      organization.state = state;
+    }
+    
     // Handle jobs
     if (jobs) {
       console.log("started");

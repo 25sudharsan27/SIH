@@ -50,7 +50,7 @@ const Organization = () =>{
 
     return(
       <Context.Provider value = {{fetchUserDetails}}>
-        <div>
+        <div className="user-pages">
             <OrganizationNavbar/>
 
             <Routes>

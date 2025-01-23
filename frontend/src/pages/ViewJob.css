@@ -100,9 +100,20 @@
   border:1px solid black;
 }
   #i256{
+    display:flex;
     box-sizing: border-box;
-    margin-left:2px;
+    
+    /* padding-left:100px; */
+    
   }
+#i2210{
+  padding-left:100px;
+}
+@media (max-width: 755px) {
+  #i2210{
+    padding-left:0px;
+  }
+}
   #i251{
     box-sizing: border-box;
 
@@ -312,9 +323,17 @@
   .application-form button:hover {
     background-color: #0056b3;
   }
+
+  @media (max-width:755px){
+    #i256{
+      padding-left:auto;
+    }
+   
+  }
   
   /* Media Queries for Responsive Design */
   @media (max-width: 768px) {
+    
     .job-header {
       flex-direction: column;
       align-items: flex-start;

@@ -5,6 +5,7 @@
   }
   
   .sidebar {
+    
     background-color: #f1f1f1;
     padding: 20px;
     width: 200px;
@@ -19,6 +20,18 @@
   .main-content {
     flex-grow: 1;
     padding: 20px;
+  }
+  #applicants111{
+    position:relative;
+    display:flex;
+    padding-left:190px;
+    /* justify-content:flex-end;
+    align-items: flex-end; */
+
+  }
+
+  #applicants112{
+    position: relative;
   }
   
   .header {
@@ -176,6 +189,13 @@
 
   #i207{
     border-radius:15px;
+  }
+
+
+  @media (max-width:755px){
+    #applicants111{
+      padding-left:0px;
+    }
   }
 
 

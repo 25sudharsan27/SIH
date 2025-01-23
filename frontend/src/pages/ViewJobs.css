@@ -237,7 +237,13 @@
   background-color: hsl(223, 47%, 54%);
 }
 
+
+
+
 @media (max-width: 800px){
+  #i2323{
+    margin-top:-80px;
+  }
   .posted-jobs{
     width:auto;
   }

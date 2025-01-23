@@ -151,7 +151,7 @@ function ViewJob() {
             </div>
             <div id="i156">
               <div className="company-logo">
-                <img src={companyimg} alt="Company Logo" />
+                <img src={jobData?.pic} alt="Company Logo" />
                 <p>{jobData.companyname}</p>
               </div>
               <div id="i157">

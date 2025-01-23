@@ -56,7 +56,7 @@ const MentorshipApp = () => {
     };
 
     return (
-        <div>
+        <div  className="user-pages">
         <UserNavbar/>
 
         <div className="containe">

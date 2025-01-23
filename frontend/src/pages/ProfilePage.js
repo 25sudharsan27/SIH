@@ -16,6 +16,7 @@ import leetcode from './images/leetcode.svg'
 import hackerrank from './images/hackerrank.svg'
 import github from './images/github.svg'
 import userIcon from './images/user-icon-svgrepo-com (1).svg'
+
 import {
   CitySelect,
   CountrySelect,
@@ -23,7 +24,7 @@ import {
 } from "react-country-state-city";
 import "react-country-state-city/dist/react-country-state-city.css";
 
-
+import delete3 from './images/delete.svg'
 
 
 // import profile from './images/logesh.jpg'
@@ -53,9 +54,11 @@ const ProfilePage =  () => {
 
 
   const [isAddEducationModalOpen, setIsAddEducationModalOpen] = useState(false);
-
+  const [isUpdateEducationModalOpen, setIsUpdateEducationModalOpen] = useState(false);
+  const [isUpdateExperienceModalOpen, setIsUpdateExperienceModalOpen] = useState(false);
   const [isAddProfileDetailsOpen, setIsAddProfileDetailsOpen] = useState(false);
-
+  const [educationupdatedata, setEducationUpdateData] = useState(null);
+  const [experienceupdatedata, setExperienceUpdateData] = useState(null);
   const [loading,setLoading] = useState(false);
   const [userdata, setUserdata] = useState({
     name: '',
@@ -63,6 +66,7 @@ const ProfilePage =  () => {
     city: '',
     state: '',
     country: '',
+    profilepic: null
   });
 
   useEffect(() => {
@@ -89,6 +93,7 @@ const ProfilePage =  () => {
   });
 
   const [newExperience, setNewExperience] = useState({
+    pic:'',
     title: '',
     company: '',
     startDate: '',
@@ -98,6 +103,7 @@ const ProfilePage =  () => {
   });
 
   const [newEducation, setNewEducation] = useState({
+    pic:'',
     title: '',
     institution: '',
     startDate: '',
@@ -150,20 +156,32 @@ const ProfilePage =  () => {
 
   const handleUpdateDetails = async () => {
     setLoading(true);
+    const formData = new FormData();
+    formData.append('name', userdata.name);
+    formData.append('tagline', userdata.tagline);
+    formData.append('city', city);
+    formData.append('state', state);
+    formData.append('country', country);
+    console.log(userdata.profilepic);
+    formData.append('profilepic', userdata.profilepic);
+
 
     try {
+      console.log(userdata);
       const response = await fetch(process.env.REACT_APP_addskill_api, {
         method: "POST",
         credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ...userdata, state: state, city: city, country: country }),
+        body: formData,
       });
       
-      if (!response.ok) throw new Error('Failed to update profile details');
+      if (!response.ok){
+        console.log(response);
+       throw new Error('Failed to update profile details');
+      }
+      setIsAddProfileDetailsOpen(false);
       window.location.reload();
       setLoading(false);
+
     } catch (error) {
       setLoading(false);
       // console.error(error);
@@ -210,6 +228,7 @@ const ProfilePage =  () => {
     }
   };
 
+  
   // Add a new project
   const handleAddProject = async () => {
     setLoading(true);
@@ -261,23 +280,30 @@ const ProfilePage =  () => {
   const handleAddExperience = async () => {
     setLoading(true);
 
-    // Send new experience data to the server (optional)
-    try{
-    const updateUser = await fetch(process.env.REACT_APP_addexperience_api , {
-      method: process.env.REACT_APP_addexperience_method,
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        "experiences": [...(userData?.experiences || []), newExperience]
-      })
-    });
-    const data = await updateUser.json();
-    setLoading(false);
-    // console.log("data : ", data);
-    setIsAddExperienceModalOpen(false);
-    window.location.reload(); // Reload the page to clear state and redirect to login
+    const formdata = new FormData();
+    formdata.append('title', newExperience.title);
+    formdata.append('company', newExperience.company);
+    formdata.append('startDate', newExperience.startDate);
+    formdata.append('endDate', newExperience.endDate);
+    formdata.append('description', newExperience.description);
+
+    // Ensure you are appending the correct file field
+    if (newExperience.pic) {
+        formdata.append('pic', newExperience.pic); // 'pic' is the field name for the file
+    }
+
+    console.log(formdata); // Optional: Check the formdata content in the console
+
+    try {
+        // Make sure you are sending the formdata directly in the body
+        const updateUser = await fetch(process.env.REACT_APP_addexperience_api, {
+            method: process.env.REACT_APP_addexperience_method,
+            credentials: 'include',
+            body: formdata,  // Directly sending formdata here
+        });
+
+        const data = await updateUser.json(); // Parse the JSON response from the server
+        console.log('Response from server:', data);
     }catch(error){
       setLoading(false);
       const messageContainer = document.createElement('div');
@@ -292,23 +318,63 @@ const ProfilePage =  () => {
     }
   };
 
-  const handleAddEducation = async () => {
+  const handleUpdateExperience = async () =>{
     setLoading(true);
+    const formdata = new FormData();
+    formdata.append('title', experienceupdatedata.title);
+    formdata.append('company', experienceupdatedata.company);
+    formdata.append('startDate', experienceupdatedata.startDate);
+    formdata.append('endDate', experienceupdatedata.endDate);
+    formdata.append('description', experienceupdatedata.description);
+    formdata.append('pic', experienceupdatedata.pic);
+    formdata.append('_id',experienceupdatedata._id);
 
     try{
     // Send new experience data to the server (optional)
-    const updateUser = await fetch(process.env.REACT_APP_addexperience_api , {
+    const updateUser = await fetch(process.env.REACT_APP_addexperience_api, {
       method: process.env.REACT_APP_addexperience_method,
       credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        "education": [...(userData?.education || []), newEducation]
-      })
+      body: formdata
     });
     const data = await updateUser.json();
-    // console.log("data : ", data);
+    console.log("data : ", data);
+    setIsUpdateEducationModalOpen(false);
+    setLoading(false);
+    window.location.reload(); // Reload the page to clear state and redirect to login
+    }catch(error){
+      setLoading(false);
+      const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+
+        messageContainer.textContent = 'Error in Adding Education';
+        
+        document.body.appendChild(messageContainer);
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
+    }
+  }
+
+
+  const handleAddEducation = async () => {
+    setLoading(true);
+    const formdata = new FormData();
+    formdata.append('title',newEducation.title);
+    formdata.append('institution',newEducation.institution);
+    formdata.append('startDate',newEducation.startDate);
+    formdata.append('endDate',newEducation.endDate);
+    formdata.append('description',newEducation.description);
+    formdata.append('pic',newEducation.pic);
+
+    try{
+    // Send new experience data to the server (optional)
+    const updateUser = await fetch(process.env.REACT_APP_addeducation_api , {
+      method: process.env.REACT_APP_addexperience_method,
+      credentials: 'include',
+      body: formdata
+    });
+    const data = await updateUser.json();
+    console.log("data : ", data);
     setIsShowMoreEducationOpen(false);
     setLoading(false);
     window.location.reload(); // Reload the page to clear state and redirect to login
@@ -325,6 +391,109 @@ const ProfilePage =  () => {
         }, 3000);
     }
   };
+
+  
+  const handleDeleteExperience = async(id2)=>{
+    setLoading(true);
+    const formdata = new FormData();
+    formdata.append('delete',"yeah");
+    formdata.append('_id',id2);
+    try{
+      // Send new experience data to the server (optional)
+      const updateUser = await fetch(process.env.REACT_APP_addexperience_api, {
+        method: process.env.REACT_APP_addexperience_method,
+        credentials: 'include',
+        body: formdata
+      });
+      const data = await updateUser.json();
+      console.log("data : ", data);
+      setLoading(false);
+      window.location.reload(); // Reload the page to clear state and redirect to login
+      }catch(error){
+        setLoading(false);
+        const messageContainer = document.createElement('div');
+          messageContainer.className = 'popup-message';
+  
+          messageContainer.textContent = 'Error in Adding Education';
+          
+          document.body.appendChild(messageContainer);
+          setTimeout(() => {
+            document.body.removeChild(messageContainer);
+          }, 3000);
+      }
+  }
+
+
+
+
+  const handleDeleteEducation = async(id2)=>{
+    setLoading(true);
+    const formdata = new FormData();
+    formdata.append('delete',"yeah");
+    formdata.append('_id',id2);
+    try{
+      // Send new experience data to the server (optional)
+      const updateUser = await fetch(process.env.REACT_APP_addeducation_api , {
+        method: process.env.REACT_APP_addexperience_method,
+        credentials: 'include',
+        body: formdata
+      });
+      const data = await updateUser.json();
+      console.log("data : ", data);
+      setLoading(false);
+      window.location.reload(); // Reload the page to clear state and redirect to login
+      }catch(error){
+        setLoading(false);
+        const messageContainer = document.createElement('div');
+          messageContainer.className = 'popup-message';
+  
+          messageContainer.textContent = 'Error in Adding Education';
+          
+          document.body.appendChild(messageContainer);
+          setTimeout(() => {
+            document.body.removeChild(messageContainer);
+          }, 3000);
+      }
+  }
+
+  const handleUpdateEducation = async () => {
+    setLoading(true);
+    const formdata = new FormData();
+    formdata.append('title',educationupdatedata.title);
+    formdata.append('institution',educationupdatedata.institution);
+    formdata.append('startDate',educationupdatedata.startDate);
+    formdata.append('endDate',educationupdatedata.endDate);
+    formdata.append('description',educationupdatedata.description);
+    formdata.append('pic',educationupdatedata.pic);
+    formdata.append('_id',educationupdatedata._id);
+
+    try{
+    // Send new experience data to the server (optional)
+    const updateUser = await fetch(process.env.REACT_APP_addeducation_api , {
+      method: process.env.REACT_APP_addexperience_method,
+      credentials: 'include',
+      body: formdata
+    });
+    const data = await updateUser.json();
+    console.log("data : ", data);
+    setIsUpdateEducationModalOpen(false);
+    setLoading(false);
+    window.location.reload(); // Reload the page to clear state and redirect to login
+    }catch(error){
+      setLoading(false);
+      const messageContainer = document.createElement('div');
+        messageContainer.className = 'popup-message';
+
+        messageContainer.textContent = 'Error in Adding Education';
+        
+        document.body.appendChild(messageContainer);
+        setTimeout(() => {
+          document.body.removeChild(messageContainer);
+        }, 3000);
+    }
+  };
+
+
 
 
   // Show More Projects
@@ -369,13 +538,27 @@ const ProfilePage =  () => {
       <div className="profile-header">
           <div className="profile-left">
 
-          <div id="i400">
-          <img
+          <div >
+          {
+            
+            userData.profilepic ? (
+              
+              <img
 
-            src={userIcon}
+            src={userData.profilepic}
             alt="Profile Picture"
             className="profile-picture"
-          />
+            id="profile1-pic"
+          /> 
+              
+              ) : 
+          <div id="i400" onClick={()=>{setIsAddProfileDetailsOpen(true)}} style={{cursor:"pointer"}} >
+            <img src={userIcon} alt="Profile Picture" className="profile-picture" />
+            <p style={{fontFamily:"Poppins",fontWeight:"600"}} id="pro-name" >Upload Profile Pic</p>
+          </div>
+            
+          }
+          
           </div>
           <div id="i402">
           <img onClick={() => setIsAddProfileDetailsOpen(true)} className='editbtn' style={{height:"10px"}} src={edit} alt="edit" />
@@ -463,18 +646,23 @@ const ProfilePage =  () => {
         <div className="experience-section">
           {(userData.experiences || []).slice(0, visibleExperiencesCount).map((experience, index) => (
             <div key={index} className="experience-item">
-              <div className="experience-item-a">
-                <img src={(experience.company === 'Amazon')?Amazon:
-                  (experience.company === 'Google')?Google:'' || experience.media[0]} alt={experience.company} className="company-logo" />
-                <p id="i401">{experience.company}</p>
-              </div>
+              <div className="experience-item-a123">
+             
+                <img id="education-photo" src={experience.pic || "https://www.google.com/imgres?q=company%20icon&imgurl=https%3A%2F%2Ftoppng.com%2Fuploads%2Fpreview%2Fbuilding-page-11-of-23-free-vectors-logos-icons-and-company-icon-11563539532xcbrgvknez.png&imgrefurl=https%3A%2F%2Feasysell.in%2F%3Fj%3D105352818850&docid=ycwHP3WZ7lZUPM&tbnid=jBuo7VUGJ85XPM&vet=12ahUKEwiMzuaCiOSKAxVfxDgGHWyZGGgQM3oECHsQAA..i&w=840&h=859&hcb=2&itg=1&ved=2ahUKEwiMzuaCiOSKAxVfxDgGHWyZGGgQM3oECHsQAA"} alt={experience.company} className="company-logo" />
+              
               <div id="exp1">
-                <div > 
-                <h4 id="hi10" className="title" >{experience.title}</h4>
+                 
+                <h4 id="hi12" className="title" >{experience.title}</h4>
                 <p  id="hi11" style={{fontWeight:"500"}} >{new Date(experience.startDate).toLocaleDateString()} - {experience.endDate ? new Date(experience.endDate).toLocaleDateString() : 'Present'}</p>
                 <p id="hi510" className="description" style={{marginTop:"20px",fontWeight:"400"}}>{experience.description}</p>
-                  </div>
+                  
               </div>
+              </div>
+              <div className="profile-update-delete">
+                  <a href="#" className="show-more" onClick={()=>{ setExperienceUpdateData(experience); setIsUpdateExperienceModalOpen(true)}}><img src={edit} className="update-buttons"/></a>
+                  <a href="#" className="show-more" onClick={()=>{ setExperienceUpdateData(experience);  handleDeleteExperience(experience._id) }}><img src={delete3} className="update-buttons"/></a>
+                </div>
+
             </div>
           ))}
           {(userData.experiences || []).length > 5 && visibleExperiencesCount < (userData.experiences || []).length && (
@@ -506,28 +694,30 @@ const ProfilePage =  () => {
           <a href="#" className="add-more-projects" onClick={() => setIsAddProjectModalOpen(true)}>Add Project</a>
         </div>
         <h3 style={{marginTop:"100px"}} className="exp-h3">Education</h3>
-        <div className="experience-section">
+        <div id="education-dddd" className="experience-section">
           {(userData.education || []).slice(0, visibleExperiencesCount).map((experience, index) => (
-            <div key={index} className="experience-item">
-              <div className="experience-item-a">
-                <img src={(experience.institution === 'Amazon')?Amazon:
-                  (experience.institution !== 'Amazon')?Google:'' || experience.media[0]} alt={experience.institution} className="company-logo" />
-                <p id="i401" >{experience.institution}</p>
-              </div>
-              <div id="exp1">
-                <div  >
-                <h4 id="hi" className="title">{experience.institution}</h4>
+            
+            <div  key={index} className="experience-item">
+              <div className="experience-item-a123">
+                <img id="education-photo" src={experience.pic || "https://www.google.com/imgres?q=company%20icon&imgurl=https%3A%2F%2Ftoppng.com%2Fuploads%2Fpreview%2Fbuilding-page-11-of-23-free-vectors-logos-icons-and-company-icon-11563539532xcbrgvknez.png&imgrefurl=https%3A%2F%2Feasysell.in%2F%3Fj%3D105352818850&docid=ycwHP3WZ7lZUPM&tbnid=jBuo7VUGJ85XPM&vet=12ahUKEwiMzuaCiOSKAxVfxDgGHWyZGGgQM3oECHsQAA..i&w=840&h=859&hcb=2&itg=1&ved=2ahUKEwiMzuaCiOSKAxVfxDgGHWyZGGgQM3oECHsQAA"} alt={experience.company} className="company-logo" />
+                <div  id="exp1" >
 
-                <h4 id="hi10" className="title">{experience.title}</h4>
-                <p  id="hi11">{new Date(experience.startDate).toLocaleDateString()} - {experience.endDate ? new Date(experience.endDate).toLocaleDateString() : 'Present'}</p>
-                <p id="hi510"  className="description" style={{fontWeight:"500"}}>{experience.description}</p>
-                
+                  <h4 id="hi12" className="title">{experience.institution}</h4>
+
+                  <h4 id="hi10" className="title">{experience.title}  {'('}{new Date(experience.startDate).toLocaleDateString()} - {experience.endDate ? new Date(experience.endDate).toLocaleDateString() : 'Present'}{')'}</h4>
+                  <p id="hi510"  className="description" style={{fontWeight:"500"}}>{experience.description}</p>
                 </div>
-                
-              </div>
+                </div>
+                <div className="profile-update-delete">
+                  <a href="#" className="show-more" onClick={()=>{ setEducationUpdateData(experience); setIsUpdateEducationModalOpen(true)}}><img src={edit} className="update-buttons"/></a>
+                  <a href="#" className="show-more" onClick={()=>{ setEducationUpdateData(experience);  handleDeleteEducation(experience._id) }}><img src={delete3} className="update-buttons"/></a>
+                </div>
+              
+       
               
 
             </div>
+
           ))}
           {(userData.education || []).length > 5 && visibleExperiencesCount < (userData.education || []).length && (
             <a href="#" className="show-more" onClick={handleShowMoreEducation}>Show More</a>
@@ -542,6 +732,10 @@ const ProfilePage =  () => {
       <Modal isOpen={isAddProfileDetailsOpen} onClose={() => setIsAddProfileDetailsOpen(false)}>
           <h3>Update Profile Details</h3>
           <form className="addproject" onSubmit={(e) => { e.preventDefault(); handleUpdateDetails(); }}>
+            <div className="profice-update2-image">
+              <p style={{fontFamily:"Poppins",fontWeight:"600"}} id="pro-name">Upload</p>
+              <input type="file"   onChange={(e) => setUserdata({ ...userdata, profilepic: e.target.files[0] })}  />
+            </div>
             <input
               placeholder="Name"
               value={userdata.name}
@@ -625,6 +819,10 @@ const ProfilePage =  () => {
       <Modal isOpen={isAddExperienceModalOpen} onClose={() => setIsAddExperienceModalOpen(false)}>
         <h3>Add New Experience</h3>
         <form className="addexperience" onSubmit={(e) => { e.preventDefault(); handleAddExperience(); }}>
+            <div className="profice-update2-image">
+              <p style={{fontFamily:"Poppins",fontWeight:"600"}} id="pro-name">Upload</p>
+              <input type="file"   onChange={(e) => setNewExperience({ ...newExperience, pic: e.target.files[0] })}  />
+            </div>
           <input
             
             placeholder="Title"
@@ -672,6 +870,10 @@ const ProfilePage =  () => {
       <Modal isOpen={isAddEducationModalOpen} onClose={() => setIsAddEducationModalOpen(false)}>
         <h3>Add New Education</h3>
         <form className="addexperience" onSubmit={(e) => { e.preventDefault(); handleAddEducation(); }}>
+            <div className="profice-update2-image">
+              <p style={{fontFamily:"Poppins",fontWeight:"600"}} id="pro-name">Upload</p>
+              <input type="file"   onChange={(e) => setNewEducation({ ...newEducation, pic: e.target.files[0] })}  />
+            </div>
           <input
             
             placeholder="Title"
@@ -714,6 +916,107 @@ const ProfilePage =  () => {
           <button type="submit">Add Education</button>
         </form>
       </Modal>
+      
+      <Modal isOpen={isUpdateEducationModalOpen} onClose={() =>  setIsUpdateEducationModalOpen(false)}>
+        <h3>Update Education</h3>
+        <form className="addexperience" onSubmit={(e) => { handleUpdateEducation(); e.preventDefault();  }}>
+            <div className="profice-update2-image">
+              <p style={{fontFamily:"Poppins",fontWeight:"600"}} id="pro-name">Upload</p>
+              <input type="file"   onChange={(e) => setEducationUpdateData({ ...educationupdatedata, pic: e.target.files[0] })}  />
+            </div>
+          <input
+            
+            placeholder="Title"
+            value={educationupdatedata?.title}
+            onChange={(e) => setEducationUpdateData({ ...educationupdatedata, title: e.target.value })}
+            required
+          />
+          <input
+            
+            placeholder="Institution or College or School"
+            value={educationupdatedata?.institution}
+            onChange={(e) => setEducationUpdateData({ ...educationupdatedata, institution: e.target.value })}
+            required
+          />
+          <div>
+            <label>Start Date</label>
+            <input
+              type="date"
+              placeholder="Start Date"
+              value={educationupdatedata?.startDate.slice(0, 10)}
+              onChange={(e) => setEducationUpdateData({ ...educationupdatedata, startDate: e.target.value })}
+              required
+            />
+          </div>
+          <div>
+            <label>End Date</label>
+            <input
+              type="date"
+              placeholder="End Date"
+              value={educationupdatedata?.endDate.slice(0,10)}
+              onChange={(e) => setEducationUpdateData({ ...educationupdatedata, endDate: e.target.value })}
+            />
+          </div>
+          <textarea
+            placeholder="Description"
+            value={educationupdatedata?.description}
+            onChange={(e) => setEducationUpdateData({ ...educationupdatedata, description: e.target.value })}
+            required
+          />
+          <button type="submit">Update Education</button>
+        </form>
+      </Modal>
+
+      <Modal isOpen={isUpdateExperienceModalOpen} onClose={() =>  setIsUpdateExperienceModalOpen(false)}>
+        <h3>Update Experience</h3>
+        <form className="addexperience" onSubmit={(e) => { handleUpdateExperience(); e.preventDefault();  }}>
+            <div className="profice-update2-image">
+              <p style={{fontFamily:"Poppins",fontWeight:"600"}} id="pro-name">Upload</p>
+              <input type="file"   onChange={(e) => setExperienceUpdateData({ ...experienceupdatedata, pic: e.target.files[0] })}  />
+            </div>
+          <input
+            
+            placeholder="Title"
+            value={experienceupdatedata?.title}
+            onChange={(e) => setExperienceUpdateData({ ...experienceupdatedata, title: e.target.value })}
+            required
+          />
+          <input
+            
+            placeholder="Institution or College or School"
+            value={experienceupdatedata?.company}
+            onChange={(e) => setExperienceUpdateData({ ...experienceupdatedata, company: e.target.value })}
+            required
+          />
+          <div>
+            <label>Start Date</label>
+            <input
+              type="date"
+              placeholder="Start Date"
+              value={experienceupdatedata?.startDate.slice(0, 10)}
+              onChange={(e) => setExperienceUpdateData({ ...experienceupdatedata, startDate: e.target.value })}
+              required
+            />
+          </div>
+          <div>
+            <label>End Date</label>
+            <input
+              type="date"
+              placeholder="End Date"
+              value={experienceupdatedata?.endDate.slice(0,10)}
+              onChange={(e) => setExperienceUpdateData({ ...experienceupdatedata, endDate: e.target.value })}
+            />
+          </div>
+          <textarea
+            placeholder="Description"
+            value={experienceupdatedata?.description}
+            onChange={(e) => setExperienceUpdateData({ ...educationupdatedata, description: e.target.value })}
+            required
+          />
+          <button type="submit">Update Experience</button>
+        </form>
+      </Modal>
+
 
       {/* Show More Projects Modal */}
       <Modal isOpen={isShowMoreProjectsOpen} onClose={() => setIsShowMoreProjectsOpen(false)}>

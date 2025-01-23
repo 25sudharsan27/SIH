@@ -86,8 +86,8 @@ const Applicants = () => {
             <div id="i168"><Link id="i164" to="/organization/closedjobs">Closed Jobs</Link></div>
           </div>
         </div>
-            <div className="container">
-                <div className="main-content">
+            <div id="applicants111" className="container">
+                <div id="applicants112"  className="main-content">
                     <Header jobDetails={jobDetails} />
                     {loading ? (
                         <div className="buffer">

@@ -46,7 +46,7 @@ const CreatePost = () => {
   };
 
   return (
-    <div>
+    <div  className="user-pages">
       <UserNavbar/>
       <div className="post-page-container">
         <div className="post-form-container">

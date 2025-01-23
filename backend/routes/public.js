@@ -32,6 +32,8 @@ router.post("/getdata",getdata);
 router.post("/addpost",userAuth,AddPost);
 router.post("/getpost",getpost);
 router.post("/getmyjobs",authToken,require("../controller/public/getmyjob"));
+router.post("/getprofdata",require("../controller/public/profiledata"));
+router.post("/getprofdatas",require("../controller/public/getpeopledata"));
 // router.post("/forget-password", forgetPasswordController);
 // router.post("/reset-password",resetPasswordController)
 

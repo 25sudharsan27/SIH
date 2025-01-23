@@ -4,6 +4,7 @@ const organizationSchema = new mongoose.Schema(
   {
     organization : Boolean,
     companyname: String,
+    pic: String,
     email: {
       type: String,
       unique: true,

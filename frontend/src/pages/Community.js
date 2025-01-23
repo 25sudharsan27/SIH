@@ -47,7 +47,7 @@ const Posts = () => {
   }, [samplePosts]); // Update when samplePosts change
 
   return (
-    <div>
+    <div className="user-pages">
       <UserNavbar />
 
       <div className="posts-container">

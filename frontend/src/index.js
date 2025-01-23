@@ -19,6 +19,8 @@ import MentorshipApp from './pages/Mentorship';
 import CoursePage from './pages/CoursePage';
 import Posts from './pages/Community';
 import CreatePost from './pages/CreatePost';
+import UsersData from './pages/UsersData';
+import ViewProfile from './pages/ViewProfile';
 
 
 
@@ -42,7 +44,8 @@ root.render(
         <Route path="/user/courses" element={<CoursePage/>} />
         <Route path="/posts" element={<Posts/>}/>
         <Route path="/addpost" element={<CreatePost/>}/>
-        
+        <Route path="/profiles" element={<UsersData/>}/>
+        <Route path="/profiles/:id" element={<ViewProfile/>}/>
       </Routes>
     </BrowserRouter>
     </Provider>

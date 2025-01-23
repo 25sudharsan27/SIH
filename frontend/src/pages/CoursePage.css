@@ -27,7 +27,7 @@ body {
 
   a:hover {
     color: #0056b3;
-    border-bottom: 2px solid #0056b3;
+    /* border-bottom: 2px solid #0056b3; */
   }
 
   .error {

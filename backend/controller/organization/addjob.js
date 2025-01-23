@@ -14,10 +14,11 @@ const AddJob = async (req, res) => {
 
     // Fetch the organization based on user_id
     const org = await organizationModel.findOne({ "_id": user_id });
+    const pic = org?.pic;
     
     if (!org) {
       throw new Error("Organization not found");
-    }
+    } 
 
     if (!title || !description || !skills || !city || !state || !experienceLevel || !country || !link) {
       throw new Error("All fields are required");
@@ -30,6 +31,7 @@ const AddJob = async (req, res) => {
       description,
       link,
       skills,
+      pic,
       city,
       state,
       country,

@@ -1,9 +1,10 @@
 const userModel = require("../../models/userModel");
 
+
 const updateUserDetails = async (req, res) => {
   try {
-    const {name,following,skills, about, projects, jobs, experiences, volunteering, education,tagline,portfolio,city,state,country } = req.body;
-
+    const {name,following,skills, about, projects, jobs, experiences, volunteering, education,tagline,portfolio,city,state,country,profilepic,experiencepic,educationpic } = req.body;
+    console.log("profile1" +profilepic);
     
     // Find the user by email
     const user_id = req?.user_id;
@@ -38,6 +39,7 @@ const updateUserDetails = async (req, res) => {
       }
     }
 
+
     // Update about
     if (about) {
       user.about = about;
@@ -57,8 +59,9 @@ const updateUserDetails = async (req, res) => {
     if(country){
       user.country = country;
     }
-    
-    
+    if(req.body.profilepic){
+      user.profilepic = req.body.profilepic;
+    }
 
     // Handle projects
     if (projects) {
@@ -107,6 +110,7 @@ const updateUserDetails = async (req, res) => {
           user.jobs[existingJobIndex] = { ...user.jobs[existingJobIndex], ...jobs };
         } else {
           // Add new job
+
           user.jobs.push(jobs);
         }
       }
@@ -132,6 +136,7 @@ const updateUserDetails = async (req, res) => {
           // Update existing experience
           user.experiences[existingExperienceIndex] = { ...user.experiences[existingExperienceIndex], ...experiences };
         } else {
+          
           // Add new experience
           user.experiences.push(experiences);
         }

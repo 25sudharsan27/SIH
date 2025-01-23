@@ -100,7 +100,7 @@ function JobBoard() {
   }
 
   return (
-    <div id="i166" className="main">
+    <div >
       {loading &&<div className="buffer">
       <div className="loading-container">
         <div className="loading-spinner"></div>
@@ -114,8 +114,8 @@ function JobBoard() {
           </div>
         </div>
       <div className="job-board">
-        <div id="i256" className="posted-jobs-container">
-          <div className="posted-jobs">
+        <div className="posted-jobs-container alien256" id="i256" >
+          <div id="i2210" className="posted-jobs">
             {currentJobs.length > 0 ? currentJobs.map((job) => (
               <div key={job._id} className="job-card">
                 <div className="title">

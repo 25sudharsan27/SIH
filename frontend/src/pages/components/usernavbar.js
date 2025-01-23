@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Cookies from 'js-cookie'; // Optional
 import './usernavbar.css';
-import User from '../UserJobs';
 import { Link } from 'react-router-dom';
 
 import prof from './Images/user-icon-svgrepo-com (1).svg';
@@ -10,8 +9,7 @@ import setting from './Images/settings-2-svgrepo-com.svg';
 import logout from './Images/log-out-1-svgrepo-com.svg';
 import profile from './Images/profile.svg';
 import mentorship from './Images/mentorship.svg';
-import userimg from './Images/user-icon-svgrepo-com (1).svg'
-import { useRef } from 'react';
+import userimg from './Images/user-icon-svgrepo-com (1).svg';
 
 // Function to clear specific cookies
 const clearCookie = (name) => {
@@ -24,7 +22,7 @@ const clearAllCookies = () => {
         const cookie = c.trim();
         const eqPos = cookie.indexOf('=');
         const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
     });
 };
 
@@ -34,27 +32,27 @@ const UserNavbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isDropdownTwoVisible, setDropdownTwoVisible] = useState(false);
     const dropdownTwoRef = useRef(null);
+    const dropdownRef = useRef(null); // Create a ref for the dropdown
+
+    // Toggles for dropdown visibility
     const toggleDropdown = () => {
-        setDropdownVisible(!isDropdownVisible);
+        setDropdownVisible(prevState => !prevState);
     };
 
     const toggleDropdownTwo = () => {
-        setDropdownTwoVisible(!isDropdownTwoVisible);
+        setDropdownTwoVisible(prevState => !prevState);
         if (isDropdownVisible) setDropdownVisible(false); // Close first dropdown
     };
 
-    const dropdownRef = useRef(null); // Create a ref for the dropdown
-
-    
-
+    // Close dropdowns if clicking outside
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (
                 dropdownRef.current && !dropdownRef.current.contains(event.target) &&
                 dropdownTwoRef.current && !dropdownTwoRef.current.contains(event.target)
             ) {
-                setDropdownVisible(false); // Close dropdown one if clicked outside
-                setDropdownTwoVisible(false); // Close dropdown two if clicked outside
+                setDropdownVisible(false); // Close dropdown one
+                setDropdownTwoVisible(false); // Close dropdown two
             }
         };
 
@@ -64,36 +62,48 @@ const UserNavbar = () => {
         };
     }, []);
 
+    // Handle user logout
     const handleLogout = () => {
-        clearCookie('token'); // Replace with your actual cookie names
+        clearCookie('token');
         clearAllCookies();
-        window.location.reload(); // Reload the page to clear state and redirect to login
+        window.location.reload(); // Reload page to clear state and redirect to login
     };
 
+    // Handle navbar highlighting on route change
     useEffect(() => {
         if (nav !== "") {
             document.querySelectorAll('.navbar-item').forEach(a => a.classList.remove('highlight'));
-            document.getElementById(nav).classList.add('highlight');
+            document.getElementById(nav)?.classList.add('highlight');
         }
     }, [nav]);
+
+    // Initial highlight based on URL path
+    useEffect(() => {
+        const currentNav = window.location.pathname.split("/").pop();
+        if (currentNav) {
+            document.querySelectorAll('.navbar-item').forEach(e => e.classList.remove('highlight'));
+            document.getElementById(currentNav)?.classList.add('highlight');
+        }
+    }, []);
 
     const handleSetNav = (m) => {
         setNav(m);
     };
 
     const toggleSudharsan = () => {
-        setIsOpen(!isOpen);
+        setIsOpen(prevState => !prevState);
     };
 
     return (
         <nav className="navbar">
             <div className="navbar-left">
                 <div>
-                    <Link to="/user/viewjobs" className="navbar-item" onClick={e => handleSetNav("jobs")} id="jobs">Jobs</Link>
-                    <Link to="/user/interview" className="navbar-item" onClick={e => handleSetNav("interview")} id="interview">Interview Prep</Link>
-                    <Link to="/user/courses" className="navbar-item" onClick={e => handleSetNav("message")} id="message">Courses</Link>
-                    <Link to="/posts" className="navbar-item" onClick={e => handleSetNav("community")} id="community">Community</Link>
-                    <Link to="/user/resumebuilder" className="navbar-item" onClick={e => handleSetNav("buildResume")} id="buildResume">Build Resume</Link>
+                    <Link to="/user/viewjobs" className="navbar-item" onClick={() => handleSetNav("viewjobs")} id="viewjobs">Jobs</Link>
+                    <Link to="/profiles" className="navbar-item" onClick={() => handleSetNav("profiles")} id="profiles">Profiles</Link>
+                    <Link to="/user/interview" className="navbar-item" onClick={() => handleSetNav("interview")} id="interview">Interview Prep</Link>
+                    <Link to="/user/courses" className="navbar-item" onClick={() => handleSetNav("courses")} id="courses">Courses</Link>
+                    <Link to="/posts" className="navbar-item" onClick={() => handleSetNav("posts")} id="posts">Community</Link>
+                    <Link to="/user/resumebuilder" className="navbar-item" onClick={() => handleSetNav("resumebuilder")} id="resumebuilder">Build Resume</Link>
                 </div>
             </div>
 
@@ -106,15 +116,15 @@ const UserNavbar = () => {
             <div className={`sudharsan ${isDropdownTwoVisible ? 'open' : ''}`}>
                 <div className="sudharsan-header">
                     <h2 className="sudharsan-title">Menu</h2>
-                  
                 </div>
                 <nav className="sudharsan-nav">
                     <div className="sudharsan-links">
-                        <Link to="/user/viewjobs" className="navbar-item" onClick={e => handleSetNav("jobs")} id="jobs">Jobs</Link>
-                        <Link to="/user/interview" className="navbar-item" onClick={e => handleSetNav("interview")} id="interview">Interview Prep</Link>
-                        <Link to="/user/courses" className="navbar-item" onClick={e => handleSetNav("message")} id="message">Courses</Link>
-                        <Link to="/posts" className="navbar-item" onClick={e => handleSetNav("community")} id="community">Community</Link>
-                        <Link to="/user/resumebuilder" className="navbar-item" onClick={e => handleSetNav("buildResume")} id="buildResume">Build Resume</Link>
+                        <Link to="/user/viewjobs" className="navbar-item" onClick={() => handleSetNav("viewjobs")} id="viewjobs">Jobs</Link>
+                        <Link to="/profiles" className="navbar-item" onClick={() => handleSetNav("profiles")} id="profiles">Profiles</Link>
+                        <Link to="/user/interview" className="navbar-item" onClick={() => handleSetNav("interview")} id="interview">Interview Prep</Link>
+                        <Link to="/user/courses" className="navbar-item" onClick={() => handleSetNav("courses")} id="courses">Courses</Link>
+                        <Link to="/posts" className="navbar-item" onClick={() => handleSetNav("posts")} id="posts">Community</Link>
+                        <Link to="/user/resumebuilder" className="navbar-item" onClick={() => handleSetNav("resumebuilder")} id="resumebuilder">Build Resume</Link>
                     </div>
                 </nav>
             </div>
@@ -122,20 +132,20 @@ const UserNavbar = () => {
             <div className="navbar-right">
                 <div className="navbar-righta">
                     <div className={`profile-dropdown`}>
-                        <img 
+                        <img
                             src={userimg}
-                            alt="Profile" 
-                            className="profile-logo" 
-                            onClick={toggleDropdown} 
+                            alt="Profile"
+                            className="profile-logo"
+                            onClick={toggleDropdown}
                         />
-                        <div  className={`dropdown-content ${isDropdownVisible ? 'active' : ''}`} ref={dropdownRef}>
+                        <div className={`dropdown-content ${isDropdownVisible ? 'active' : ''}`} ref={dropdownRef}>
                             <div className="Profdrop">
                                 <img src={prof} className="profa" alt="Profile" />
                                 <Link to="/user/profile">Profile</Link>
                             </div>
                             <div className="Profdrop">
                                 <img src={myjob} className="profa" alt="My Jobs" />
-                                <a href="/user/myjobs">My Jobs</a>
+                                <Link to="/user/myjobs">My Jobs</Link>
                             </div>
                             <div className="Profdrop">
                                 <img src={mentorship} className="profa" alt="Mentorship" />
@@ -151,7 +161,7 @@ const UserNavbar = () => {
                             </div>
                             <div className="Profdrop" onClick={handleLogout}>
                                 <img src={logout} className="profa" alt="Logout" />
-                                <a href="../../">Logout</a>
+                                <a href="/">Logout</a>
                             </div>
                         </div>
                     </div>

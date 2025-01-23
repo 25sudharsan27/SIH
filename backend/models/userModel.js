@@ -29,6 +29,7 @@ const userSchema = new mongoose.Schema(
     ],
     experiences: [
       {
+        pic: String,
         title: String,
         company: String,
         startDate: Date,
@@ -49,6 +50,7 @@ const userSchema = new mongoose.Schema(
     ],
     education: [
       {
+        pic:String,
         title: String,
         institution: String,
         startDate: Date,

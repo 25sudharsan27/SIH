@@ -34,6 +34,7 @@ const jobSchema = new mongoose.Schema(
       required:true,
     }, // Additional details about the job's location
     company: String,
+    pic:String,
     opening: {
       type: Number,
       default: 1, // Number of job openings

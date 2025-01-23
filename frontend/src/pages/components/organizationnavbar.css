@@ -5,7 +5,10 @@ body {
     margin: 0;
     padding: 0;
 }
-
+#organizationnavddd{
+    display:block;
+    margin-top:500px;
+}
 /* Navbar Styles */
 .navbar {
     z-index: 1000000;
@@ -110,9 +113,7 @@ body {
     transition: background-color 0.3s ease;
 }
 
-.dropdown-content a:hover {
-    background-color: #f0f0f0;
-}
+
 
 /* Show dropdown on click */
 .profile-dropdown.active .dropdown-content {
