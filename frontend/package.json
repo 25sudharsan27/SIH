@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^13.5.0",
     "dotenv": "^16.4.5",
     "frontend": "file:",
+    "html2canvas": "^1.4.1",
     "js-cookie": "^3.0.5",
     "jspdf": "^2.5.2",
     "jspdf-autotable": "^3.8.3",

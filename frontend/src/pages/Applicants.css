@@ -74,7 +74,6 @@
   }
   
   .resume-section{
-    max-height:500px;
     overflow-y:scroll;
   }
   .skills-section ul {
@@ -204,9 +203,7 @@
       display:flex;
       flex-direction:column;
     }
-    .resume-section{
-      width:90%;
-    }
+    
     .applicant-card {
       padding: 20px;
     }
