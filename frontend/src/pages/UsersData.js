@@ -15,10 +15,11 @@ import nvidia from './images/nvidia.png';
 import oracle from './images/oracle.png';
 import salesForce from './images/salesForce.png';
 import search from './images/loupe.png';
+import queryString from 'query-string';
 
 function JobBoard() {
+  const [totalPages, setTotalPages] = useState(0);
   const [jobs, setJobs] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [experienceLevel, setExperienceLevel] = useState('');
   const [location, setLocation] = useState('');
@@ -26,6 +27,8 @@ function JobBoard() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const jobsPerPage = 6;
+  const {page=1, query=''} = queryString.parse(window.location.search);
+  const [currentPage, setCurrentPage] = useState(page);
 
   const img = [Amazon, Google, flipkart, JPMorgan, microsoft, nvidia, oracle, salesForce];
 
@@ -40,14 +43,15 @@ function JobBoard() {
           credentials: "include",
           headers: {
             'Content-Type': 'application/json'
-          }
+          },
+          body : JSON.stringify({ query, page })
         });
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
         }
         const data = await response.json();
-        console.log(await data);
         setJobs(Array.isArray(data.data) ? data.data : []);
+        setTotalPages(data.totalPages);
       } catch (error) {
         console.error('Error fetching jobs:', error);
         setError('Failed to fetch jobs. Please try again later.');
@@ -57,7 +61,7 @@ function JobBoard() {
     };
 
     fetchJobs();
-  }, [experienceLevel, location]);
+  }, [experienceLevel, location, query, page]);
 
   // Handle "Suggest Me Jobs" button click
   const handleSuggest = async () => {
@@ -73,7 +77,6 @@ function JobBoard() {
           'Content-Type': 'application/json'
         },
       });
-      console.log("response : ", response);
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
       }
@@ -88,22 +91,27 @@ function JobBoard() {
   };
 
   // Filter jobs based on search term and experience level
-  const filteredJobs = jobs.filter((job) => {
-    return job.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      (experienceLevel ? job.experienceLevel === experienceLevel : true) &&
-      (location ? job.city === location : true);
-  });
+  // const filteredJobs = jobs.filter((job) => {
+  //   return job.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+  //     (experienceLevel ? job.experienceLevel === experienceLevel : true) &&
+  //     (location ? job.city === location : true);
+  // });
 
-  // Pagination logic
-  const indexOfLastJob = currentPage * jobsPerPage;
-  const indexOfFirstJob = indexOfLastJob - jobsPerPage;
-  const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
+  // // Pagination logic
+  // const indexOfLastJob = currentPage * jobsPerPage;
+  // const indexOfFirstJob = indexOfLastJob - jobsPerPage;
+  // const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
 
   // Handle page change
   const handlePageChange = (pageNumber) => {
+    navigate(`/profiles/?page=${pageNumber}&query=${query}`); // Update URL query parameter
     setCurrentPage(pageNumber);
   };
 
+  const handleSearchChange = (newQuery) => {
+    navigate(`/profiles/?page=1&query=${newQuery}`); // Reset to page 1 when query changes
+  }
+  
   // Handle filtering
   const handleFilter = () => {
     setCurrentPage(1); // Reset pagination
@@ -148,12 +156,14 @@ function JobBoard() {
         
         placeholder="Search..."
         value={searchTerm}
-        onChange={(e) => { setSearchTerm(e.target.value); handleFilter(); }}
+        onChange={(e) => { setSearchTerm(e.target.value); }
+      
+      }
         id="i212"
         className="profiles-search"
         
       />
-                <span onClick={handleFilter} className="search-icon"><img style={{opacity:"0.4" ,height:"17px",marginTop:"3px",marginRight:"2px"}} src={search} alt="search"/></span>
+                <span onClick={()=>{handleSearchChange(searchTerm)}} className="search-icon"><img style={{opacity:"0.4" ,height:"17px",marginTop:"3px",marginRight:"2px"}} src={search} alt="search"/></span>
 
         </div>
       </div>
@@ -172,8 +182,8 @@ function JobBoard() {
       <div  id="i2323" className="job-board">
         <div id="i256" className="posted-jobs-container">
           <div className="posted-jobs">
-            {currentJobs.length > 0 ? (
-              currentJobs.map((job) => (
+            {jobs.length > 0 ? (
+              jobs.map((job) => (
                 <div key={job._id} className="job-card">
                   <div className="title">
                     <img src={job.profilepic} alt="job" id="i415" className="company-log" />
@@ -206,7 +216,7 @@ function JobBoard() {
 
         {/* Pagination Component */}
         <Pagination
-          totalPages={Math.ceil(filteredJobs.length / jobsPerPage)}
+          totalPages={totalPages}
           currentPage={currentPage}
           onPageChange={handlePageChange}
         />

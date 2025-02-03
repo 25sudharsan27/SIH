@@ -3,6 +3,8 @@ import './Pagination.css';
 
 function Pagination({ totalPages, currentPage, onPageChange }) {
   const [visiblePages, setVisiblePages] = useState(5); // Default to 5 pages
+  const [prevdisabled, setPrevDisabled] = useState(true);
+  const [nextdisabled, setNextDisabled] = useState(true);
 
   useEffect(() => {
     const handleResize = () => {
@@ -11,9 +13,13 @@ function Pagination({ totalPages, currentPage, onPageChange }) {
 
     window.addEventListener('resize', handleResize);
     handleResize(); // Call on mount to set initial value
-
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    setPrevDisabled(currentPage === 1 );
+    setNextDisabled(currentPage === totalPages );
+  }, [currentPage, totalPages]); // Recalculate disabled buttons whenever currentPage or totalPages changes
 
   const pageNumbers = [];
   let startPage, endPage;
@@ -33,6 +39,8 @@ function Pagination({ totalPages, currentPage, onPageChange }) {
 
   for (let i = startPage; i <= endPage; i++) {
     pageNumbers.push(i);
+    
+
   }
 
   return (
@@ -41,10 +49,9 @@ function Pagination({ totalPages, currentPage, onPageChange }) {
         id="i417"
         className="pagination-button"
         onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage === 1}
+        disabled={prevdisabled}
       >
-        {`<  `}{` `}{` `}
-        Previous
+        {'<  '} Previous
       </button>
 
       {pageNumbers.map((number) => (
@@ -61,10 +68,9 @@ function Pagination({ totalPages, currentPage, onPageChange }) {
         id="i418"
         className="pagination-button"
         onClick={() => onPageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
+        disabled={nextdisabled}
       >
-        Next
-        {`  `}{` `}{`>`}
+        Next {'  >'}
       </button>
     </div>
   );

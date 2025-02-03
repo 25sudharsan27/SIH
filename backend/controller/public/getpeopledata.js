@@ -7,10 +7,25 @@ const User = require('../../models/userModel'); // Ensure you have the correct p
 const getprofdata = async (req, res) => {
     try {
         console.log("hi everyone");
+        
+        const {query='',page} = req.body;
 
-        const user = await User.find();
+        var user = await User.find(
+            {
+                name : { $regex: query, $options: 'i' }
+            }
+        );
+
+        var totalPages = Math.ceil(user.length/6);
+        if(page){
+            const start = (page-1)*6;
+            const end = page*6;
+            user = user.slice(start,(end>user.length)?user.length:end);
+        }
+
         res.status(200).json(
             {
+            "totalPages": totalPages,
             "error":false,
             "data" :user
             }
