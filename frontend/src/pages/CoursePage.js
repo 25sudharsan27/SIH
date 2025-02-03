@@ -43,7 +43,7 @@ const CoursePage = () => {
   }, [searchTitle, data]);
 
   return (
-    <div>
+    <div style={{marginTop:"100px"}}>
       <UserNavbar />
       <div className="search-container">
         <input
