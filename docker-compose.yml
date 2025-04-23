@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    command: ["npm", "start"]
+    depends_on:
+      - frontend
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    command: ["npm", "start"]
