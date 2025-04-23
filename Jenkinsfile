@@ -1,25 +1,47 @@
 pipeline {
     agent any
 
+    environment {
+        // Optional: You can use these if needed
+        COMPOSE_FILE = 'docker-compose.yml'
+    }
+
     stages {
-        stage('Clone Repo') {
+        stage('Clone Repository') {
             steps {
-                git 'https://github.com/25sudharsan27/SIH.git'
+                git 'https://github.com/25sudharsan27/SIH'
             }
         }
 
-        stage('Inject .env Files') {
+        stage('Inject .env files') {
             steps {
-                bat 'copy D:\\OUTOFBOX\\Full-Stack-Projects\\sih\\SIH\\frontend\\.env frontend\\.env'
-                bat 'copy D:\\OUTOFBOX\\Full-Stack-Projects\\sih\SIH\\backend\\.env backend\\.env'
+                bat '''
+                echo Copying .env files...
+                copy C:\\Users\\sudharsan\\envs\\backend.env backend\\.env
+                copy C:\\Users\\sudharsan\\envs\\frontend.env frontend\\.env
+                '''
             }
         }
 
-        stage('Docker Compose Up') {
+        stage('Build and Run Docker Containers') {
             steps {
-                bat 'docker-compose down'
-                bat 'docker-compose up --build -d'
+                bat '''
+                echo Stopping previous containers...
+                docker-compose -f docker-compose.yml down
+
+                echo Starting new containers...
+                docker-compose -f docker-compose.yml up --build -d
+                '''
             }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ Deployment successful!'
+        }
+        failure {
+            echo '❌ Deployment failed!'
         }
     }
 }
