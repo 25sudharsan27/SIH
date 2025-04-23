@@ -20,8 +20,12 @@ pipeline {
             steps {
                 echo "Installing dependencies and building frontend/backend locally (optional for dev testing)..."
                 dir('frontend') {
+                    bat 'del /f /s /q node_modules && rmdir /s /q node_modules' // Clean node_modules
+                    bat 'npm cache clean --force'
                     bat 'npm install'
+                    bat 'npm run build'
                 }
+
                 dir('backend') {
                     bat 'npm install'
                 }
