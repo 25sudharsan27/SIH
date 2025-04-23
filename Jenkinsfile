@@ -2,46 +2,77 @@ pipeline {
     agent any
 
     environment {
-        // Optional: You can use these if needed
-        COMPOSE_FILE = 'docker-compose.yml'
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+        IMAGE_BACKEND = "01sudharsan/sihbackend-app"
+        IMAGE_FRONTEND = "01sudharsan/sihfrontend-app"
+        TAG = "${env.BUILD_NUMBER}"
     }
 
     stages {
-        stage('Clone Repository') {
+        stage('Checkout') {
             steps {
-                git 'https://github.com/25sudharsan27/SIH'
+                echo "Checking out source code..."
+                checkout scm
             }
         }
 
-        stage('Inject .env files') {
+        stage('Install Dependencies & Build') {
             steps {
+                echo "Installing dependencies and building frontend/backend locally (optional for dev testing)..."
+                dir('frontend') {
+                    bat 'npm install'
+                }
+                dir('backend') {
+                    bat 'npm install'
+                }
+            }
+        }
+
+        stage('Docker Compose Build') {
+            steps {
+                echo "Building Docker images using docker-compose..."
+                bat 'docker-compose build'
+            }
+        }
+
+        stage('Docker Login') {
+            steps {
+                echo "Logging into Docker Hub..."
                 bat '''
-                echo Copying .env files...
-                copy C:\\Users\\sudharsan\\envs\\backend.env backend\\.env
-                copy C:\\Users\\sudharsan\\envs\\frontend.env frontend\\.env
+                echo|set /p=%DOCKERHUB_CREDENTIALS_PSW%|docker login -u %DOCKERHUB_CREDENTIALS_USR% --password-stdin
                 '''
             }
         }
 
-        stage('Build and Run Docker Containers') {
+        stage('Tag & Push Images') {
             steps {
-                bat '''
-                echo Stopping previous containers...
-                docker-compose -f docker-compose.yml down
+                echo "Tagging and pushing frontend and backend images to Docker Hub..."
 
-                echo Starting new containers...
-                docker-compose -f docker-compose.yml up --build -d
-                '''
+                bat """
+                docker tag backend %IMAGE_BACKEND%:%TAG%
+                docker tag frontend %IMAGE_FRONTEND%:%TAG%
+
+                docker push %IMAGE_BACKEND%:%TAG%
+                docker push %IMAGE_FRONTEND%:%TAG%
+                """
+            }
+        }
+
+        stage('Deploy (Optional)') {
+            steps {
+                echo 'Add SSH, Docker Compose UP or server deployment steps here if needed.'
             }
         }
     }
 
     post {
-        success {
-            echo '✅ Deployment successful!'
-        }
-        failure {
-            echo '❌ Deployment failed!'
+        always {
+            echo "Cleaning up Docker images locally..."
+            bat '''
+            docker logout
+            docker rmi %IMAGE_BACKEND%:%TAG% || exit 0
+            docker rmi %IMAGE_FRONTEND%:%TAG% || exit 0
+            '''
         }
     }
 }
