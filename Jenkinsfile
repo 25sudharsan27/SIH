@@ -20,10 +20,11 @@ pipeline {
             steps {
                 echo "Installing dependencies and building frontend/backend..."
                 dir('frontend') {
-                    bat 'del /f /s /q node_modules && rmdir /s /q node_modules' // Clean node_modules
+                    bat 'rmdir /s /q node_modules'
+                    bat 'del /f /q package-lock.json'
                     bat 'npm cache clean --force'
+                    bat 'npm config set registry https://registry.npmjs.org/'
                     bat 'npm install'
-                    bat 'npm run build'
                 }
                 dir('backend') {
                     bat 'npm install'    // Install backend dependencies
