@@ -127,7 +127,7 @@ function JobBoard() {
                     <p>{job.city}, {job.state}, </p>
                     <p>{job.country}</p>
                     <p><b>{job.workMode}</b> -<b> {job.experienceLevel}</b></p>
-                    <p><b>Stipend:</b> {job.stipend}</p>
+                    <p><b>Salary:</b> {job.stipend}</p>
                   </div>
                   <div className="job-actions">
                     <button onClick={()=>{navigator("../applicants/"+job._id)}} className="i411">View Applicants</button>
