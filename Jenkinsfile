@@ -2,72 +2,91 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub') // Make sure to replace with your Docker Hub credential ID in Jenkins
-        IMAGE_BACKEND = "01sudharsan/sihbackend-app"
-        IMAGE_FRONTEND = "01sudharsan/sihfrontend-app"
-        TAG = "${env.BUILD_NUMBER}"
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub')  // Replace with your Jenkins credentials ID
+        IMAGE_FRONTEND = "01sudharsan/sihfrontend-app"     // Frontend Docker Hub image name
+        IMAGE_BACKEND = "01sudharsan/sihbackend-app"       // Backend Docker Hub image name
+        IMAGE_TAG = "${env.BUILD_NUMBER}"                  // Tagging with Jenkins build number, can also use "latest"
     }
 
     stages {
         stage('Checkout') {
             steps {
                 echo "Checking out source code..."
-                checkout scm
+                checkout scm  // Checkout the code from the repository
             }
         }
 
         stage('Install Dependencies & Build') {
             steps {
-                echo "Installing dependencies and building frontend/backend locally (optional for dev testing)..."
+                echo "Installing dependencies and building frontend/backend..."
                 dir('frontend') {
-                    bat 'npm install'
+                    bat 'npm install'    // Install frontend dependencies
+                    bat 'npm run build'  // Build frontend assets (if applicable)
                 }
                 dir('backend') {
-                    bat 'npm install'
+                    bat 'npm install'    // Install backend dependencies
+                    // If you have a build step for backend (e.g., TypeScript compilation), add it here
                 }
             }
         }
 
-        stage('Docker Compose Build') {
+        stage('Test') {
             steps {
-                echo "Building Docker images using docker-compose..."
-                bat 'docker-compose build'
+                echo "Running tests on frontend and backend..."
+                dir('frontend') {
+                    bat 'npm test || exit 0'  // Run frontend tests, and ignore errors if any
+                }
+                dir('backend') {
+                    bat 'npm test || exit 0'  // Run backend tests, and ignore errors if any
+                }
             }
         }
 
-        stage('Docker Login') {
+        stage('Build Docker Images') {
+            steps {
+                echo "Building Docker images for frontend and backend..."
+                
+                // Frontend Docker build
+                dir('frontend') {
+                    bat "docker build -t %IMAGE_FRONTEND%:%IMAGE_TAG% ."
+                    bat "docker tag %IMAGE_FRONTEND%:%IMAGE_TAG% %IMAGE_FRONTEND%:latest"
+                }
+
+                // Backend Docker build
+                dir('backend') {
+                    bat "docker build -t %IMAGE_BACKEND%:%IMAGE_TAG% ."
+                    bat "docker tag %IMAGE_BACKEND%:%IMAGE_TAG% %IMAGE_BACKEND%:latest"
+                }
+            }
+        }
+
+        stage('Login to Docker Hub') {
             steps {
                 echo "Logging into Docker Hub..."
                 bat '''
-                    echo "Username: %DOCKERHUB_CREDENTIALS_USR%"
-                    echo "Password: (hidden)"
                     echo|set /p=%DOCKERHUB_CREDENTIALS_PSW%|docker login -u %DOCKERHUB_CREDENTIALS_USR% --password-stdin
-                '''
+                '''  // Login to Docker Hub using credentials stored in Jenkins
             }
         }
 
-        stage('Tag & Push Images') {
+        stage('Push to Docker Hub') {
             steps {
-                echo "Tagging and pushing frontend and backend images to Docker Hub..."
-                bat """
-                    echo "Tagging backend image: %IMAGE_BACKEND%:%TAG%"
-                    echo "Tagging frontend image: %IMAGE_FRONTEND%:%TAG%"
-                    docker tag backend %IMAGE_BACKEND%:%TAG%
-                    docker tag frontend %IMAGE_FRONTEND%:%TAG%
+                echo "Pushing frontend and backend images to Docker Hub..."
 
-                    echo "Pushing backend image to Docker Hub..."
-                    docker push %IMAGE_BACKEND%:%TAG%
+                // Push the frontend image to Docker Hub
+                bat "docker push %IMAGE_FRONTEND%:%IMAGE_TAG%"
+                bat "docker push %IMAGE_FRONTEND%:latest"
 
-                    echo "Pushing frontend image to Docker Hub..."
-                    docker push %IMAGE_FRONTEND%:%TAG%
-                """
+                // Push the backend image to Docker Hub
+                bat "docker push %IMAGE_BACKEND%:%IMAGE_TAG%"
+                bat "docker push %IMAGE_BACKEND%:latest"
             }
         }
 
         stage('Deploy (Optional)') {
             steps {
-                echo 'Add SSH, Docker Compose UP or server deployment steps here if needed.'
-                // Example: docker-compose up -d or deploy via SSH commands
+                echo "Deployment step placeholder - customize based on your target platform"
+                // Optional: Add commands for deployment (e.g., Docker Compose up, SSH to remote servers, etc.)
             }
         }
     }
@@ -75,11 +94,10 @@ pipeline {
     post {
         always {
             echo "Cleaning up Docker images locally..."
-            bat '''
-                docker logout
-                docker rmi %IMAGE_BACKEND%:%TAG% || exit 0
-                docker rmi %IMAGE_FRONTEND%:%TAG% || exit 0
-            '''
+            // Logout from Docker Hub and remove locally cached images
+            bat 'docker logout'
+            bat "docker rmi %IMAGE_FRONTEND%:%IMAGE_TAG% || exit 0"
+            bat "docker rmi %IMAGE_BACKEND%:%IMAGE_TAG% || exit 0"
         }
     }
 }
