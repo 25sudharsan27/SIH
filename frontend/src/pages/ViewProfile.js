@@ -42,6 +42,7 @@ const ProfilePage =  () => {
   const { id } = useParams('id');
 
     useEffect(() => {
+      
         const fetchUser = async () => {
             const response = await fetch(process.env.REACT_APP_profile_data_api, {
                 method: "POST",
