@@ -134,13 +134,6 @@ pipeline {
             steps {
                 echo "Installing dependencies and building frontend/backend..."
                 dir('frontend') {
-                    bat '''
-                    IF EXIST node_modules (
-                        rmdir /s /q node_modules
-                    )
-                    '''
-                    bat 'del /f /q package-lock.json'
-                    bat 'npm cache clean --force'
                     bat 'npm config set registry https://registry.npmjs.org/'
                     bat 'npm install'
                 }
