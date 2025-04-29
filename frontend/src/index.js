@@ -24,6 +24,7 @@ import ViewProfile from './pages/ViewProfile';
 
 
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
