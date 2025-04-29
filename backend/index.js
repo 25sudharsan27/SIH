@@ -30,7 +30,10 @@ app.use("/public",public);
 app.use("/organization",organization);
 // app.use("/hr",hr);
 app.options('*', cors()); // This will respond to preflight requests
-
+app.post('/webhook', (req, res) => {
+    console.log('Received webhook:', req.body);
+    res.sendStatus(200);
+  });
 
 
 connectDB().then(()=>{
