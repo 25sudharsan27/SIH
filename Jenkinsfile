@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub')  // Replace with your Jenkins credentials ID
+   
         IMAGE_FRONTEND = "01sudharsan/sihfrontend-app"     // Frontend Docker Hub image name
         IMAGE_BACKEND = "01sudharsan/sihbackend-app"       // Backend Docker Hub image name
         IMAGE_TAG = "${env.BUILD_NUMBER}"                  // Tagging with Jenkins build number, can also use "latest"
@@ -174,29 +174,6 @@ pipeline {
                     bat "docker build -t %IMAGE_BACKEND%:%IMAGE_TAG% ."
                     bat "docker tag %IMAGE_BACKEND%:%IMAGE_TAG% %IMAGE_BACKEND%:latest"
                 }
-            }
-        }
-
-        stage('Login to Docker Hub') {
-            steps {
-                echo "Logging into Docker Hub..."
-                bat '''
-                    echo|set /p=%DOCKERHUB_CREDENTIALS_PSW%|docker login -u %DOCKERHUB_CREDENTIALS_USR% --password-stdin
-                '''  // Login to Docker Hub using credentials stored in Jenkins
-            }
-        }
-
-        stage('Push to Docker Hub') {
-            steps {
-                echo "Pushing frontend and backend images to Docker Hub..."
-
-                // Push the frontend image to Docker Hub
-                bat "docker push %IMAGE_FRONTEND%:%IMAGE_TAG%"
-                bat "docker push %IMAGE_FRONTEND%:latest"
-
-                // Push the backend image to Docker Hub
-                bat "docker push %IMAGE_BACKEND%:%IMAGE_TAG%"
-                bat "docker push %IMAGE_BACKEND%:latest"
             }
         }
 
