@@ -157,7 +157,9 @@ pipeline {
             }
         }
 
-        stage('Build Docker Images') {
+
+        stage('B
+        ') {
             steps {
                 echo "Building Docker images for frontend and backend..."
                 
