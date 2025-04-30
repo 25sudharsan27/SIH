@@ -208,7 +208,7 @@ pipeline {
 
         stage('Build and Run Docker') {
             steps {
-                bat 'docker compose up --force-recreate'
+                bat 'docker compose up -d --force-recreate'
             }
         }
     }
