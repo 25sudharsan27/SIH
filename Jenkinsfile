@@ -195,6 +195,5 @@ pipeline {
     }
 }
 
-explain this for ppt 
 
 
