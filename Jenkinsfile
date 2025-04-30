@@ -199,11 +199,16 @@ pipeline {
             }
         }
 
-        stage('Deploy (Optional)') {
+        stage('Clean Old Containers') {
             steps {
-                echo "Deployment step placeholder - customize based on your target platform"
-                bat "docker compose up --force-recreate"  // Example command for Docker Compose deployment
-                // Optional: Add commands for deployment (e.g., Docker Compose up, SSH to remote servers, etc.)
+                bat 'docker rm -f backend || exit 0'
+                bat 'docker rm -f frontend || exit 0'
+            }
+        }
+
+        stage('Build and Run Docker') {
+            steps {
+                bat 'docker compose up --force-recreate'
             }
         }
     }
