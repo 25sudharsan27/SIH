@@ -30,6 +30,7 @@ function JobBoard() {
   const {page=1, query=''} = queryString.parse(window.location.search);
   const [currentPage, setCurrentPage] = useState(page);
 
+  
   const img = [Amazon, Google, flipkart, JPMorgan, microsoft, nvidia, oracle, salesForce];
 
   // Fetch jobs on component mount and when filters change
