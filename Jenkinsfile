@@ -202,6 +202,7 @@ pipeline {
         stage('Deploy (Optional)') {
             steps {
                 echo "Deployment step placeholder - customize based on your target platform"
+                bat "docker-compose up -d"  // Example command for Docker Compose deployment
                 // Optional: Add commands for deployment (e.g., Docker Compose up, SSH to remote servers, etc.)
             }
         }
