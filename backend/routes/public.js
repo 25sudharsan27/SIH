@@ -5,13 +5,13 @@ const router = express.Router();
 const authToken = require("../middleware/verifyuserToken");
 const jobdetails = require("../controller/public/jobDetail.js");
 const updatejob = require("../controller/public/updateJobs.js");
-const filterjobdetails = require("../controller/public/filterJobDetails.js");
-const viewJob = require("../controller/public/singleJobDetails.js");
-const addmcqtest = require("../controller/public/addMcqTest.js")
-const getmcqtest = require("../controller/public/getMcqtest.js");
-const getdata = require("../controller/public/getMcq.js");
-const AddPost = require("../controller/public/addPost.js");
-const getpost = require("../controller/public/getPost.js");
+const filterjobdetails = require("../controller/public/filterJobDetail.js");
+const viewJob = require("../controller/public/singleJobDetail.js");
+const addmcqtest = require("../controller/public/addMcqTests.js")
+const getmcqtest = require("../controller/public/getMcqtests.js");
+const getdata = require("../controller/public/getMCQ.js");
+const AddPost = require("../controller/public/adddPost.js");
+const getpost = require("../controller/public/getPosts.js");
 const userAuth = require("../middleware/verifyuserToken.js");
 
 router.post("/jobs",authToken,jobdetails);
