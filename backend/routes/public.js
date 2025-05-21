@@ -4,15 +4,15 @@ const router = express.Router();
 
 const authToken = require("../middleware/verifyuserToken");
 const jobdetails = require("../controller/public/jobDetail.js");
-const updatejob = require("../controller/public/updateJob");
-const filterjobdetails = require("../controller/public/filterJobDetails");
-const viewJob = require("../controller/public/singleJobDetails");
-const addmcqtest = require("../controller/public/addMcqTest")
-const getmcqtest = require("../controller/public/getMcqtest");
-const getdata = require("../controller/public/getMcq");
-const AddPost = require("../controller/public/addPost");
-const getpost = require("../controller/public/getPost");
-const userAuth = require("../middleware/verifyuserToken");
+const updatejob = require("../controller/public/updateJob.js");
+const filterjobdetails = require("../controller/public/filterJobDetails.js");
+const viewJob = require("../controller/public/singleJobDetails.js");
+const addmcqtest = require("../controller/public/addMcqTest.js")
+const getmcqtest = require("../controller/public/getMcqtest.js");
+const getdata = require("../controller/public/getMcq.js");
+const AddPost = require("../controller/public/addPost.js");
+const getpost = require("../controller/public/getPost.js");
+const userAuth = require("../middleware/verifyuserToken.js");
 
 router.post("/jobs",authToken,jobdetails);
 router.post("/updatejob",updatejob);
