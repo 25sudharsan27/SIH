@@ -4,7 +4,7 @@ const router = express.Router();
 
 const authToken = require("../middleware/verifyuserToken");
 const jobdetails = require("../controller/public/jobDetail.js");
-const updatejob = require("../controller/public/updateJob.js");
+const updatejob = require("../controller/public/updateJobs.js");
 const filterjobdetails = require("../controller/public/filterJobDetails.js");
 const viewJob = require("../controller/public/singleJobDetails.js");
 const addmcqtest = require("../controller/public/addMcqTest.js")
