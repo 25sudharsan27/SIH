@@ -1,5 +1,3 @@
-const express = require("express");
-const router = express.Router();
 const jobModel = require("../../models/public/jobsModel");
 
 const jobdetails = async (req, res) => {
