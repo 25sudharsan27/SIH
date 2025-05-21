@@ -3,7 +3,7 @@ const express = require("express")
 const router = express.Router();
 
 const authToken = require("../middleware/verifyuserToken");
-const jobdetails = require("../controller/public/jobDetails");
+const jobdetails = require("../controller/public/jobDetails.js");
 const updatejob = require("../controller/public/updateJob");
 const filterjobdetails = require("../controller/public/filterJobDetails");
 const viewJob = require("../controller/public/singleJobDetails");
