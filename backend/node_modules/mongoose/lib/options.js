@@ -12,6 +12,5 @@ exports.internalToObjectOptions = {
   depopulate: true,
   flattenDecimals: false,
   useProjection: false,
-  versionKey: true,
-  flattenObjectIds: false
+  versionKey: true
 };
