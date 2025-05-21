@@ -6,7 +6,7 @@ const updateEducation = async (req, res) => {
     const education = req.body;
     const user_id = req?.user_id;
 
-    if(!user_id){
+    if (!user_id) {
       res.status(400).json({
         message: "user id not found",
         error: true,
@@ -14,41 +14,42 @@ const updateEducation = async (req, res) => {
       });
     }
 
-    const user = await userModel.findOne({"_id" :user_id });
+    const user = await userModel.findOne({ "_id": user_id });
 
     if (!user) {
-      throw new Error("User not found");
+      res.status(404).json({
+        message: "User not found",
+        error: true,
+        success: false,
+      })
     }
 
-    // Handle education
     if (education) {
-      if(education?.delete){
-
+      if (education?.delete) {
         const existingEducationIndex = (user.education || []).findIndex(e => e._id.toString() === education._id);
         if (existingEducationIndex > -1) {
-          // Delete existing education
           user.education.splice(existingEducationIndex, 1);
         }
       }
-      else{
+      else {
 
-      if (Array.isArray(education)) {
-        education.forEach(ed => {
-          const existingEducationIndex = (user.education || []).findIndex(e => e.title === ed.title);
-          if (existingEducationIndex > -1) {
-            // Update existing education
-            user.education[existingEducationIndex] = { ...user.education[existingEducationIndex], ...ed };
-          } else {
-            // Add new education
-            user.education.push(ed);
-          }
-        });
-      } else {
+        // if (Array.isArray(education)) {
+        //   education.forEach(ed => {
+        //     const existingEducationIndex = (user.education || []).findIndex(e => e.title === ed.title);
+        //     if (existingEducationIndex > -1) {
+        //       // Update existing education
+        //       user.education[existingEducationIndex] = { ...user.education[existingEducationIndex], ...ed };
+        //     } else {
+        //       // Add new education
+        //       user.education.push(ed);
+        //     }
+        //   });
+        // } else {
         // Handle single education object
         const existingEducationIndex = (user.education || []).findIndex(e => {
-          return e._id.toString() === education._id; 
-      });
-        console.log("index : "+existingEducationIndex);
+          return e._id.toString() === education._id;
+        });
+        console.log("index : " + existingEducationIndex);
         if (existingEducationIndex > -1) {
           // Update existing education
           console.log("education single one");
@@ -61,7 +62,7 @@ const updateEducation = async (req, res) => {
         }
       }
     }
-    }
+
     // Save the updated user document
     // console.log(user.education);
     const updatedUser = await user.save();

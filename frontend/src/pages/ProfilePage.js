@@ -304,6 +304,8 @@ const ProfilePage =  () => {
 
         const data = await updateUser.json(); // Parse the JSON response from the server
         console.log('Response from server:', data);
+        setLoading(false);
+        setIsAddExperienceModalOpen(false);
     }catch(error){
       setLoading(false);
       const messageContainer = document.createElement('div');

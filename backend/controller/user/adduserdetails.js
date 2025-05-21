@@ -4,15 +4,11 @@ const userModel = require("../../models/userModel");
 const updateUserDetails = async (req, res) => {
   try {
     const {name,following,skills, about, projects, jobs, experiences, volunteering, education,tagline,portfolio,city,state,country,pic,experiencepic,educationpic } = req.body;
-    console.log("profile1" +profilepic);
-    
-    // Find the user by email
     const user_id = req?.user_id;
 
     if(!user_id){
       throw new Error("Cache not found");
     }
-
 
     const user = await userModel.findOne({"_id" :user_id });
 
