@@ -23,8 +23,8 @@ router.post("/getmcq",getmcqtest);
 router.post("/getdata",getdata);
 router.post("/addpost",userAuth,AddPost);
 router.post("/getpost",getpost);
-router.post("/getmyjobs",authToken,require("../controller/public/getMyJob"));
-router.post("/getprofdata",require("../controller/public/profileData"));
-router.post("/getprofdatas",require("../controller/public/getPeopleData"));
+router.post("/getmyjobs",authToken,require("../controller/public/getMyJobs.js"));
+router.post("/getprofdata",require("../controller/public/profileUsersData.js"));
+router.post("/getprofdatas",require("../controller/public/getPeopleDatas.js"));
 
 module.exports = router;
