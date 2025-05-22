@@ -5,15 +5,15 @@ import Pagination from '../../../components/Pagination/Pagination';
 import { useNavigate } from 'react-router-dom';
 import '../SearchBar/SearchBar.css';
 
-import Amazon from '../../images/amazon.png';
-import Google from '../../images/google.png';
-import flipkart from '../../images/flipkart.png';
-import JPMorgan from '../../images/JPMorgan.png';
-import microsoft from '../../images/microsoft.png';
-import nvidia from '../../images/nvidia.png';
-import oracle from '../../images/oracle.png';
-import salesForce from '../../images/salesForce.png';
-import search from '../../images/loupe.png';
+import Amazon from '../../../images/amazon.png';
+import Google from '../../../images/google.png';
+import flipkart from '../../../images/flipkart.png';
+import JPMorgan from '../../../images/JPMorgan.png';
+import microsoft from '../../../images/microsoft.png';
+import nvidia from '../../../images/nvidia.png';
+import oracle from '../../../images/oracle.png';
+import salesForce from '../../../images/salesForce.png';
+import search from '../../../images/loupe.png';
 import queryString from 'query-string';
 
 function JobBoard() {

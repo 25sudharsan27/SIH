@@ -2,17 +2,17 @@
 import React, { useState,useEffect } from 'react';
 import './profile.css';
 import Modal from '../../../components/Model/Model'; // Make sure this is imported correctly
-import edit from '../../images/edit.png';
+import edit from '../../../images/edit.png';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../../store/userSlice';
-import editIcon from '../../images/edit-icon.svg'
-import saveIcon from '../../images/floppy-disk-regular.svg'
-import linkIcon from '../../images/link-solid.svg'
+import editIcon from '../../../images/edit-icon.svg'
+import saveIcon from '../../../images/floppy-disk-regular.svg'
+import linkIcon from '../../../images/link-solid.svg'
 import HeatMap from '../HeatMap/HeatMap';
-import leetcode from '../../images/leetcode.svg'
-import hackerrank from '../../images/hackerrank.svg'
-import github from '../../images/github.svg'
-import userIcon from '../../images/user-icon-svgrepo-com (1).svg'
+import leetcode from '../../../images/leetcode.svg'
+import hackerrank from '../../../images/hackerrank.svg'
+import github from '../../../images/github.svg'
+import userIcon from '../../../images/user-icon-svgrepo-com (1).svg'
 
 import {
   CitySelect,

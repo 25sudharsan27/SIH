@@ -2,8 +2,8 @@ import { Link, useParams } from 'react-router-dom';
 import '../PostedJobs/PostedJobs.css'
 import { useState, useEffect } from 'react';
 import "./Applicants.css";
-import tick from '../../images/tick.svg';
-import times from '../../images/times.svg';
+import tick from '../../../images/tick.svg';
+import times from '../../../images/times.svg';
 
 const Applicants = () => {
     const { id } = useParams(); // Extract the job ID from params

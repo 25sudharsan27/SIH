@@ -4,7 +4,7 @@ import UserNavbar from '../../../components/UserNavbar/usernavbar';
 import SearchBar from '../../UserPages/SearchBar/SearchBar';
 import Pagination from '../../../components/Pagination/Pagination';
 import { Link } from 'react-router-dom';
-import google from '../../images/google.png'
+import google from '../../../images/google.png'
 import { useNavigate } from 'react-router-dom';
 
 function JobBoard() {

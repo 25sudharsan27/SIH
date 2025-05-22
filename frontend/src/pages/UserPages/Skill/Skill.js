@@ -1,6 +1,6 @@
 import React from 'react';
 import './Skill.css';
-import pythonLogo from '../../images/python-logo.png'; // Replace with a prop or default image if needed
+import pythonLogo from '../../../images/python-logo.png'; // Replace with a prop or default image if needed
 import { useNavigate } from 'react-router-dom';
 
 function Skill({ skillData = {} }) {

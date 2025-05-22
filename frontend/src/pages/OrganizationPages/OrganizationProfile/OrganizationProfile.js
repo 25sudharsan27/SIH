@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import '../../UserPages/ProfilePage/profile.css';
 import Modal from '../../../components/Model/Model'; // Ensure this is imported correctly
 import { selectOrganization, setOrganizationDetails } from '../../../store/OrganizationSlice';
-import editIcon from '../../images/edit-icon.svg'
-import saveIcon from '../../images/floppy-disk-regular.svg'
-import linkIcon from '../../images/link-solid.svg'
-import edit from '../../images/edit.png';
-import userIcon from '../../images/user-icon-svgrepo-com (1).svg'
+import editIcon from '../../../images/edit-icon.svg'
+import saveIcon from '../../../images/floppy-disk-regular.svg'
+import linkIcon from '../../../images/link-solid.svg'
+import edit from '../../../images/edit.png';
+import userIcon from '../../../images/user-icon-svgrepo-com (1).svg'
 
 
 import {

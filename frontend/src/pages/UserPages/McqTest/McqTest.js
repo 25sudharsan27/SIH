@@ -120,7 +120,7 @@ function Interview() {
           ) : (
             <p>No questions available</p> // Better message if no questions are found
           )}
-          {!submitted && <button style={{margin:'20px'}} className='skill-start-btn' style={{backgroundColor:"green"}} onClick={handleSubmit}>Submit</button>}
+          {!submitted && <button style={{margin:'20px',backgroundColor:"green"}} className='skill-start-btn'  onClick={handleSubmit}>Submit</button>}
           <div style={{display:'flex'}}>
           {submitted && <button style={{margin:'20px'}} className="skill-start-btn" onClick={handleContinue}>Continue</button>}
 
