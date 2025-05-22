@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    organization: null, // This will store the complete organization data
+    organization: null, 
 };
 
 const organizationSlice = createSlice({
@@ -9,16 +9,13 @@ const organizationSlice = createSlice({
     initialState,
     reducers: {
         setOrganizationDetails: (state, action) => {
-            state.organization = action.payload; // Set the complete organization data
+            state.organization = action.payload; 
         },
-        // Optionally add other reducers if needed
     },
 });
 
-// Selectors
 export const selectOrganization = (state) => state.organization.organization;
 
-// Actions
 export const { setOrganizationDetails } = organizationSlice.actions;
 
 export default organizationSlice.reducer;

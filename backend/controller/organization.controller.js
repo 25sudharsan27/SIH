@@ -1,5 +1,8 @@
 const jobModel = require("../models/public/jobsModel");
 const organizationModel = require("../models/organizationModel");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
 
 
 const AddJob = async (req, res) => {

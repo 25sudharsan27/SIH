@@ -1,26 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import LandingPage from './pages/LandingPage';
+import LandingPage from './pages/UserPages/LandingPage/LandingPage';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter,Route,Routes} from 'react-router-dom';
-// import OrganizationSignup from './pages/OrganizationSignup';
-import JobSeekerSignup from './pages/JobSeekerSignup';
-import JobSeekerLogin from './pages/JobSeekerLogin';
-import OrganizationSignup from './pages/OrganizationSignup';
-import OrganizationLogin from './pages/OrganizationLogin';
-import Organization from './pages/Organizationjobs';
-import OrganizationRouter from './pages/OrganizationRouter';
-import User from './pages/UserJobs';
+import JobSeekerSignup from './pages/UserPages/JobSeekerSignup/JobSeekerSignup';
+import JobSeekerLogin from './pages/UserPages/JobSeekerLogin/JobSeekerLogin';
+import OrganizationSignup from './pages/OrganizationPages/OrganizationSignup/OrganizationSignup';
+import OrganizationLogin from './pages/OrganizationPages/OrganizationLogin/OrganizationLogin';
+import OrganizationRouter from './pages/OrganizationPages/OrganizationProfile/OrganizationRouter';
+import User from './pages/UserPages/UserJobs/UserJobs';
 import {store} from './store/store';
 import { Provider } from 'react-redux';
-import Mcqtest from './pages/McqTest';
-import MentorshipApp from './pages/Mentorship';
-import CoursePage from './pages/CoursePage';
-import Posts from './pages/Community';
-import CreatePost from './pages/CreatePost';
-import UsersData from './pages/UsersData';
-import ViewProfile from './pages/ViewProfile';
+import Mcqtest from './pages/UserPages/McqTest/McqTest';
+import MentorshipApp from './pages/UserPages/Mentorship/Mentorship';
+import CoursePage from './pages/UserPages/CoursePage/CoursePage';
+import Posts from './pages/UserPages/Community/Community';
+import CreatePost from './pages/UserPages/CreatePost/CreatePost';
+import UsersData from './pages/UserPages/UserData/UsersData';
+import ViewProfile from './pages/UserPages/ViewProfile/ViewProfile';
 
 
 
@@ -33,7 +31,6 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        {/* <Route path="/organization/signup" element={<OrganizationSignup />} /> */}
         <Route path="/jobseeker/signup" element={<JobSeekerSignup />} />
         <Route path="/jobseeker/login" element={<JobSeekerLogin />} />
         <Route path="/organization/login" element={<OrganizationLogin/>}/>
@@ -53,7 +50,4 @@ root.render(
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

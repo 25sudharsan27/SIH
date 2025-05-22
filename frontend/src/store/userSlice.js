@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    user: null, // This will store the complete user data
+    user: null, 
 };
 
 const userSlice = createSlice({
@@ -9,16 +9,13 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setUserDetails: (state, action) => {
-            state.user = action.payload; // Set the complete user data
+            state.user = action.payload; 
         },
-        // Optionally add other reducers if needed
     },
 });
 
-// Selectors
 export const selectUser = (state) => state.user.user;
 
-// Actions
 export const { setUserDetails } = userSlice.actions;
 
 export default userSlice.reducer;
