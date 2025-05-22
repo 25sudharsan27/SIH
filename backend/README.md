@@ -48,7 +48,7 @@ backend/
 
 ## 2.c 👤 User Profile Management
 
-### 2.d 🔹 General Details
+### 2.c1 🔹 General Details
 
 | Purpose          | Endpoint                         | Method |
 |------------------|----------------------------------|--------|
@@ -56,7 +56,7 @@ backend/
 | Add Skills       | `/api/user/adddetails`          | POST   |
 | Add Projects     | `/api/user/adddetails`          | POST   |
 
-### 2.e 🔹 Experience
+### 2.c2 🔹 Experience
 
 | Purpose              | Endpoint                            | Method |
 |----------------------|-------------------------------------|--------|
@@ -64,7 +64,7 @@ backend/
 | Update Experience    | `/api/user/updateexperience`       | POST   |
 | Delete Experience    | `/api/user/deleteexperience`       | POST   |
 
-### 2.f🔹 Education
+### 2.c3🔹 Education
 
 | Purpose              | Endpoint                            | Method |
 |----------------------|-------------------------------------|--------|
@@ -72,7 +72,7 @@ backend/
 | Update Education     | `/api/user/updateeducation`        | POST   |
 | Delete Education     | `/api/user/deleteeducation`        | POST   |
 
-### 2.g🔹 User Data
+### 2.c4🔹 User Data
 
 | Purpose              | Endpoint                            | Method |
 |----------------------|-------------------------------------|--------|
@@ -80,7 +80,7 @@ backend/
 
 ---
 
-## 2.h 🧪 Interview & MCQ Section
+## 2.d 🧪 Interview & MCQ Section
 
 | Purpose              | Endpoint                            | Method |
 |----------------------|-------------------------------------|--------|
@@ -89,7 +89,7 @@ backend/
 
 ---
 
-## 2.i 🏢 Organization Section
+## 2.e 🏢 Organization Section
 
 | Purpose                     | Endpoint                                 | Method |
 |-----------------------------|------------------------------------------|--------|
@@ -100,7 +100,7 @@ backend/
 
 ---
 
-## 2.j 🧾 Job Management (Organization)
+## 2.f 🧾 Job Management (Organization)
 
 | Purpose                     | Endpoint                            | Method |
 |-----------------------------|-------------------------------------|--------|
@@ -111,7 +111,7 @@ backend/
 
 ---
 
-## 2.k 🌐 Community Section
+## 2.g 🌐 Community Section
 
 | Purpose              | Endpoint                            | Method |
 |----------------------|-------------------------------------|--------|
@@ -120,7 +120,7 @@ backend/
 
 ---
 
-## 2.l 📈 Profile Data (for Heatmap & Analytics)
+## 2.h 📈 Profile Data (for Heatmap & Analytics)
 
 | Purpose                         | Endpoint                             | Method |
 |----------------------------------|--------------------------------------|--------|
