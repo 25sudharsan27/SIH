@@ -4,6 +4,7 @@
 ## 2. Backend API Endpoints
 ## 3. Environment Variables setup
 ## 4. Start Backend Server
+## 5. Error Notes
 
 # 1.  Project File Structure - Backend
 
@@ -167,3 +168,6 @@ Otherwise
 ``` bash
     node index.js
 ```
+
+## 5. Error Notes
+
