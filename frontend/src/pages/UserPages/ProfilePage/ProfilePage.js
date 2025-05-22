@@ -21,7 +21,7 @@ import {
 } from "react-country-state-city";
 import "react-country-state-city/dist/react-country-state-city.css";
 
-import delete3 from '../../images/delete.svg'
+import delete3 from '../../../images/delete.svg'
 
 
 // import profile from './images/logesh.jpg'
