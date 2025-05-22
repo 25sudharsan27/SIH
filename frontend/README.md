@@ -7,7 +7,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ``` bash
     
-    
 # Users section
 REACT_APP_usersignup_api = "http://your_backend_url/api/signup"
 REACT_APP_userlogin_api = "http://your_backend_url/api/login"
