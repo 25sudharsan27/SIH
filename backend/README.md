@@ -1,5 +1,18 @@
 # Documentation of Backend of Job Intern Catalyst
 
+# Indexing
+
+```
+
+├── 1 . Project File Structure
+├── 2 . Backend API Endpoints
+├── 3 . Environment Variables setup
+├── 4 . Start Backend Server
+└── 5 . Error Notes
+
+
+```
+
 ## 1. Project File Structure
 ## 2. Backend API Endpoints
 ## 3. Environment Variables setup

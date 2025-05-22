@@ -16,15 +16,6 @@
 └── 6 . Features Implemented
 
 ```
-## 1. Project Setup
-### 1.a Prerequisites
-### 1.b Installation
-### 1.c  Run the app
-## 2. Project Architecture
-## 3. Environment Variables
-## 4. Available Scripts
-## 5. Learn More
-## 6. Features Implemented
 
 ## 1. 📦 Project Setup
 
