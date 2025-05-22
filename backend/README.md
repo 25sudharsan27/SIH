@@ -12,13 +12,6 @@
 
 
 ```
-
-## 1. Project File Structure
-## 2. Backend API Endpoints
-## 3. Environment Variables setup
-## 4. Start Backend Server
-## 5. Error Notes
-
 # 1.  Project File Structure - Backend
 
 ```
@@ -184,3 +177,18 @@ Otherwise
 
 ## 5. Error Notes
 
+---
+
+## 🧾 Common HTTP Status Codes & Error Notes
+
+| Status Code | Message               | Reason                                                    |
+|-------------|------------------------|------------------------------------------------------------|
+| 200         | OK                     | Request successful.                                        |
+| 201         | Created                | Resource created successfully (e.g., data added).          |
+| 400         | Bad Request            | User ID or required data not sent from client.             |
+| 401         | Unauthorized           | Invalid token or user not logged in.                       |
+| 403         | Forbidden              | User does not have the required privileges.                |
+| 404         | Not Found              | Requested resource or user not found in the database.      |
+| 500         | Internal Server Error  | Unexpected error occurred in server.                       |
+
+---
