@@ -11,7 +11,6 @@ const jobSchema = new mongoose.Schema({
         }
     ],
     title : String 
-    // Assuming stipend is a number
 });
 
 const post = mongoose.model('Post', jobSchema);

@@ -34,7 +34,7 @@ const ProfilePage =  () => {
   // Get user data from Redux store
 
   const userData = useSelector(selectUser);
-  console.log(userData);
+  // console.log(userData);
 
   // Initialize state variables
   const [isEditingAbout, setIsEditingAbout] = useState(false);
@@ -123,7 +123,6 @@ const ProfilePage =  () => {
     setIsEditingAbout(false);
     setLoading(true);
     try{
-    // console.log("aboutText : ", process.env.REACT_APP_saveabout_api);
     const updateUser = await fetch(process.env.REACT_APP_saveabout_api, {
       method: "POST",
       credentials: 'include',
@@ -134,12 +133,12 @@ const ProfilePage =  () => {
         "about": aboutText
       })
     });
-    
+    // console.log("aboutText : ", a);
     const data = await updateUser.json();
     setLoading(false);
     
-    // console.log("data : ", data);
-    window.location.reload(); // Reload the page to clear state and redirect to login
+    console.log("data : ", data);
+    // window.location.reload(); // Reload the page to clear state and redirect to login
     }catch(error){
       setLoading(false);
       const messageContainer = document.createElement('div');
@@ -276,7 +275,6 @@ const ProfilePage =  () => {
     }
   };
 
-  // Add a new experience
   const handleAddExperience = async () => {
     setLoading(true);
 
@@ -287,25 +285,23 @@ const ProfilePage =  () => {
     formdata.append('endDate', newExperience.endDate);
     formdata.append('description', newExperience.description);
 
-    // Ensure you are appending the correct file field
     if (newExperience.pic) {
-        formdata.append('pic', newExperience.pic); // 'pic' is the field name for the file
+        formdata.append('pic', newExperience.pic);
     }
 
-    console.log(formdata); // Optional: Check the formdata content in the console
 
     try {
-        // Make sure you are sending the formdata directly in the body
         const updateUser = await fetch(process.env.REACT_APP_addexperience_api, {
             method: process.env.REACT_APP_addexperience_method,
             credentials: 'include',
-            body: formdata,  // Directly sending formdata here
+            body: formdata, 
         });
 
-        const data = await updateUser.json(); // Parse the JSON response from the server
+        const data = await updateUser.json(); 
         console.log('Response from server:', data);
         setLoading(false);
         setIsAddExperienceModalOpen(false);
+        window.location.reload();
     }catch(error){
       setLoading(false);
       const messageContainer = document.createElement('div');
@@ -333,8 +329,8 @@ const ProfilePage =  () => {
 
     try{
     // Send new experience data to the server (optional)
-    const updateUser = await fetch(process.env.REACT_APP_addexperience_api, {
-      method: process.env.REACT_APP_addexperience_method,
+    const updateUser = await fetch(process.env.REACT_APP_updateexperience_api, {
+      method: process.env.REACT_APP_updateexperience_method,
       credentials: 'include',
       body: formdata
     });
@@ -402,8 +398,8 @@ const ProfilePage =  () => {
     formdata.append('_id',id2);
     try{
       // Send new experience data to the server (optional)
-      const updateUser = await fetch(process.env.REACT_APP_addexperience_api, {
-        method: process.env.REACT_APP_addexperience_method,
+      const updateUser = await fetch(process.env.REACT_APP_deleteexperience_api, {
+        method: process.env.REACT_APP_deleteexperience_method,
         credentials: 'include',
         body: formdata
       });
@@ -431,21 +427,22 @@ const ProfilePage =  () => {
   const handleDeleteEducation = async(id2)=>{
     setLoading(true);
     const formdata = new FormData();
-    formdata.append('delete',"yeah");
     formdata.append('_id',id2);
     try{
-      // Send new experience data to the server (optional)
-      const updateUser = await fetch(process.env.REACT_APP_addeducation_api , {
-        method: process.env.REACT_APP_addexperience_method,
+
+      const updateUser = await fetch(process.env.REACT_APP_deleteeducation_api , {
+        method: "POST",
         credentials: 'include',
         body: formdata
       });
+
       const data = await updateUser.json();
       console.log("data : ", data);
       setLoading(false);
       window.location.reload(); // Reload the page to clear state and redirect to login
       }catch(error){
         setLoading(false);
+        console.log(error);
         const messageContainer = document.createElement('div');
           messageContainer.className = 'popup-message';
   
@@ -471,8 +468,8 @@ const ProfilePage =  () => {
 
     try{
     // Send new experience data to the server (optional)
-    const updateUser = await fetch(process.env.REACT_APP_addeducation_api , {
-      method: process.env.REACT_APP_addexperience_method,
+    const updateUser = await fetch(process.env.REACT_APP_updateeducation_api , {
+      method: process.env.REACT_APP_updateeducation_method,
       credentials: 'include',
       body: formdata
     });
@@ -480,7 +477,7 @@ const ProfilePage =  () => {
     console.log("data : ", data);
     setIsUpdateEducationModalOpen(false);
     setLoading(false);
-    window.location.reload(); // Reload the page to clear state and redirect to login
+    // window.location.reload(); // Reload the page to clear state and redirect to login
     }catch(error){
       setLoading(false);
       const messageContainer = document.createElement('div');

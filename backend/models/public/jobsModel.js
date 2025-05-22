@@ -14,11 +14,11 @@ const jobSchema = new mongoose.Schema(
     description: String,
     link: String,
     experienceLevel: {
-      type: String, // e.g., Junior, Mid, Senior
+      type: String, 
       required: true,
     },
     workMode: {
-      type: String, // Possible work modes
+      type: String,
       required: true,
     },
     country: {
@@ -32,14 +32,14 @@ const jobSchema = new mongoose.Schema(
     state :{
       type :String,
       required:true,
-    }, // Additional details about the job's location
+    },
     company: String,
     pic:String,
     opening: {
       type: Number,
-      default: 1, // Number of job openings
+      default: 1,
     },
-    skills: [String], // Required skills for the job
+    skills: [String],
     extra_questions :[String],
     applicants: [
       {

@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-async function orgauthToken(req, res, next) {
+const orgauthToken = async (req, res, next) => {
     try {
         const token = req.cookies?.token;
 

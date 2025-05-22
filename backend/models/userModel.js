@@ -21,11 +21,11 @@ const userSchema = new mongoose.Schema(
         title: String,
         description: String,
         link: String,
-        media: [String], // Array of image URLs
+        media: [String], 
       },
     ],
     jobs: [
-      String // store the job id
+      String 
     ],
     experiences: [
       {
@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema(
         startDate: Date,
         endDate: Date,
         description: String,
-        media: [String], // Array of image URLs
+        media: [String], 
       },
     ],
     volunteering: [
@@ -45,7 +45,7 @@ const userSchema = new mongoose.Schema(
         startDate: Date,
         endDate: Date,
         description: String,
-        media: [String], // Array of image URLs
+        media: [String],
       },
     ],
     education: [
@@ -56,7 +56,7 @@ const userSchema = new mongoose.Schema(
         startDate: Date,
         endDate: Date,
         description: String,
-        media: [String], // Array of image URLs
+        media: [String], 
       },
     ],
     social: {

@@ -9,7 +9,6 @@ const jobSchema = new mongoose.Schema({
             answer :String
         }
     ]
-    // Assuming stipend is a number
 });
 
 const Job = mongoose.model('MCQ', jobSchema);
