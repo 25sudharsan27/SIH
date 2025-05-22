@@ -1,11 +1,30 @@
+# Documentation of Backend of Job Intern Catalyst
+
+## 1. Project File Structure
+## 2. Backend API Endpoints
+## 3. Environment Variables setup
+## 4. Start Backend Server
+
+# 1.  Project File Structure - Backend
+
+```
+backend/
+├── config/            # Configuration files (e.g., DB, env)
+├── controller/        # Controller logic for handling requests
+├── middleware/        # Express middleware (auth, logging, etc.)
+├── models/            # Mongoose/Sequelize models for DB schemas
+├── node_modules/      # Node.js packages (auto-generated)
+├── routes/            # API route definitions
+├── index.js           # Entry point of the server
+└── package.json       # Project dependencies and scripts
+```
 
 
-
-# 📌 Backend API Endpoints Documentation
+# 2. Backend API Endpoints
 
 ---
 
-## 🧑‍💼 Users Section
+## 2.a 🧑‍💼 Users Section
 
 | Purpose      | Endpoint                         | Method |
 |--------------|----------------------------------|--------|
@@ -14,7 +33,7 @@
 
 ---
 
-## 🧳 Job Viewing & Suggestions
+## 2.b 🧳 Job Viewing & Suggestions
 
 | Purpose                  | Endpoint                              | Method |
 |--------------------------|---------------------------------------|--------|
@@ -27,9 +46,9 @@
 
 ---
 
-## 👤 User Profile Management
+## 2.c 👤 User Profile Management
 
-### 🔹 General Details
+### 2.d 🔹 General Details
 
 | Purpose          | Endpoint                         | Method |
 |------------------|----------------------------------|--------|
@@ -37,7 +56,7 @@
 | Add Skills       | `/api/user/adddetails`          | POST   |
 | Add Projects     | `/api/user/adddetails`          | POST   |
 
-### 🔹 Experience
+### 2.e 🔹 Experience
 
 | Purpose              | Endpoint                            | Method |
 |----------------------|-------------------------------------|--------|
@@ -45,7 +64,7 @@
 | Update Experience    | `/api/user/updateexperience`       | POST   |
 | Delete Experience    | `/api/user/deleteexperience`       | POST   |
 
-### 🔹 Education
+### 2.f🔹 Education
 
 | Purpose              | Endpoint                            | Method |
 |----------------------|-------------------------------------|--------|
@@ -53,7 +72,7 @@
 | Update Education     | `/api/user/updateeducation`        | POST   |
 | Delete Education     | `/api/user/deleteeducation`        | POST   |
 
-### 🔹 User Data
+### 2.g🔹 User Data
 
 | Purpose              | Endpoint                            | Method |
 |----------------------|-------------------------------------|--------|
@@ -61,7 +80,7 @@
 
 ---
 
-## 🧪 Interview & MCQ Section
+## 2.h 🧪 Interview & MCQ Section
 
 | Purpose              | Endpoint                            | Method |
 |----------------------|-------------------------------------|--------|
@@ -70,7 +89,7 @@
 
 ---
 
-## 🏢 Organization Section
+## 2.i 🏢 Organization Section
 
 | Purpose                     | Endpoint                                 | Method |
 |-----------------------------|------------------------------------------|--------|
@@ -81,7 +100,7 @@
 
 ---
 
-## 🧾 Job Management (Organization)
+## 2.j 🧾 Job Management (Organization)
 
 | Purpose                     | Endpoint                            | Method |
 |-----------------------------|-------------------------------------|--------|
@@ -92,7 +111,7 @@
 
 ---
 
-## 🌐 Community Section
+## 2.k 🌐 Community Section
 
 | Purpose              | Endpoint                            | Method |
 |----------------------|-------------------------------------|--------|
@@ -101,7 +120,7 @@
 
 ---
 
-## 📈 Profile Data (for Heatmap & Analytics)
+## 2.l 📈 Profile Data (for Heatmap & Analytics)
 
 | Purpose                         | Endpoint                             | Method |
 |----------------------------------|--------------------------------------|--------|
@@ -111,7 +130,7 @@
 
 
 
-## Initialize environment variables in this format
+## 3. Initialize environment variables in this format
 
 ``` bash
 // Database credentials
@@ -135,7 +154,7 @@ PORT = your_backend_port_number (example : 5000)
 ```
 
 
-## Start backend server
+## 4. Start backend server
 
 If you have nodemon then 
 
