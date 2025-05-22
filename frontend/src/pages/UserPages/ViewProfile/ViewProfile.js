@@ -2,15 +2,8 @@
 import React, { useState,useEffect } from 'react';
 import '../ProfilePage/profile.css';
 import Modal from '../../../components/Model/Model.js'; // Make sure this is imported correctly
-import edit from '../../../images/edit.png';
-import dummyIcon from '../../../images/logesh_2.jpg';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectUser } from '../../../store/userSlice.js';
-import editIcon from '../../../images/edit-icon.svg'
-import saveIcon from '../../../images/floppy-disk-regular.svg'
+
 import linkIcon from '../../../images/link-solid.svg'
-import Amazon from '../../../images/amazon.png'
-import Google from '../../../images/google.png'
 import HeatMap from '../HeatMap/HeatMap';
 import leetcode from '../../../images/leetcode.svg'
 import hackerrank from '../../../images/hackerrank.svg'
@@ -18,15 +11,7 @@ import github from '../../../images/github.svg'
 import userIcon from '../../../images/user-icon-svgrepo-com (1).svg'
 import { useParams } from 'react-router-dom';
 
-import {
-  CitySelect,
-  CountrySelect,
-  StateSelect,
-} from "react-country-state-city";
 import "react-country-state-city/dist/react-country-state-city.css";
-
-import delete3 from '../../../images/delete.svg'
-
 
 // import profile from './images/logesh.jpg'
 import '../../../components/Model/Model.css';

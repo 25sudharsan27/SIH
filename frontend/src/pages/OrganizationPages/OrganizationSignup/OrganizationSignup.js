@@ -8,8 +8,8 @@ import {
   StateSelect,
 } from "react-country-state-city";
 import "react-country-state-city/dist/react-country-state-city.css";
-import hidden from '../../images/hidden.png';
-import eye from '../../images/eye.png';
+import hidden from '../../../images/hidden.png';
+import eye from '../../../images/eye.png';
 
 
 const JobSeekerSignup = () => {

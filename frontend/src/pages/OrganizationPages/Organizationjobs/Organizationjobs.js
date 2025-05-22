@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './CreateJob.css';
 import OrganizationNavbar from '../../../components/organizationnavbar.js';
-import {BrowserRouter as Router, Route, BrowserRouter, Routes} from 'react-router-dom';
+import { Route, Routes} from 'react-router-dom';
 import JobForm from '../CreateJob/CreateJob.js';
 import PostedJobs from '../PostedJobs/PostedJobs.js';
 import ClosedJobs from '../ClosedJobs/ClosedJobs.js';

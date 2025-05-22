@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import '../ViewJobs/ViewJobs.css';
-import UserNavbar from '../../../components/UserNavbar/usernavbar';
-import SearchBar from '../SearchBar/SearchBar';
 import Pagination from '../../../components/Pagination/Pagination';
 import { useNavigate } from 'react-router-dom';
 import { selectUser } from '../../../store/userSlice';

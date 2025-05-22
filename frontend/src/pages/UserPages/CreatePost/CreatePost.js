@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './CreatePost.css';
-import { Link } from 'react-router-dom';
 import UserNavbar from '../../../components/UserNavbar/usernavbar';
 
 const CreatePost = () => {

@@ -1,6 +1,5 @@
 import React, { useEffect,useState } from 'react';
 import '../../OrganizationPages/CreateJob/CreateJob.css';
-import OrganizationNavbar from '../../../components/OrganizationNavbar/organizationnavbar.js';
 import {BrowserRouter as Router, Route, BrowserRouter, Routes} from 'react-router-dom';
 import ViewJobs from '../ViewJobs/ViewJobs.js';
 import ViewJob from '../ViewJob/ViewJob.js';

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import '../../UserPages/ViewJobs/ViewJobs.css';
-import UserNavbar from '../../../components/UserNavbar/usernavbar';
-import SearchBar from '../../UserPages/SearchBar/SearchBar';
 import Pagination from '../../../components/Pagination/Pagination';
 import { Link } from 'react-router-dom';
 import google from '../../../images/google.png'
