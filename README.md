@@ -4,7 +4,8 @@ Welcome to our Job and Internship Platform! This website connects students and j
 
 ## Flow Chart 
 
-![Flow Chart](./website%20photos/flow-chart.png)
+<img width="1520" height="1576" alt="Group 1" src="https://github.com/user-attachments/assets/1fd55337-3086-42a4-ab25-8c98e091c08c" />
+
 
 
 ## Features
