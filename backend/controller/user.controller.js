@@ -292,7 +292,7 @@ const deleteExperience = async (req, res) => {
 
 const updateUserDetails = async (req, res) => {
   try {
-    const {name,following,skills, about, projects, jobs, experiences, volunteering, education,tagline,portfolio,city,state,country,pic,experiencepic,educationpic } = req.body;
+    const {name,skills, about, projects,tagline,portfolio,city,state,country } = req.body;
     const user_id = req?.user_id;
 
     if(!user_id){
@@ -646,7 +646,7 @@ const userSignInController = async (req,res) => {
         if(!user){
             throw new Error("User Not found");
         }
-        const checkpassword = await bcrypt.compare(password,user.password);
+        const checkpassword = bcrypt.compareSync(password,user.password);
         console.log(`checkPassword = ${checkpassword}`);
         if(checkpassword){
             const tokenData = {
@@ -705,7 +705,7 @@ const userSignUpController =  async(req,res) => {
             throw new Error("Please provide name")
         }
         const salt = bcrypt.genSaltSync(10);
-        const hashPassword = await bcrypt.hashSync(password,salt);
+        const hashPassword = bcrypt.hashSync(password,salt);
         if(!hashPassword){
             throw new Error("Something is wrong");
         }
