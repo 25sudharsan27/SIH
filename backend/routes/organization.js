@@ -15,11 +15,32 @@ router.post("/signup",organizationController.organizationSignUp);
 router.post("/login",organizationController.organizationSignIn);
 
 
-router.post("/addorganization",orgauthToken,upload.single('pic'),uploadImageExp,organizationController.updateOrganizationDetails);
+router.patch("/addorganization",orgauthToken,upload.single('pic'),uploadImageExp,organizationController.updateOrganizationDetails);
+router.patch("/updateabout",orgauthToken,organizationController.updateAboutOrganization);
 router.post("/closejob",orgauthToken,organizationController.closeJobByOrganization);
-router.post("/getclosedjobs",orgauthToken,organizationController.getClosedJobs);
-router.post("/getopenjobs",orgauthToken,organizationController.getOpenJobs);
+router.get("/getclosedjobs",orgauthToken,organizationController.getClosedJobs);
+router.get("/getopenjobs",orgauthToken,organizationController.getOpenJobs);
 router.post("/addjob",orgauthToken,organizationController.AddJob);
-router.post("/organizationdetails",orgauthToken,organizationController.organizationDetailsById);
+router.get("/organizationdetails",orgauthToken,organizationController.organizationDetailsById);
+router.post("/userdetails",orgauthToken,organizationController.userDetailsController);
+
+
+
+router.post('/create',orgauthToken, organizationController.createJob);
+router.get('/posted/:orgId',organizationController.getPostedJobs);
+router.get('/details/:jobId', organizationController.getJobDetails);
+router.get('/applicants/:jobId/:stage', organizationController.getApplicantsByStage);
+router.post('/applicant/move', organizationController.moveApplicantToNextStage);
+router.post('/applicants/bulk-update', organizationController.moveApplicantsBulk);
+router.put('/applicant/status', organizationController.updateApplicantStatus);
+router.put('/stages/:jobId', organizationController.updateJobStages);
+router.put('/close/:jobId', organizationController.closeJob);
+
+// Job seeker routes
+router.get('/jobdetail/:job_id',orgauthToken, organizationController.getJobDetailById);
+router.post('/apply', organizationController.applyToJob);
+router.get('/my-applications/:userId', organizationController.getMyApplications);
+router.get('/application-status/:jobId/:userId', organizationController.getApplicationStatus);
+router.get('/jobapplicationstatuscount/:jobId', orgauthToken, organizationController.getCountofApplicationStatus);
 
 module.exports = router;

@@ -7,6 +7,48 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 
+const updateCodingPlatforms = async (req, res) => {
+  try {
+    const { codechef, codeforces, leetcode, hackerrank, github } = req.body;
+    const user_id = req?.user_id;
+    if (!user_id) {
+      return res.status(400).json({
+        message: "User ID not found",
+        error: true,
+        success: false,
+      });
+    }
+    const user = await userModel.findById(user_id);
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+        error: true,
+        success: false,
+      });
+    }
+    user.codingplatforms = {
+      codechef: codechef || user.codingplatforms.codechef,
+      codeforces: codeforces || user.codingplatforms.codeforces,
+      leetcode: leetcode || user.codingplatforms.leetcode,
+      hackerrank: hackerrank || user.codingplatforms.hackerrank,
+      github: github || user.codingplatforms.github,
+    };
+    const updatedUser = await user.save();
+    res.status(200).json({
+      message: "Coding platforms updated successfully",
+      success: true,
+      data: updatedUser,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: err.message || "Internal Server Error",
+      error: true,
+      success: false,
+    });
+  }
+};
+
+
 const addEducation = async (req, res) => {
   try {
     const education = req.body;
@@ -74,7 +116,6 @@ const updateEducation = async (req, res) => {
     
 
     const index = user.education.findIndex(e => e._id.toString() === education._id);
-    console.log("index "+index);
 
     if (index === -1) {
       return res.status(404).json({
@@ -219,8 +260,13 @@ const updateExperience = async (req, res) => {
       (e) => e._id.toString() === experience._id
     );
 
-    if (index === -1) throw new Error("Experience not found");
-
+    if (index === -1){
+      return res.status(404).json({
+        message: "Experience not found",
+        error: true,
+        success: false,
+      });
+    }
     user.experiences[index] = {
       ...user.experiences[index],
       ...experience,
@@ -228,7 +274,7 @@ const updateExperience = async (req, res) => {
 
     const updatedUser = await user.save();
 
-    res.status(200).json({
+    res.status(201).json({
       message: "Experience updated successfully",
       success: true,
       data: updatedUser,
@@ -268,8 +314,13 @@ const deleteExperience = async (req, res) => {
       (e) => e._id.toString() === _id
     );
 
-    if (index === -1) throw new Error("Experience not found");
-
+    if (index === -1){
+      return res.status(404).json({
+        message: "Experience not found",
+        error: true,
+        success: false,
+      });
+    }
     user.experiences.splice(index, 1);
 
     const updatedUser = await user.save();
@@ -296,13 +347,21 @@ const updateUserDetails = async (req, res) => {
     const user_id = req?.user_id;
 
     if(!user_id){
-      throw new Error("Cache not found");
+      return res.status(400).json({
+        message: "User ID not found",
+        error: true,
+        success: false,
+      });
     }
 
     const user = await userModel.findOne({"_id" :user_id });
 
     if (!user) {
-      throw new Error("User not found");
+      return res.status(404).json({
+        message: "User not found",
+        error: true,
+        success: false,
+      });
     }
     if(name){
       user.name = name;
@@ -344,10 +403,8 @@ const updateUserDetails = async (req, res) => {
         projects.forEach(project => {
           const existingProjectIndex = (user.projects || []).findIndex(p => p.title === project.title);
           if (existingProjectIndex > -1) {
-            // Update existing project
             user.projects[existingProjectIndex] = { ...user.projects[existingProjectIndex], ...project };
           } else {
-            // Add new project
             user.projects.push(project);
           }
         });
@@ -355,10 +412,8 @@ const updateUserDetails = async (req, res) => {
         // Handle single project object
         const existingProjectIndex = (user.projects || []).findIndex(p => p.title === projects.title);
         if (existingProjectIndex > -1) {
-          // Update existing project
           user.projects[existingProjectIndex] = { ...user.projects[existingProjectIndex], ...projects };
         } else {
-          // Add new project
           user.projects.push(projects);
         }
       }
@@ -388,7 +443,6 @@ const applyToJob = async (req, res) => {
   try {
     const { job_id, extra } = req.body;
     const user_id = req.user_id;
-    console.log("job_id" + job_id);
 
     if (!job_id) {
       res.status(400).json({
@@ -436,10 +490,9 @@ const applyToJob = async (req, res) => {
       "skill" : skill,
       match: user_skills.includes(skill.trim().toUpperCase()),
     }));
-    console.log("final skills "+final_skills)
 
     if (user.applied_jobs.includes(job_id)) {
-      res.status(403).json({
+      res.status(409).json({
         message: "Already applied to this job",
         error: true,
         success: false,
@@ -595,11 +648,14 @@ const  userDetailsController= async(req,res) => {
         
         const user = await userModel.findById(req.user_id);
         if(!user){
-            throw new Error("User not found");
+            res.status(404).json({
+                message : "User not found",
+                error : true,
+                success : false
+            })
         }
         res.status(200).json({
             data : user,
-            message : "working well ",
             error : false,
             success : true
         })
@@ -632,22 +688,24 @@ const userLogout = async(req,res) => {
 
 const userSignInController = async (req,res) => {
     try{
-        console.log("checking");
-        console.log(req.body);
-        const email = req.body.email;
-        const password = req.body.password;
-        if(!email){
-            throw new Error("Please provide Email");
+        const {email,password} = req.body;
+        if(!email || !password){
+            res.status(400).json({
+                message : "Missing Required fields email and password",
+                error : true,
+                success : false
+            });
         }
-        if(!password){
-            throw new Error("Please provide a password");
-        }
+        
         const user = await userModel.findOne({email});
         if(!user){
-            throw new Error("User Not found");
+            res.status(404).json({
+                message : "User Not found",
+                error : true,
+                success : false
+            });
         }
         const checkpassword = bcrypt.compareSync(password,user.password);
-        console.log(`checkPassword = ${checkpassword}`);
         if(checkpassword){
             const tokenData = {
                 "_id" : user.id,
@@ -668,7 +726,11 @@ const userSignInController = async (req,res) => {
             })
         }
         else{
-            throw new Error("User Password is Incorrect");
+            res.status(401).json({
+                message : "User Password is Incorrect",
+                error : true,
+                success : false
+            });
         }
     }
     catch(error){
@@ -685,29 +747,33 @@ const userSignInController = async (req,res) => {
 
 const userSignUpController =  async(req,res) => {
     try{
-        console.log(req.body);        
-        const email = req.body.email;
-        const name = req.body.name;
-        const password = req.body.password;
+        const {email,name,password} = req.body;
+
+        if(!email && !password && !name){
+          res.status(400).json({
+              message : "Missing Required fields email, password and name",
+              error : true,
+              success : false
+          })
+        }
         const user = await userModel.findOne({email});
-        
         if(user){
-            console.log("user already exists");
-            throw new Error ("User Already Exists");
+            res.status(409).json({
+                message : "User Already Exists",
+                error : true,
+                success : false
+            })
         }
-        if(!email){
-            throw new Error("Please provide email")
-        }
-        if(!password){
-            throw new Error("Please provide password")
-        }
-        if(!name){
-            throw new Error("Please provide name")
-        }
+        
         const salt = bcrypt.genSaltSync(10);
         const hashPassword = bcrypt.hashSync(password,salt);
+
         if(!hashPassword){
-            throw new Error("Something is wrong");
+            res.status(500).json({
+                message : "Unable to process hashing password",
+                error : true,
+                success : false
+            })
         }
         const payload = {
             ...req.body,
@@ -733,9 +799,52 @@ const userSignUpController =  async(req,res) => {
     }
 }
 
+const getCountofApplication = async (req, res) => {
+  try{
+    const userId = req.user_id;
+    if(!userId){
+      return res.status(400).json({
+        sucess:false,
+        error:true,
+        message:"Token Not Provided or it got Expired"
+      })
+    }
+    const user = await userModel.findById(userId);
+    const obj = {};
+    if(!user){
+      return res.status(404).json({
+        success:false,
+        error:true,
+        message:"User not found"
+      })
+    }
+    const applications = user.applied_jobs || [];
+    applications.forEach(app => {
+      if(app.application_status in obj){
+        obj[app.application_status] += 1;
+      }else{
+        obj[app.application_status] = 1;
+      }
+    });
+    return res.status(200).json({
+      success:true,
+      error:false,
+      data:obj
+    })
+  }
+  catch(error){
+    return res.status(500).json({
+      success:false,
+      message:error.message,
+      error:true
+    })
+  }
+}
+
 
 
 module.exports = {
+    updateCodingPlatforms,
     updateEducation,
     addEducation,
     deleteEducation,
@@ -749,5 +858,6 @@ module.exports = {
     userDetailsController,
     userLogout,
     userSignInController,
-    userSignUpController
+    userSignUpController,
+    getCountofApplication
 }

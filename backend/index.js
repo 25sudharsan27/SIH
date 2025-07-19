@@ -20,8 +20,8 @@ app.use(bodyparser.urlencoded({ extended: true }));
 
 
 app.use(cors({
-    origin : ["https://frontend-sih-swart.vercel.app","http://localhost:3000"],
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    origin : ["https://frontend-sih-swart.vercel.app"],
+    methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'],
     credentials : true
 }
 )) ;

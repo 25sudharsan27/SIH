@@ -78,16 +78,133 @@
     font-size: 16px;
   }
   
-  .like-button i, .comment-button i {
-    margin-right: 5px;
+  .like-button{
+    padding:15px;
+    transition: all 0.3s ease-in-out;
   }
-  
+  .like-button:hover{
+    background-color: #d2d2d2;
+    border-radius:15px;
+    transition: all 0.3s ease;
+  }
+
 
   .postimage{
     width: 100%;
     height: auto;
   }
 
+  .post-interact-buttons{
+    height:40px;
+    width:40px;
+    
+  }
+  .post-interact-buttons3{
+    height:20px;
+  }
+
+  .comment-item {
+    background-color: #f9f9f9;
+    margin: 8px 0;
+    padding: 12px 16px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    transition: background-color 0.3s;
+    position: relative;
+  }
+  
+  /* Add indentation per level */
+  .comment-item.level-1 { margin-left: 20px; }
+  .comment-item.level-2 { margin-left: 40px; }
+  .comment-item.level-3 { margin-left: 60px; }
+  .comment-item.level-4 { margin-left: 80px; }
+  /* You can keep going or use a max cap */
+  
+  .comment-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .comment-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 6px;
+  }
+  
+  .comment-author {
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .comment-date {
+    font-style: italic;
+    font-size: 0.75rem;
+    color: #888;
+  }
+  
+  .comment-text {
+    margin: 4px 0 10px;
+    font-size: 0.95rem;
+    color: #222;
+  }
+  
+  .comment-actions {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+  
+  .reply-btn,
+  .toggle-replies-btn {
+    background: none;
+    border: none;
+    color: #0066cc;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: color 0.2s ease;
+  }
+  
+  .reply-btn:hover,
+  .toggle-replies-btn:hover {
+    color: #004a99;
+  }
+  
+  .reply-form {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+  }
+  
+  .reply-form input[type="text"] {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 0.9rem;
+  }
+  
+  .reply-submit-btn {
+    padding: 8px 14px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+  }
+  
+  .reply-submit-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Optional: Different background color for deeper levels */
+  .comment-item.level-2 { background-color: #f1f5ff; }
+  .comment-item.level-3 { background-color: #e7efff; }
+  .comment-item.level-4 { background-color: #dde7ff; }
+  
 
 @media (max-width : 800px){
   .posts{

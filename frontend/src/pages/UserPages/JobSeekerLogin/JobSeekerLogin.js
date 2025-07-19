@@ -1,24 +1,17 @@
-import React, { useState,useContext } from 'react';
+import React, { useState } from 'react';
 import './JobSeekerLogin.css';
 import { useNavigate } from 'react-router-dom';
-// import Context from '../context';
-
 
 
 const JobSeekerLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const [isBuffereing , setIsBuffering] = useState(false);
 
   const navigate = useNavigate();
-  // const generalContext = useContext(Context);
-  // console.log("generalContext ",generalContext.fetchUserDetails());
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Implement your login logic here
     setIsBuffering(true);
     try {
       const response = await fetch(process.env.REACT_APP_userlogin_api, {
@@ -30,7 +23,7 @@ const JobSeekerLogin = () => {
           "email":email,
           "password":password,
         }),
-        credentials: 'include', // This option will send cookies with the request and receive any cookies from the server
+        credentials: 'include',
       });
       
 
@@ -38,7 +31,6 @@ const JobSeekerLogin = () => {
 
       if (userdata.success) {
 
-        // alert('Signup successful');
         const messageContainer = document.createElement('div');
         messageContainer.className = 'popup-message';
         messageContainer.id = "i233"
@@ -46,32 +38,27 @@ const JobSeekerLogin = () => {
         
         document.body.appendChild(messageContainer);
 
-        // Remove the message after a few seconds
         setTimeout(() => {
           document.body.removeChild(messageContainer);
         }, 3000);
-        // console.log(userdata);
-        // const data = await generalContext.fetchUserDetails();
 
         navigate('/user/profile');
       } else {
         setIsBuffering(false);
         
-        // Display a pop-up message at the top of the screen
         const messageContainer = document.createElement('div');
         messageContainer.className = 'popup-message';
         messageContainer.textContent = 'Signup failed: ' + userdata.message;
-        
+  
         document.body.appendChild(messageContainer);
 
-        // Remove the message after a few seconds
         setTimeout(() => {
           document.body.removeChild(messageContainer);
         }, 3000);
+
         if(userdata.message === 'User Already Exists'){
-          console.log("went to login page");
-          navigate('/jobseeker/login');        }
-        // console.log(userdata);
+          navigate('/jobseeker/login');       
+       }
       }
     } catch (error) {
       setIsBuffering(false);
@@ -82,7 +69,6 @@ const JobSeekerLogin = () => {
         
         document.body.appendChild(messageContainer);
 
-        // Remove the message after a few seconds
         setTimeout(() => {
           document.body.removeChild(messageContainer);
         }, 3000);
@@ -124,6 +110,17 @@ const JobSeekerLogin = () => {
           </div>
           <button id="i143" type="submit" className="submit-button">Login</button>
         </form>
+      </div>
+      <div style={{marginTop: '20px', textAlign: 'center'}}>
+        <p style={{fontSize: '14px', color: '#666'}}>
+          Sample Account:  
+        </p>
+        <p style={{fontSize: '14px', color: '#666'}}>
+          <b style={{color:"black"}}>Email</b> : sample4@gmail.com  
+        </p>
+        <p style={{fontSize: '14px', color: '#666'}}>
+          <b style={{color :"black" }}>Password</b> : 123456789a
+        </p>
       </div>
     </div>
   );

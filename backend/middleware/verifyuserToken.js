@@ -6,12 +6,11 @@ const authToken = async (req,res,next) => {
     try{
 
         const token =  req.cookies?.token;
-        if(req.body.user_id){
-            req.user_id = req.body.user_id;
-            return next();
-        }
+        // if(req.body.user_id){
+        //     req.user_id = req.body.user_id;
+        //     return next();
+        // }
         if(!token){
-            console.log("token ",token);
             return res.status(400).json({
                 message: "user not Logging",
                 error : true,
@@ -21,9 +20,11 @@ const authToken = async (req,res,next) => {
         jwt.verify(token,process.env.TOKEN_SECRET_KEY,
             function (err,decoded){
                 if(err){
-                    console.log("error auth",err);
-                }
-                console.log(req.body);
+                    return res.status(401).json({
+                        message: 'Invalid or expired token',
+                        error: true,
+                        success: false
+                    });                }
                 req.user_id = decoded?._id;
                 next();
             }

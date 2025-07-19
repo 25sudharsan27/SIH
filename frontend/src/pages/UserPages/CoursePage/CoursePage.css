@@ -60,7 +60,7 @@ body {
     margin-bottom: 30px;
   }
 
-  input[type="text"] {
+  /* input[type="text"] {
     padding: 15px;
     width: 60%;
     max-width: 600px;
@@ -73,7 +73,7 @@ body {
   input[type="text"]:focus {
     outline: none;
     border-color: #007bff;
-  }
+  } */
 
   /* Course Info */
   .course-info {

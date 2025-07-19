@@ -9,14 +9,12 @@ cloudinary.config({
   
 
 const uploadImageExp = async (req, res, next) => {
+    console.log("uploading image to cloudinary");
     const { file } = req; 
-    console.log("Uploaded file:", file); 
     const { pic } = req.body;
-    console.log("picture "+pic);
     if (file) {
         try {
-            console.log("Uploading image to Cloudinary...");
-            const stream = cloudinary.uploader.upload_stream(
+            const stream = await cloudinary.uploader.upload_stream(
                 {
                     resource_type: 'auto', 
                     public_id: `profilepics/${Date.now()}`, 
@@ -32,6 +30,7 @@ const uploadImageExp = async (req, res, next) => {
                     }
 
                     req.body.pic = result.secure_url;
+                    console.log("Image uploaded successfully:", result.secure_url);
                     next();
                 }
             );
@@ -41,6 +40,7 @@ const uploadImageExp = async (req, res, next) => {
             return res.status(500).json({ error: "Error in image upload" });
         }
     } else {
+        console.log("no file");
         next();
     }
 };

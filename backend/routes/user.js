@@ -3,11 +3,12 @@ const router = express.Router();
 
 
 const authToken = require("../middleware/verifyuserToken")
+const multer = require('multer');
+
 const uploadImageExp = require("../controller/utils/uploadimage.js");
 const userController = require("../controller/user.controller.js");
+const organizationController = require("../controller/organization.controller.js");
 
-
-const multer = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
@@ -19,12 +20,14 @@ router.post("/adddetails", authToken, upload.single('pic'), uploadImageExp, user
 
 
 router.post("/addeducation", authToken, upload.single('pic'), uploadImageExp, userController.addEducation);
-router.post("/updateeducation", authToken, upload.single('pic'), uploadImageExp, userController.updateEducation);
-router.post("/deleteeducation", authToken,upload.none(), userController.deleteEducation);
+router.patch("/updateeducation", authToken, upload.single('pic'), uploadImageExp, userController.updateEducation);
+router.delete("/deleteeducation", authToken,upload.none(), userController.deleteEducation);
 
 router.post("/addexperience", authToken, upload.single('pic'), uploadImageExp, userController.addExperience);
-router.post("/updateexperience", authToken, upload.single('pic'), uploadImageExp, userController.updateExperience);
-router.post("/deleteexperience", authToken, upload.none(), userController.deleteExperience);
+router.patch("/updateexperience", authToken, upload.single('pic'), uploadImageExp, userController.updateExperience);
+router.delete("/deleteexperience", authToken, upload.none(), userController.deleteExperience);
+
+router.patch("/updatecodingplatforms", authToken, userController.updateCodingPlatforms);
 
 router.post("/newtestingroute",authToken ,(req,res)=>{
     console.log("testing route");
@@ -38,10 +41,14 @@ router.post("/newtestingroute",authToken ,(req,res)=>{
     })
 })
 
-router.post("/delete",authToken,userController.deleteUserDetails);
+router.delete("/delete",authToken,userController.deleteUserDetails);
 router.post("/applytojob",authToken,userController.applyToJob);
 router.post("/userdetails",authToken,userController.userDetailsController);
 router.post("/suggestedjob",authToken,userController.SuggestJob);
 
 
+router.post('/apply',authToken, organizationController.applyToJob);
+router.get('/my-applications',authToken, organizationController.getMyApplications);
+router.get('/application-status/:jobId',authToken, organizationController.getApplicationStatus);
+router.get('/getcountofapplications',authToken, userController.getCountofApplication);
 module.exports = router;

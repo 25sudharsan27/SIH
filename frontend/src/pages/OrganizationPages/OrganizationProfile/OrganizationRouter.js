@@ -8,10 +8,11 @@ import { useDispatch } from 'react-redux';
 import Context from '../../../context/index.js';
 import { useNavigate } from 'react-router-dom';
 import OrganizationProfile from './OrganizationProfile.js'
-import CreateJob from '../CreateJob/CreateJob.js';
+import CreateJob from '../CreateJob/CreateJob1.js';
 import PostedJobs from '../PostedJobs/PostedJobs.js';
 import ClosedJobs from '../ClosedJobs/ClosedJobs.js';
 import Applicants from '../Applicants/Applicants.js';
+import EditJob from '../EditJob/editjob.js';
 
 const Organization = () =>{
   const Navigate = useNavigate();
@@ -19,7 +20,7 @@ const Organization = () =>{
   const fetchUserDetails = async()=>{
     const dataResponse = await fetch(process.env.REACT_APP_organization_details,
       {
-        method : "POST",
+        method : process.env.REACT_APP_organization_details_method,
         credentials : "include",
       }
     )
@@ -50,7 +51,8 @@ const Organization = () =>{
                 <Route path="/createjob" element ={<CreateJob/>}/>
                 <Route path="/postedjobs" element={<PostedJobs/>}/>
                 <Route path="/closedjobs" element={<ClosedJobs/>}/>
-                <Route path="/applicants/:id" element={<Applicants/>}/>
+                <Route path="/applicants/:jobId" element={<Applicants/>}/>
+                <Route path="/edit/:jobId" element={<EditJob/>}/>
             </Routes>
         
         </div>

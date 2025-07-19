@@ -4,6 +4,7 @@ import Pagination from '../../../components/Pagination/Pagination';
 import { Link } from 'react-router-dom';
 import google from '../../../images/google.png'
 import './ClosedJobs.css';
+import { useNavigate} from 'react-router-dom';
 
 function JobBoard() {
   const [jobs, setJobs] = useState([]);
@@ -11,6 +12,7 @@ function JobBoard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const jobsPerPage = 6;
+  const navigator = useNavigate();
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -21,7 +23,6 @@ function JobBoard() {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ "email": "s" })
         });
 
         if (!response.ok) {
@@ -75,7 +76,7 @@ function JobBoard() {
             {currentJobs.length > 0 ? currentJobs.map((job) => (
               <div key={job._id} className="job-card">
                 <div className="title">
-                  <img src={job.img || google} alt={job.title} />
+                  {/* <img src={job.img || google} alt={job.title} /> */}
                   <h3>{job.title}</h3>
                 </div>
                 <div className="bodies">
@@ -90,6 +91,8 @@ function JobBoard() {
                   </div>
               
                 </div>
+                <button onClick={()=>{navigator("../applicants/"+job._id)}} className="i411">View Applicants</button>
+
               </div>
             )) : <p>No jobs available.</p>}
           </div>

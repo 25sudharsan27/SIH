@@ -1,0 +1,90 @@
+.single-application-status-container{
+    padding: 30px;
+    max-width:800px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.single-application-status-container h1{
+    font-family: 'Poppins', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: #424141;
+    text-align: left;
+}
+.single-application-status-header{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap:15px;
+}
+.single-application-status-header h2{
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: #424141;
+    text-align: left;
+}
+
+.single-application-content{
+    display:flex;
+    flex-direction: column;
+}
+.single-application-content h3{
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #424141;
+    text-align: left;
+}
+.single-application-content p3{
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #424141;
+    text-align: left;
+}
+
+.single-application-stage{
+    padding:20px;
+    margin-top: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.single-application-stage-header-first{
+    display:flex;
+    gap:20px;
+    align-items: center;
+
+}
+.single-application-stage-header-first h4{
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #424141;
+    text-align: left;
+}
+
+.single-application-action-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: #27425f;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.single-application-action-btn:hover{
+    background-color: #1f3650;
+    transition: background-color 0.3s ease;
+}

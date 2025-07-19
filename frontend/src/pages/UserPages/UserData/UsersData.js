@@ -40,7 +40,7 @@ function JobBoard() {
       setError('');
       try {
         const response = await fetch(process.env.REACT_APP_profile_datas_api, {
-          method: "POST",
+          method: process.env.REACT_APP_profile_datas_method,
           credentials: "include",
           headers: {
             'Content-Type': 'application/json'

@@ -110,6 +110,17 @@ const JobSeekerLogin = () => {
           <button id="i143" type="submit" className="submit-button">Login</button>
         </form>
       </div>
+      <div style={{marginTop: '20px', textAlign: 'center'}}>
+        <p style={{fontSize: '14px', color: '#666'}}>
+          Sample Account:  
+        </p>
+        <p style={{fontSize: '14px', color: '#666'}}>
+          <b style={{color:"black"}}>Email</b> : smil@gmai.com  
+        </p>
+        <p style={{fontSize: '14px', color: '#666'}}>
+          <b style={{color :"black" }}>Password</b> : 123456789a
+        </p>
+      </div>
     </div>
   );
 }

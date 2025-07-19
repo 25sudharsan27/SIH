@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../../UserPages/ViewJobs/ViewJobs.css';
+import './PostedJobs.css';
 import Pagination from '../../../components/Pagination/Pagination';
 import { Link } from 'react-router-dom';
 import google from '../../../images/google.png'
@@ -34,7 +35,6 @@ function JobBoard() {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ "email": "s" })
         });
 
         if (!response.ok) {
@@ -117,7 +117,6 @@ function JobBoard() {
             {currentJobs.length > 0 ? currentJobs.map((job) => (
               <div key={job._id} className="job-card">
                 <div className="title">
-                  <img src={job.img || google} alt={job.title}/>
                   <h3>{job.title}</h3>
                 </div>
                 <div className="bodies">
@@ -129,6 +128,7 @@ function JobBoard() {
                   </div>
                   <div className="job-actions">
                     <button onClick={()=>{navigator("../applicants/"+job._id)}} className="i411">View Applicants</button>
+                    <button onClick={()=>{navigator("../edit/"+job._id)}} className="i411">Edit</button>
                     <button 
                       className="close-btn" 
                       onClick={() => handleCloseJob(job._id)}

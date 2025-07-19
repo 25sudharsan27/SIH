@@ -22,17 +22,15 @@ import {
 import "react-country-state-city/dist/react-country-state-city.css";
 
 import delete3 from '../../../images/delete.svg'
-
+import { useNavigate } from 'react-router-dom';
 
 // import profile from './images/logesh.jpg'
 import '../../../components/Model/Model.css';
-import { useNavigate } from 'react-router-dom';
-
 
 const ProfilePage = () => {
-  // Get user data from Redux store
   const navigate = useNavigate();
-  const userData = useSelector(selectUser);
+
+  // Get user data from Redux store
   const logos =
   {
     'codechef': 'https://res.cloudinary.com/duyuxtpau/image/upload/v1752683635/htezq9oicurm58xubddv.webp',
@@ -41,6 +39,8 @@ const ProfilePage = () => {
     'hackerrank': 'https://res.cloudinary.com/duyuxtpau/image/upload/v1752683638/k7iotdhmx9nwni4d1ery.webp',
     'leetcode': 'https://res.cloudinary.com/duyuxtpau/image/upload/v1752683636/dl9i6oaodrcez5shi4bj.webp'
   }
+
+  const userData = useSelector(selectUser);
 
   // Initialize state variables
   const [isEditingAbout, setIsEditingAbout] = useState(false);
@@ -57,7 +57,6 @@ const ProfilePage = () => {
   const [isUpdateEducationModalOpen, setIsUpdateEducationModalOpen] = useState(false);
   const [isUpdateExperienceModalOpen, setIsUpdateExperienceModalOpen] = useState(false);
   const [isAddProfileDetailsOpen, setIsAddProfileDetailsOpen] = useState(false);
-
 
   const [country, setCountry] = useState('');
   const [state, setState] = useState('');
@@ -90,7 +89,7 @@ const ProfilePage = () => {
         state: userData.state || '',
         country: userData.country || '',
       });
-      setCodingPlatformData(userData?.codingplatforms || {})
+      setCodingPlatformData(userData?.codingplatforms || []);
     }
   }, [userData]);
 
@@ -129,6 +128,13 @@ const ProfilePage = () => {
   const [visibleExperiencesCount, setVisibleExperiencesCount] = useState(5);
   const [visibleEducationCount, setVisibleEducationCount] = useState(5);
 
+  const handleSaveCodingplatforms = () => {
+    setIsCodingPlatformModeOpen(true);
+    const data = {
+
+    }
+  }
+
   // Save updated about section
   const handleSaveAbout = async () => {
     setIsEditingAbout(false);
@@ -160,39 +166,6 @@ const ProfilePage = () => {
       }, 3000);
     }
   };
-
-  const handleCodingPlatformSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const response = await fetch(process.env.REACT_APP_codingplatforms_api, {
-        method: process.env.REACT_APP_codingplatforms_method,
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(codingplatformdata)
-      });
-      if (!response.ok) {
-        throw new Error('Failed to update coding platforms');
-      }
-
-    }
-    catch (error) {
-      setLoading(false);
-      const messageContainer = document.createElement('div');
-      messageContainer.className = 'popup-message';
-      messageContainer.textContent = 'Error in Saving Coding Platforms';
-      document.body.appendChild(messageContainer);
-      setTimeout(() => {
-        document.body.removeChild(messageContainer);
-      }, 3000);
-    }
-    setIsCodingPlatformModeOpen(false);
-    window.location.reload(); // Reload the page to clear state and redirect to login
-    setLoading(false);
-  };
-
 
   const handleUpdateDetails = async (e) => {
     e.preventDefault();
@@ -575,65 +548,43 @@ const ProfilePage = () => {
         </div>
       </div>}
       <div className="profile-header">
-        <div id="profile-for-image" className="profile-left">
-          {
-
-            userData.profilepic ? (
-
-              <img
-
-                src={userData.profilepic}
-                alt="Profile Picture"
-                className="profile-picture"
-                id="profile1-pic"
-              />
-
-            ) :
-              <div id="i400" onClick={() => { setIsAddProfileDetailsOpen(true) }} style={{ cursor: "pointer" }} >
-                <img src={userIcon} alt="Profile Picture" className="profile-picture" />
-                <p style={{ fontFamily: "Poppins", fontWeight: "600" }} id="pro-name" >Upload Profile Pic</p>
-              </div>
-
-          }
-
-        </div>
         <div className="profile-left">
-          <div className="profile-left-header">
-            <h2 >{userData.name}</h2>
-            <button className="profile-btn" onClick={() => setIsAddProfileDetailsOpen(true)} >Edit</button>
-          </div>
 
-          <p style={{ fontFamily: "Poppins", fontSize: "14px", paddingTop: "15px" }}>{userData.tagline}</p>
+          <div >
+            {
+
+              userData.profilepic ? (
+
+                <img
+
+                  src={userData.profilepic}
+                  alt="Profile Picture"
+                  className="profile-picture"
+                  id="profile1-pic"
+                />
+
+              ) :
+                <div id="i400" onClick={() => { setIsAddProfileDetailsOpen(true) }} style={{ cursor: "pointer" }} >
+                  <img src={userIcon} alt="Profile Picture" className="profile-picture" />
+                  <p style={{ fontFamily: "Poppins", fontWeight: "600" }} id="pro-name" >Upload Profile Pic</p>
+                </div>
+
+            }
+
+          </div>
+          <div id="i402">
+            <img onClick={() => setIsAddProfileDetailsOpen(true)} className='editbtn' style={{ height: "10px" }} src={edit} alt="edit" />
+
+          </div>
+          <h2 style={{ fontFamily: "Poppins", fontWeight: "600" }} id="pro-name">{userData.name}</h2>
+          <p style={{ fontFamily: "Poppins", fontSize: "14px" }}>{userData.tagline}</p>
           <p style={{ fontSize: "14px" }} className="location">
             {userData.city}, {userData.state}, {userData.country}
           </p>
-          <div>
-            <div className="coding-platform-btn" style={{ display: 'flex', gap: '20px', flex: 'wrap' }}>
-              {
-                Object.keys(logos).map((platform) => {
-                  return (
-                    <a className={"coding-platform-cont"} id={userData?.codingplatforms && userData?.codingplatforms[platform] ? null : 'disable-button'} href={userData?.codingplatforms && userData?.codingplatforms[platform] || '#'} target="_blank" rel="noopener noreferrer">
-                      <img src={logos[platform]} alt={platform} id="coding-platform-logo" className={"coding-platform-logo " + userData?.codingplatforms && userData?.codingplatforms[platform] ? null : 'disable-ref'} />
-                    </a>
-                  )
-                })
-              }
-              <button className="profile-btn" onClick={() => setIsCodingPlatformModeOpen(true)}>
-                Edit
-              </button>
-            </div>
-
-          </div>
 
         </div>
+        <div className="profile-right">
 
-
-
-      </div>
-
-      <div className="complete">
-        <div className="about">
-          {/* About Section */}
           <div className="about1" id="i302">
             <div className="about-section">
               <div className="about-section-a">
@@ -642,7 +593,7 @@ const ProfilePage = () => {
                   {isEditingAbout ? (
                     <img onClick={handleSaveAbout} className='editbtn' src={saveIcon}></img>
                   ) : (
-                    <button className="profile-btn2" onClick={() => setIsEditingAbout(true)} >Edit</button>
+                    <img className='editbtn' onClick={() => setIsEditingAbout(true)} src={editIcon}></img>
                   )}
                 </div>
                 {isEditingAbout ? (
@@ -664,7 +615,7 @@ const ProfilePage = () => {
               <div className="skill-section-a">
                 <div className='simply'>
                   <h3>Skills</h3>
-                  <button className="profile-btn2" onClick={handleAddSkill} >Edit</button>
+                  <img className="addskill editbtn" onClick={handleAddSkill} src={editIcon}></img>
                 </div>
                 <div className="skills-list">
                   {(userData.skills || []).map((skill, index) => (
@@ -765,11 +716,12 @@ const ProfilePage = () => {
 
       </div>
 
+
       <Modal isOpen={isCodingPlatformModeOpen} onClose={() => setIsCodingPlatformModeOpen(false)}>
         <h3>Update Coding Platforms</h3>
-        <form className="coding-platforms-input-data" onSubmit={handleCodingPlatformSubmit}>
+        <div className="coding-platforms-input-data">
           <div className="platform-input-box">
-            <img src={logos['codechef']} alt="CodeChef Logo" className="coding-platform-logo" />
+            <image src={logos.codechef} alt="CodeChef Logo" className="coding-platform-logo" />
             <input
               type="url"
               placeholder="CodeChef Profile Link"
@@ -778,7 +730,7 @@ const ProfilePage = () => {
             />
           </div>
           <div className="platform-input-box">
-            <img src={logos.geeksforgeeks} alt="GeeksforGeeks Logo" className="coding-platform-logo" />
+            <image src={logos.geeksforgeeks} alt="GeeksforGeeks Logo" className="coding-platform-logo" />
             <input
               type="url"
               placeholder="GeeksforGeeks Profile Link"
@@ -787,7 +739,7 @@ const ProfilePage = () => {
             />
           </div>
           <div className="platform-input-box">
-            <img src={logos.github} alt="GitHub Logo" className="coding-platform-logo" />
+            <image src={logos.github} alt="GitHub Logo" className="coding-platform-logo" />
             <input
               type="url"
               placeholder="GitHub Profile Link"
@@ -796,7 +748,7 @@ const ProfilePage = () => {
             />
           </div>
           <div className="platform-input-box">
-            <img src={logos.hackerrank} alt="HackerRank Logo" className="coding-platform-logo" />
+            <image src={logos.hackerrank} alt="HackerRank Logo" className="coding-platform-logo" />
             <input
               type="url"
               placeholder="HackerRank Profile Link"
@@ -805,7 +757,7 @@ const ProfilePage = () => {
             />
           </div>
           <div className="platform-input-box">
-            <img src={logos.leetcode} alt="LeetCode Logo" className="coding-platform-logo" />
+            <image src={logos.leetcode} alt="LeetCode Logo" className="coding-platform-logo" />
             <input
               type="url"
               placeholder="LeetCode Profile Link"
@@ -815,76 +767,63 @@ const ProfilePage = () => {
           </div>
           <button type="submit">Submit</button>
 
-        </form>
+        </div>
 
       </Modal>
-
       <Modal isOpen={isAddProfileDetailsOpen} onClose={() => setIsAddProfileDetailsOpen(false)}>
         <h3>Update Profile Details</h3>
         <form className="addproject" onSubmit={(e) => { e.preventDefault(); handleUpdateDetails(e); }}>
-          <div className="create-job-input-box">
-            <label >Upload</label>
+          <div className="profice-update2-image">
+            <p style={{ fontFamily: "Poppins", fontWeight: "600" }} id="pro-name">Upload</p>
             <input type="file" onChange={(e) => setUserdata({ ...userdata, pic: e.target.files[0] })} />
           </div>
-          <div className="create-job-input-box">
-            <label className="creatte-job-label">Name</label>
-            <input
-              placeholder="Name"
-              value={userdata.name}
-              onChange={(e) => setUserdata({ ...userdata, name: e.target.value })}
-              required
-            />
-          </div>
-          <div className="create-job-input-box">
-            <label className="creatte-job-label">Tag Line</label>
-            <input
-              placeholder="TagLine"
-              value={userdata.tagline}
-              onChange={(e) => setUserdata({ ...userdata, tagline: e.target.value })}
-              required
-            />
-          </div>
-          <div className="create-job-input-box">
-            <label className="creatte-job-label">Country</label>
-            <CountrySelect
-              onChange={(e) => {
-                setCountryid(e.id);
-                setCountry(e.name); // Set the selected country name
-                setState(''); // Reset state and city when country changes
-                setCity('');
-              }}
-              placeHolder="Select Country"
-              value={countryid} // Set selected country id
-            />
-          </div>
-          <div className="create-job-input-box" >
-            <label className="creatte-job-label">State</label>
-            <StateSelect
-              countryid={countryid}
-              onChange={(e) => {
-                setStateid(e.id);
-                
-                setState(e.name); // Set the selected state name
-                setCity(''); // Reset city when state changes
-              }}
-              style={{height:'100%',boxSizing:'border-box'}}
-              placeHolder="Select State"
-              value={stateid} // Set selected state id
-            />
-          </div>
-          <div className="create-job-input-box">
-          <label className="creatte-job-label">City</label>
-            <CitySelect
-              countryid={countryid}
-              stateid={stateid}
-              onChange={(e) => {
-                setCity(e.name); // Set the selected city name
-              }}
-              placeHolder="Select City"
-              value={city} // Set selected city name
-            />
-          </div>
-         
+          <input
+            placeholder="Name"
+            value={userdata.name}
+            onChange={(e) => setUserdata({ ...userdata, name: e.target.value })}
+            required
+          />
+          <input
+            placeholder="TagLine"
+            value={userdata.tagline}
+            onChange={(e) => setUserdata({ ...userdata, tagline: e.target.value })}
+            required
+          />
+
+          <CountrySelect
+            onChange={(e) => {
+              setCountryid(e.id);
+              setCountry(e.name); // Set the selected country name
+              setState(''); // Reset state and city when country changes
+              setCity('');
+            }}
+            placeHolder="Select Country"
+            value={countryid} // Set selected country id
+          />
+          <br />
+
+          <StateSelect
+            countryid={countryid}
+            onChange={(e) => {
+              setStateid(e.id);
+              setState(e.name); // Set the selected state name
+              setCity(''); // Reset city when state changes
+            }}
+            placeHolder="Select State"
+            value={stateid} // Set selected state id
+          />
+          <br />
+
+          <CitySelect
+            countryid={countryid}
+            stateid={stateid}
+            onChange={(e) => {
+              setCity(e.name); // Set the selected city name
+            }}
+            placeHolder="Select City"
+            value={city} // Set selected city name
+          />
+          <br />
 
           <button type="submit">Update Details</button>
         </form>
@@ -894,34 +833,25 @@ const ProfilePage = () => {
       <Modal isOpen={isAddProjectModalOpen} onClose={() => setIsAddProjectModalOpen(false)}>
         <h3>Add New Project</h3>
         <form className="addproject" onSubmit={(e) => { e.preventDefault(); handleAddProject(); }}>
-          <div className="create-job-input-box" >
-            <label className="creatte-job-label">Title</label>
-            <input
+          <input
 
-              placeholder="Title"
-              value={newProject.title}
-              onChange={(e) => setNewProject({ ...newProject, title: e.target.value })}
-              required
-            />
-          </div>
-          <div className="create-job-input-box" >
-            <label className="creatte-job-label">Description</label>
-            <textarea
-              placeholder="Description"
-              value={newProject.description}
-              onChange={(e) => setNewProject({ ...newProject, description: e.target.value })}
-              required
-            />
-          </div>
-          <div className="create-job-input-box" >
-            <label className="creatte-job-label">State</label>
-            <input
-              type="url"
-              placeholder="Project Link"
-              value={newProject.link}
-              onChange={(e) => setNewProject({ ...newProject, link: e.target.value })}
-            />
-          </div>
+            placeholder="Title"
+            value={newProject.title}
+            onChange={(e) => setNewProject({ ...newProject, title: e.target.value })}
+            required
+          />
+          <textarea
+            placeholder="Description"
+            value={newProject.description}
+            onChange={(e) => setNewProject({ ...newProject, description: e.target.value })}
+            required
+          />
+          <input
+            type="url"
+            placeholder="Project Link"
+            value={newProject.link}
+            onChange={(e) => setNewProject({ ...newProject, link: e.target.value })}
+          />
           <button type="submit">Add Project</button>
         </form>
       </Modal>
@@ -930,33 +860,26 @@ const ProfilePage = () => {
       <Modal isOpen={isAddExperienceModalOpen} onClose={() => setIsAddExperienceModalOpen(false)}>
         <h3>Add New Experience</h3>
         <form className="addexperience" onSubmit={(e) => { e.preventDefault(); handleAddExperience(); }}>
-          
-          <div className="create-job-input-box" >
-            <label className="creatte-job-label">Upload</label>
+          <div className="profice-update2-image">
+            <p style={{ fontFamily: "Poppins", fontWeight: "600" }} id="pro-name">Upload</p>
             <input type="file" onChange={(e) => setNewExperience({ ...newExperience, pic: e.target.files[0] })} />
           </div>
-          <div className="create-job-input-box" >
-            <label className="creatte-job-label">Title</label>
-            <input
+          <input
 
-              placeholder="Title"
-              value={newExperience.title}
-              onChange={(e) => setNewExperience({ ...newExperience, title: e.target.value })}
-              required
-            />
-          </div>
-          <div className="create-job-input-box" >
-            <label className="creatte-job-label">Company</label>
-            <input
+            placeholder="Title"
+            value={newExperience.title}
+            onChange={(e) => setNewExperience({ ...newExperience, title: e.target.value })}
+            required
+          />
+          <input
 
-              placeholder="Company"
-              value={newExperience.company}
-              onChange={(e) => setNewExperience({ ...newExperience, company: e.target.value })}
-              required
-            />
-          </div>
-          <div className="create-job-input-box" >
-            <label className="creatte-job-label">Start Date</label>
+            placeholder="Company"
+            value={newExperience.company}
+            onChange={(e) => setNewExperience({ ...newExperience, company: e.target.value })}
+            required
+          />
+          <div>
+            <label>Start Date</label>
             <input
               type="date"
               placeholder="Start Date"
@@ -965,8 +888,8 @@ const ProfilePage = () => {
               required
             />
           </div>
-          <div className="create-job-input-box" >
-            <label className="creatte-job-label">End Date</label>
+          <div>
+            <label>End Date</label>
             <input
               type="date"
               placeholder="End Date"
@@ -974,16 +897,13 @@ const ProfilePage = () => {
               onChange={(e) => setNewExperience({ ...newExperience, endDate: e.target.value })}
             />
           </div>
-          <div className="create-job-input-box" >
-            <label className="creatte-job-label">Description</label>
-            <textarea
-              placeholder="Description"
-              value={newExperience.description}
-              onChange={(e) => setNewExperience({ ...newExperience, description: e.target.value })}
-              required
-            />
-          </div>
-          <button className="profile-btn2" type="submit">Add Experience</button>
+          <textarea
+            placeholder="Description"
+            value={newExperience.description}
+            onChange={(e) => setNewExperience({ ...newExperience, description: e.target.value })}
+            required
+          />
+          <button type="submit">Add Experience</button>
         </form>
       </Modal>
 
@@ -991,32 +911,26 @@ const ProfilePage = () => {
       <Modal isOpen={isAddEducationModalOpen} onClose={() => setIsAddEducationModalOpen(false)}>
         <h3>Add New Education</h3>
         <form className="addexperience" onSubmit={(e) => { e.preventDefault(); handleAddEducation(); }}>
-          <div className="create-job-input-box" >
-            <label className="creatte-job-label">Upload</label>
+          <div className="profice-update2-image">
+            <p style={{ fontFamily: "Poppins", fontWeight: "600" }} id="pro-name">Upload</p>
             <input type="file" onChange={(e) => setNewEducation({ ...newEducation, pic: e.target.files[0] })} />
           </div>
-          <div className="create-job-input-box" >
-            <label className="creatte-job-label">Title</label>
-            <input
+          <input
 
-              placeholder="Title"
-              value={newEducation.title}
-              onChange={(e) => setNewEducation({ ...newEducation, title: e.target.value })}
-              required
-            />
-          </div>
-          <div className="create-job-input-box" >
-            <label className="creatte-job-label">Institution</label>
-            <input
+            placeholder="Title"
+            value={newEducation.title}
+            onChange={(e) => setNewEducation({ ...newEducation, title: e.target.value })}
+            required
+          />
+          <input
 
-              placeholder="Institution or College or School"
-              value={newEducation.institution}
-              onChange={(e) => setNewEducation({ ...newEducation, institution: e.target.value })}
-              required
-            />
-          </div>
-          <div className="create-job-input-box" >
-            <label className="creatte-job-label">Start Date</label>
+            placeholder="Institution or College or School"
+            value={newEducation.institution}
+            onChange={(e) => setNewEducation({ ...newEducation, institution: e.target.value })}
+            required
+          />
+          <div>
+            <label>Start Date</label>
             <input
               type="date"
               placeholder="Start Date"
@@ -1025,8 +939,8 @@ const ProfilePage = () => {
               required
             />
           </div>
-          <div className="create-job-input-box" >
-            <label className="creatte-job-label">End Date</label>
+          <div>
+            <label>End Date</label>
             <input
               type="date"
               placeholder="End Date"
@@ -1034,15 +948,12 @@ const ProfilePage = () => {
               onChange={(e) => setNewEducation({ ...newEducation, endDate: e.target.value })}
             />
           </div>
-          <div className="create-job-input-box" >
-            <label className="creatte-job-label">Description</label>
-            <textarea
-              placeholder="Description"
-              value={newEducation.description}
-              onChange={(e) => setNewEducation({ ...newEducation, description: e.target.value })}
-              required
-            />
-          </div>
+          <textarea
+            placeholder="Description"
+            value={newEducation.description}
+            onChange={(e) => setNewEducation({ ...newEducation, description: e.target.value })}
+            required
+          />
           <button type="submit">Add Education</button>
         </form>
       </Modal>

@@ -26,15 +26,13 @@ function ViewJob() {
     // Define an async function inside useEffect
     const fetchJobData = async () => {
       setLoading(true); // Set loading state to true
-      // console.log("fetching url : "+process.env.REACT_APP_viewjobdetails_api)
       try {
-        const response = await fetch(process.env.REACT_APP_viewjobdetails_api, {
+        const response = await fetch(process.env.REACT_APP_viewjobdetails_api+"/"+id, {
           method: process.env.REACT_APP_viewjobdetails_method,
           credentials: "include",
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ job_id }), // Pass the job_id in the body
         });
 
         if (!response.ok) {
@@ -85,7 +83,10 @@ function ViewJob() {
     if (!jobData) return;
   
     // Prepare extra data
-    const extra = jobData.extra_questions.map((_, index) => extraAnswers[index] || '');
+    const extra = jobData.extra_questions.map((_, index) => {
+      return {question : jobData?.extra_questions[index], answer : 
+      extraAnswers[index] || ''}
+    })
     console.log("Extra data: ", extra);
     console.log("job data : ",job_id);
     try {
@@ -96,8 +97,8 @@ function ViewJob() {
         },
         credentials: "include",
         body: JSON.stringify({
-          job_id: job_id,
-          extra: extra,
+          jobId: job_id,
+          extra_questions_answers: extra,
           // Resume is not included since it's not being uploaded
         }),
         
@@ -245,6 +246,25 @@ function ViewJob() {
                 onChange={handleAdditionalInfoChange}
               ></textarea>
             </label>
+
+            <div>
+              {jobData?.application_stages && jobData.application_stages.length > 0 ? (
+                <div id="i188">
+                  <h3  id="i184">Application Stages</h3>
+                  {jobData.application_stages.map((stage, index) => (
+                    <div id="application_stages_job" key={index}>
+
+                      <div className="application_stage_name">{stage.stage_name}  </div>
+                      <div className="application_state_description">
+                        {stage.stage_description}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p id="i181">No application stages defined for this job.</p>
+              )}
+            </div>
 
             <button id="i187" type="submit">Submit Application</button>
           </form>

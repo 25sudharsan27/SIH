@@ -13,12 +13,11 @@ function Interview() {
   useEffect(() => {
     const fetchSkillData = async () => {
       try {
-        const response = await fetch(process.env.REACT_APP_mcq_api, {
+        const response = await fetch(process.env.REACT_APP_mcq_api+"/"+id, {
           method: process.env.REACT_APP_mcq_method,
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ "id" : id }) // Send the id in the request body
         });
         // console.log(response);
         if (!response.ok) {

@@ -62,7 +62,7 @@ const OrganizationProfile = () => {
     try {
       console.log(userdata);
       const response = await fetch(process.env.REACT_APP_organization_saveabout_api, {
-        method: "POST",
+        method: process.env.REACT_APP_organization_saveabout_method,
         credentials: 'include',
         body: formData,
       });
@@ -112,17 +112,18 @@ const OrganizationProfile = () => {
 
   // Save updated about section
   const handleSaveAbout = async () => {
-    const formData = new FormData();
-    formData.append('about', aboutText);
+   
     setIsEditingAbout(false);
 
-    const response = await fetch(process.env.REACT_APP_organization_saveabout_api, {
-      method: 'POST',
+    const response = await fetch(process.env.REACT_APP_organization_about, {
+      method: process.env.REACT_APP_organization_about_method,
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: formData,
+      body: JSON.stringify({
+        about: aboutText, // Updated about text
+      }),
     });
     const data = await response.json();
     if (data.success) {

@@ -18,24 +18,28 @@ import '../../../components/Model/Model.css';
 import UserNavbar from '../../../components/UserNavbar/usernavbar.js';
 
 const ProfilePage =  () => {
+  const logos =
+  {
+    'codechef': 'https://res.cloudinary.com/duyuxtpau/image/upload/v1752683635/htezq9oicurm58xubddv.webp',
+    'geeksforgeeks': 'https://res.cloudinary.com/duyuxtpau/image/upload/v1752683635/esrjeuprlcfcjj1bk0cz.webp',
+    'github': 'https://res.cloudinary.com/duyuxtpau/image/upload/v1752683636/xdwqzyuhacwm1b6r7hkz.webp',
+    'hackerrank': 'https://res.cloudinary.com/duyuxtpau/image/upload/v1752683638/k7iotdhmx9nwni4d1ery.webp',
+    'leetcode': 'https://res.cloudinary.com/duyuxtpau/image/upload/v1752683636/dl9i6oaodrcez5shi4bj.webp'
+  }
 
   const [userData, setUserData] = useState(null);
-
 
   const { id } = useParams('id');
 
     useEffect(() => {
       
         const fetchUser = async () => {
-            const response = await fetch(process.env.REACT_APP_profile_data_api, {
-                method: "POST",
+            const response = await fetch(process.env.REACT_APP_profile_data_api+"/"+id, {
+                method: process.env.REACT_APP_profile_data_method,
                 credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    "id": id
-                })
             });
             const data = await response.json();
             setUserData(data.data[0]);
@@ -91,6 +95,8 @@ const ProfilePage =  () => {
   };
 
   // Fetch leetcode details
+  
+  
 
   
 
@@ -151,22 +157,18 @@ const ProfilePage =  () => {
 
 
           <div>
-            <div className='heatmap-container'>
-                <HeatMap msg={'Jan'}/>
-                <HeatMap msg={'Feb'}/>
-                <HeatMap msg={'Mar'}/>
-                <HeatMap msg={'Apr'}/>
-                <HeatMap msg={'May'}/>
-                <HeatMap msg={'Sep'}/>
-                <HeatMap msg={'Oct'}/>
-                <HeatMap msg={'Nov'}/>
-                <HeatMap msg={'Dec'}/>
+            <div className="coding-platform-btn" style={{display:'flex',gap:'20px',flex:'wrap'}}>
+              {
+                userData?.codingplatforms && Object.keys(userData.codingplatforms).map((platform)=>{
+                  return (
+                    <a href={userData?.codingplatforms && userData?.codingplatforms[platform] ? userData.codingplatforms[platform] : '#'} target="_blank" rel="noopener noreferrer">
+                        <img src={logos[platform]} alt={platform} className={"coding-platform-logo"+((userData?.codingplatforms&& userData?.codingplatforms[platform]) ? null : 'disable-ref')} />
+                    </a>
+                  )
+                })
+              }
             </div>
-            <div className='images-con'>
-                <a href="https://leetcode.com/u/vinukanth75/" target='blank'><img src={leetcode} className='logoo'></img></a>
-                <a href="https://www.hackerrank.com/profile/vinukanth75" target='blank'><img src={hackerrank} className='logoo'></img></a>
-                <a href="https://github.com/vinu75kanth" target='blank'><img src={github} className='logoo'></img></a>
-            </div>
+            
           </div>
       </div>
 

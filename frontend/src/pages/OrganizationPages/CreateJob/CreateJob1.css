@@ -1,0 +1,208 @@
+.create-job-heading{
+    font-family: 'Poppins', sans-serif;
+    font-size: 26px;
+    font-weight: bolder;
+    padding:0px;
+    margin:0px;
+    /* margin-bottom: 20px; */
+    text-align: start;
+}
+
+.create-job-container{
+    padding:30px;
+    padding-left:220px;
+}
+.create-job-text{
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #707070;
+    text-align: start;
+    margin:0px;
+}
+.create-job-label{
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #5b5b5b;
+    text-align: start;
+    margin:0px;
+}
+.create-job-form{
+    margin-top:20px;
+    display:flex;
+}
+.create-job-basic-info1{
+    width: 100%;
+    padding-right: 20px;
+}
+.create-job-input-box{
+    width: 100%;
+    /* border: 1px solid #dcdcdc; */
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    /* color: #424141; */
+    margin-top: 20px;
+    box-sizing: border-box;
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+}
+.create-job-input-box input{
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #424141;
+    box-sizing: border-box;
+    box-shadow:2px 4px 6px rgba(0, 0, 0, 0.1);
+
+}
+.create-job-input-box textarea{
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #424141;
+    box-sizing: border-box;
+    resize: none;
+    box-shadow:2px 4px 6px rgba(0, 0, 0, 0.1);
+
+}
+.create-job-location-box{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    background-color: white;
+    padding:20px;
+    border-radius: 10px;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.create-job-general-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 8px;
+    background-color: #27425f;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.create-job-general-button1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 8px;
+    background-color: #e4406c;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 20px;
+    border:none;
+    cursor: pointer;
+}
+.create-job-general-button2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 11px;
+    background-color: #21503f;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 20px;
+    border:none;
+    cursor: pointer;
+}
+.create-job-general-button2:hover{
+    background-color: #1f3650;
+    transition: all 0.3s ease;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+}
+.create-job-general-button1:hover{
+    background-color: #d32c5a;
+    transition: all 0.3s ease;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+}
+.create-job-general-button:hover{
+    background-color: #1f3650;
+    transition: all 0.3s ease;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.create-job-location-input-box{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    /* box-shadow:2px 4px 6px rgba(0, 0, 0, 0.1); */
+
+    
+}
+.create-job-location-input-box select{
+    width: 48%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #424141;
+    box-sizing: border-box;
+    /* box-shadow:2px 4px 6px rgba(0, 0, 0, 0.1); */
+
+}
+.create-job-location-input-box input{
+    width: 48%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #424141;
+    box-sizing: border-box;
+    /* box-shadow:2px 4px 6px rgba(0, 0, 0, 0.1); */
+}
+
+
+@media (max-width: 768px) {
+    .create-job-container{
+        padding:20px;
+        padding-top:100px;
+        /* padding-left:0px; */
+    }
+    .create-job-form{
+
+        flex-direction: column;
+    }
+    .create-job-label{
+        text-wrap: nowrap;
+    }
+
+    .create-job-basic-info1{
+        width: 100%;
+        padding-right: 0px;
+    }
+    .create-job-location-box{
+        margin-top: 20px;
+    }
+
+}

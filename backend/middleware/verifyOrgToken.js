@@ -9,15 +9,13 @@ const orgauthToken = async (req, res, next) => {
 
         if (!token) {
             return res.status(400).json({
-                message: 'User not logged in',
+                message: 'Token was not Provided, Please Login Again',
                 error: true,
                 success: false
             });
         }
-        console.log("secret key "+process.env.ORG_TOKEN_SECRET_KEY);
         jwt.verify(token, process.env.ORG_TOKEN_SECRET_KEY, (err, decoded) => {
             if (err) {
-                console.error('Authentication error:', err);
                 return res.status(401).json({
                     message: 'Invalid or expired token',
                     error: true,

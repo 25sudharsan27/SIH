@@ -1,6 +1,5 @@
 
 
-/* Signup Container */
 .signup-container {
   display: flex;
   flex-direction: column;
@@ -9,7 +8,6 @@
   font-family: Arial, sans-serif;
 }
 
-/* Form Title */
 .form-title {
   font-family: 'Poppins', sans-serif;
 
@@ -17,17 +15,13 @@
   font-weight: bold;
   margin-bottom: 40px;
   color: #333;
-  /* Darker text */
   animation: fadeIn 1s ease-out;
-  /* Animation for form title */
 }
 
-/* Signup Form */
 .signup-form {
   font-family: 'Poppins', sans-serif;
 
   background: #ffffff;
-  /* White background */
   border-radius: 10px;
   padding: 40px;
   width: 400px;
@@ -40,19 +34,15 @@
   transform: scale(1.02);
 }
 
-/* Form Subtitle */
 .form-subtitle {
   font-family: 'Poppins', sans-serif;
 
   font-size: 24px;
   margin-bottom: 20px;
   color: #333;
-  /* Darker text */
   animation: fadeIn 1.5s ease-out;
-  /* Animation for subtitle */
 }
 
-/* Form Input */
 .form-input {
   width: 100%;
   padding: 10px;
@@ -68,12 +58,10 @@
   outline: none;
 }
 
-/* Password Container */
 .password-container {
   position: relative;
 }
 
-/* Password Toggle */
 .password-toggle {
   position: absolute;
   top: 50%;
@@ -86,23 +74,19 @@
   /* Color for the toggle */
 }
 
-/* Address Container */
 .address-container {
   display: flex;
   justify-content: space-between;
 }
 
-/* Small Input */
 .small-input {
   width: 48%;
 }
 
-/* Submit Button */
 .submit-button {
   width: 100%;
   padding: 10px;
   background: linear-gradient(90deg, #007BFF, #00BFFF);
-  /* Gradient background */
   color: white;
   border: none;
   border-radius: 5px;
@@ -113,19 +97,17 @@
 
 .submit-button:hover {
   background: linear-gradient(90deg, #0056b3, #00A3E0);
-  /* Darker gradient on hover */
   transform: scale(1.05);
 }
 
 #i147{
 }
-/* Padding Adjustment for Password Field */
+
 #pwd {
   margin-top: -10px;
   margin-right: -20px;
 }
 
-/* Animation Keyframes */
 @keyframes fadeIn {
   from {
     opacity: 0;

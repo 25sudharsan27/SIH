@@ -1,251 +1,503 @@
-import { Link, useParams } from 'react-router-dom';
-import '../PostedJobs/PostedJobs.css'
-import { useState, useEffect } from 'react';
-import "./Applicants.css";
-import tick from '../../../images/tick.svg';
-import times from '../../../images/times.svg';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import './Applicants.css';
 
-const Applicants = () => {
-    const { id } = useParams(); // Extract the job ID from params
-    const [jobDetails, setJobDetails] = useState(null);
-    const [applicantsData, setApplicantsData] = useState([]);
-    const [loading, setLoading] = useState(true); // Loading state
-    const fetchedUserIds = new Set(); // Track fetched user IDs
+const ApplicantManagement = () => {
+  const { jobId } = useParams();
+  const [job, setJob] = useState(null);
+  const [applicants, setApplicants] = useState([]);
+  const [currentStage, setCurrentStage] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [selectedApplicants, setSelectedApplicants] = useState([]);
+  const [actionLoading, setActionLoading] = useState(false);
+  const [comments, setComments] = useState('');
+  const [showCommentsModal, setShowCommentsModal] = useState(false);
+  const [actionType, setActionType] = useState('');
+  const [targetApplicant, setTargetApplicant] = useState(null);
+  const [countsData, setCountsData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const ITEMS_PER_PAGE = 5; // Or any default page size
 
-    useEffect(() => {
-        const fetchJobDetails = async () => {
-            try {
-                const response = await fetch(process.env.REACT_APP_viewjobdetails_api, {
-                    method: process.env.REACT_APP_viewjobdetails_method,
-                    credentials: "include",
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ job_id: id }),
-                });
 
-                if (response.ok) {
-                    const responseData = await response.json();
-                    setJobDetails(responseData.data);
-                    console.log(responseData.data);
-                    await fetchUserDetails(responseData.data.applicants); // Fetch user details if job details are retrieved
-                } else {
-                    throw new Error("Network response was not ok.");
-                }
-            } catch (error) {
-                console.error("Failed to fetch job data:", error);
-            }
-        };
+  useEffect(() => {
+    fetchJobDetails();
+    fetchStageswithCount();
+    fetchApplicantsByStage(currentStage, currentPage);
+  }, [jobId, currentStage, currentPage]);
 
-        fetchJobDetails();
-    }, [id]); // Fetch job details when the component mounts or ID changes
+  const fetchStageswithCount = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_fetchstageswithcount_api}/${jobId}`, {
+        credentials: 'include'
+      });
+      const result = await response.json();
+      if (result.success) {
+        setCountsData(result.data);
+      }
+    } catch (error) {
+      console.error('Error fetching stages with counts:', error);
+    }
+  };
 
-    const fetchUserDetails = async (applicants) => {
-        setLoading(true); // Set loading to true before fetching user details
-        const userDetailsPromises = applicants.map(async (applicant) => {
-            // Check if the user ID has already been fetched
-            if (fetchedUserIds.has(applicant.id)) {
-                return null; // Skip fetching if already fetched
-            }
-            fetchedUserIds.add(applicant.id); // Mark this user ID as fetched
 
-            try {
-                const response = await fetch(process.env.REACT_APP_userdetails_api, {
-                    method: process.env.REACT_APP_userdetails_method,
-                    credentials: "include",
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ user_id: applicant.id })
-                });
+  const fetchJobDetails = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_fetchjoborganizationjobdetails_api}/${jobId}`, {
+        credentials: 'include'
+      });
+      const result = await response.json();
 
-                if (response.ok) {
-                    const userData = await response.json();
-                    console.log(`User data for applicant ID ${applicant.id}:`, userData);
-                    return userData; // Return user data instead of setting state directly
-                } else {
-                    throw new Error("Network response was not ok.");
-                }
-            } catch (error) {
-                console.error(`Failed to fetch user data for applicant ID ${applicant.id}:`, error);
-                return null; // Return null for failed requests
-            }
-        });
+      if (result.success) {
+        setJob(result.data);
+      }
+    } catch (error) {
+      console.error('Error fetching job details:', error);
+    }
+  };
 
-        const userDetails = await Promise.all(userDetailsPromises);
-        setApplicantsData(userDetails.filter(user => user !== null)); // Filter out null responses
-        setLoading(false); // Set loading to false after fetching all user details
-    };
+  const fetchApplicantsByStage = async (stage, page = 1) => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${process.env.REACT_APP_fetchapplicantsbystage_api}/${jobId}/${stage}?page=${page}&limit=${ITEMS_PER_PAGE}`, {
+        credentials: 'include'
+      });
+      const result = await response.json();
 
-    return (
-        <div className="job-page-container">
-            <div id="i258" className="sidebar">
-          <div id="i163">
-            <div id="i168"><Link id="i164" to="/organization/createjob" >Create Job</Link></div>
-            <div id="i168"><Link id="i164"  to="/organization/postedjobs" className="high">Posted Jobs</Link></div>
-            <div id="i168"><Link id="i164" to="/organization/closedjobs">Closed Jobs</Link></div>
+      if (result.success) {
+        setApplicants(result.data.applicants || []);
+        setJob(result.data.job);
+        setTotalPages(result.data.totalPages);
+        setCurrentPage(result.data.currentPage);
+      }
+    } catch (error) {
+      console.error('Error fetching applicants:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+  const handleStageChange = (stage) => {
+    setCurrentStage(parseInt(stage));
+    setSelectedApplicants([]);
+    setCurrentPage(1); // reset pagination
+  };
+
+
+  const handleApplicantSelection = (applicantId) => {
+    setSelectedApplicants(prev => {
+      if (prev.includes(applicantId)) {
+        return prev.filter(id => id !== applicantId);
+      } else {
+        return [...prev, applicantId];
+      }
+    });
+  };
+
+  const handleSelectAll = () => {
+    if (selectedApplicants.length === applicants.length) {
+      setSelectedApplicants([]);
+    } else {
+      setSelectedApplicants(applicants.map(app => app._id));
+    }
+  };
+
+  const openCommentsModal = (action, applicantId = null) => {
+    setActionType(action);
+    setTargetApplicant(applicantId);
+    setShowCommentsModal(true);
+    setComments('');
+  };
+
+  const closeCommentsModal = () => {
+    setShowCommentsModal(false);
+    setActionType('');
+    setTargetApplicant(null);
+    setComments('');
+  };
+
+  const handleSingleApplicantAction = async () => {
+    if (!targetApplicant) return;
+
+    try {
+      setActionLoading(true);
+      const response = await fetch(`${process.env.REACT_APP_fetchsingleapplicantaction_api}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          jobId,
+          applicantId: targetApplicant,
+          decision: actionType,
+          comments
+        })
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        fetchApplicantsByStage(currentStage);
+        closeCommentsModal();
+      } else {
+        alert('Error: ' + result.message);
+      }
+    } catch (error) {
+      console.error('Error updating applicant:', error);
+      alert('Error updating applicant status');
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  const handleBulkAction = async () => {
+    if (selectedApplicants.length === 0) return;
+
+    try {
+      setActionLoading(true);
+      const response = await fetch(`${process.env.REACT_APP_handlebulkaction_api}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          jobId,
+          applicantIds: selectedApplicants,
+          decision: actionType,
+          comments
+        })
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        fetchApplicantsByStage(currentStage);
+        setSelectedApplicants([]);
+        closeCommentsModal();
+      } else {
+        alert('Error: ' + result.message);
+      }
+    } catch (error) {
+      console.error('Error updating applicants:', error);
+      alert('Error updating applicants');
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString();
+  };
+
+  const getStageStatusColor = (status) => {
+    switch (status) {
+      case 'passed': return '#28a745';
+      case 'failed': return '#dc3545';
+      case 'in_progress': return '#ffc107';
+      case 'pending': return '#6c757d';
+      default: return '#6c757d';
+    }
+  };
+
+  if (loading) {
+    return <div className="buffer">
+    <div className="loading-container">
+      <div className="loading-spinner"></div>
+    </div>
+  </div>;
+  }
+
+  if (!job) {
+    return <div>Job not found</div>;
+  }
+
+  return (
+    <div className="applications-page-container" >
+      <div className="applicants-page-header">
+        <h1>Applicant Management</h1>
+        <h2>{job.title}</h2>
+        <p>{job.company} - {job.city}, {job.state}</p>
+      </div>
+
+      <div>
+        <h3>Application Stages</h3>
+        <div>
+          {job.application_stages?.map((stage, index) => (
+            <button
+              key={index}
+              onClick={() => handleStageChange(index)}
+              style={{
+                backgroundColor: currentStage === index ? '#007bff' : '#f8f9fa',
+                color: currentStage === index ? 'white' : 'black',
+                margin: '0 5px',
+                padding: '8px 16px',
+                border: '1px solid #dee2e6',
+                borderRadius: '4px',
+                cursor: 'pointer'
+              }}
+              className="application-stage-button"
+            >
+              {stage.stage_name} ({countsData[stage.stage_name] || 0})
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h3 className="applicants-page-header-p">
+          {job.application_stages?.[currentStage]?.stage_name || 'Stage'} -
+          {job.application_stages?.[currentStage]?.stage_description || 'No description'}
+        </h3>
+
+        {applicants.length > 0 && (
+          <div>
+            <div>
+              <button  className="create-job-general-button" onClick={handleSelectAll}>
+                {selectedApplicants.length === applicants.length ? 'Deselect All' : 'Select All'}
+              </button>
+
+              {selectedApplicants.length > 0 && (
+                <div>
+                  <button  className="create-job-general-button" onClick={() => openCommentsModal('passed')}>
+                    Pass Selected ({selectedApplicants.length})
+                  </button>
+                  <button  className="create-job-general-button" onClick={() => openCommentsModal('failed')}>
+                    Reject Selected ({selectedApplicants.length})
+                  </button>
+                </div>
+              )}
+            </div>
+
+            <div className="applicants-list-container">
+              {applicants.map((applicant) => (
+                <div
+                  className="applicant-list-card"
+                  key={applicant._id}
+                  style={{
+                    border: '1px solid #dee2e6',
+                    borderRadius: '8px',
+                    padding: '16px',
+                    margin: '8px 0',
+                    backgroundColor: selectedApplicants.includes(applicant._id) ? '#f8f9fa' : 'white'
+                  }}
+                >
+                  <div>
+                    <input
+                      type="checkbox"
+                      checked={selectedApplicants.includes(applicant._id)}
+                      onChange={() => handleApplicantSelection(applicant._id)}
+                    />
+                  </div>
+                  <div className="applicant-list-container-box">
+                    <div className="applicant-list-left-one">
+                      <div className="applicant-list-info">
+                        <h4>{applicant.id?.name || 'Unknown'}</h4>
+                        <p>{applicant.id?.email}</p>
+                        <p>{applicant.id?.tagline}</p>
+                        <p>{applicant.id?.city}, {applicant.id?.state}, {applicant.id?.country}</p>
+                      </div>
+                      <div className="applicant-list-experience">
+                        <div>
+                          <h5 className="applicant-subsection-heading">Experience</h5>
+                          {applicant.id?.experiences?.map((exp, index) => (
+                            <div key={index}>
+                              <strong className="applicant-subsection-heading">{exp.title}</strong> at<span style={{fontSize:"13px"}}> {exp.company}</span>
+                              <br />
+                              {exp.startDate && (
+                                <small className="applicant-subsection-text">
+                                  {formatDate(exp.startDate)} - {exp.endDate ? formatDate(exp.endDate) : 'Present'}
+                                </small>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+
+                        <div>
+                          <h5 className="applicant-subsection-heading">Education</h5>
+                          {applicant.id?.education?.map((edu, index) => (
+                            <div key={index}>
+                              <strong  className="applicant-subsection-heading">{edu.title}</strong> at <span style={{fontSize:"13px"}}>{edu.institution}</span>
+                              <br />
+                              {edu.startDate && (
+                                <small className="applicant-subsection-text">
+                                  {formatDate(edu.startDate)} - {edu.endDate ? formatDate(edu.endDate) : 'Present'}
+                                </small>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        {applicant.extra_questions && applicant.extra_questions.length > 0 && (
+                          <div>
+                            <h5  className="applicant-subsection-heading">Additional Questions</h5>
+                            {applicant.extra_questions.map((qa, index) => (
+                              <div key={index}>
+                                <strong className="applicant-subsection-heading">Q: {qa.question}</strong>
+                                <p className="applicant-subsection-text">A: {qa.answer}</p>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+
+
+                    <div className="applicant-list-right-one">
+                      <h5  className="applicant-subsection-heading">Application History</h5>
+                      {applicant.stage_history?.map((stage, index) => (
+                        <div className="applicant-history-card" key={index}>
+                          <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <strong className="applicant-subsection-heading" style={{width:'70%'}}>{stage.stage_name}</strong>
+                            <span
+                             className="applicant-subsection-heading"
+                              style={{
+                                color: getStageStatusColor(stage.status),
+                                fontWeight: 'bold',
+                                marginLeft: '8px',
+                                
+                              }}
+                            >
+                              {stage.status.toUpperCase()}
+                            </span>
+                          </div>
+                          <div  className="applicant-subsection-text">
+                            {stage.comments && <p>{stage.comments}</p>}
+                          </div>
+                          <small  className="applicant-subsection-heading" style={{textAlign:'right',fontSize:'12px',margin:'0px'}}>{formatDate(stage.updated_at)}</small>
+
+                        </div>
+                      ))}
+                    </div>
+
+                    
+                  </div>
+                  <div style={{display:'flex',gap:"20px"}}>
+                      <button className="create-job-general-button"  onClick={() => openCommentsModal('passed', applicant._id)}>
+                        Pass
+                      </button>
+                      <button className="create-job-general-button1" onClick={() => openCommentsModal('failed', applicant._id)}>
+                        Reject
+                      </button>
+
+                      {applicant.resume && (
+                        <a
+                          href={applicant.resume}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          View Resume
+                        </a>
+                      )}
+                    </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {applicants.length === 0 && (
+          <div>
+            <p>No applicants at this stage yet.</p>
+          </div>
+        )}
+        {totalPages > 1 && (
+          <div className="pagination-application-containe" style={{ marginTop: '16px', display: 'flex', justifyContent: 'center', gap: '8px' }}>
+            <button
+            className="pagination-application-btn"
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
+            <span>Page {currentPage} of {totalPages}</span>
+            <button
+            className="pagination-application-btn"
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </button>
+          </div>
+        )}
+
+      </div>
+
+      {/* Comments Modal */}
+      {showCommentsModal && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1000
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: 'white',
+              padding: '24px',
+              borderRadius: '8px',
+              maxWidth: '500px',
+              width: '90%'
+            }}
+          >
+            <h3>
+              {actionType === 'passed' ? 'Pass' : 'Reject'}
+              {targetApplicant ? ' Applicant' : ` ${selectedApplicants.length} Applicants`}
+            </h3>
+
+            <div>
+              <label>Comments (Optional)</label>
+              <textarea
+                value={comments}
+                onChange={(e) => setComments(e.target.value)}
+                placeholder="Add comments about this decision..."
+                rows={4}
+                style={{
+                  width: '100%',
+                  padding: '8px',
+                  border: '1px solid #dee2e6',
+                  borderRadius: '4px'
+                }}
+              />
+            </div>
+
+            <div>
+              <button
+                onClick={closeCommentsModal}
+                disabled={actionLoading}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={targetApplicant ? handleSingleApplicantAction : handleBulkAction}
+                disabled={actionLoading}
+                style={{
+                  backgroundColor: actionType === 'passed' ? '#28a745' : '#dc3545',
+                  color: 'white',
+                  marginLeft: '8px'
+                }}
+              >
+                {actionLoading ? 'Processing...' : 'Confirm'}
+              </button>
+            </div>
           </div>
         </div>
-            <div id="applicants111" className="container">
-                <div id="applicants112"  className="main-content">
-                    <Header jobDetails={jobDetails} />
-                    {loading ? (
-                        <div className="buffer">
-                        <div className="loading-container">
-                          <div className="loading-spinner"></div>
-                        </div>
-                      </div> // Show loading message
-                    ) : (
-                        applicantsData.map((applicant, index) => (
-                            
-                            <ApplicantCard index={index} jobDetails={jobDetails} applicant={applicant} />
-                        ))
-                    )}
-                </div>
-            </div>
-        </div>
-    );
-};
-
-const Header = ({ jobDetails }) => (
-    <div className="header">
-        {/* <img src="logo.png" alt="Logo" className="logo" /> */}
-        <h1 id="i191">{jobDetails?.title} Applications</h1>
-        <p>{jobDetails?.city}, {jobDetails?.state}<br></br> {jobDetails?.country}</p>
+      )}
     </div>
-);
-
-const ApplicantCard = ({ index,applicant ,jobDetails}) => {
-    const [showDetails, setShowDetails] = useState(false);
-
-    const toggleDetails = () => {
-        setShowDetails(!showDetails);
-    };
-    console.log("key : "+index);
-    console.log("job details : "+JSON.stringify(jobDetails.applicants[0].skills));
-    // console.log("job details : "+JSON.stringify(jobDetails));
-    // console.log("applicant data " + JSON.stringify(applicant.data));
-    // console.log("job details " + jobDetails);
-
-    return (
-        <div className="applicant-card">
-            <div id="i192" className="applicant-header">
-                <div id="i193">
-                    <h2 id="i191">{applicant.data.name}</h2>
-                    <p style={{fontWeight:"500"}}>{applicant.data.tagline}</p>
-                    <p style={{fontWeight:"500"}} >{applicant.data.city}, {applicant.data.state}</p>
-                    <p style={{fontWeight:"500"}}>{applicant.data.country}</p>
-                    
-                </div>
-                <button className="view-btn" onClick={toggleDetails}>
-                    {showDetails ? 'Hide' : 'View'}
-                </button>
-            </div>
-
-            {showDetails && (
-                <>
-                    <div className="hided">
-                        <div id="i194" className="skills-section">
-                            <h3>Skills</h3>
-                            <div >
-                                {jobDetails.applicants[index].skills.map(({skill,match},idx) => (
-                                    <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",paddingRight:"90px"}}>
-                                    <div key={idx}>
-                                        <p style={{fontWeight:"500"}}>{skill}</p>
-                                    </div>
-                                    <div key={idx}>
-                                    {match ? <img src={tick} alt="✔️" style={{height:"20px"}} /> :<img src={times} alt='❌' style={{height:"20px"}} />  }
-                                    </div>
-                                    </div>
-                                ))}
-                                
-                            </div>
-                        </div>
-
-                        <div id="i207" className="resume-section">
-                            <h3>Resume</h3>
-                            <p><strong>About:</strong> </p>
-                            <div id="i206"></div>
-
-                            <div>
-                            <p id="i197">{applicant.data.about}</p>
-                            </div>
-
-                            <h3 id="i198">Experience</h3>
-                            <div id="i205"></div>
-
-                            <div>
-                                {applicant.data.experiences.map((exp, idx) => (
-                                    <div id="i202" key={idx}>
-                                        <div id="i201">
-                                            <div>
-                                            <p id="i199"><b>{exp.company}</b> </p>
-                                            <p id="i203"> {exp.title}</p>
-                                            </div>
-                                            <p id="i200"> {new Date(exp.startDate).toISOString().split('T')[0]} to {new Date(exp.endDate).toISOString().split('T')[0]}</p>
-
-                                            
-                                        </div>
-                                        <p id="i204">{exp.description}</p>
-                                    </div>
-                                ))}
-                            </div>
-
-
-                            <h3 id="i198">Education</h3>
-                            <div id="i205"></div>
-
-                            <ul>
-                                {applicant.data.education.map((edu, idx) => (
-                                                       <div id="i202" key={idx}>
-                                                       <div id="i201">
-                                                           <div>
-                                                           <p id="i199"><b>{edu.company}</b> </p>
-                                                           <p id="i203"> {edu.title}</p>
-                                                           </div>
-                                                           <p id="i200"> {new Date(edu.startDate).toISOString().split('T')[0]} to {new Date(edu.endDate).toISOString().split('T')[0]}</p>
-               
-                                                           
-                                                       </div>
-                                                       <p id="i204">{edu.description}</p>
-                                                   </div>
-                                ))}
-                            </ul>
-
-                            <h3 id="i198">Projects</h3>
-                            <div id="i205"></div>
-
-                            
-                                {applicant.data.projects.map((project, idx) => (
-                                    <div id="i202" key={idx}>
-                                    <div id="i201">
-                                        <div>
-                                        <a href={project.title} ><p style={{fontSize:"14px"}}><b>{project.title}</b></p> </a>
-
-                                        </div>
-                                        <a href={project.link} id="i200">{project.link}</a>
-                                    </div>
-                                    <p id="i204">{project.description}</p>
-                                </div>
-                                ))}
-                            
-                        </div>
-                    </div>
-
-                   
-                    <div id="i195" className="extra-questions">
-                        <h3 style={{fontSize:"24px"}}><b>Extra Questions</b></h3>
-                        {jobDetails.applicants[index].extra_questions.map(({ question, answer }, idx) => (
-                            <div style={{margin:"10px"}} key={idx}>
-                                <p ><strong>Q:{idx+1}</strong> {question}</p>
-                                <p id="i196"><strong>Answer:</strong> {answer}</p>
-                            </div>
-                        ))}
-                    </div>
-                </>
-            )}
-        </div>
-    );
+  );
 };
 
-export default Applicants;
+export default ApplicantManagement;
