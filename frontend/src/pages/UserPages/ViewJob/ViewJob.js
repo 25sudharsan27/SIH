@@ -63,7 +63,7 @@ function ViewJob() {
   }, [job_id]);
 
   const handleResumeChange = (event) => {
-    setResume(event.target.files[0]);
+    setResume(event.targe.value);
   };
 
   const handleExtraAnswerChange = (index, value) => {
@@ -99,6 +99,7 @@ function ViewJob() {
         body: JSON.stringify({
           jobId: job_id,
           extra_questions_answers: extra,
+          resume
           // Resume is not included since it's not being uploaded
         }),
         
@@ -218,8 +219,8 @@ function ViewJob() {
           <h3 id="i184">Submit Application</h3>
           <form onSubmit={handleSubmit}>
             <label  id="i181" className="resu">
-              Upload Resume:
-              <input id="i186" type="file" name="resume" onChange={handleResumeChange} />
+              Give Good Drive link of Resume:
+              <input id="i186" type="text" style={{width:"100%"}} name="resume" onChange={(e)=>{setResume(e.target.value)}} />
             </label>
 
             <label id="i152" className="final">
