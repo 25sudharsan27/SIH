@@ -15,14 +15,14 @@ Welcome to our Job and Internship Platform! This website connects students and j
 In the profile section, users can enter their experiences, projects, and skills. Additionally, the profile displays heatmaps from various platforms such as Codeforces, CodeChef, GeeksforGeeks, and LeetCode.
 
 ![User Profile](./website%20photos//JobSeekerLogin.png)
-![image](https://github.com/user-attachments/assets/54cec64d-2b39-4891-9f5b-f3aed23e3f0b)
-![image](https://github.com/user-attachments/assets/b90efe91-2eae-4041-b73c-a1c2501794af)
+<img width="1898" height="891" alt="image" src="https://github.com/user-attachments/assets/341ecf03-6e86-4c85-8e86-3d0c4301a469" />
+<img width="1896" height="898" alt="image" src="https://github.com/user-attachments/assets/f2332d41-db70-4448-8aa2-8e39804ca25d" />
 ![image](https://github.com/user-attachments/assets/d70c03e6-fc10-42ce-886a-e331b6570fb0)
 
 For Mobile
-![image](https://github.com/user-attachments/assets/3442f0df-b2c4-45bf-8106-486a95475ced)
-![image](https://github.com/user-attachments/assets/a582d622-aa9a-440b-91e4-297cf30fe6ed)
-![image](https://github.com/user-attachments/assets/38a00641-68ae-4eb8-ae98-7d1b3c67d109)
+<img width="1583" height="883" alt="image" src="https://github.com/user-attachments/assets/afaad58f-a695-482e-861d-947d48ba9313" />
+<img width="1589" height="871" alt="image" src="https://github.com/user-attachments/assets/595a2e09-7101-4d03-a430-6de5a026fe02" />
+<img width="1597" height="875" alt="image" src="https://github.com/user-attachments/assets/ef1f96e5-bec6-485e-8f2f-781ac1834e75" />
 ![image](https://github.com/user-attachments/assets/1ec1f7e4-21a5-4b37-aaaf-2a2e14eccd6c)
 
 
@@ -34,7 +34,11 @@ Users can view jobs posted by organizations. The jobs can be filtered using the 
 ![image](https://github.com/user-attachments/assets/fd56ff00-80f4-4b29-bc83-adcea608fee4)
 ![image](https://github.com/user-attachments/assets/c6468379-1815-4166-aa90-5de7a210bce2)
 ![image](https://github.com/user-attachments/assets/545bac15-c2a7-48f1-883e-2614683d581e)
-![image](https://github.com/user-attachments/assets/bbe7cf85-75fd-440e-b5be-8322cd263365)
+<img width="1907" height="909" alt="image" src="https://github.com/user-attachments/assets/844f747f-98e6-41cf-b9a2-3af16bf982c5" />
+<img width="1895" height="936" alt="image" src="https://github.com/user-attachments/assets/322a4935-8c11-4cf6-aa01-e95a88e19a22" />
+<img width="1900" height="918" alt="image" src="https://github.com/user-attachments/assets/b291d7dc-f3d1-446b-b177-f0154a2f254e" />
+<img width="1897" height="907" alt="image" src="https://github.com/user-attachments/assets/1dbd96bf-d990-4092-a3dc-9656426aeba6" />
+<img width="1897" height="910" alt="image" src="https://github.com/user-attachments/assets/aa6cffdc-cb8d-48b2-b36e-01cd1231d375" />
 
 For Mobile
 ![image](https://github.com/user-attachments/assets/16667f7b-1349-4755-bf85-785a341b4c19)
@@ -45,8 +49,8 @@ For Mobile
 
 Our community section allows users to view posts made by job seekers and job providers. It's a great place for interaction and knowledge sharing between users of the platform.
 
-![image](https://github.com/user-attachments/assets/a5eee3fd-2df2-4ada-b023-b7413dc21d9b)
-
+<img width="1904" height="920" alt="image" src="https://github.com/user-attachments/assets/20920ff6-caf6-41b1-b764-ae559d0baca3" />
+<img width="1902" height="908" alt="image" src="https://github.com/user-attachments/assets/3b8c32a6-4198-4c89-8d1a-0448480bef43" />
 
 ### 4. Interview Preparation Section
 
@@ -100,10 +104,11 @@ Organizations have a separate section where they can log in and manage job posti
 ![image](https://github.com/user-attachments/assets/0ae673d3-1a91-4151-b7bc-dbe71e71a015)
 
 ![image](https://github.com/user-attachments/assets/c0f66052-704d-4d10-bf58-a5225b51438a)
-![image](https://github.com/user-attachments/assets/0bee7946-342e-492d-b370-10f1fed4f781)
-![image](https://github.com/user-attachments/assets/e54de8f3-d77d-4b19-9339-60f0d4e96578)
-![image](https://github.com/user-attachments/assets/8b86bf6e-8a70-4521-b1ce-163818c8bb00)
-![image](https://github.com/user-attachments/assets/6df41020-9d61-413b-a9d6-69343fd427fd)
+<img width="1902" height="907" alt="image" src="https://github.com/user-attachments/assets/f11db73a-11cc-48fb-8b73-d9d3e83f4c0e" />
+<img width="1899" height="902" alt="image" src="https://github.com/user-attachments/assets/d16f1dd3-b448-44b8-a718-8fe9a682b4fd" />
+<img width="1892" height="907" alt="image" src="https://github.com/user-attachments/assets/f1c1c17f-9466-468a-ba0a-3099aa031544" />
+<img width="1897" height="909" alt="image" src="https://github.com/user-attachments/assets/c15ca213-60bf-418a-881d-500c445d050d" />
+<img width="1900" height="910" alt="image" src="https://github.com/user-attachments/assets/1682ce24-9437-4959-9fc4-14ca4bfe0a90" />
 ![image](https://github.com/user-attachments/assets/fe2cd167-fc72-4026-a03e-9f3e2f3fdf4a)
 ![image](https://github.com/user-attachments/assets/a8da67d6-992e-4ba6-9259-d166afd722c4)
 
