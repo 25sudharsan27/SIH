@@ -274,8 +274,8 @@ function JobBoard() {
 
   return (
     <div style={{ marginTop: "120px" }}>
-      <div className="search-bar">
-        <div className="filters">
+      <div className="search-bar" style={{flexWrap:"wrap"}}>
+        <div className="filters" style={{flexWrap:"wrap"}}>
           <select
             className="dropdown"
             value={experienceLevel}

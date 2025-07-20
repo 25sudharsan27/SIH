@@ -609,11 +609,11 @@ const ProfilePage = () => {
           </p>
           <div>
             <div className="coding-platform-btn" style={{ display: 'flex', gap: '20px', flex: 'wrap' }}>
-              {
+              { 
                 Object.keys(logos).map((platform) => {
                   return (
-                    <a className={"coding-platform-cont"} id={userData?.codingplatforms && userData?.codingplatforms[platform] ? null : 'disable-button'} href={userData?.codingplatforms && userData?.codingplatforms[platform] || '#'} target="_blank" rel="noopener noreferrer">
-                      <img src={logos[platform]} alt={platform} id="coding-platform-logo" className={"coding-platform-logo " + userData?.codingplatforms && userData?.codingplatforms[platform] ? null : 'disable-ref'} />
+                    <a className={"coding-platform-cont"} id={userData?.codingplatforms && userData?.codingplatforms?.platform ? null : 'disable-button'} href={userData?.codingplatforms && userData?.codingplatforms?.platform || '#'} target="_blank" rel="noopener noreferrer">
+                      <img src={logos[platform]} alt={platform} id="coding-platform-logo" className={"coding-platform-logo " + userData?.codingplatforms && userData?.codingplatforms?.platform ? null : 'disable-ref'} />
                     </a>
                   )
                 })
